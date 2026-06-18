@@ -3,8 +3,7 @@ import './styles/globals.css';
 import './styles/all.css';
 import './styles/hero-bg.css';
 import { initAnimations } from './animations';
-//nihal testing
-//nihal testing 2 
+
 export default function App() {
   useEffect(() => {
     initAnimations();
