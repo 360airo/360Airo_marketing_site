@@ -5,6 +5,8 @@ import './styles/hero-bg.css';
 import { initAnimations } from './animations';
 //nihal testing 
 //nihal 
+
+// nihal dev push demo
 export default function App() {
   useEffect(() => {
     initAnimations();
