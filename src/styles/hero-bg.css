@@ -1,0 +1,150 @@
+#section-home {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: linear-gradient(135deg, #08142F 0%, #091533 28%, #061022 58%, #040A18 100%);
+}
+
+.hero-diagonal-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+#section-home .hero {
+  position: relative;
+  z-index: 2;
+}
+
+.hero-panel {
+  position: absolute;
+  border-radius: 0;
+  transform-origin: center;
+  will-change: transform, opacity;
+  opacity: 1;
+  filter: none;
+}
+
+.hero-panel.panel-1 {
+  width: 78vw;
+  height: 140vh;
+  top: -55vh;
+  left: -18vw;
+  background: linear-gradient(180deg, rgba(88, 118, 220, 0.24), rgba(88, 118, 220, 0.12));
+  transform: rotate(36deg);
+  animation: panelFloatA 20s ease-in-out infinite;
+}
+
+.hero-panel.panel-2 {
+  width: 70vw;
+  height: 145vh;
+  top: -48vh;
+  left: 8vw;
+  background: linear-gradient(180deg, rgba(78, 110, 220, 0.18), rgba(78, 110, 220, 0.08));
+  transform: rotate(36deg);
+  animation: panelFloatB 24s ease-in-out infinite;
+}
+
+.hero-panel.panel-3 {
+  width: 82vw;
+  height: 150vh;
+  top: -42vh;
+  left: 26vw;
+  background: linear-gradient(180deg, rgba(26, 47, 118, 0.32), rgba(26, 47, 118, 0.10));
+  transform: rotate(36deg);
+  animation: panelFloatA 26s ease-in-out infinite reverse;
+}
+
+.hero-panel.panel-4 {
+  width: 76vw;
+  height: 145vh;
+  top: -38vh;
+  left: 52vw;
+  background: linear-gradient(180deg, rgba(9, 20, 56, 0.42), rgba(9, 20, 56, 0.12));
+  transform: rotate(36deg);
+  animation: panelFloatB 22s ease-in-out infinite;
+}
+
+.hero-panel.panel-5 {
+  width: 68vw;
+  height: 150vh;
+  top: -46vh;
+  left: 66vw;
+  background: linear-gradient(180deg, rgba(39, 50, 120, 0.18), rgba(39, 50, 120, 0.06));
+  transform: rotate(36deg);
+  animation: panelFloatA 28s ease-in-out infinite;
+}
+
+.hero-glow {
+  position: absolute;
+  border-radius: 999px;
+  filter: blur(90px);
+  will-change: transform, opacity;
+  pointer-events: none;
+}
+
+.hero-glow.glow-1 {
+  width: 420px;
+  height: 420px;
+  top: 8%;
+  left: 8%;
+  background: rgba(84, 120, 255, 0.14);
+  animation: glowPulse 14s ease-in-out infinite;
+}
+
+.hero-glow.glow-2 {
+  width: 560px;
+  height: 560px;
+  top: 16%;
+  right: 6%;
+  background: rgba(70, 90, 210, 0.10);
+  animation: glowPulse 18s ease-in-out infinite reverse;
+}
+
+@keyframes panelFloatA {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(36deg);
+  }
+  50% {
+    transform: translate3d(3%, -2%, 0) rotate(36deg);
+  }
+}
+
+@keyframes panelFloatB {
+  0%, 100% {
+    transform: translate3d(0, 0, 0) rotate(36deg);
+  }
+  50% {
+    transform: translate3d(-3%, 2%, 0) rotate(36deg);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.10;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.16;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-panel {
+    opacity: 0.6;
+  }
+
+  .hero-glow {
+    opacity: 0.6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-panel,
+  .hero-glow {
+    animation: none !important;
+  }
+}
