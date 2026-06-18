@@ -3,14 +3,15 @@ import './styles/globals.css';
 import './styles/all.css';
 import './styles/hero-bg.css';
 import { initAnimations } from './animations';
-//nihal testing 
+//nihal testing
+//nihal testing 2 
 export default function App() {
   useEffect(() => {
     initAnimations();
   }, []);
   return (
     <div className="app-container">
-      <div>
+      <div>   
   <canvas id="aurora-canvas" />
   <canvas id="aurora-light-canvas" />
   <nav id="main-nav" className="nav-dark">
