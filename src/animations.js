@@ -357,7 +357,7 @@ nav.classList.remove("nav-light")
 
 
 /* HERO METRIC COUNTER ANIMATION */
-document.addEventListener("DOMContentLoaded", function () {
+;(function () {
   const counters = document.querySelectorAll(".counter");
   const metricsSection = document.querySelector(".hero-metrics");
 
@@ -428,7 +428,7 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     animateCounters();
   }
-});
+})();
 
 /* HERO ELEMENT FADE-IN */
 (function(){
