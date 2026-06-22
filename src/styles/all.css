@@ -1,7 +1,7 @@
 
 
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-html{overflow-x:hidden;scroll-behavior:smooth}
+html{overflow-x:hidden}
 body{font-family:'DM Sans',sans-serif;background:#030712;color:#fff;overflow-x:hidden;line-height:1.7;font-weight:400;font-size:16px}
 a{text-decoration:none;color:inherit}
 ul,ol{list-style:none}

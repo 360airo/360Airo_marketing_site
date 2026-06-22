@@ -22,97 +22,114 @@ export default function App() {
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
-    let ctx = gsap.context(() => {
-      let mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-                gsap.set(tabletMotionRef.current, {
-          xPercent: 0,
-          yPercent: -50,
-          x: 0,
-          y: 0,
-          scale: 1,
-          transformOrigin: "center center"
+    let ctx;
+
+    const initTimeline = () => {
+      ctx = gsap.context(() => {
+        let mm = gsap.matchMedia();
+        mm.add("(prefers-reduced-motion: no-preference)", () => {
+                  gsap.set(tabletMotionRef.current, {
+            xPercent: 0,
+            yPercent: -50,
+            x: 0,
+            y: 0,
+            scale: 1,
+            transformOrigin: "center center"
+          });
+
+          const timeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: heroStageRef.current,
+              start: "top top",
+              end: "+=4800",
+              scrub: 1.15,
+              pin: true,
+              pinSpacing: true,
+              anticipatePin: 1,
+              invalidateOnRefresh: true
+            }
+          });
+
+          const getViewportScreenCoverScale = () => {
+            const screen = tabletScreenRef.current;
+            if (!screen) return 1.5;
+            const baseScreenWidth = screen.offsetWidth || 680;
+            const baseScreenHeight = screen.offsetHeight || 460;
+            const scaleX = window.innerWidth / baseScreenWidth;
+            const scaleY = window.innerHeight / baseScreenHeight;
+            return Math.max(scaleX, scaleY) * 1.14;
+          };
+
+          timeline
+            .addLabel("heroExit")
+            .to(heroContentRef.current, {
+              opacity: 0,
+              x: -70,
+              y: -18,
+              filter: "blur(4px)",
+              duration: 1,
+              ease: "none"
+            }, "heroExit")
+            .to(dashboardUiRef.current, {
+              opacity: 0,
+              scale: 0.96,
+              filter: "blur(4px)",
+              duration: 1,
+              ease: "none"
+            }, "heroExit")
+            .addLabel("futureTitleEnter", "heroExit+=0.35")
+            .to(futureTabletContentRef.current, {
+              autoAlpha: 1,
+              opacity: 0.65,
+              duration: 0.55,
+              ease: "none"
+            }, "futureTitleEnter")
+            .addLabel("futureTitleCrisp", "futureTitleEnter+=0.4")
+            .to(futureTabletContentRef.current, {
+              opacity: 1,
+              duration: 0.65,
+              ease: "none"
+            }, "futureTitleCrisp")
+            .addLabel("tabletPullForward", "futureTitleCrisp+=0.45")
+            .to(tabletMotionRef.current, {
+              x: () => {
+                const shell = tabletMotionRef.current;
+                if (!shell) return 0;
+                const rect = shell.getBoundingClientRect();
+                const currentCenterX = rect.left + rect.width / 2;
+                return window.innerWidth / 2 - currentCenterX;
+              },
+              y: () => {
+                const shell = tabletMotionRef.current;
+                if (!shell) return 0;
+                const rect = shell.getBoundingClientRect();
+                const currentCenterY = rect.top + rect.height / 2;
+                return window.innerHeight / 2 - currentCenterY;
+              },
+              scale: 1.55,
+              duration: 1.2,
+              ease: "none"
+            }, "tabletPullForward")
+            .addLabel("tabletZoomToViewport", "tabletPullForward+=0.95")
+            .to(tabletMotionRef.current, {
+              scale: getViewportScreenCoverScale,
+              duration: 2.8,
+              ease: "none"
+            }, "tabletZoomToViewport");
         });
-
-        const timeline = gsap.timeline({
-          scrollTrigger: {
-            trigger: heroStageRef.current,
-            start: "top top",
-            end: "+=4800",
-            scrub: 1.15,
-            pin: true,
-            pinSpacing: true,
-            anticipatePin: 1,
-            invalidateOnRefresh: true
-          }
-        });
-
-        const getViewportScreenCoverScale = () => {
-          const screen = tabletScreenRef.current;
-          const baseScreenWidth = screen.offsetWidth;
-          const baseScreenHeight = screen.offsetHeight;
-          const scaleX = window.innerWidth / baseScreenWidth;
-          const scaleY = window.innerHeight / baseScreenHeight;
-          return Math.max(scaleX, scaleY) * 1.14;
-        };
-
-        timeline
-          .addLabel("heroExit")
-          .to(heroContentRef.current, {
-            opacity: 0,
-            x: -70,
-            y: -18,
-            filter: "blur(4px)",
-            duration: 1,
-            ease: "none"
-          }, "heroExit")
-          .to(dashboardUiRef.current, {
-            opacity: 0,
-            scale: 0.96,
-            filter: "blur(4px)",
-            duration: 1,
-            ease: "none"
-          }, "heroExit")
-          .addLabel("futureTitleEnter", "heroExit+=0.35")
-          .to(futureTabletContentRef.current, {
-            autoAlpha: 1,
-            opacity: 0.65,
-            duration: 0.55,
-            ease: "none"
-          }, "futureTitleEnter")
-          .addLabel("futureTitleCrisp", "futureTitleEnter+=0.4")
-          .to(futureTabletContentRef.current, {
-            opacity: 1,
-            duration: 0.65,
-            ease: "none"
-          }, "futureTitleCrisp")
-          .addLabel("tabletPullForward", "futureTitleCrisp+=0.45")
-          .to(tabletMotionRef.current, {
-            x: () => {
-              const shell = tabletMotionRef.current;
-              const rect = shell.getBoundingClientRect();
-              const currentCenterX = rect.left + rect.width / 2;
-              return window.innerWidth / 2 - currentCenterX;
-            },
-            y: () => {
-              const shell = tabletMotionRef.current;
-              const rect = shell.getBoundingClientRect();
-              const currentCenterY = rect.top + rect.height / 2;
-              return window.innerHeight / 2 - currentCenterY;
-            },
-            scale: 1.55,
-            duration: 1.2,
-            ease: "none"
-          }, "tabletPullForward")
-          .addLabel("tabletZoomToViewport", "tabletPullForward+=0.95")
-          .to(tabletMotionRef.current, {
-            scale: getViewportScreenCoverScale,
-            duration: 2.8,
-            ease: "none"
-          }, "tabletZoomToViewport");
       });
-    });
-    return () => ctx.revert();
+    };
+
+    if (document.readyState === 'complete') {
+      initTimeline();
+    } else {
+      window.addEventListener('load', initTimeline);
+    }
+
+    return () => {
+      if (ctx) ctx.revert();
+      window.removeEventListener('load', initTimeline);
+    };
   }, []);
   useEffect(() => {
     initAnimations();
