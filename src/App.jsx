@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-gsap.registerPlugin(ScrollTrigger);
 import './styles/globals.css';
 import './styles/all.css';
 import './styles/hero-bg.css';
@@ -22,6 +21,7 @@ export default function App() {
   const featureSectionRef = useRef(null);
 
   useLayoutEffect(() => {
+    gsap.registerPlugin(ScrollTrigger);
     let ctx = gsap.context(() => {
       let mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
