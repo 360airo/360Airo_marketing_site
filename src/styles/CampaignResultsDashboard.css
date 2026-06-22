@@ -1,0 +1,219 @@
+/* src/styles/CampaignResultsDashboard.css */
+
+.phone-container {
+    width: 100%;
+    max-width: 412px;
+    background-color: #0D121F;
+    border-radius: 40px;
+    padding: 30px 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    border: 8px solid #181E2C;
+    margin: 0 auto;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: #FFFFFF;
+    box-sizing: border-box;
+}
+
+.phone-container * {
+    box-sizing: border-box;
+}
+
+.phone-container .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.phone-container .header h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #F3F4F6;
+    margin: 0;
+}
+
+.phone-container .time-filter {
+    background-color: #161D30;
+    color: #4B5563;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}
+
+.phone-container .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 28px;
+}
+
+.phone-container .stat-card {
+    background-color: #121826;
+    border-radius: 14px;
+    padding: 12px;
+    border: 1px solid #1E293B;
+}
+
+.phone-container .channel-tag {
+    display: flex;
+    align-items: center;
+    font-size: 9px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #6B7280;
+    margin-bottom: 6px;
+    letter-spacing: 0.5px;
+}
+
+.phone-container .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    margin-right: 5px;
+}
+
+.phone-container .dot.email { background-color: #D9F99D; }
+.phone-container .dot.linkedin { background-color: #38BDF8; }
+.phone-container .dot.sms { background-color: #FB923C; }
+
+.phone-container .stat-value {
+    font-size: 16px;
+    font-weight: 700;
+    color: #FFFFFF;
+    line-height: 1.2;
+}
+
+.phone-container .stat-value span {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.phone-container .stat-label {
+    font-size: 10px;
+    color: #4B5563;
+    margin-top: 2px;
+    margin-bottom: 8px;
+}
+
+.phone-container .trend {
+    font-size: 11px;
+    font-weight: 600;
+    color: #EAB308;
+    display: flex;
+    align-items: center;
+}
+
+.phone-container .replies-section {
+    margin-bottom: 16px;
+}
+
+.phone-container .replies-title {
+    font-size: 14px;
+    color: #4B5563;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.phone-container .replies-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.phone-container .replies-count {
+    font-size: 32px;
+    font-weight: 700;
+}
+
+.phone-container .badge {
+    background-color: rgba(234, 179, 8, 0.1);
+    color: #CA8A04;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 1px solid rgba(234, 179, 8, 0.2);
+}
+
+.phone-container .chart-container {
+    width: 100%;
+    height: 180px;
+    margin-bottom: 24px;
+    position: relative;
+}
+
+.phone-container .chart-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.phone-container .bottom-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.phone-container .metric-box {
+    background-color: #121826;
+    border-radius: 12px;
+    padding: 16px 8px;
+    text-align: center;
+    border: 1px solid #1E293B;
+}
+
+.phone-container .metric-num {
+    font-size: 18px;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 4px;
+}
+
+.phone-container .metric-name {
+    font-size: 9px;
+    color: #4B5563;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.phone-container .contribution-card {
+    background-color: #121826;
+    border-radius: 14px;
+    padding: 16px;
+    border: 1px solid #1E293B;
+}
+
+.phone-container .contribution-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.phone-container .contribution-label {
+    color: #4B5563;
+}
+
+.phone-container .contribution-value {
+    color: #EAB308;
+}
+
+.phone-container .progress-bar-bg {
+    width: 100%;
+    height: 6px;
+    background-color: #161D30;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.phone-container .progress-bar-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #FB923C, #38BDF8, #D9F99D);
+    border-radius: 3px;
+}

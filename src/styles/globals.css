@@ -142,24 +142,93 @@ body {
 .future-tablet-content {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   padding: clamp(24px, 4vw, 68px);
   background: #ffffff;
   opacity: 0;
   visibility: hidden;
-}
-
-.future-tablet-content h2 {
   width: 100%;
-  margin: 0;
-  color: #080808;
-  font-family: inherit;
-  font-size: clamp(2rem, 4vw, 5.7rem);
-  font-weight: 900;
-  line-height: 0.84;
-  letter-spacing: -0.07em;
+  height: 100%;
+  flex-direction: row;
 }
 
-.future-tablet-content h2 span {
+.future-tablet-content .hero-center {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: visible !important;
+}
+
+.tablet-headline {
+  margin: 0;
+  color: #111;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: clamp(3.5rem, 8.5vw, 9rem);
+  font-weight: 900;
+  line-height: 0.82;
+  letter-spacing: -0.05em;
+  text-transform: uppercase;
+  text-align: left;
+}
+
+.tablet-headline span {
   display: block;
+}
+
+.future-tablet-content .hero-right {
+  flex: 0 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.phone-wrapper {
+  transform: scale(0.85);
+  transform-origin: center center;
+}
+
+@media (max-width: 1024px) {
+  .phone-wrapper {
+    transform: scale(0.7);
+  }
+}
+
+@media (max-width: 768px) {
+  .future-tablet-content {
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 100px; /* space for navbar */
+    gap: 30px;
+  }
+  
+  .future-tablet-content .hero-center {
+    flex: 0 0 auto;
+    justify-content: center;
+  }
+  
+  .tablet-headline {
+    font-size: clamp(40px, 12vw, 80px) !important;
+    text-align: center;
+    line-height: 0.9;
+  }
+
+  .future-tablet-content .hero-right {
+    padding: 0;
+  }
+
+  .phone-wrapper {
+    transform: scale(0.65);
+  }
+}
+
+@media (max-width: 480px) {
+  .future-tablet-content {
+    padding-top: 80px;
+  }
+  .phone-wrapper {
+    transform: scale(0.55);
+  }
 }
