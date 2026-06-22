@@ -14,7 +14,9 @@ import ModernOutreachSection from './components/ModernOutreachSection';
 export default function App() {
   const heroStageRef = useRef(null);
   const heroContentRef = useRef(null);
+  const tabletMotionRef = useRef(null);
   const heroTabletRef = useRef(null);
+  const tabletScreenRef = useRef(null);
   const dashboardUiRef = useRef(null);
   const futureTabletContentRef = useRef(null);
   const featureSectionRef = useRef(null);
@@ -23,32 +25,36 @@ export default function App() {
     let ctx = gsap.context(() => {
       let mm = gsap.matchMedia();
       mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.set(dashboardUiRef.current, {
-          opacity: 1,
+                gsap.set(tabletMotionRef.current, {
+          xPercent: 0,
+          yPercent: -50,
+          x: 0,
+          y: 0,
           scale: 1,
-          filter: "blur(0px)"
-        });
-
-        gsap.set(futureTabletContentRef.current, {
-          autoAlpha: 0,
-          opacity: 0,
-          scale: 0.96,
-          y: 20,
-          filter: "blur(5px)"
+          transformOrigin: "center center"
         });
 
         const timeline = gsap.timeline({
           scrollTrigger: {
             trigger: heroStageRef.current,
             start: "top top",
-            end: "+=2800",
-            scrub: 1,
+            end: "+=4800",
+            scrub: 1.15,
             pin: true,
             pinSpacing: true,
             anticipatePin: 1,
             invalidateOnRefresh: true
           }
         });
+
+        const getViewportScreenCoverScale = () => {
+          const screen = tabletScreenRef.current;
+          const baseScreenWidth = screen.offsetWidth;
+          const baseScreenHeight = screen.offsetHeight;
+          const scaleX = window.innerWidth / baseScreenWidth;
+          const scaleY = window.innerHeight / baseScreenHeight;
+          return Math.max(scaleX, scaleY) * 1.14;
+        };
 
         timeline
           .addLabel("heroExit")
@@ -67,33 +73,43 @@ export default function App() {
             duration: 1,
             ease: "none"
           }, "heroExit")
-          .addLabel("futureTitleEnter", "heroExit+=0.62")
+          .addLabel("futureTitleEnter", "heroExit+=0.35")
           .to(futureTabletContentRef.current, {
             autoAlpha: 1,
-            opacity: 1,
-            scale: 1,
-            y: 0,
-            filter: "blur(0px)",
-            duration: 0.8,
+            opacity: 0.65,
+            duration: 0.55,
             ease: "none"
           }, "futureTitleEnter")
-          .addLabel("tabletZoom", "futureTitleEnter+=0.9")
-          .to(heroTabletRef.current, {
-            scale: () => {
-              if(!heroTabletRef.current) return 1;
-              const rect = heroTabletRef.current.getBoundingClientRect();
-
-              return Math.max(
-                window.innerWidth / rect.width,
-                window.innerHeight / rect.height
-              ) * 1.16;
-            },
-            borderRadius: 0,
-            borderWidth: 0,
-            boxShadow: "0 0 0 rgba(0,0,0,0)",
-            duration: 1.8,
+          .addLabel("futureTitleCrisp", "futureTitleEnter+=0.4")
+          .to(futureTabletContentRef.current, {
+            opacity: 1,
+            duration: 0.65,
             ease: "none"
-          }, "tabletZoom");
+          }, "futureTitleCrisp")
+          .addLabel("tabletPullForward", "futureTitleCrisp+=0.45")
+          .to(tabletMotionRef.current, {
+            x: () => {
+              const shell = tabletMotionRef.current;
+              const rect = shell.getBoundingClientRect();
+              const currentCenterX = rect.left + rect.width / 2;
+              return window.innerWidth / 2 - currentCenterX;
+            },
+            y: () => {
+              const shell = tabletMotionRef.current;
+              const rect = shell.getBoundingClientRect();
+              const currentCenterY = rect.top + rect.height / 2;
+              return window.innerHeight / 2 - currentCenterY;
+            },
+            scale: 1.55,
+            duration: 1.2,
+            ease: "none"
+          }, "tabletPullForward")
+          .addLabel("tabletZoomToViewport", "tabletPullForward+=0.95")
+          .to(tabletMotionRef.current, {
+            scale: getViewportScreenCoverScale,
+            duration: 2.8,
+            ease: "none"
+          }, "tabletZoomToViewport");
       });
     });
     return () => ctx.revert();
@@ -143,8 +159,7 @@ export default function App() {
       <span className="hero-glow glow-2"></span>
     </div>
     <section className="hero">
-      {/* LEFT COPY */}
-      <div className="hero-copy" ref={heroContentRef}>
+        <div className="hero-copy" ref={heroContentRef}>
         <h1 className="hero-title">
           <span className="title-line">A Hyper-<em className="title-accent">Personalized</em></span>
           <span className="title-line">Multichannel</span>
@@ -211,15 +226,19 @@ export default function App() {
           </div>
         </div>{/* /.hero-metrics */}
       </div>{/* /.hero-copy */}
-      {/* RIGHT VISUAL: TABLET MOCKUP */}
-      <div className="hero-visual">
-        <div className="tablet-frame hero-dashboard-tablet" ref={heroTabletRef}>
-          <div className="tablet-camera" />
-          <div className="tablet-side-dot tablet-left" />
-          <div className="tablet-side-dot tablet-right" />
-          <div className="tablet-screen">
-            <div ref={dashboardUiRef} className="hero-dashboard-ui">
-              <div className="db-container">
+        {/* RIGHT VISUAL: TABLET MOCKUP */}
+        <div className="hero-visual"></div>
+      </section>
+
+                  <div className="future-transition-layer" aria-hidden="true">
+        <div ref={tabletMotionRef} className="tablet-motion-shell">
+          <div ref={heroTabletRef} className="hero-dashboard-tablet">
+            <div className="tablet-camera" />
+            <div className="tablet-side-dot tablet-left" />
+            <div className="tablet-side-dot tablet-right" />
+            <div ref={tabletScreenRef} className="tablet-screen-mask">
+              <div ref={dashboardUiRef} className="hero-dashboard-ui">
+                <div className="db-container">
               {/* Sidebar */}
               <div className="db-sidebar">
                 {/* Logo removed per request */}
@@ -320,73 +339,73 @@ export default function App() {
                         <line x1={0} y1={90} x2={400} y2={90} stroke="#F1F5F9" strokeWidth={1} />
                         <line x1={0} y1={120} x2={400} y2={120} stroke="#F1F5F9" strokeWidth={1} />
                         {/* Y Axis Labels */}
-                        <text x={-20} y={5} fontSize={8} fill="#94A3B8">8K</text>
-                        <text x={-20} y={35} fontSize={8} fill="#94A3B8">6K</text>
-                        <text x={-20} y={65} fontSize={8} fill="#94A3B8">4K</text>
-                        <text x={-20} y={95} fontSize={8} fill="#94A3B8">2K</text>
-                        <text x={-15} y={125} fontSize={8} fill="#94A3B8">0</text>
+                        <text x={-10} y={5} fill="#94A3B8" fontSize={10} textAnchor="end">100</text>
+                        <text x={-10} y={35} fill="#94A3B8" fontSize={10} textAnchor="end">75</text>
+                        <text x={-10} y={65} fill="#94A3B8" fontSize={10} textAnchor="end">50</text>
+                        <text x={-10} y={95} fill="#94A3B8" fontSize={10} textAnchor="end">25</text>
+                        <text x={-10} y={125} fill="#94A3B8" fontSize={10} textAnchor="end">0</text>
                         {/* X Axis Labels */}
-                        <text x={20} y={140} fontSize={8} fill="#94A3B8">May 1</text>
-                        <text x={80} y={140} fontSize={8} fill="#94A3B8">May 6</text>
-                        <text x={140} y={140} fontSize={8} fill="#94A3B8">May 11</text>
-                        <text x={200} y={140} fontSize={8} fill="#94A3B8">May 16</text>
-                        <text x={260} y={140} fontSize={8} fill="#94A3B8">May 21</text>
-                        <text x={320} y={140} fontSize={8} fill="#94A3B8">May 26</text>
-                        <text x={380} y={140} fontSize={8} fill="#94A3B8">May 31</text>
-                        {/* Lines */}
-                        <path d="M0 90 L40 70 L80 85 L120 40 L160 55 L200 30 L240 60 L280 20 L320 45 L360 10 L400 35" fill="none" stroke="#3B82F6" strokeWidth="1.5" strokeLinecap="round" />
-                        <path d="M0 110 L40 105 L80 90 L120 95 L160 70 L200 80 L240 65 L280 50 L320 75 L360 40 L400 55" fill="none" stroke="#8B5CF6" strokeWidth="1.5" strokeLinecap="round" />
-                        <path d="M0 115 L40 110 L80 115 L120 105 L160 110 L200 95 L240 100 L280 85 L320 95 L360 75 L400 85" fill="none" stroke="#06B6D4" strokeWidth="1.5" strokeLinecap="round" />
+                        <text x={0} y={140} fill="#94A3B8" fontSize={10} textAnchor="middle">Mon</text>
+                        <text x={80} y={140} fill="#94A3B8" fontSize={10} textAnchor="middle">Tue</text>
+                        <text x={160} y={140} fill="#94A3B8" fontSize={10} textAnchor="middle">Wed</text>
+                        <text x={240} y={140} fill="#94A3B8" fontSize={10} textAnchor="middle">Thu</text>
+                        <text x={320} y={140} fill="#94A3B8" fontSize={10} textAnchor="middle">Fri</text>
+                        <text x={400} y={140} fill="#94A3B8" fontSize={10} textAnchor="middle">Sat</text>
+                        
+                        {/* Data Lines */}
+                        <path d="M0,90 C40,80 80,40 160,50 C240,60 320,20 400,10" fill="none" stroke="#3B82F6" strokeWidth={2} />
+                        <path d="M0,110 C40,105 80,80 160,90 C240,100 320,60 400,40" fill="none" stroke="#8B5CF6" strokeWidth={2} />
+                        <path d="M0,115 C40,112 80,100 160,105 C240,110 320,90 400,80" fill="none" stroke="#06B6D4" strokeWidth={2} />
                       </svg>
                     </div>
                   </div>
                   {/* Doughnut Chart */}
                   <div className="db-chart-card">
-                    <div className="db-chart-title" style={{marginBottom: 16}}>Channel Performance</div>
-                    <div className="db-donut">
-                      <svg viewBox="0 0 36 36">
-                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#F1F5F9" strokeWidth={3} />
-                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#3B82F6" strokeWidth={3} strokeDasharray="65, 100" strokeLinecap="round" />
-                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#8B5CF6" strokeWidth={3} strokeDasharray="25, 100" strokeDashoffset={-65} strokeLinecap="round" />
-                        <path d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke="#06B6D4" strokeWidth={3} strokeDasharray="10, 100" strokeDashoffset={-90} strokeLinecap="round" />
+                    <div className="db-chart-header">
+                      <div className="db-chart-title">Channel Performance</div>
+                      <svg viewBox="0 0 24 24" width={16} height={16} fill="none" stroke="#94A3B8" strokeWidth={2}><circle cx={12} cy={12} r={1} /><circle cx={19} cy={12} r={1} /><circle cx={5} cy={12} r={1} /></svg>
+                    </div>
+                    <div className="db-doughnut-wrap">
+                      <svg viewBox="0 0 100 100" style={{width: 140, height: 140, overflow: 'visible', margin: '0 auto', display: 'block'}}>
+                        <circle cx={50} cy={50} r={40} fill="none" stroke="#F1F5F9" strokeWidth={12} />
+                        <circle cx={50} cy={50} r={40} fill="none" stroke="#3B82F6" strokeWidth={12} strokeDasharray="251.2" strokeDashoffset="62.8" />
+                        <circle cx={50} cy={50} r={40} fill="none" stroke="#8B5CF6" strokeWidth={12} strokeDasharray="251.2" strokeDashoffset="188.4" />
+                        <circle cx={50} cy={50} r={40} fill="none" stroke="#06B6D4" strokeWidth={12} strokeDasharray="251.2" strokeDashoffset="226.08" />
                       </svg>
-                      <div className="db-donut-text">
-                        <div className="db-donut-lbl">Emails Sent</div>
-                        <div className="db-donut-val">45,123</div>
+                      <div className="db-chan-list">
+                        <div className="db-chan-item">
+                          <div className="db-chan-name"><div className="db-dot" style={{background: '#3B82F6'}} /> Email</div>
+                          <div className="db-chan-pct">65%</div>
+                        </div>
+                        <div className="db-chan-item">
+                          <div className="db-chan-name"><div className="db-dot" style={{background: '#8B5CF6'}} /> LinkedIn</div>
+                          <div className="db-chan-pct">25%</div>
+                        </div>
+                        <div className="db-chan-item">
+                          <div className="db-chan-name"><div className="db-dot" style={{background: '#06B6D4'}} /> SMS</div>
+                          <div className="db-chan-pct">10%</div>
+                        </div>
                       </div>
+                      <div className="db-chart-link">View full report →</div>
                     </div>
-                    <div className="db-chan-list">
-                      <div className="db-chan-item">
-                        <div className="db-chan-name"><div className="db-dot" style={{background: '#3B82F6'}} /> Email</div>
-                        <div className="db-chan-pct">65%</div>
-                      </div>
-                      <div className="db-chan-item">
-                        <div className="db-chan-name"><div className="db-dot" style={{background: '#8B5CF6'}} /> LinkedIn</div>
-                        <div className="db-chan-pct">25%</div>
-                      </div>
-                      <div className="db-chan-item">
-                        <div className="db-chan-name"><div className="db-dot" style={{background: '#06B6D4'}} /> SMS</div>
-                        <div className="db-chan-pct">10%</div>
-                      </div>
-                    </div>
-                    <div className="db-chart-link">View full report →</div>
                   </div>
                 </div>
               </div>
-            </div>
-            </div>{/* /.hero-dashboard-ui */}
-            <div ref={futureTabletContentRef} className="future-tablet-content">
-              <h2>
-                <span>THE FUTURE</span>
-                <span>OF</span>
-                <span>OUTREACH</span>
-              </h2>
-            </div>
-          </div>{/* /.tablet-screen */}
-        </div>{/* /.tablet-frame */}
-      </div>{/* /.hero-visual */}
-    </section>
-      </div>
+            </div>{/* closes db-container */}
+            </div>{/* closes hero-dashboard-ui */}
+
+              <div ref={futureTabletContentRef} className="future-tablet-content">
+                <h2>
+                  <span>THE FUTURE</span>
+                  <span>OF</span>
+                  <span>OUTREACH</span>
+                </h2>
+              </div>
+            </div>{/* closes tablet-screen-mask */}
+          </div>{/* closes hero-dashboard-tablet */}
+        </div>{/* closes tablet-motion-shell */}
+      </div>{/* closes future-transition-layer */}
+      </div>{/* closes hero-scene */}
     </section>
   </div>{/* /#section-home */}
   <div id="section-phone" ref={featureSectionRef}><section className="p2-hero"><div className="hero-main"><div className="hero-left"><p data-reveal="left" data-delay={900}>Trust automated strategies or invest yourself — the choice is yours.</p><p data-reveal="left" data-delay={1100}>Take the first step towards financial freedom.</p></div><div className="hero-center"><h1 className="hero-headline"><span className="headline-line"><span className="headline-inner" data-headline-delay={500}>THE FUTURE</span></span><span className="headline-line line2"><span className="headline-inner" data-headline-delay={650}>OF</span></span><span className="headline-line"><span className="headline-inner" data-headline-delay={800}>OUTREACH</span></span></h1></div><div className="hero-right"><div className="phone-mockup" data-reveal="right" data-delay={700} id="p2phone"><div className="phone-screen"><div className="phone-notch" /><div className="dash-content"><div className="dash-header"><span className="dash-title">Campaign Results</span><span className="dash-period">Last 30 days</span></div><div className="channel-stats"><div className="channel-card"><div className="channel-icon-row"><div className="channel-dot email" /><span className="channel-label">Email</span></div><div className="channel-number" data-target={2847} data-suffix>0</div><div className="channel-sub">Sent</div><div className="channel-change">Γåæ 24.3%</div></div><div className="channel-card"><div className="channel-icon-row"><div className="channel-dot linkedin" /><span className="channel-label">LinkedIn</span></div><div className="channel-number" data-target={1263} data-suffix>0</div><div className="channel-sub">Requests</div><div className="channel-change">Γåæ 18.7%</div></div><div className="channel-card"><div className="channel-icon-row"><div className="channel-dot sms" /><span className="channel-label">SMS</span></div><div className="channel-number" data-target={934} data-suffix>0</div><div className="channel-sub">Delivered</div><div className="channel-change">Γåæ 31.2%</div></div></div><div className="total-section"><div><div className="total-label">Total Replies</div><div className="total-number" data-target={1592} data-suffix>0</div></div><div className="total-badge">+42.8% vs last month</div></div><div className="dash-chart"><svg viewBox="0 0 240 100" preserveAspectRatio="none"><defs><linearGradient id="p2ag" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#c5d441" stopOpacity=".25" /><stop offset="100%" stopColor="#c5d441" stopOpacity=".02" /></linearGradient><linearGradient id="p2bg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#5b9bf5" stopOpacity=".12" /><stop offset="100%" stopColor="#5b9bf5" stopOpacity={0} /></linearGradient><linearGradient id="p2og" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#f59b5b" stopOpacity=".12" /><stop offset="100%" stopColor="#f59b5b" stopOpacity={0} /></linearGradient></defs><line x1={0} y1={25} x2={240} y2={25} stroke="#151c30" strokeWidth=".5" /><line x1={0} y1={50} x2={240} y2={50} stroke="#151c30" strokeWidth=".5" /><line x1={0} y1={75} x2={240} y2={75} stroke="#151c30" strokeWidth=".5" /><path className="chart-area" data-area-delay={2400} d="M0,95 C15,93 30,90 48,85 C65,80 80,78 96,72 C112,66 128,62 144,56 C160,50 176,48 192,44 C208,40 224,38 240,35 L240,100 L0,100Z" fill="url(#p2og)" /><path className="chart-line" data-line-delay={1400} d="M0,95 C15,93 30,90 48,85 C65,80 80,78 96,72 C112,66 128,62 144,56 C160,50 176,48 192,44 C208,40 224,38 240,35" fill="none" stroke="#f59b5b" strokeWidth="1.5" strokeLinecap="round" /><path className="chart-area" data-area-delay={2200} d="M0,92 C15,88 30,84 48,76 C65,68 80,62 96,55 C112,48 128,42 144,36 C160,30 176,26 192,22 C208,18 224,16 240,14 L240,100 L0,100Z" fill="url(#p2bg)" /><path className="chart-line" data-line-delay={1600} d="M0,92 C15,88 30,84 48,76 C65,68 80,62 96,55 C112,48 128,42 144,36 C160,30 176,26 192,22 C208,18 224,16 240,14" fill="none" stroke="#5b9bf5" strokeWidth="1.5" strokeLinecap="round" /><path className="chart-area" data-area-delay={2000} d="M0,88 C15,82 30,76 48,66 C65,56 80,48 96,40 C112,33 128,27 144,22 C160,17 176,13 192,10 C208,7 224,5 240,4 L240,100 L0,100Z" fill="url(#p2ag)" /><path className="chart-line" data-line-delay={1200} d="M0,88 C15,82 30,76 48,66 C65,56 80,48 96,40 C112,33 128,27 144,22 C160,17 176,13 192,10 C208,7 224,5 240,4" fill="none" stroke="#c5d441" strokeWidth={2} strokeLinecap="round" /><circle className="chart-dot" data-dot-delay={3200} cx={240} cy={4} fill="#c5d441" /><circle className="chart-dot-pulse" data-dot-delay={3400} cx={240} cy={4} fill="#c5d441" /><circle className="chart-dot" data-dot-delay={3400} cx={240} cy={14} fill="#5b9bf5" /><circle className="chart-dot" data-dot-delay={3600} cx={240} cy={35} fill="#f59b5b" /></svg></div><div className="dash-bottom-stats"><div className="mini-stat"><div className="mini-stat-value" data-target={32} data-suffix="%">0%</div><div className="mini-stat-label">Open Rate</div></div><div className="mini-stat"><div className="mini-stat-value" data-target={12} data-suffix="%">0%</div><div className="mini-stat-label">Reply Rate</div></div><div className="mini-stat"><div className="mini-stat-value" data-target={847} data-suffix>0</div><div className="mini-stat-label">Meetings</div></div></div><div className="campaign-bar"><div className="campaign-bar-header"><span className="campaign-bar-title">Channel Contribution</span><span className="campaign-bar-pct">100%</span></div><div className="progress-track"><div className="progress-fill email" id="p2pe" /><div className="progress-fill linkedin" id="p2pl" /><div className="progress-fill sms" id="p2ps" /></div></div></div></div></div></div></div></section></div>
