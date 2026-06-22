@@ -78,15 +78,14 @@ function secProg(rect,fade){
 
 /* ZONE CONTROL */
 function updateZones(){
-  /* Light sections (white bg): phone, wyg, dashboard, compare, trusted */
-  const phone=getRect('section-phone');
+  /* Light sections (white bg): wyg, dashboard, compare, trusted */
   const wyg=getRect('section-wyg');
   const dash=getRect('section-dashboard');
   const compare=getRect('section-compare');
   const trusted=getRect('section-trusted');
 
   let lightMax=0;
-  [phone,wyg,dash,compare,trusted].forEach(r=>{lightMax=Math.max(lightMax,secProg(r,520))});
+  [wyg,dash,compare,trusted].forEach(r=>{lightMax=Math.max(lightMax,secProg(r,520))});
 
   /* "Turn Prospects Into Clients" — light starts only when 30% from top */
   const lightStartEl=document.getElementById('aurora-light-start');
