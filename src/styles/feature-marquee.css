@@ -1,0 +1,115 @@
+.cs-marquee-wrapper {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  margin-top: 64px;
+  overflow: hidden;
+  padding: 20px 0;
+}
+
+.cs-marquee-fade-left {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 20%;
+  background: linear-gradient(to right, #FDFDFE, transparent);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.cs-marquee-fade-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  width: 20%;
+  background: linear-gradient(to left, #FDFDFE, transparent);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.cs-marquee-track {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  animation: marquee-scroll 40s linear infinite;
+}
+
+.cs-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - 8px)); } /* Scrolls half the width minus half the gap */
+}
+
+.cs-marquee-card {
+  width: 320px;
+  height: 352px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.03);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.cs-marquee-card:hover {
+  transform: translateY(-8px);
+}
+
+.cs-marquee-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 32px 32px 0 32px;
+  margin: 0;
+}
+
+.cs-marquee-ui-mock {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 0 24px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+/* Fallback for deep purple card */
+.cs-marquee-card[style*="background: linear-gradient(145deg, rgb(76, 29, 149) 0%, rgb(49, 46, 129) 100%)"] .cs-marquee-ui-mock,
+.cs-marquee-card[style*="#4C1D95"] .cs-marquee-ui-mock {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cs-marquee-ui-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  opacity: 0.9;
+  color: #1A1E26;
+}
+
+.cs-marquee-card[style*="#4C1D95"] .cs-marquee-ui-row {
+  color: #FFFFFF;
+}
+
+.cs-marquee-ui-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  opacity: 0.5;
+}
