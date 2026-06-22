@@ -1,0 +1,297 @@
+/* ========================================================
+   TRUSTED OPERATORS SECTION
+   ======================================================== */
+
+.trusted-operators-section {
+  background-color: #ffffff;
+  font-family: 'DM Sans', sans-serif;
+  padding: 20px 40px 140px;
+  width: 100%;
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.trusted-operators-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* --- STATS CARD --- */
+.trusted-stats-card {
+  width: 90%;
+  max-width: 1080px;
+  background-color: #ffffff;
+  border: 1px solid #ececec;
+  border-radius: 26px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px 0;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.02);
+  
+  /* Subtle dot grid inside */
+  background-image: radial-gradient(#e5e5e5 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center;
+}
+
+.trusted-stat-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.to-visible .trusted-stat-item {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.trusted-stat-item strong {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800;
+  font-size: 52px;
+  color: #0B0B0B;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+}
+
+.trusted-stat-item span {
+  font-size: 14px;
+  color: #676767;
+  font-weight: 500;
+}
+
+.trusted-divider {
+  width: 1px;
+  height: 80px;
+  background-color: #ececec;
+}
+
+/* --- TRUST COPY --- */
+.trusted-copy {
+  margin-top: 90px;
+  margin-bottom: 50px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.trusted-copy p {
+  font-size: 19px;
+  font-weight: 600;
+  color: #5D5D5D;
+  margin: 0;
+}
+
+.trusted-copy span {
+  font-size: 19px;
+  font-weight: 500;
+  color: #A0A0A0;
+}
+
+/* --- LOGO GRID --- */
+.trusted-logo-grid {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 34px;
+  width: 100%;
+}
+
+.trusted-logo-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
+  width: 100%;
+  flex-wrap: wrap;
+}
+
+/* Base custom logo styling */
+.custom-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Outfit', sans-serif;
+  user-select: none;
+}
+
+/* Raycast */
+.logo-raycast svg {
+  width: 20px;
+  height: 20px;
+}
+.logo-raycast span {
+  font-weight: 700;
+  font-size: 22px;
+  color: #333;
+  letter-spacing: -0.5px;
+}
+
+/* Twitch */
+.logo-twitch span {
+  font-weight: 800;
+  font-size: 24px;
+  color: #9146FF;
+  letter-spacing: -1px;
+}
+
+/* Spotify */
+.logo-spotify svg {
+  width: 28px;
+  height: 28px;
+}
+.logo-spotify span {
+  font-weight: 700;
+  font-size: 23px;
+  color: #1DB954;
+  letter-spacing: -0.5px;
+}
+
+/* Hulu */
+.logo-hulu span {
+  font-weight: 800;
+  font-size: 32px;
+  color: #1CE783;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+/* YouTube */
+.logo-youtube {
+  gap: 2px;
+}
+.yt-you {
+  font-weight: 700;
+  font-size: 22px;
+  color: #111;
+  letter-spacing: -1px;
+}
+.yt-tube {
+  background-color: #FF0000;
+  color: #fff;
+  font-weight: 700;
+  font-size: 22px;
+  padding: 2px 6px;
+  border-radius: 6px;
+  letter-spacing: -1px;
+}
+
+/* character.ai */
+.logo-character span {
+  font-weight: 800;
+  font-size: 22px;
+  color: #333;
+  letter-spacing: -1px;
+}
+
+/* OpenAI */
+.logo-openai span {
+  font-weight: 600;
+  font-size: 22px;
+  color: #333;
+  letter-spacing: -0.5px;
+}
+
+/* ORACLE */
+.logo-oracle span {
+  font-family: sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  color: #333;
+  letter-spacing: 2px;
+}
+
+/* Portola */
+.logo-portola span {
+  font-weight: 900;
+  font-size: 26px;
+  color: #444;
+  letter-spacing: -1px;
+}
+.logo-portola sup {
+  font-size: 10px;
+  font-weight: 700;
+  color: #444;
+  margin-top: -12px;
+}
+
+/* granola */
+.logo-granola {
+  gap: 4px;
+}
+.logo-granola span {
+  font-weight: 600;
+  font-size: 24px;
+  color: #444;
+  letter-spacing: -1px;
+}
+.granola-bar {
+  width: 2px;
+  height: 20px;
+  background-color: #999;
+}
+
+
+/* ========================================================
+   RESPONSIVE LAYOUTS
+   ======================================================== */
+
+@media (max-width: 992px) {
+  .trusted-stats-card {
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 30px 0;
+    padding: 30px 0;
+  }
+  
+  .trusted-stat-item {
+    flex: 1 1 40%;
+  }
+
+  .trusted-divider {
+    display: none;
+  }
+  
+  /* Add custom borders for 2x2 grid */
+  .trusted-stats-card {
+    position: relative;
+  }
+}
+
+@media (max-width: 768px) {
+  .trusted-operators-section {
+    padding: 20px 20px 80px;
+  }
+
+  .trusted-stat-item strong {
+    font-size: 36px;
+  }
+
+  .trusted-stat-item span {
+    font-size: 12px;
+  }
+
+  .trusted-copy {
+    margin-top: 60px;
+    margin-bottom: 40px;
+  }
+
+  .trusted-copy p, .trusted-copy span {
+    font-size: 17px;
+  }
+
+  .trusted-logo-row {
+    gap: 30px 40px;
+  }
+}

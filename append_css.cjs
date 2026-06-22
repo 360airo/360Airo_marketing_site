@@ -1,40 +1,12 @@
-/* global styles */
+const fs = require('fs');
+let css = fs.readFileSync('src/styles/globals.css', 'utf8');
 
-/* GSAP Transition Styles */
-html,
-body {
-  overflow-x: hidden;
-}
+// I should probably remove the old `.future-transition-tablet` styles if they conflict.
+css = css.replace(/\.future-transition-tablet \{[\s\S]*?\}/g, '');
+css = css.replace(/\.future-transition-title \{[\s\S]*?\}/g, '');
+css = css.replace(/\.future-transition-layer \{[\s\S]*?\}/g, '');
 
-.hero-stitch-stage {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  background: inherit; /* preserve existing Hero background */
-}
-
-.hero-scene {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-}
-
-
-
-
-
-
-
-.future-section {
-  position: relative;
-  min-height: 100vh;
-  background: #ffffff;
-}
-
-@media (max-width: 768px) {
-  
-}
-
+const newCss = `
 
 /* ----- HERO DASHBOARD TRANSITION ----- */
 .hero-dashboard-tablet {
@@ -44,17 +16,15 @@ body {
   will-change: transform, opacity;
 }
 
+.hero-dashboard-ui,
 .future-tablet-content {
   position: absolute;
   inset: 0;
 }
 
 .hero-dashboard-ui {
-  position: relative;
   z-index: 2;
   opacity: 1;
-  width: 100%;
-  height: 100%;
   will-change: opacity, transform, filter;
 }
 
@@ -86,3 +56,8 @@ body {
 .future-tablet-content h2 span {
   display: block;
 }
+`;
+
+css += newCss;
+fs.writeFileSync('src/styles/globals.css', css);
+console.log('globals.css updated.');

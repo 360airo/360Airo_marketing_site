@@ -1879,3 +1879,69 @@ filter:none;
     animation: none !important;
   }
 }
+
+/* ============================================================
+   GLOBAL RESPONSIVE OVERRIDES
+   ============================================================ */
+@media (max-width: 1199px) {
+  .hero-metrics {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .hero-stat-card {
+    flex: 1 1 200px;
+  }
+  .ct {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-metrics {
+    flex-direction: column;
+  }
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+  }
+  .hero-btn-primary, .hero-btn-secondary {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  .tablet-frame {
+    padding: 8px;
+    border-radius: 16px;
+  }
+  .db-container {
+    flex-direction: column;
+    height: auto;
+  }
+  .db-sidebar {
+    width: 100%;
+    flex-direction: row;
+    border-right: none;
+    border-bottom: 1px solid #EAEFF5;
+    overflow-x: auto;
+  }
+  .db-nav {
+    flex-direction: row;
+  }
+  .db-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+  .db-charts {
+    grid-template-columns: 1fr;
+  }
+  .wfg svg.wm {
+    width: 100%;
+    height: auto;
+  }
+  .fg {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+}

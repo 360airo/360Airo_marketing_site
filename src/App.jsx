@@ -1,10 +1,103 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useLayoutEffect } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+gsap.registerPlugin(ScrollTrigger);
 import './styles/globals.css';
 import './styles/all.css';
 import './styles/hero-bg.css';
 import { initAnimations } from './animations';
+import EngineeringTeamSection from './components/EngineeringTeamSection';
+import TrustedOperatorsSection from './components/TrustedOperatorsSection';
+import LaunchFasterSection from './components/LaunchFasterSection';
+import ModernOutreachSection from './components/ModernOutreachSection';
 
 export default function App() {
+  const heroStageRef = useRef(null);
+  const heroContentRef = useRef(null);
+  const heroTabletRef = useRef(null);
+  const dashboardUiRef = useRef(null);
+  const futureTabletContentRef = useRef(null);
+  const featureSectionRef = useRef(null);
+
+  useLayoutEffect(() => {
+    let ctx = gsap.context(() => {
+      let mm = gsap.matchMedia();
+      mm.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.set(dashboardUiRef.current, {
+          opacity: 1,
+          scale: 1,
+          filter: "blur(0px)"
+        });
+
+        gsap.set(futureTabletContentRef.current, {
+          autoAlpha: 0,
+          opacity: 0,
+          scale: 0.96,
+          y: 20,
+          filter: "blur(5px)"
+        });
+
+        const timeline = gsap.timeline({
+          scrollTrigger: {
+            trigger: heroStageRef.current,
+            start: "top top",
+            end: "+=2800",
+            scrub: 1,
+            pin: true,
+            pinSpacing: true,
+            anticipatePin: 1,
+            invalidateOnRefresh: true
+          }
+        });
+
+        timeline
+          .addLabel("heroExit")
+          .to(heroContentRef.current, {
+            opacity: 0,
+            x: -70,
+            y: -18,
+            filter: "blur(4px)",
+            duration: 1,
+            ease: "none"
+          }, "heroExit")
+          .to(dashboardUiRef.current, {
+            opacity: 0,
+            scale: 0.96,
+            filter: "blur(4px)",
+            duration: 1,
+            ease: "none"
+          }, "heroExit")
+          .addLabel("futureTitleEnter", "heroExit+=0.62")
+          .to(futureTabletContentRef.current, {
+            autoAlpha: 1,
+            opacity: 1,
+            scale: 1,
+            y: 0,
+            filter: "blur(0px)",
+            duration: 0.8,
+            ease: "none"
+          }, "futureTitleEnter")
+          .addLabel("tabletZoom", "futureTitleEnter+=0.9")
+          .to(heroTabletRef.current, {
+            scale: () => {
+              if(!heroTabletRef.current) return 1;
+              const rect = heroTabletRef.current.getBoundingClientRect();
+
+              return Math.max(
+                window.innerWidth / rect.width,
+                window.innerHeight / rect.height
+              ) * 1.16;
+            },
+            borderRadius: 0,
+            borderWidth: 0,
+            boxShadow: "0 0 0 rgba(0,0,0,0)",
+            duration: 1.8,
+            ease: "none"
+          }, "tabletZoom");
+      });
+    });
+    return () => ctx.revert();
+  }, []);
   useEffect(() => {
     initAnimations();
   }, []);
@@ -26,18 +119,20 @@ export default function App() {
         <li className="nav-text-item">Pricing</li>
       </ul>
       <div className="nav-btns"><button className="btn-nav-login">Log in</button></div>
-      <div className="nav-hamburger" onclick="document.getElementById('mob').classList.add('open')"><span /><span /><span /></div>
+      <div className="nav-hamburger" onClick={() => document.getElementById('mob').classList.add('open')}><span /><span /><span /></div>
     </div>
   </nav>
   <div className="mobile-overlay" id="mob">
-    <div className="mobile-close" onclick="this.parentElement.classList.remove('open')">Γ£ò</div>
-    <a href="#" onclick="document.getElementById('mob').classList.remove('open')">Home</a>
-    <a href="#" onclick="document.getElementById('mob').classList.remove('open')">Features</a>
-    <a href="#" onclick="document.getElementById('mob').classList.remove('open')">Solutions</a>
-    <a href="#" onclick="document.getElementById('mob').classList.remove('open')">Resources</a>
-    <a href="#" onclick="document.getElementById('mob').classList.remove('open')">Pricing</a>
+    <div className="mobile-close" onClick={(e) => e.target.parentElement.classList.remove('open')}>✕</div>
+    <a href="#" onClick={() => document.getElementById('mob').classList.remove('open')}>Home</a>
+    <a href="#" onClick={() => document.getElementById('mob').classList.remove('open')}>Features</a>
+    <a href="#" onClick={() => document.getElementById('mob').classList.remove('open')}>Solutions</a>
+    <a href="#" onClick={() => document.getElementById('mob').classList.remove('open')}>Resources</a>
+    <a href="#" onClick={() => document.getElementById('mob').classList.remove('open')}>Pricing</a>
   </div>
   <div id="section-home">
+    <section className="hero-stitch-stage" ref={heroStageRef}>
+      <div className="hero-scene">
     <div className="hero-diagonal-bg" aria-hidden="true">
       <span className="hero-panel panel-1"></span>
       <span className="hero-panel panel-2"></span>
@@ -49,7 +144,7 @@ export default function App() {
     </div>
     <section className="hero">
       {/* LEFT COPY */}
-      <div className="hero-copy">
+      <div className="hero-copy" ref={heroContentRef}>
         <h1 className="hero-title">
           <span className="title-line">A Hyper-<em className="title-accent">Personalized</em></span>
           <span className="title-line">Multichannel</span>
@@ -118,12 +213,13 @@ export default function App() {
       </div>{/* /.hero-copy */}
       {/* RIGHT VISUAL: TABLET MOCKUP */}
       <div className="hero-visual">
-        <div className="tablet-frame">
+        <div className="tablet-frame hero-dashboard-tablet" ref={heroTabletRef}>
           <div className="tablet-camera" />
           <div className="tablet-side-dot tablet-left" />
           <div className="tablet-side-dot tablet-right" />
           <div className="tablet-screen">
-            <div className="db-container">
+            <div ref={dashboardUiRef} className="hero-dashboard-ui">
+              <div className="db-container">
               {/* Sidebar */}
               <div className="db-sidebar">
                 {/* Logo removed per request */}
@@ -278,12 +374,22 @@ export default function App() {
                 </div>
               </div>
             </div>
+            </div>{/* /.hero-dashboard-ui */}
+            <div ref={futureTabletContentRef} className="future-tablet-content">
+              <h2>
+                <span>THE FUTURE</span>
+                <span>OF</span>
+                <span>OUTREACH</span>
+              </h2>
+            </div>
           </div>{/* /.tablet-screen */}
         </div>{/* /.tablet-frame */}
       </div>{/* /.hero-visual */}
     </section>
+      </div>
+    </section>
   </div>{/* /#section-home */}
-  <div id="section-phone"><section className="p2-hero"><div className="hero-main"><div className="hero-left"><p data-reveal="left" data-delay={900}>Trust automated strategies or invest yourself — the choice is yours.</p><p data-reveal="left" data-delay={1100}>Take the first step towards financial freedom.</p></div><div className="hero-center"><h1 className="hero-headline"><span className="headline-line"><span className="headline-inner" data-headline-delay={500}>THE FUTURE</span></span><span className="headline-line line2"><span className="headline-inner" data-headline-delay={650}>OF</span></span><span className="headline-line"><span className="headline-inner" data-headline-delay={800}>OUTREACH</span></span></h1></div><div className="hero-right"><div className="phone-mockup" data-reveal="right" data-delay={700} id="p2phone"><div className="phone-screen"><div className="phone-notch" /><div className="dash-content"><div className="dash-header"><span className="dash-title">Campaign Results</span><span className="dash-period">Last 30 days</span></div><div className="channel-stats"><div className="channel-card"><div className="channel-icon-row"><div className="channel-dot email" /><span className="channel-label">Email</span></div><div className="channel-number" data-target={2847} data-suffix>0</div><div className="channel-sub">Sent</div><div className="channel-change">Γåæ 24.3%</div></div><div className="channel-card"><div className="channel-icon-row"><div className="channel-dot linkedin" /><span className="channel-label">LinkedIn</span></div><div className="channel-number" data-target={1263} data-suffix>0</div><div className="channel-sub">Requests</div><div className="channel-change">Γåæ 18.7%</div></div><div className="channel-card"><div className="channel-icon-row"><div className="channel-dot sms" /><span className="channel-label">SMS</span></div><div className="channel-number" data-target={934} data-suffix>0</div><div className="channel-sub">Delivered</div><div className="channel-change">Γåæ 31.2%</div></div></div><div className="total-section"><div><div className="total-label">Total Replies</div><div className="total-number" data-target={1592} data-suffix>0</div></div><div className="total-badge">+42.8% vs last month</div></div><div className="dash-chart"><svg viewBox="0 0 240 100" preserveAspectRatio="none"><defs><linearGradient id="p2ag" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#c5d441" stopOpacity=".25" /><stop offset="100%" stopColor="#c5d441" stopOpacity=".02" /></linearGradient><linearGradient id="p2bg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#5b9bf5" stopOpacity=".12" /><stop offset="100%" stopColor="#5b9bf5" stopOpacity={0} /></linearGradient><linearGradient id="p2og" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#f59b5b" stopOpacity=".12" /><stop offset="100%" stopColor="#f59b5b" stopOpacity={0} /></linearGradient></defs><line x1={0} y1={25} x2={240} y2={25} stroke="#151c30" strokeWidth=".5" /><line x1={0} y1={50} x2={240} y2={50} stroke="#151c30" strokeWidth=".5" /><line x1={0} y1={75} x2={240} y2={75} stroke="#151c30" strokeWidth=".5" /><path className="chart-area" data-area-delay={2400} d="M0,95 C15,93 30,90 48,85 C65,80 80,78 96,72 C112,66 128,62 144,56 C160,50 176,48 192,44 C208,40 224,38 240,35 L240,100 L0,100Z" fill="url(#p2og)" /><path className="chart-line" data-line-delay={1400} d="M0,95 C15,93 30,90 48,85 C65,80 80,78 96,72 C112,66 128,62 144,56 C160,50 176,48 192,44 C208,40 224,38 240,35" fill="none" stroke="#f59b5b" strokeWidth="1.5" strokeLinecap="round" /><path className="chart-area" data-area-delay={2200} d="M0,92 C15,88 30,84 48,76 C65,68 80,62 96,55 C112,48 128,42 144,36 C160,30 176,26 192,22 C208,18 224,16 240,14 L240,100 L0,100Z" fill="url(#p2bg)" /><path className="chart-line" data-line-delay={1600} d="M0,92 C15,88 30,84 48,76 C65,68 80,62 96,55 C112,48 128,42 144,36 C160,30 176,26 192,22 C208,18 224,16 240,14" fill="none" stroke="#5b9bf5" strokeWidth="1.5" strokeLinecap="round" /><path className="chart-area" data-area-delay={2000} d="M0,88 C15,82 30,76 48,66 C65,56 80,48 96,40 C112,33 128,27 144,22 C160,17 176,13 192,10 C208,7 224,5 240,4 L240,100 L0,100Z" fill="url(#p2ag)" /><path className="chart-line" data-line-delay={1200} d="M0,88 C15,82 30,76 48,66 C65,56 80,48 96,40 C112,33 128,27 144,22 C160,17 176,13 192,10 C208,7 224,5 240,4" fill="none" stroke="#c5d441" strokeWidth={2} strokeLinecap="round" /><circle className="chart-dot" data-dot-delay={3200} cx={240} cy={4} fill="#c5d441" /><circle className="chart-dot-pulse" data-dot-delay={3400} cx={240} cy={4} fill="#c5d441" /><circle className="chart-dot" data-dot-delay={3400} cx={240} cy={14} fill="#5b9bf5" /><circle className="chart-dot" data-dot-delay={3600} cx={240} cy={35} fill="#f59b5b" /></svg></div><div className="dash-bottom-stats"><div className="mini-stat"><div className="mini-stat-value" data-target={32} data-suffix="%">0%</div><div className="mini-stat-label">Open Rate</div></div><div className="mini-stat"><div className="mini-stat-value" data-target={12} data-suffix="%">0%</div><div className="mini-stat-label">Reply Rate</div></div><div className="mini-stat"><div className="mini-stat-value" data-target={847} data-suffix>0</div><div className="mini-stat-label">Meetings</div></div></div><div className="campaign-bar"><div className="campaign-bar-header"><span className="campaign-bar-title">Channel Contribution</span><span className="campaign-bar-pct">100%</span></div><div className="progress-track"><div className="progress-fill email" id="p2pe" /><div className="progress-fill linkedin" id="p2pl" /><div className="progress-fill sms" id="p2ps" /></div></div></div></div></div></div></div></section></div>
+  <div id="section-phone" ref={featureSectionRef}><section className="p2-hero"><div className="hero-main"><div className="hero-left"><p data-reveal="left" data-delay={900}>Trust automated strategies or invest yourself — the choice is yours.</p><p data-reveal="left" data-delay={1100}>Take the first step towards financial freedom.</p></div><div className="hero-center"><h1 className="hero-headline"><span className="headline-line"><span className="headline-inner" data-headline-delay={500}>THE FUTURE</span></span><span className="headline-line line2"><span className="headline-inner" data-headline-delay={650}>OF</span></span><span className="headline-line"><span className="headline-inner" data-headline-delay={800}>OUTREACH</span></span></h1></div><div className="hero-right"><div className="phone-mockup" data-reveal="right" data-delay={700} id="p2phone"><div className="phone-screen"><div className="phone-notch" /><div className="dash-content"><div className="dash-header"><span className="dash-title">Campaign Results</span><span className="dash-period">Last 30 days</span></div><div className="channel-stats"><div className="channel-card"><div className="channel-icon-row"><div className="channel-dot email" /><span className="channel-label">Email</span></div><div className="channel-number" data-target={2847} data-suffix>0</div><div className="channel-sub">Sent</div><div className="channel-change">Γåæ 24.3%</div></div><div className="channel-card"><div className="channel-icon-row"><div className="channel-dot linkedin" /><span className="channel-label">LinkedIn</span></div><div className="channel-number" data-target={1263} data-suffix>0</div><div className="channel-sub">Requests</div><div className="channel-change">Γåæ 18.7%</div></div><div className="channel-card"><div className="channel-icon-row"><div className="channel-dot sms" /><span className="channel-label">SMS</span></div><div className="channel-number" data-target={934} data-suffix>0</div><div className="channel-sub">Delivered</div><div className="channel-change">Γåæ 31.2%</div></div></div><div className="total-section"><div><div className="total-label">Total Replies</div><div className="total-number" data-target={1592} data-suffix>0</div></div><div className="total-badge">+42.8% vs last month</div></div><div className="dash-chart"><svg viewBox="0 0 240 100" preserveAspectRatio="none"><defs><linearGradient id="p2ag" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#c5d441" stopOpacity=".25" /><stop offset="100%" stopColor="#c5d441" stopOpacity=".02" /></linearGradient><linearGradient id="p2bg" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#5b9bf5" stopOpacity=".12" /><stop offset="100%" stopColor="#5b9bf5" stopOpacity={0} /></linearGradient><linearGradient id="p2og" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stopColor="#f59b5b" stopOpacity=".12" /><stop offset="100%" stopColor="#f59b5b" stopOpacity={0} /></linearGradient></defs><line x1={0} y1={25} x2={240} y2={25} stroke="#151c30" strokeWidth=".5" /><line x1={0} y1={50} x2={240} y2={50} stroke="#151c30" strokeWidth=".5" /><line x1={0} y1={75} x2={240} y2={75} stroke="#151c30" strokeWidth=".5" /><path className="chart-area" data-area-delay={2400} d="M0,95 C15,93 30,90 48,85 C65,80 80,78 96,72 C112,66 128,62 144,56 C160,50 176,48 192,44 C208,40 224,38 240,35 L240,100 L0,100Z" fill="url(#p2og)" /><path className="chart-line" data-line-delay={1400} d="M0,95 C15,93 30,90 48,85 C65,80 80,78 96,72 C112,66 128,62 144,56 C160,50 176,48 192,44 C208,40 224,38 240,35" fill="none" stroke="#f59b5b" strokeWidth="1.5" strokeLinecap="round" /><path className="chart-area" data-area-delay={2200} d="M0,92 C15,88 30,84 48,76 C65,68 80,62 96,55 C112,48 128,42 144,36 C160,30 176,26 192,22 C208,18 224,16 240,14 L240,100 L0,100Z" fill="url(#p2bg)" /><path className="chart-line" data-line-delay={1600} d="M0,92 C15,88 30,84 48,76 C65,68 80,62 96,55 C112,48 128,42 144,36 C160,30 176,26 192,22 C208,18 224,16 240,14" fill="none" stroke="#5b9bf5" strokeWidth="1.5" strokeLinecap="round" /><path className="chart-area" data-area-delay={2000} d="M0,88 C15,82 30,76 48,66 C65,56 80,48 96,40 C112,33 128,27 144,22 C160,17 176,13 192,10 C208,7 224,5 240,4 L240,100 L0,100Z" fill="url(#p2ag)" /><path className="chart-line" data-line-delay={1200} d="M0,88 C15,82 30,76 48,66 C65,56 80,48 96,40 C112,33 128,27 144,22 C160,17 176,13 192,10 C208,7 224,5 240,4" fill="none" stroke="#c5d441" strokeWidth={2} strokeLinecap="round" /><circle className="chart-dot" data-dot-delay={3200} cx={240} cy={4} fill="#c5d441" /><circle className="chart-dot-pulse" data-dot-delay={3400} cx={240} cy={4} fill="#c5d441" /><circle className="chart-dot" data-dot-delay={3400} cx={240} cy={14} fill="#5b9bf5" /><circle className="chart-dot" data-dot-delay={3600} cx={240} cy={35} fill="#f59b5b" /></svg></div><div className="dash-bottom-stats"><div className="mini-stat"><div className="mini-stat-value" data-target={32} data-suffix="%">0%</div><div className="mini-stat-label">Open Rate</div></div><div className="mini-stat"><div className="mini-stat-value" data-target={12} data-suffix="%">0%</div><div className="mini-stat-label">Reply Rate</div></div><div className="mini-stat"><div className="mini-stat-value" data-target={847} data-suffix>0</div><div className="mini-stat-label">Meetings</div></div></div><div className="campaign-bar"><div className="campaign-bar-header"><span className="campaign-bar-title">Channel Contribution</span><span className="campaign-bar-pct">100%</span></div><div className="progress-track"><div className="progress-fill email" id="p2pe" /><div className="progress-fill linkedin" id="p2pl" /><div className="progress-fill sms" id="p2ps" /></div></div></div></div></div></div></div></section></div>
   {/* /#section-phone */}
   <div id="section-trusted-startups">
     <section className="trusted-startups-inner">
@@ -309,6 +415,10 @@ export default function App() {
       </div>
     </section>
   </div>
+  <ModernOutreachSection />
+  <EngineeringTeamSection />
+  <TrustedOperatorsSection />
+  <LaunchFasterSection />
   <div id="section-mountain"><section className="img-section mountain-section" style={{backgroundImage: 'url("mountain-bg.jpg")'}}><div data-anim="left" style={{maxWidth: 460}}><h2>Reaching Heights<br />Is Never Accidental.</h2></div></section><section className="apple-statement" id="aurora-dark-start"><h2 data-anim="up">And we make it easier for you.<br /><span>The only reach out infrastructure you need.</span></h2></section></div>
   <div id="section-cone"><section className="growth-section"><div className="growth-headline"><h2>Growth happens in stages</h2></div><div className="growth-layout"><div className="growth-cone"><img src="cone-funnel.png" alt="Sales Funnel" /></div><div className="g-reach"><div className="g-label-row"><div className="g-dot g-dot-blue" /><span className="g-label-text">Reach</span></div><p className="g-sublabel">Drive awareness with<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;our powerful systems</p></div><div className="g-progress-card"><div><p className="gpc-label">Progress</p><p className="gpc-val">87%</p></div><div className="gpc-right"><div className="gpc-change"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M7 17l5-5 4 4 5-7" /><path d="M17 7h4v4" /></svg>1.7%</div><div className="gpc-chart"><svg viewBox="0 0 70 30" fill="none"><path d="M0 28 Q8 26 14 24 T28 18 T42 20 T52 12 T62 8 T70 2" stroke="#06B6D4" strokeWidth={2} fill="none" /></svg></div></div></div><div className="g-convert"><div className="g-label-row"><div className="g-dot g-dot-purple" /><span className="g-label-text" style={{color: '#C4B5FD', borderColor: '#C4B5FD'}}>Convert</span></div><p className="g-sublabel">Your Prospects are<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;now your Clients</p></div><div className="g-success-card"><p className="gsc-label">Success ratio</p><div className="gsc-right"><p className="gsc-val">96%</p><span className="gsc-change">+12%Γû▓</span></div></div><div className="g-engage"><div className="g-label-row"><div className="g-dot g-dot-blue" /><span className="g-label-text">Engage</span></div><p className="g-engage-sub">Run targeted campaigns</p></div><div className="g-matrix-card"><div className="gmc-dots"><span /><span /><span /></div><p className="gmc-title">Conversion matrix</p><div className="gmc-bars"><div className="gmc-bar gmc-bar-1" /><div className="gmc-bar gmc-bar-2" /><div className="gmc-bar gmc-bar-3" /><div className="gmc-bar gmc-bar-4" /><div className="gmc-bar gmc-bar-5" /><div className="gmc-bar gmc-bar-6" /></div></div><div className="g-dashed-line" /></div><div className="growth-mobile-timeline"><div className="gmt-funnel"><img src="cone-funnel.png" alt="Funnel" /></div><div className="gmt-stages"><div className="gmt-stage stage-reach"><div className="gmt-label">Reach</div><div className="gmt-desc">Drive awareness with our powerful systems</div><div className="gmt-card" style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}><div><p style={{fontSize: 11, color: 'rgba(255,255,255,.5)'}}>Progress</p><p style={{fontFamily: '"Outfit"', fontWeight: 700, fontSize: 26, color: '#fff'}}>87%</p></div><div style={{display: 'flex', flexDirection: 'column', alignItems: 'flex-end', gap: 4}}><div style={{fontSize: 12, color: '#34D399', fontWeight: 600}}>Γåæ1.7%</div></div></div></div><div className="gmt-stage stage-engage"><div className="gmt-label">Engage</div><div className="gmt-desc">Run targeted campaigns</div><div className="gmt-card-row"><div className="gmt-card" style={{display: 'flex', alignItems: 'center', justifyContent: 'space-between'}}><div><p style={{fontSize: 13, color: 'rgba(255,255,255,.5)'}}>Success ratio</p><p style={{fontFamily: '"Outfit"', fontWeight: 800, fontSize: 30, color: '#fff'}}>96%</p></div><span style={{fontSize: 11, color: '#34D399', fontWeight: 600}}>+12%Γû▓</span></div><div className="gmt-card"><p style={{fontSize: 13, fontWeight: 700, color: '#fff', margin: '0 0 12px'}}>Conversion matrix</p><div style={{display: 'flex', alignItems: 'flex-end', gap: 8, height: 60}}><div style={{borderRadius: '4px 4px 0 0', flex: 1, height: 30, background: 'rgba(255,255,255,.1)'}} /><div style={{borderRadius: '4px 4px 0 0', flex: 1, height: 20, background: 'rgba(255,255,255,.1)'}} /><div style={{borderRadius: '4px 4px 0 0', flex: 1, height: 40, background: '#3B82F6'}} /><div style={{borderRadius: '4px 4px 0 0', flex: 1, height: 55, background: '#06B6D4'}} /><div style={{borderRadius: '4px 4px 0 0', flex: 1, height: 50, background: '#8B5CF6'}} /><div style={{borderRadius: '4px 4px 0 0', flex: 1, height: 35, background: 'rgba(255,255,255,.1)'}} /></div></div></div></div><div className="gmt-stage stage-convert"><div className="gmt-label" style={{color: '#C4B5FD'}}>Convert</div><div className="gmt-desc">Your Prospects are now your Clients</div></div></div></div><div className="growth-subtext"><p>360 Airo structures the entire journey — Analyse the Pipeline, identifying prospects, nurturing engagement, and converting interest into lasting business relationships.</p></div></section></div>
   <div id="section-3stack"><div className="s3p"><div className="s3f blue"><div className="s3g"><div className="s3sw" /><div className="s3l lr"><div className="s3t pr"><div className="s3pill blue">Step 1 — Load your Prospect list</div><h2>Build Your<br /><span className="bl">Target List</span></h2><p className="s3sub">Import prospects from <b>CSV, CRM, or LinkedIn</b>. Define who to reach by industry, role, location, or company size.</p><div className="s3bars"><div className="s3bar"><div className="s3chk blue"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" /></svg></div><div className="s3bc"><span className="s3bt">Import from any source</span><span className="s3bs">CSV, HubSpot, Salesforce, LinkedIn Sales Nav.</span></div></div><div className="s3bar"><div className="s3chk blue"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" /></svg></div><div className="s3bc"><span className="s3bt">Smart filtering &amp; segmentation</span><span className="s3bs">Target by title, industry, company size.</span></div></div><div className="s3bar"><div className="s3chk blue"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" /></svg></div><div className="s3bc"><span className="s3bt">Verified contact data</span><span className="s3bs">Auto-enriched emails and LinkedIn profiles.</span></div></div></div></div><div className="s3av" id="s3sc"><canvas id="s3cv" /><div className="s3pts" id="s3pts" /><div className="s3fc s3fc1"><img src="tp-meeting.jpg" alt="Meeting" /><div className="s3tag"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" /><circle cx={9} cy={7} r={4} /></svg>In-person</div></div><div className="s3fc s3fc2"><img src="tp-desktop.jpg" alt="Desktop" /><div className="s3tag"><svg viewBox="0 0 24 24"><rect x={2} y={3} width={20} height={14} rx={2} /><path d="M8 21h8M12 17v4" /></svg>Desktop</div></div><div className="s3fc s3fc3"><img src="tp-mobile.jpg" alt="Mobile" /><div className="s3tag"><svg viewBox="0 0 24 24"><rect x={5} y={2} width={14} height={20} rx={2} /><path d="M12 18h.01" /></svg>Mobile</div></div><div className="s3sf"><div style={{fontWeight: 600, fontSize: 9, color: 'rgba(200,204,223,.5)', textTransform: 'uppercase'}}>Prospects loaded</div><div style={{display: 'flex', alignItems: 'baseline', gap: 5}}><span style={{fontWeight: 800, fontSize: 22, color: '#e8eaf0'}}>4,820</span><span style={{fontWeight: 700, fontSize: 11, color: '#34d399'}}>Γåæ 2.4x</span></div></div></div></div></div></div><div className="conn"><svg viewBox="0 0 1400 100" preserveAspectRatio="none" fill="none"><path d="M1050 0 C1050 35,350 65,350 100" stroke="rgba(100,130,255,.08)" strokeWidth={2} strokeDasharray="8 10" strokeLinecap="round" /></svg></div><div className="s3f blue"><div className="s3g"><div className="s3sw" style={{animationDelay: '2.5s'}} /><div className="s3l rl"><div className="s3vis"><img src="360-airo-graphic.png" alt="360 Airo" /><div className="s3kpi br"><div className="s3kl">Replies generated</div><div className="s3kr"><span className="s3kn">1,284</span><span className="s3ku">Γåæ 3.6x</span></div></div></div><div className="s3t"><div className="s3pill blue">Step 2 — Automation</div><h2>AI That<br /><span className="bl">Never Sleeps</span></h2><p className="s3sub">Your pipeline shouldn't pause when your team logs off. 360 Airo runs <b>24/7 outreach</b> across LinkedIn, calls, and messaging.</p><div className="s3bars"><div className="s3bar"><div className="s3chk blue"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" /></svg></div><div className="s3bc"><span className="s3bt">24/7 prospect outreach</span><span className="s3bs">Always on, never stops.</span></div></div><div className="s3bar"><div className="s3chk blue"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" /></svg></div><div className="s3bc"><span className="s3bt">AI follow-ups that never stop</span><span className="s3bs">Automated and intelligent.</span></div></div><div className="s3bar"><div className="s3chk blue"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" /></svg></div><div className="s3bc"><span className="s3bt">Conversations generated automatically</span></div></div></div></div></div></div></div><div className="conn"><svg viewBox="0 0 1400 100" preserveAspectRatio="none" fill="none"><path d="M350 0 C350 35,1050 65,1050 100" stroke="rgba(16,185,129,.08)" strokeWidth={2} strokeDasharray="8 10" strokeLinecap="round" /></svg></div><div className="s3f green" id="aurora-light-start"><div className="s3g"><div className="s3sw" style={{animationDelay: '5s', background: 'linear-gradient(108deg,transparent 20%,rgba(150,255,220,.05) 50%,transparent 80%)'}} /><div className="s3l rlg"><div className="s3t"><div className="s3pill green">Step 3 — Conversion</div><h2>Turn Prospects<br />Into <span className="gr">Clients</span></h2><p className="s3sub">360 Airo reaches through <b>LinkedIn, email, and calls</b> — starting real conversations that turn prospects into customers.</p><div className="s3bars"><div className="s3bar"><div className="s3chk green"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" /></svg></div><div className="s3bc"><span className="s3bt">Automated LinkedIn outreach</span><span className="s3bs">AI email follow-ups that never stop</span></div></div><div className="s3bar"><div className="s3chk green"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7" /></svg></div><div className="s3bc"><span className="s3bt">Conversations that convert</span><span className="s3bs">Prospects into clients, automatically</span></div></div></div></div><div className="s3vis"><img src="360-airo-prospects.png" alt="Prospects" /><div className="s3kpi bl"><div className="s3kl">Deals closed</div><div className="s3kr"><span className="s3kn">312</span><span className="s3ku">Γåæ 4.1x</span></div></div></div></div></div></div></div></div>
@@ -317,7 +427,7 @@ export default function App() {
   <div id="section-compare"><section className="cb"><div className="ci"><h2>Why Choose Us?</h2><table className="ct"><thead><tr><th>What Matters</th><th>In-House</th><th>Traditional</th><th>360 Airo</th></tr></thead><tbody><tr><td>Setup Speed</td><td>Time-consuming</td><td>Moderate</td><td>Ready in minutes</td></tr><tr><td>Outreach</td><td>Manual workflows</td><td>Multiple tools</td><td>Unified system</td></tr><tr><td>Automation</td><td>Limited</td><td>Partial</td><td>Fully automated</td></tr><tr><td>Pipeline</td><td>Fragmented</td><td>Limited insights</td><td>Real-time tracking</td></tr><tr><td>Scalability</td><td>Hard to scale</td><td>Tool-dependent</td><td>Built to scale</td></tr></tbody></table><div className="cmob"><div className="cmc"><div className="cmh"><h4>Setup Speed</h4></div><div className="cmb"><div className="cml"><div className="cmll">In-House</div><div className="cmlv">Time-consuming</div></div><div className="cml"><div className="cmll">Traditional</div><div className="cmlv">Moderate</div></div><div className="cml hl"><div className="cmll">360 Airo</div><div className="cmlv">Ready in minutes</div></div></div></div><div className="cmc"><div className="cmh"><h4>Automation</h4></div><div className="cmb"><div className="cml"><div className="cmll">In-House</div><div className="cmlv">Limited</div></div><div className="cml"><div className="cmll">Traditional</div><div className="cmlv">Partial</div></div><div className="cml hl"><div className="cmll">360 Airo</div><div className="cmlv">Fully automated</div></div></div></div><div className="cmc"><div className="cmh"><h4>Scalability</h4></div><div className="cmb"><div className="cml"><div className="cmll">In-House</div><div className="cmlv">Hard to scale</div></div><div className="cml"><div className="cmll">Traditional</div><div className="cmlv">Tool-dependent</div></div><div className="cml hl"><div className="cmll">360 Airo</div><div className="cmlv">Built to scale</div></div></div></div></div><div className="ccta"><button className="btn-primary">Book a Call</button></div></div></section></div>
   <div id="section-trusted"><section className="svs" id="svid"><div className="svss"><div className="ehl"><h2>Trusted by Sales Teams Worldwide</h2><p>Teams use 360Airo to run multichannel outreach with real-time visibility.</p></div><img id="sfr" src="earth-bg.jpg" alt="Earth" /></div></section></div>
   <div id="section-mobile"><section className="ms"><div className="mi"><div className="section-tag" data-anim="up">MOBILE READY</div><h2 data-anim="up" style={{fontFamily: '"Outfit",sans-serif', fontWeight: 700, fontSize: 'clamp(32px,4vw,48px)', letterSpacing: '-1.5px', marginBottom: 16}}>Streamline your outreach<br />from anywhere</h2><p className="msub" data-anim="up">Monitor campaigns, respond to leads, approve sequences — from the 360Airo mobile app.</p><div className="pd" data-anim="up"><div className="mp"><div className="nt" /><div className="mu"><div style={{display: 'flex', alignItems: 'center', gap: 6, padding: '8px 0', fontSize: 12, fontWeight: 700}}><span className="mld" /> 360Airo Live</div><div className="mr"><span className="ml">Open Rate</span><span className="mv" style={{color: '#34D399'}}>47%</span></div><div className="mr"><span className="ml">Replies</span><span className="mv">+24</span></div><div className="mr"><span className="ml">Meetings</span><span className="mv">8</span></div></div></div><div className="mp"><div className="nt" /><div className="mu"><div style={{padding: '8px 0', fontSize: 12, fontWeight: 700, color: '#60A5FA'}}>Sequences</div><div className="mr"><span className="ml">Active</span><span className="mv" style={{color: '#34D399'}}>12</span></div><div className="mr"><span className="ml">Leads</span><span className="mv">1,208</span></div><div className="mr"><span className="ml">Pipeline</span><span className="mv" style={{color: '#34D399'}}>$2.4M</span></div></div></div></div></div></section></div>
-  <div id="section-analytics"><section className="as"><img className="abg" src="analytics-bg.jpg" alt /><div className="aov" /><div className="act" data-anim="left"><h2>Build, Analyse and Track your data in real time</h2><p>Track outreach performance, engagement trends, and deal progression through a unified analytics view.</p></div></section></div>
+  <div id="section-analytics"><section className="as"><img className="abg" src="analytics-bg.jpg" alt="" /><div className="aov" /><div className="act" data-anim="left"><h2>Build, Analyse and Track your data in real time</h2><p>Track outreach performance, engagement trends, and deal progression through a unified analytics view.</p></div></section></div>
   <div id="section-pricing"><section className="cban"><div className="cin" data-anim="scale"><h2>Ready to supercharge your outreach?</h2><p>Join 4,200+ teams already using 360Airo.</p><button className="btn-primary">Start Free Trial <svg width={16} height={16} fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24"><path d="M5 12h14m-6-6l6 6-6 6" /></svg></button></div></section><footer><div className="fg"><div className="fb"><div className="nav-logo-fallback" style={{fontSize: 24}}><span style={{color: '#3B82F6'}}>360</span>Airo</div><p>AI-powered multichannel sales outreach. Discover prospects, start conversations, close more deals.</p></div><div className="fc"><h4>Product</h4><a href="#">Features</a><a href="#">Pricing</a><a href="#">Integrations</a></div><div className="fc"><h4>Solutions</h4><a href="#">For SDRs</a><a href="#">For Agencies</a><a href="#">For Founders</a></div><div className="fc"><h4>Resources</h4><a href="#">Blog</a><a href="#">Docs</a><a href="#">Case Studies</a></div><div className="fc"><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Contact</a></div></div><div className="fbot"><p>© 2024 360Airo. All rights reserved.</p><div className="fsc"><a href="#">𝕏</a><a href="#">in</a><a href="#">▶</a></div></div></footer></div>
 </div>
 
