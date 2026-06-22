@@ -5,9 +5,8 @@ body,
   min-height: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: clip;
+  overflow-x: hidden;
 }
-
 
 body {
   background: #030712;
