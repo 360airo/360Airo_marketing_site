@@ -1,0 +1,151 @@
+/* [project]/Documents/GitHub/360Airo_marketing_site/src/styles/hero-bg.css [app-client] (css) */
+#section-home {
+  isolation: isolate;
+  background: linear-gradient(135deg, #08142f 0%, #091533 28%, #061022 58%, #040a18 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-diagonal-bg {
+  z-index: 0;
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+#section-home .hero {
+  z-index: 2;
+  position: relative;
+}
+
+.hero-panel {
+  transform-origin: center;
+  will-change: transform, opacity;
+  opacity: 1;
+  filter: none;
+  border-radius: 0;
+  position: absolute;
+}
+
+.hero-panel.panel-1 {
+  background: linear-gradient(#5876dc3d, #5876dc1f);
+  width: 78vw;
+  height: 140vh;
+  animation: 20s ease-in-out infinite panelFloatA;
+  top: -55vh;
+  left: -18vw;
+  transform: rotate(36deg);
+}
+
+.hero-panel.panel-2 {
+  background: linear-gradient(#4e6edc2e, #4e6edc14);
+  width: 70vw;
+  height: 145vh;
+  animation: 24s ease-in-out infinite panelFloatB;
+  top: -48vh;
+  left: 8vw;
+  transform: rotate(36deg);
+}
+
+.hero-panel.panel-3 {
+  background: linear-gradient(#1a2f7652, #1a2f761a);
+  width: 82vw;
+  height: 150vh;
+  animation: 26s ease-in-out infinite reverse panelFloatA;
+  top: -42vh;
+  left: 26vw;
+  transform: rotate(36deg);
+}
+
+.hero-panel.panel-4 {
+  background: linear-gradient(#0914386b, #0914381f);
+  width: 76vw;
+  height: 145vh;
+  animation: 22s ease-in-out infinite panelFloatB;
+  top: -38vh;
+  left: 52vw;
+  transform: rotate(36deg);
+}
+
+.hero-panel.panel-5 {
+  background: linear-gradient(#2732782e, #2732780f);
+  width: 68vw;
+  height: 150vh;
+  animation: 28s ease-in-out infinite panelFloatA;
+  top: -46vh;
+  left: 66vw;
+  transform: rotate(36deg);
+}
+
+.hero-glow {
+  filter: blur(90px);
+  will-change: transform, opacity;
+  pointer-events: none;
+  border-radius: 999px;
+  position: absolute;
+}
+
+.hero-glow.glow-1 {
+  background: #5478ff24;
+  width: 420px;
+  height: 420px;
+  animation: 14s ease-in-out infinite glowPulse;
+  top: 8%;
+  left: 8%;
+}
+
+.hero-glow.glow-2 {
+  background: #465ad21a;
+  width: 560px;
+  height: 560px;
+  animation: 18s ease-in-out infinite reverse glowPulse;
+  top: 16%;
+  right: 6%;
+}
+
+@keyframes panelFloatA {
+  0%, 100% {
+    transform: translate3d(0, 0, 0)rotate(36deg);
+  }
+
+  50% {
+    transform: translate3d(3%, -2%, 0)rotate(36deg);
+  }
+}
+
+@keyframes panelFloatB {
+  0%, 100% {
+    transform: translate3d(0, 0, 0)rotate(36deg);
+  }
+
+  50% {
+    transform: translate3d(-3%, 2%, 0)rotate(36deg);
+  }
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    opacity: .1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: .16;
+    transform: scale(1.08);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-panel, .hero-glow {
+    opacity: .6;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-panel, .hero-glow {
+    animation: none !important;
+  }
+}
+
+/*# sourceMappingURL=Documents_GitHub_360Airo_marketing_site_src_styles_hero-bg_css_1igg3k2._.single.css.map*/

@@ -104,7 +104,7 @@ self.__SERVER_FILES_MANIFEST={
         "transform": "lodash/{{member}}"
       }
     },
-    "outputFileTracingRoot": "C:\\Users\\hp\\Documents\\GitHub\\360Airo_marketing_site",
+    "outputFileTracingRoot": "C:\\Users\\Nihal",
     "cacheComponents": false,
     "cacheLife": {
       "default": {
@@ -166,7 +166,7 @@ self.__SERVER_FILES_MANIFEST={
       "proxyPrefetch": "flexible",
       "optimisticClientCache": true,
       "manualClientBasePath": false,
-      "cpus": 11,
+      "cpus": 7,
       "memoryBasedWorkersCount": false,
       "imgOptConcurrency": null,
       "imgOptTimeoutInSeconds": 7,
@@ -305,12 +305,12 @@ self.__SERVER_FILES_MANIFEST={
     "bundlePagesRouterDependencies": false,
     "configFileName": "next.config.js",
     "turbopack": {
-      "root": "C:\\Users\\hp\\Documents\\GitHub\\360Airo_marketing_site"
+      "root": "C:\\Users\\Nihal"
     },
     "distDirRoot": ".next"
   },
-  "appDir": "C:\\Users\\hp\\Documents\\GitHub\\360Airo_marketing_site",
-  "relativeAppDir": "",
+  "appDir": "C:\\Users\\Nihal\\Documents\\GitHub\\360Airo_marketing_site",
+  "relativeAppDir": "Documents\\GitHub\\360Airo_marketing_site",
   "files": [
     ".next\\package.json",
     ".next\\routes-manifest.json",
