@@ -2,7 +2,8 @@
 "use client";
 import React, { useEffect, useRef, useLayoutEffect } from 'react';
 import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';   //nihal
+
 import { initAnimations } from '../animations';
 import EngineeringTeamSection from '../components/EngineeringTeamSection';
 import TrustedOperatorsSection from '../components/TrustedOperatorsSection';
