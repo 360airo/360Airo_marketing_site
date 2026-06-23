@@ -1,0 +1,229 @@
+/* [project]/Documents/GitHub/360Airo_marketing_site/src/styles/PhoneDashboard.css [app-client] (css) */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.phone-container {
+  color: #fff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizelegibility;
+  background: #0f172a;
+  border: 1px solid #1e293b;
+  border-radius: 28px;
+  width: 100%;
+  max-width: 420px;
+  padding: 24px;
+  font-family: Outfit, sans-serif;
+  box-shadow: 0 20px 60px #0006;
+}
+
+.pd-header {
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  display: flex;
+}
+
+.pd-header h1 {
+  color: #fff;
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.time-filter {
+  color: #cbd5e1;
+  cursor: pointer;
+  background: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 12px;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.stats-grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+  display: grid;
+}
+
+.stat-card {
+  background: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 12px;
+}
+
+.channel-tag {
+  color: #94a3b8;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  display: flex;
+}
+
+.dot {
+  border-radius: 50%;
+  width: 8px;
+  height: 8px;
+  display: inline-block;
+}
+
+.dot.email {
+  background: #d9f99d;
+}
+
+.dot.linkedin {
+  background: #38bdf8;
+}
+
+.dot.sms {
+  background: #fb923c;
+}
+
+.stat-value {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.stat-label {
+  color: #94a3b8;
+  margin-top: 4px;
+  font-size: 12px;
+}
+
+.trend {
+  color: #22c55e;
+  margin-top: 8px;
+  font-size: 12px;
+}
+
+.replies-section {
+  margin-bottom: 20px;
+}
+
+.replies-title {
+  color: #94a3b8;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.replies-row {
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+}
+
+.replies-count {
+  font-size: 34px;
+  font-weight: 700;
+}
+
+.badge {
+  color: #22c55e;
+  background: #22c55e1f;
+  border-radius: 999px;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+
+.chart-container {
+  background: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 18px;
+  height: 180px;
+  margin-bottom: 20px;
+  padding: 15px;
+}
+
+.chart-svg {
+  width: 100%;
+  height: 100%;
+}
+
+.bottom-grid {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 20px;
+  display: grid;
+}
+
+.metric-box {
+  text-align: center;
+  background: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 16px 10px;
+}
+
+.metric-num {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.metric-name {
+  color: #94a3b8;
+  margin-top: 5px;
+  font-size: 12px;
+}
+
+.contribution-card {
+  background: #111827;
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.contribution-header {
+  justify-content: space-between;
+  margin-bottom: 12px;
+  display: flex;
+}
+
+.contribution-label {
+  color: #cbd5e1;
+  font-size: 14px;
+}
+
+.contribution-value {
+  color: #d9f99d;
+  font-weight: 600;
+}
+
+.progress-bar-bg {
+  background: #1e293b;
+  border-radius: 999px;
+  height: 10px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  background: linear-gradient(90deg, #d9f99d, #38bdf8, #fb923c);
+  border-radius: 999px;
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 480px) {
+  .phone-container {
+    border-radius: 20px;
+    padding: 18px;
+  }
+
+  .stats-grid, .bottom-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pd-header, .replies-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+}
+
+/*# sourceMappingURL=Documents_GitHub_360Airo_marketing_site_src_styles_PhoneDashboard_css_1igg3k2._.single.css.map*/

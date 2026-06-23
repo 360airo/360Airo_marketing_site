@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/Documents/GitHub/360Airo_marketing_site/src/index.css"],"sourcesContent":["html,\r\nbody,\r\n#root {\r\n  width: 100%;\r\n  min-height: 100%;\r\n  margin: 0;\r\n  padding: 0;\r\n  overflow-x: hidden;\r\n}\r\n\r\nbody {\r\n  background: #030712;\r\n}\r\n\r\n#root {\r\n  width: 100%;\r\n}\r\n\r\n.app,\r\n.page,\r\n.site-wrapper,\r\nmain,\r\n.app-container {\r\n  width: 100%;\r\n  max-width: none;\r\n  margin: 0;\r\n  padding: 0;\r\n}\r\n\r\nsection {\r\n  width: 100%;\r\n  position: relative;\r\n}\r\n"],"names":[],"mappings":"AAAA;;;;;;;;AAUA;;;;AAIA;;;;AAIA;;;;;;;AAWA"}}]
+}
