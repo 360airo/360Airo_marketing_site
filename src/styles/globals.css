@@ -109,6 +109,7 @@ body {
   transform-origin: center center;
   will-change: auto;
   transition: none !important;
+  pointer-events: auto;
 }
 
 /* Keep device visual intact */

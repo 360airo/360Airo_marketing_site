@@ -1,0 +1,8 @@
+- `[x]` Refactor `src/components/Navbar.tsx` to handle navigation, mobile view, and active tabs.
+- `[x]` Replace hardcoded navigation in `src/app/page.tsx` with `<Navbar activeTab="home" />`.
+- `[x]` Create placeholder subpages with the Navbar and a premium glassmorphic "Coming Soon" card:
+  - `[x]` Features: `src/app/features/page.tsx`
+  - `[x]` Solutions: `src/app/solutions/page.tsx`
+  - `[x]` Resources: `src/app/resources/page.tsx`
+  - `[x]` Pricing: `src/app/pricing/page.tsx`
+- `[x]` Verify that all pages build and routing works correctly.
