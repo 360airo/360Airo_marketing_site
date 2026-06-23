@@ -82,6 +82,38 @@ export default function FeaturesDashboardMockup() {
               e.stopPropagation();
               e.stopImmediatePropagation();
               setIframeSrc('/features-dashboard.html');
+            } else if (targetView === 'performance') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-performance.html');
+            } else if (targetView === 'email-sequence') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-email-sequence.html');
+            } else if (targetView === 'scheduled-event') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-scheduled-event.html');
+            }
+          }
+
+          // Catch sidebar section clicks to load default pages for sections
+          const sectionBtn = target.closest('[data-section-target]');
+          if (sectionBtn) {
+            const defaultView = sectionBtn.getAttribute('data-default-view');
+            if (defaultView === 'email-sequence') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-email-sequence.html');
+            } else if (defaultView === 'dashboard') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-dashboard.html');
             }
           }
 
