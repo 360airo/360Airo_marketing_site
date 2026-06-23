@@ -15,15 +15,17 @@ export default function LaunchFasterSection() {
           {/* Left Column Content */}
           <div className="launch-faster-content">
             <h2>
-              Launch faster with<br />
-              <span>production-ready UI blocks.</span>
+              Reach out with our<br />
+              <span>all-outcome AI automation.</span>
             </h2>
             <p>
-              Ship polished landing pages in hours. Pick a block, customize it,
-              and move from idea to launch without rebuilding layout primitives.
+              The 360Airo AI SDR researches prospects, generates highly personalized messages, and automates multi-channel outreach across Email, LinkedIn, and SMS. It automatically classifies lead intent and syncs status updates directly to your CRM.
             </p>
-            <button className="cta-button-blue">
-              Get all CTA blocks <span>→</span>
+            <button className="cta-button-blue" onClick={() => {
+              const sec = document.getElementById('section-engineering');
+              if (sec) sec.scrollIntoView({ behavior: 'smooth' });
+            }}>
+              Start outreach now <span>→</span>
             </button>
           </div>
 
@@ -78,19 +80,15 @@ export default function LaunchFasterSection() {
             <div className="ui-card card-chat">
               <div className="chat-msg left">
                 <div className="chat-avatar a1"></div>
-                <div className="chat-bubble">Hey! Are you free for a quick call?</div>
+                <div className="chat-bubble">Can you schedule a demo for this week?</div>
               </div>
               <div className="chat-msg right">
-                <div className="chat-bubble reply">Sure, give me 5 minutes!</div>
+                <div className="chat-bubble reply">Sure, here is my booking link!</div>
                 <div className="chat-avatar a2"></div>
               </div>
               <div className="chat-msg left">
                 <div className="chat-avatar a1"></div>
-                <div className="chat-bubble">Sounds good ✨</div>
-              </div>
-              <div className="chat-msg right">
-                <div className="chat-bubble reply faded">I'm not sure if I can make it.</div>
-                <div className="chat-avatar a2"></div>
+                <div className="chat-bubble">Booking confirmed 🚀</div>
               </div>
             </div>
 
@@ -112,8 +110,8 @@ export default function LaunchFasterSection() {
             {/* Card 6: Global Coverage */}
             <div className="ui-card card-global">
               <div className="global-text">
-                <h4>All over the world</h4>
-                <p>Meet our distributed team of experts working across 6 continents.</p>
+                <h4>Global Outreach Coverage</h4>
+                <p>Nurture and engage leads automatically in any time zone or channel.</p>
               </div>
               <div className="global-globe">
                 <div className="globe-accent-dot"></div>
@@ -126,12 +124,11 @@ export default function LaunchFasterSection() {
         {/* BOTTOM CENTER AREA */}
         <div className="launch-faster-bottom">
           <h3>
-            Build the front end your<br />
-            <span>team will actually ship.</span>
+            Automate your pipeline with<br />
+            <span>AI outbound workflows.</span>
           </h3>
           <p>
-            Drop in blocks, tune copy, and keep momentum. No wrestling with
-            layout primitives every time you need a new section.
+            Connect your CRM, sync prospects, and let the AI SDR manage data intelligence, intent analysis, and personalized sequencing without manual intervention.
           </p>
         </div>
 
