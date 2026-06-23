@@ -1,0 +1,30 @@
+/* [project]/src/index.css [app-client] (css) */
+html, body, #root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
+body {
+  background: #030712;
+}
+
+#root {
+  width: 100%;
+}
+
+.app, .page, .site-wrapper, main, .app-container {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+section {
+  width: 100%;
+  position: relative;
+}
+
+/*# sourceMappingURL=src_index_css_1igg3k2._.single.css.map*/
