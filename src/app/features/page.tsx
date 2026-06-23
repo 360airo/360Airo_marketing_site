@@ -172,12 +172,6 @@ export default function FeaturesPage() {
                     Interactive Mode
                   </button>
                 </div>
-
-                <div className="hero-metrics">
-                  <MetricCard tone="metric-blue" value="3.2x" label="Average Reply Rate Lift" growth="+32% vs industry average" />
-                  <MetricCard tone="metric-cyan" value="4,200+" label="Campaigns Launched" growth="+24% vs last 90 days" />
-                  <MetricCard tone="metric-purple" value="89%" label="Customer Retention" growth="+7% vs last 90 days" />
-                </div>
               </div>
               <div className="hero-visual"></div>
             </section>
