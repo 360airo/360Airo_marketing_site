@@ -60,13 +60,13 @@ body {
 
 .hero-dashboard-tablet {
   position: relative;
-  padding: 7px;
+  padding: 24px;
   overflow: visible;
   transform-origin: center center;
   will-change: transform;
-  border: 7px solid #080808;
-  border-radius: 24px;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+  border: 3px solid #8e8e93;
+  border-radius: 36px;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1), 0 30px 80px rgba(0, 0, 0, 0.6);
 }
 
 
@@ -117,19 +117,19 @@ body {
   width: 100%;
   height: 100%;
   overflow: visible;
-  border: 7px solid #080808;
-  border-radius: 24px;
-  background: #080808;
-  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+  border: 3px solid #8e8e93;
+  border-radius: 36px;
+  background: #000000;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.1), 0 30px 80px rgba(0, 0, 0, 0.6);
   transition: none !important;
 }
 
 /* Inner device screen */
 .tablet-screen-mask {
   position: absolute;
-  inset: 7px;
+  inset: 24px;
   overflow: hidden;
-  border-radius: 17px;
+  border-radius: 12px;
   background: #ffffff;
 }
 
