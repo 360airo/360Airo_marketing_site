@@ -351,6 +351,7 @@ color:#fff;
   white-space:nowrap;
 }
 .hero-btn-primary:hover{transform:translateY(-2px);filter:brightness(1.1);}
+.hero-btn-primary.is-active{background:linear-gradient(90deg,#16a34a 0%,#06b6d4 100%);}
 .hero-btn-secondary{
   display:inline-flex;
   align-items:center;
