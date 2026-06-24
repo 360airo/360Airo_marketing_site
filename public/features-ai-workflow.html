@@ -7711,9 +7711,9 @@
         </div>
 
         <div class="profile-menu">
-          <button class="profile-btn" id="profileToggle" data-section-target="profile" data-default-view="profile-section" aria-haspopup="true" aria-expanded="false">
-            <div class="avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7.5" r="3.5" stroke="currentColor" stroke-linecap="round"/><path d="M5 20c0-3.5 2.9-6.2 7-6.2s7 2.7 7 6.2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <span class="profile-name">Ayush Ranjan</span>
+          <button class="profile-btn" id="profileToggle" aria-haspopup="true" aria-expanded="false">
+            <div class="avatar" aria-hidden="true" style="overflow:hidden;"><img src="https://randomuser.me/api/portraits/men/32.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Profile"></div>
+            <span class="profile-name">Michael Smith</span>
             <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           </button>
           <div class="dropdown-panel">
@@ -12750,7 +12750,7 @@ Worth a quick look this week?</textarea></div>
         ` : node.category === "AI" ? `
           <label class="aiw-label">Purpose<input class="aiw-input" value="Personalized outbound follow-up"></label><label class="aiw-label">Tone<select class="aiw-select"><option>Professional</option><option>Friendly</option><option>Consultative</option><option>Direct</option></select></label><label class="aiw-label">Message length<select class="aiw-select"><option>Short and crisp</option><option>Balanced</option><option>Detailed</option></select></label><label class="aiw-check"><input type="checkbox" checked>Use prospect research</label>
         ` : `
-          <label class="aiw-label">Configuration<input class="aiw-input" value="${nodeSummary(node)}"></label><label class="aiw-label">Owner<select class="aiw-select"><option>Ayush Ranjan</option><option>Sales Team</option><option>Round robin</option></select></label><label class="aiw-check"><input type="checkbox" checked>Stop workflow on reply</label><label class="aiw-check"><input type="checkbox" checked>Enable tracking</label>
+          <label class="aiw-label">Configuration<input class="aiw-input" value="${nodeSummary(node)}"></label><label class="aiw-label">Owner<select class="aiw-select"><option>Michael Smith</option><option>Sales Team</option><option>Round robin</option></select></label><label class="aiw-check"><input type="checkbox" checked>Stop workflow on reply</label><label class="aiw-check"><input type="checkbox" checked>Enable tracking</label>
         `;
         body.innerHTML = `<div class="aiw-row"><span class="aiw-tag" style="--cat-color:${catColor[node.category]}">${node.category}</span><span class="aiw-muted">${node.complete ? "Configured" : "Needs setup"}</span></div><div class="aiw-form-grid">${form}</div><div class="aiw-actions"><button class="aiw-btn primary" type="button" data-aiw-action="configure-node">Save Node</button><button class="aiw-btn" type="button" data-aiw-action="test-node">Test Block</button><button class="aiw-btn warn" type="button" data-aiw-action="delete-selected">Delete</button></div>`;
       };
@@ -13266,18 +13266,7 @@ Worth a quick look this week?</textarea></div>
   </script>
 
   <script>
-    // Profile Dropdown Toggle
-    const profileBtn = document.getElementById('profileToggle');
-    profileBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isExpanded = profileBtn.getAttribute('aria-expanded') === 'true';
-      profileBtn.setAttribute('aria-expanded', !isExpanded);
-    });
-    document.addEventListener('click', (e) => {
-      if (!profileBtn.contains(e.target)) {
-        profileBtn.setAttribute('aria-expanded', 'false');
-      }
-    });
+    // Profile Dropdown Toggle disabled by request
   </script>
 
   <script>

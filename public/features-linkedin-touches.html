@@ -5741,9 +5741,9 @@
         </div>
 
         <div class="profile-menu">
-          <button class="profile-btn" id="profileToggle" data-section-target="profile" data-default-view="profile-section" aria-haspopup="true" aria-expanded="false">
-            <div class="avatar" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="7.5" r="3.5" stroke="currentColor" stroke-linecap="round"/><path d="M5 20c0-3.5 2.9-6.2 7-6.2s7 2.7 7 6.2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-            <span class="profile-name">Ayush Ranjan</span>
+          <button class="profile-btn" id="profileToggle" aria-haspopup="true" aria-expanded="false">
+            <div class="avatar" aria-hidden="true" style="overflow:hidden;"><img src="https://randomuser.me/api/portraits/men/32.jpg" style="width:100%;height:100%;object-fit:cover;" alt="Profile"></div>
+            <span class="profile-name">Michael Smith</span>
             <svg class="chevron" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
           </button>
           <div class="dropdown-panel">
@@ -8463,18 +8463,7 @@
   </script>
 
   <script>
-    // Profile Dropdown Toggle
-    const profileBtn = document.getElementById('profileToggle');
-    profileBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const isExpanded = profileBtn.getAttribute('aria-expanded') === 'true';
-      profileBtn.setAttribute('aria-expanded', !isExpanded);
-    });
-    document.addEventListener('click', (e) => {
-      if (!profileBtn.contains(e.target)) {
-        profileBtn.setAttribute('aria-expanded', 'false');
-      }
-    });
+    // Profile Dropdown Toggle disabled by request
   </script>
 
   <script>

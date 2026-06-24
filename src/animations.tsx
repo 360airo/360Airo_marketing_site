@@ -215,7 +215,8 @@ const nav=document.getElementById('main-nav');
 let _p=0;
 function lerp(a,b,t){return a+(b-a)*t}
 function upNav(){
-  const tgt=window._lightProg||0;
+  const isFeatures = window.location.pathname === "/features" || window.location.pathname === "/features/";
+  const tgt = isFeatures ? 0 : (window._lightProg||0);
   _p+=(tgt-_p)*.06;
   const p=_p;
   nav.style.background=`rgba(${Math.round(lerp(3,228,p))},${Math.round(lerp(7,234,p))},${Math.round(lerp(18,252,p))},${lerp(.42,.72,p).toFixed(2)})`;
@@ -342,19 +343,19 @@ updateNavProgress()
 const nav = document.getElementById("main-nav")
 
 window.addEventListener("scroll", () => {
+  if (window.location.pathname === "/features" || window.location.pathname === "/features/") {
+    nav.classList.add("nav-dark");
+    nav.classList.remove("nav-light");
+    return;
+  }
 
-if(window.scrollY > 450){
-
-nav.classList.add("nav-light")
-nav.classList.remove("nav-dark")
-
-}else{
-
-nav.classList.add("nav-dark")
-nav.classList.remove("nav-light")
-
-}
-
+  if(window.scrollY > 450){
+    nav.classList.add("nav-light")
+    nav.classList.remove("nav-dark")
+  }else{
+    nav.classList.add("nav-dark")
+    nav.classList.remove("nav-light")
+  }
 })
 
 
