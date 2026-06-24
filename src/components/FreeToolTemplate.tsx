@@ -29,7 +29,7 @@ export default function FreeToolTemplate({
 }: FreeToolTemplateProps) {
   return (
     <div className="ft-site" style={{ backgroundColor: '#FDFDFE', color: '#1A1E26', position: 'relative', overflow: 'hidden' }}>
-      <Navbar />
+      <Navbar activeTab="free-tools" />
       
       {/* Vibrant Background Orbs */}
       <div style={{ position: 'absolute', top: '-10%', left: '-10%', width: '50vw', height: '50vw', background: 'radial-gradient(circle, rgba(139,92,246,0.15) 0%, rgba(255,255,255,0) 70%)', borderRadius: '50%', zIndex: 0, pointerEvents: 'none' }} />

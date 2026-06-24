@@ -35,7 +35,7 @@ export default function FreeToolsPage() {
 
   return (
     <div className="ft-site">
-      <Navbar />
+      <Navbar activeTab="free-tools" />
       <main>
         <section className="ft-hero">
           <div className="ft-orb ft-orb-one" />
@@ -54,14 +54,23 @@ export default function FreeToolsPage() {
           <div className="ft-container">
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', flexWrap: 'wrap', gap: '24px' }}>
               <h2 style={{ fontSize: '36px' }}>The Operator Library</h2>
-              <div style={{ position: 'relative', width: '300px' }}>
-                <Search size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#9CA3AF' }} />
-                <input 
-                  value={query} 
-                  onChange={(e) => setQuery(e.target.value)} 
-                  placeholder="Search free tools..." 
-                  style={{ width: '100%', padding: '12px 16px 12px 42px', borderRadius: '100px', border: '1px solid #E5E7EB', outline: 'none', fontFamily: '"DM Sans", sans-serif', fontSize: '14px' }}
-                />
+              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                <div style={{ position: 'relative', width: '300px' }}>
+                  <Search size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#9CA3AF', pointerEvents: 'none' }} />
+                  <input 
+                    value={query} 
+                    onChange={(e) => setQuery(e.target.value)} 
+                    placeholder="Search free tools..." 
+                    style={{ width: '100%', padding: '12px 16px 12px 42px', borderRadius: '100px', border: '1px solid #E5E7EB', outline: 'none', fontFamily: '"DM Sans", sans-serif', fontSize: '14px' }}
+                  />
+                </div>
+                <button 
+                  style={{ padding: '12px 24px', borderRadius: '100px', backgroundColor: '#111827', color: '#fff', border: 'none', cursor: 'pointer', fontFamily: '"DM Sans", sans-serif', fontWeight: 600, transition: 'background 0.2s' }}
+                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'}
+                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#111827'}
+                >
+                  Search
+                </button>
               </div>
             </div>
             

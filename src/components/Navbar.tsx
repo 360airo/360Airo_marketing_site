@@ -11,7 +11,7 @@ interface NavbarProps {
 const dropdownItems = [
   { label: 'Blogs', icon: '📝', href: '/blogs', active: true },
   { label: 'Articles', icon: '📄', href: '#', active: false },
-  { label: 'Customer Stories', icon: '👥', href: '#', active: false },
+  { label: 'Customer Stories', icon: '👥', href: '/customer-stories', active: true },
   { label: 'Testimonials', icon: '💬', href: '#', active: false },
   { label: 'FAQs', icon: '❓', href: '#', active: false },
 ];
@@ -39,13 +39,13 @@ export function Navbar({ activeTab = 'home' }: NavbarProps) {
 
           <ul className="nav-links">
             {navLinks.map((link) => {
-              const linkLower = link.toLowerCase();
+              const linkSlug = link.toLowerCase().replace(/\s+/g, '-');
 
-              if (linkLower === 'resources') {
+              if (linkSlug === 'resources') {
                 return (
                   <li
                     key={link}
-                    className={`nav-text-item ${activeTab === 'resources' ? 'active' : ''}`}
+                    className={`nav-text-item ${activeTab === 'resources' || activeTab === 'customer-stories' ? 'active' : ''}`}
                     onMouseEnter={() => setDropdownOpen(true)}
                     onMouseLeave={() => setDropdownOpen(false)}
                     style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
@@ -82,26 +82,28 @@ export function Navbar({ activeTab = 'home' }: NavbarProps) {
                         gap: '4px',
                         textAlign: 'left'
                       }}>
-                        {dropdownItems.map((item, idx) => (
-                          item.active ? (
+                        {dropdownItems.map((item, idx) => {
+                          const isActiveDropdown = activeTab === item.href.substring(1);
+                          return item.active ? (
                             <Link
                               key={idx}
                               href={item.href}
                               style={{
                                 padding: '10px 14px',
                                 borderRadius: '8px',
-                                color: '#fff',
+                                color: isActiveDropdown ? '#5078F2' : '#fff',
                                 textDecoration: 'none',
                                 fontSize: '14px',
                                 fontWeight: 500,
+                                background: isActiveDropdown ? 'rgba(80, 120, 242, 0.1)' : 'transparent',
                                 transition: 'background 0.2s',
                                 display: 'flex',
                                 alignItems: 'center',
                                 justifyContent: 'space-between',
                                 cursor: 'pointer'
                               }}
-                              onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 255, 255, 0.06)'}
-                              onMouseLeave={(e) => e.currentTarget.style.background = 'transparent'}
+                              onMouseEnter={(e) => { if (!isActiveDropdown) e.currentTarget.style.background = 'rgba(255, 255, 255, 0.06)' }}
+                              onMouseLeave={(e) => { if (!isActiveDropdown) e.currentTarget.style.background = 'transparent' }}
                             >
                               <span>{item.label}</span>
                               <span style={{ fontSize: '13px' }}>{item.icon}</span>
@@ -131,18 +133,18 @@ export function Navbar({ activeTab = 'home' }: NavbarProps) {
                               }}>Soon</span>
                             </div>
                           )
-                        ))}
+                        })}
                       </div>
                     )}
                   </li>
                 );
               }
 
-              const href = linkLower === 'home' ? '/' : `/${linkLower}`;
+              const href = linkSlug === 'home' ? '/' : `/${linkSlug}`;
               return (
                 <li
                   key={link}
-                  className={`nav-text-item ${activeTab === linkLower ? 'active' : ''}`}
+                  className={`nav-text-item ${activeTab === linkSlug ? 'active' : ''}`}
                 >
                   <Link href={href} style={{ color: 'inherit', textDecoration: 'none' }}>
                     {link}
@@ -167,9 +169,9 @@ export function Navbar({ activeTab = 'home' }: NavbarProps) {
       <div className={`mobile-overlay ${mobileMenuOpen ? 'open' : ''}`} id="mob">
         <div className="mobile-close" onClick={() => setMobileMenuOpen(false)}>✕</div>
         {navLinks.map((link) => {
-          const linkLower = link.toLowerCase();
+          const linkSlug = link.toLowerCase().replace(/\s+/g, '-');
 
-          if (linkLower === 'resources') {
+          if (linkSlug === 'resources') {
             return (
               <div key={link} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <div 
@@ -206,14 +208,15 @@ export function Navbar({ activeTab = 'home' }: NavbarProps) {
                     width: '80%',
                     margin: '0 auto'
                   }}>
-                    {dropdownItems.map((item, idx) => (
-                      item.active ? (
+                    {dropdownItems.map((item, idx) => {
+                      const isActiveDropdown = activeTab === item.href.substring(1);
+                      return item.active ? (
                         <Link 
                           key={idx} 
                           href={item.href} 
                           onClick={() => setMobileMenuOpen(false)}
                           style={{
-                            color: '#7963ff',
+                            color: isActiveDropdown ? '#5078F2' : '#fff',
                             fontSize: '18px',
                             fontWeight: 500,
                             textDecoration: 'none',
@@ -238,14 +241,14 @@ export function Navbar({ activeTab = 'home' }: NavbarProps) {
                           {item.icon} {item.label} (Soon)
                         </span>
                       )
-                    ))}
+                    })}
                   </div>
                 )}
               </div>
             );
           }
 
-          const href = linkLower === 'home' ? '/' : `/${linkLower}`;
+          const href = linkSlug === 'home' ? '/' : `/${linkSlug}`;
           return (
             <Link key={link} href={href} onClick={() => setMobileMenuOpen(false)}>
               {link}
