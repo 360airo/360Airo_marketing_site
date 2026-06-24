@@ -204,7 +204,7 @@ export default function ChainOfEventsCaseStudy() {
 
   return (
     <div className="scs-page-light">
-      <Navbar />
+      <Navbar activeTab="customer-stories" />
       {/* Artisan-style Header & Hero Image Block */}
       <section className="cs-featured-artisan" style={{ marginTop: '-40px', paddingTop: '100px' }}>
         <div className="cs-featured-artisan-grid" style={{ padding: '0 24px' }}>

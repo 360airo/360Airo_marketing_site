@@ -55,7 +55,7 @@ export default function CustomerStories() {
 
   return (
     <div className="cs-page">
-      <Navbar />
+      <Navbar activeTab="customer-stories" />
       {/* Hero Section */}
       <section className="cs-hero" style={{ background: '#FAF9FB' }}>
         <div className="cs-hero-content">
