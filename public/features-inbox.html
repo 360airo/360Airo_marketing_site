@@ -8017,7 +8017,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (event.target.closest('[data-target-view="performance"]')) {
               event.preventDefault();
               event.stopPropagation();
-              event.stopImmediatePropagation();
+              
               promptCard.innerHTML = `
                 <div class="inbox-tour-kicker">Performance clicked</div>
                 <h3>Great, that is the Performance tab</h3>

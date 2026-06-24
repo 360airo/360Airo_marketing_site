@@ -7344,7 +7344,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (themeBtn) {
         event.preventDefault();
         event.stopPropagation();
-        event.stopImmediatePropagation();
+        
         
         const html = document.documentElement;
         const isDark = html.dataset.theme === "dark";
@@ -7367,7 +7367,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Prevent view switching actions
         event.preventDefault();
         event.stopPropagation();
-        event.stopImmediatePropagation();
+        
       }
     }, true);
   </script>
