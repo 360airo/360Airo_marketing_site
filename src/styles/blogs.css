@@ -1,0 +1,432 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+  body {
+    @apply bg-body-grad text-whiteText font-outfit;
+    background-attachment: fixed;
+    overflow-x: clip !important;
+  }
+  html {
+    scroll-behavior: smooth;
+    overflow-x: clip !important;
+  }
+}
+
+@layer utilities {
+  .text-gradient-hero {
+    background: linear-gradient(90deg, #BDD4F1 0%, #96AAFA 50%, #5078F2 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+  }
+  .glow-effect {
+    box-shadow: 0 0 20px rgba(80, 120, 242, 0.3);
+  }
+  .card-hover {
+    transition: all 0.3s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 15px rgba(80, 120, 242, 0.2);
+  }
+}
+
+@keyframes gradient {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 8s ease infinite;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-100%); }
+}
+
+@keyframes marquee2 {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(0%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
+
+.animate-marquee2 {
+  animation: marquee2 25s linear infinite;
+}
+@keyframes softHeroShine {
+  0% {
+    background-position: 180% 50%;
+  }
+  100% {
+    background-position: -40% 50%;
+  }
+}
+
+@keyframes lightHeroShine {
+  0% {
+    background-position: 180% 50%;
+  }
+  100% {
+    background-position: -30% 50%;
+  }
+}
+
+@keyframes premiumHeroShine {
+  0% {
+    background-position: 180% 50%;
+  }
+  100% {
+    background-position: -20% 50%;
+  }
+}
+
+@keyframes clientHeroShine {
+  0% {
+    background-position: 180% 50%;
+  }
+  100% {
+    background-position: -25% 50%;
+  }
+}
+
+@keyframes darkNavyWhiteShine {
+  0% {
+    background-position: 180% 50%;
+  }
+  100% {
+    background-position: -20% 50%;
+  }
+}
+
+@keyframes darkNavyWhiteShine {
+  0% {
+    background-position: 180% 50%;
+  }
+  100% {
+    background-position: -20% 50%;
+  }
+}
+
+@keyframes darkNavyWhiteShine {
+  0% {
+    background-position: 180% 50%;
+  }
+  100% {
+    background-position: -20% 50%;
+  }
+}
+
+@keyframes darkNavyWhiteShine {
+  0% {
+    background-position: 180% 50%;
+  }
+  100% {
+    background-position: -20% 50%;
+  }
+}
+
+@keyframes darkNavyWhiteShine {
+  0% {
+    background-position: 180% 50%;
+  }
+  100% {
+    background-position: -20% 50%;
+  }
+}
+
+.hero-title-darknavyshine {
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(
+    90deg,
+    rgba(255,255,255,0.96) 0%,
+    rgba(255,255,255,1) 18%,
+    rgba(171,214,255,1) 36%,
+    rgba(255,255,255,1) 56%,
+    rgba(108,173,255,0.95) 78%,
+    rgba(255,255,255,0.96) 100%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: heroTextShine 7s linear infinite;
+  filter: drop-shadow(0 0 22px rgba(120, 170, 255, 0.12));
+}
+
+@keyframes heroTextShine {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-title-darknavyshine {
+    animation: none;
+  }
+}
+.marquee-track-wrapper {
+  width: 100%;
+  overflow: hidden;
+}
+
+.marquee-track {
+  animation: statsMarquee 24s linear infinite;
+}
+
+@keyframes statsMarquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+    transform: translateX(0);
+  }
+}
+:root {
+  --ease-premium: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shineSweep {
+  0% {
+    transform: translateX(-140%);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.2;
+  }
+  60% {
+    opacity: 0.45;
+  }
+  100% {
+    transform: translateX(140%);
+    opacity: 0;
+  }
+}
+
+@keyframes pulseBlue {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 rgba(80, 120, 242, 0);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 0 28px rgba(80, 120, 242, 0.22);
+  }
+}
+
+@keyframes floatCard {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes textShimmer {
+  from {
+    background-position: 100% 50%;
+  }
+  to {
+    background-position: 0% 50%;
+  }
+}
+
+.reveal-up {
+  opacity: 0;
+  animation: fadeUp 0.85s var(--ease-premium) forwards;
+}
+
+.delay-1 {
+  animation-delay: 120ms;
+}
+
+.delay-2 {
+  animation-delay: 220ms;
+}
+
+.text-reveal {
+  background-image: linear-gradient(
+    90deg,
+    #fdfdfe 0%,
+    #bdd4f1 35%,
+    #96aafa 60%,
+    #fdfdfe 100%
+  );
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: textShimmer 6s linear infinite;
+}
+
+.comparison-shell {
+  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.30);
+}
+
+.comparison-head {
+  transition:
+    background 220ms var(--ease-premium),
+    transform 220ms var(--ease-premium);
+}
+
+.bad-head:hover {
+  background: rgba(255, 107, 107, 0.06);
+}
+
+.good-head {
+  position: relative;
+  overflow: hidden;
+}
+
+.good-head::after,
+.shine-cell::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 20%,
+    rgba(189, 212, 241, 0.05) 40%,
+    rgba(150, 170, 250, 0.14) 50%,
+    rgba(80, 120, 242, 0.08) 60%,
+    transparent 80%
+  );
+  transform: translateX(-140%);
+  pointer-events: none;
+}
+
+.good-head:hover::after,
+.interactive-row:hover .shine-cell::after {
+  animation: shineSweep 950ms var(--ease-premium);
+}
+
+.interactive-row {
+  position: relative;
+  transition:
+    transform 220ms var(--ease-premium),
+    background-color 220ms var(--ease-premium),
+    box-shadow 220ms var(--ease-premium);
+}
+
+.interactive-row:hover {
+  transform: translateY(-3px);
+  background: rgba(255, 255, 255, 0.02);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.bad-cell,
+.good-cell {
+  transition:
+    background-color 220ms var(--ease-premium),
+    border-color 220ms var(--ease-premium);
+}
+
+.interactive-row:hover .bad-cell {
+  background: rgba(255, 107, 107, 0.02);
+}
+
+.interactive-row:hover .good-cell {
+  background: rgba(80, 120, 242, 0.05);
+}
+
+.icon-pop {
+  transition:
+    transform 180ms var(--ease-premium),
+    box-shadow 220ms var(--ease-premium),
+    border-color 220ms var(--ease-premium);
+}
+
+.interactive-row:hover .bad-icon-wrap {
+  transform: scale(1.04);
+  border-color: rgba(255, 107, 107, 0.28);
+  box-shadow: 0 0 22px rgba(255, 107, 107, 0.10);
+}
+
+.interactive-row:hover .good-icon-wrap,
+.good-head:hover .good-icon-wrap {
+  animation: pulseBlue 1.15s ease-in-out;
+}
+
+.interactive-card {
+  transition:
+    transform 220ms var(--ease-premium),
+    border-color 220ms var(--ease-premium),
+    box-shadow 220ms var(--ease-premium),
+    background-color 220ms var(--ease-premium);
+}
+
+.interactive-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  border-color: rgba(156, 177, 249, 0.18);
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 18px 46px rgba(0, 0, 0, 0.24);
+}
+
+.interactive-card:active,
+.interactive-row:active {
+  transform: scale(0.99);
+}
+
+.metric-card:hover .text-2xl,
+.metric-card:hover .text-3xl {
+  animation: floatCard 1.8s ease-in-out infinite;
+}
+
+@supports (animation-timeline: view()) {
+  .reveal-up {
+    animation: fadeUp linear both;
+    animation-timeline: view();
+    animation-range: entry 8% entry 42%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-up,
+  .text-reveal,
+  .good-head::after,
+  .shine-cell::after,
+  .interactive-row,
+  .interactive-card,
+  .icon-pop,
+  .metric-card:hover .text-2xl,
+  .metric-card:hover .text-3xl {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}
