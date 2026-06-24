@@ -87,6 +87,7 @@ export default function App() {
             .addLabel("heroExit")
             .to(heroContentRef.current, {
               opacity: 0,
+              y: -50,
               duration: 1,
               ease: "none"
             }, "heroExit")
