@@ -48,6 +48,18 @@
   line-height: 1.6;
 }
 
+@media (max-width: 768px) {
+  .cs-hero {
+    padding: 120px 16px 60px;
+  }
+  .cs-hero-title {
+    font-size: 42px;
+  }
+  .cs-hero p {
+    font-size: 16px;
+  }
+}
+
 /* Featured Story Artisan Layout */
 .cs-featured-artisan {
   position: relative;

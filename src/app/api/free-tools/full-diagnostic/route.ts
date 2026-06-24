@@ -23,8 +23,8 @@ export async function GET(request: NextRequest) {
 
     // 2. Test Supabase Connection
     const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.SUPABASE_SERVICE_ROLE_KEY!
+      (process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co'),
+      (process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder')
     );
 
     const { error: pingError } = await supabase

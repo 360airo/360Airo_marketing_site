@@ -189,7 +189,7 @@ export default function WarmupCalculatorPage() {
                   {results.schedule.map((item: any, i: number) => {
                     const heightPercent = (item.volume / targetVolume) * 100;
                     return (
-                      <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%', group: 'hover' }}>
+                      <div key={i} style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', height: '100%' }}>
                         <div 
                           style={{ 
                             width: '100%', 

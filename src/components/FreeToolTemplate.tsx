@@ -38,14 +38,11 @@ export default function FreeToolTemplate({
 
       <main style={{ paddingTop: '120px', paddingBottom: '80px', position: 'relative', zIndex: 1 }}>
         <div className="ft-container" style={{ maxWidth: '800px' }}>
-          <Link href="/free-tools" style={{ display: 'inline-flex', alignItems: 'center', gap: '8px', color: '#6B7280', textDecoration: 'none', marginBottom: '40px', fontSize: '14px', fontFamily: '"DM Sans", sans-serif', padding: '8px 16px', backgroundColor: '#F3F4F6', borderRadius: '100px', fontWeight: 600, transition: 'all 0.2s' }} onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#E5E7EB'} onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#F3F4F6'}>
-            <ArrowLeft size={16} /> Back to all tools
-          </Link>
 
           <header style={{ marginBottom: '48px', textAlign: 'center' }}>
-            <h1 className="ft-outfit-heading" style={{ fontSize: '56px', marginBottom: '16px', lineHeight: 1.1, background: 'linear-gradient(135deg, #1E293B 0%, #4F46E5 100%)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', letterSpacing: '-0.02em' }}>{title}</h1>
-            <h2 style={{ fontFamily: '"Barlow Condensed", sans-serif', fontWeight: 900, textTransform: 'uppercase', fontSize: '24px', color: '#38BDF8', marginBottom: '16px', letterSpacing: '0.05em' }}>{subtitle}</h2>
-            <p style={{ fontFamily: '"DM Sans", sans-serif', fontSize: '18px', color: '#4B5563', lineHeight: 1.6 }}>{description}</p>
+            <h1 className="ft-outfit-heading ft-page-title">{title}</h1>
+            <h2 className="ft-page-subtitle">{subtitle}</h2>
+            <p className="ft-page-desc">{description}</p>
           </header>
 
           {calculator && (
