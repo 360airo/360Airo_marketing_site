@@ -444,7 +444,13 @@ nav.classList.remove("nav-light")
     heroEl.style.opacity = '0';
     heroEl.style.transform = 'translateY(28px)';
     heroEl.style.transition = 'opacity .85s cubic-bezier(.16,1,.3,1), transform .85s cubic-bezier(.16,1,.3,1)';
-    setTimeout(function(){ heroEl.style.opacity = '1'; heroEl.style.transform = 'none'; }, 150);
+    setTimeout(function(){ 
+      heroEl.style.opacity = '1'; 
+      heroEl.style.transform = 'none'; 
+      setTimeout(function() {
+        heroEl.style.transition = 'none';
+      }, 850);
+    }, 150);
   }
   if(tabletEl){
     tabletEl.style.opacity = '0';
