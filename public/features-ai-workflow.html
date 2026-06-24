@@ -6781,6 +6781,13 @@
     border-radius: 8px;
     background: rgba(7,11,23,.56);
   }
+  .aiw-empty.gt-target {
+    position: absolute !important;
+    left: 300px !important;
+    top: 30% !important;
+    animation: none !important;
+    transform: translate(-50%, -50%) !important;
+  }
   .aiw-empty svg {
     margin-bottom: 14px;
   }
@@ -13754,21 +13761,61 @@ document.addEventListener('DOMContentLoaded', () => {
         clickedTitle: "Great, that is the Pipeline section",
         clickedBody: "This standalone page stays locked on AI Workflow. To open the next standalone demo, use Pipeline.html.",
         steps: [
-          ["AI Workflow", ".aiw-top", "Start with the automation studio", "This header explains that users can build email, LinkedIn, CRM, and Pipeline automations in one visual workspace."],
-          ["Workflow Name", "[data-aiw-name]", "Name the workflow clearly", "The workflow name makes each automation easy to identify when teams build multiple journeys."],
-          ["Actions", ".aiw-top .aiw-actions", "Use workflow actions", "Create with AI, browse templates, save drafts, run tests, and activate from one action row."],
-          ["Status", ".aiw-status-strip", "Check setup readiness", "The status strip shows draft state, saved time, block count, and setup items that still need attention."],
-          ["Tabs", ".aiw-tabs", "Switch workflow panels", "Tabs separate the visual builder, saved workflows, and activity logs."],
-          ["Block Library", ".aiw-library", "Choose automation blocks", "The block library contains triggers, actions, conditions, CRM steps, and Pipeline movement blocks."],
-          ["Search Blocks", "[data-aiw-block-search]", "Search available blocks", "Users can quickly find workflow blocks by typing trigger, email, LinkedIn, or CRM terms."],
-          ["Canvas", ".aiw-canvas-card", "Build on the visual canvas", "The canvas is where users place blocks and connect them into an automation journey."],
-          ["Empty Canvas", ".aiw-empty", "Start from AI, template, or scratch", "The empty canvas gives users three ways to begin without confusion."],
-          ["Inspector", ".aiw-inspector", "Configure selected nodes", "The inspector shows setup requirements, selected-node details, and missing workflow pieces."],
-          ["AI Modal", '[data-aiw-modal="ai"] .aiw-modal-card', "Generate workflows with AI", "The AI modal lets users describe an outreach goal and generate a starting workflow."],
-          ["Preview", "[data-aiw-ai-preview]", "Review generated workflow preview", "The preview shows the expected automation path before it is added to the canvas."]
+          ["AI Workflow", ".aiw-top", "Start with the automation studio", "This section builds multi-channel automations for email, LinkedIn, AI personalization, reply handling, CRM handoff, and Pipeline movement."],
+          ["Workflow Name", "[data-aiw-name]", "Name the workflow clearly", "A clear workflow name helps teams identify which automation controls each campaign or revenue motion."],
+          ["Main Actions", ".aiw-top .aiw-actions", "Use the workflow action bar", "Create with AI, browse templates, save drafts, run tests, and activate the workflow from one professional control row."],
+          ["Readiness", ".aiw-status-strip", "Check setup readiness", "This strip shows draft or active status, block count, save state, and remaining setup items before launch."],
+          ["Workspace Tabs", ".aiw-tabs", "Switch workflow panels", "Automation Builder is for editing, My Workflows is for saved automations, and Workflow Activity is for run history."],
+          ["Block Library", ".aiw-library", "Understand the block library", "Blocks are the building pieces: triggers, data enrichment, AI actions, logic, outreach actions, integrations, and Pipeline movement."],
+          ["Categories", "[data-aiw-categories]", "Filter block categories", "Category chips make it faster to find the right automation block without scrolling through every option."],
+          ["Search Blocks", "[data-aiw-block-search]", "Search available blocks", "Search helps users quickly find blocks like AI Email Draft, Delay, If / Else, CRM Contact, or Pipeline Stage."],
+          ["Canvas", ".aiw-canvas-card", "Use the visual canvas", "The canvas is where workflow blocks are placed, connected, reviewed, and configured into a complete journey."],
+          ["Empty Canvas", ".aiw-empty", "Choose how to start", "Users can let AI generate a workflow, use a proven template, or start from scratch with manual blocks."],
+          ["AI Builder", '[data-aiw-modal="ai"] .aiw-modal-card', "Open Create with AI", "Create with AI turns a plain-language outreach goal into a structured automation that can be edited on the canvas."],
+          ["Workflow Goal", "[data-aiw-ai-goal]", "Describe the workflow goal", "This field tells AI what should happen from first outreach through follow-up, reply handling, task creation, and Pipeline movement."],
+          ["Target Audience", "[data-aiw-ai-audience]", "Define the audience", "Audience context helps AI choose the right trigger, messaging style, and personalization assumptions."],
+          ["Channel", "[data-aiw-ai-channel]", "Choose outreach channels", "The channel setting decides whether the workflow should use email, LinkedIn, SMS, or a combined multi-channel path."],
+          ["Outcome", "[data-aiw-ai-outcome]", "Set the desired outcome", "The desired outcome tells AI whether the workflow should optimize for a meeting, positive reply, CRM handoff, or re-engagement."],
+          ["Follow-Ups", "[data-aiw-ai-followups]", "Control follow-up depth", "Follow-up count gives AI a boundary so the automation is persistent without becoming noisy."],
+          ["AI Preview", "[data-aiw-ai-preview]", "Review the generated preview", "The preview shows the proposed blocks before they are added to the canvas, so the user can confirm the shape of the journey."],
+          ["Generated Workflow", ".aiw-canvas-card", "Add the workflow to the canvas", "The demo now creates a workflow from AI: a ready-made sequence of blocks appears on the visual canvas."],
+          ["Trigger Node", ".aiw-node:nth-of-type(1)", "Start with the trigger", "The first node defines who enters the automation, such as a selected contact list or campaign audience."],
+          ["AI Draft Node", ".aiw-node:nth-of-type(2)", "Generate personalized content", "The AI draft node prepares tailored outreach copy using prospect context and campaign intent."],
+          ["Delay Node", ".aiw-node:nth-of-type(4)", "Add timing control", "Delay blocks wait hours or business days so follow-ups happen at a natural cadence."],
+          ["Logic Node", ".aiw-node:nth-of-type(5)", "Branch by engagement", "Logic blocks split contacts based on opens, clicks, positive replies, lead score, or CRM state."],
+          ["Action Nodes", ".aiw-node:nth-of-type(6)", "Queue the next action", "Action blocks send follow-ups, queue LinkedIn touches, create tasks, or move qualified prospects into Pipeline."],
+          ["Connection Lines", "[data-aiw-lines]", "Read the workflow path", "Lines show how contacts move through the automation from trigger to AI content, delay, condition, and handoff."],
+          ["Inspector", ".aiw-inspector", "Configure selected blocks", "The inspector shows setup fields for the selected node and checklist items for the whole workflow."],
+          ["Run Test", '[data-aiw-modal="test"] .aiw-modal-card', "Test without sending messages", "Run Test simulates the workflow for a sample contact without sending real emails, LinkedIn messages, SMS, or CRM updates."],
+          ["Simulation Timeline", "[data-aiw-test-timeline]", "Review the simulated path", "The timeline explains exactly what would happen: draft creation, scheduling, delay, engagement check, LinkedIn touch, task creation, and completion."],
+          ["My Workflows", '[data-aiw-panel="workflows"]', "Review saved workflows", "My Workflows shows reusable drafts, active automations, paused flows, and performance context."],
+          ["Activity", '[data-aiw-panel="activity"]', "Monitor workflow activity", "Workflow Activity shows contact-level events, block outcomes, waiting steps, failures, and completed automation paths."]
         ],
         beforeStep(index) {
-          document.querySelector('[data-aiw-modal="ai"]')?.toggleAttribute("hidden", index < 10);
+          const aiModal = document.querySelector('[data-aiw-modal="ai"]');
+          const testModal = document.querySelector('[data-aiw-modal="test"]');
+          const builderTab = document.querySelector('[data-aiw-tab="builder"]');
+          const workflowsTab = document.querySelector('[data-aiw-tab="workflows"]');
+          const activityTab = document.querySelector('[data-aiw-tab="activity"]');
+          document.querySelector("[data-aiw-name]") && (document.querySelector("[data-aiw-name]").value = "AI Retail Reply to Pipeline Workflow");
+          if (index < 27) builderTab?.click();
+          if (index < 10 || index > 16) aiModal?.setAttribute("hidden", "");
+          if (index < 25 || index > 26) testModal?.setAttribute("hidden", "");
+          if (index >= 10 && index <= 16) aiModal?.removeAttribute("hidden");
+          if (index >= 17 && !document.querySelector(".aiw-node")) {
+            aiModal?.removeAttribute("hidden");
+            document.querySelector('[data-aiw-action="ai-apply"]')?.click();
+          }
+          if (index >= 18 && index <= 24) {
+            const node = document.querySelector(`.aiw-node:nth-of-type(${Math.min(index - 17, 6)})`) || document.querySelector(".aiw-node");
+            node?.click();
+          }
+          if (index >= 25 && index <= 26) {
+            testModal?.removeAttribute("hidden");
+            if (index === 26) document.querySelector('[data-aiw-action="run-simulation"]')?.click();
+          }
+          if (index === 27) workflowsTab?.click();
+          if (index === 28) activityTab?.click();
         }
       };
       runStandaloneTour(config);
