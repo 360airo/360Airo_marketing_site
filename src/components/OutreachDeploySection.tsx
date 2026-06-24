@@ -15,22 +15,46 @@ export default function OutreachDeploySection() {
   const sectionRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
-  // Reset and run CSV progress once per tab activation
+  // Dynamic Tab Autoplay and Progress Controller
   useEffect(() => {
+    if (!isVisible) return;
+
+    let timer;
+
     if (activeTab === 'csv') {
       setCsvProgress(0);
       const csvInterval = setInterval(() => {
         setCsvProgress((prev) => {
           if (prev >= 100) {
             clearInterval(csvInterval);
+            // Transition to the next tab (crm) 1 second after completion
+            timer = setTimeout(() => {
+              setActiveTab('crm');
+            }, 1000);
             return 100;
           }
           return prev + 5;
         });
-      }, 150);
-      return () => clearInterval(csvInterval);
+      }, 100); // Snappy 100ms intervals
+
+      return () => {
+        clearInterval(csvInterval);
+        clearTimeout(timer);
+      };
+    } else if (activeTab === 'crm') {
+      // Stay on CRM sync tab for 5 seconds before changing
+      timer = setTimeout(() => {
+        setActiveTab('linkedin');
+      }, 5000);
+      return () => clearTimeout(timer);
+    } else if (activeTab === 'linkedin') {
+      // Stay on LinkedIn extension tab for 6 seconds before looping back
+      timer = setTimeout(() => {
+        setActiveTab('csv');
+      }, 6000);
+      return () => clearTimeout(timer);
     }
-  }, [activeTab]);
+  }, [activeTab, isVisible]);
 
   // Auto-running loops inside mockups for autoplay animation effect
   useEffect(() => {
@@ -76,20 +100,6 @@ export default function OutreachDeploySection() {
     if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
-
-  // Autoplay tabs sequence if visible
-  useEffect(() => {
-    if (isVisible) {
-      const tabs = ['csv', 'crm', 'linkedin'];
-      const interval = setInterval(() => {
-        setActiveTab((prev) => {
-          const currentIndex = tabs.indexOf(prev);
-          return tabs[(currentIndex + 1) % tabs.length];
-        });
-      }, 7000);
-      return () => clearInterval(interval);
-    }
-  }, [isVisible]);
 
   return (
     <div className="deploy-section-wrapper" ref={sectionRef}>
