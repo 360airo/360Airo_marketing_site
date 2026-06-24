@@ -99,22 +99,38 @@
   color: #A0A0A0;
 }
 
-/* --- LOGO GRID --- */
-.trusted-logo-grid {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 34px;
+/* --- LOGO MARQUEE --- */
+.logo-marquee-container {
+  overflow: hidden;
   width: 100%;
+  display: flex;
+  position: relative;
+  padding: 30px 0 100px;
+  margin-top: 10px;
+  /* Fade edges for glassmorphism layout feel */
+  mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
 }
 
-.trusted-logo-row {
+.logo-marquee-track {
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 60px;
-  width: 100%;
-  flex-wrap: wrap;
+  gap: 80px; /* Generous gap for premium spacious layout */
+  width: max-content;
+  animation: logo-scroll 30s linear infinite;
+}
+
+.logo-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes logo-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
 
 /* Base custom logo styling */
@@ -124,6 +140,7 @@
   gap: 8px;
   font-family: 'Outfit', sans-serif;
   user-select: none;
+  white-space: nowrap;
 }
 
 /* Raycast */

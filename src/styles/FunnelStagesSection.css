@@ -1,0 +1,380 @@
+/* FUNNEL PIPELINE SECTION WRAPPER */
+.funnel-section-wrapper {
+  width: 100%;
+  background-color: #ffffff; /* White background behind the flexbox */
+  padding: 2.5rem 0;
+  position: relative;
+  z-index: 10;
+}
+
+.funnel-section-container {
+  max-width: 1180px;
+  width: calc(100% - 4rem);
+  margin: 0 auto;
+  background-color: #ffffff; /* White flexbox background */
+  border: 2px solid #132c54; /* Navy blue outline */
+  border-radius: 20px;
+  padding: 1.75rem 2.25rem;
+  display: flex;
+  gap: 2rem;
+  box-shadow: 0 20px 80px rgba(19, 44, 84, 0.06);
+}
+
+/* LEFT CONTENT PANEL */
+.funnel-content-panel {
+  flex: 1.15;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.funnel-eyebrow {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #132c54;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
+.funnel-main-title {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(1.6rem, 2.8vw, 2.1rem);
+  font-weight: 850;
+  line-height: 1.15;
+  color: #0F172A;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.04em;
+}
+
+.funnel-main-title span {
+  color: #132c54;
+}
+
+.funnel-main-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: #475569;
+  margin-bottom: 1.25rem;
+}
+
+/* STAGES LIST CONTAINER */
+.funnel-stages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.funnel-stage-item {
+  border-bottom: 1.5px solid #f1f5f9;
+  padding: 0.8rem 0.25rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.funnel-stage-item:hover {
+  background-color: rgba(19, 44, 84, 0.01);
+  padding-left: 0.5rem;
+}
+
+.funnel-stage-item.active {
+  border-bottom-color: #132c54;
+  padding-left: 0.5rem;
+}
+
+.funnel-stage-item-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.funnel-stage-num {
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: #94a3b8;
+  transition: color 0.3s ease;
+}
+
+.funnel-stage-item.active .funnel-stage-num {
+  color: #132c54;
+}
+
+.funnel-stage-item-header h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 750;
+  color: #334155;
+  margin: 0;
+  transition: color 0.3s ease;
+}
+
+.funnel-stage-item.active h3 {
+  color: #132c54;
+}
+
+/* EXPANDED STAGE CONTENT */
+.funnel-stage-expanded {
+  padding-left: 2.25rem;
+  margin-top: 0.5rem;
+}
+
+.funnel-stage-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #475569;
+  margin: 0 0 0.75rem 0;
+}
+
+.funnel-stage-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.funnel-stage-bullets li {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #1e293b;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.funnel-autoplay-resume {
+  margin-top: 2rem;
+  background: rgba(19, 44, 84, 0.06);
+  border: 1px solid rgba(19, 44, 84, 0.1);
+  color: #132c54;
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.funnel-autoplay-resume:hover {
+  background: #132c54;
+  color: #ffffff;
+}
+
+/* RIGHT VISUAL PANEL */
+.funnel-visual-panel {
+  flex: 0.9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.funnel-svg-wrapper {
+  width: 100%;
+  max-width: 395px;
+}
+
+.funnel-stacked-blocks-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* BLOCK FACES STYLING */
+.face {
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+/* INACTIVE STATE */
+.face-top {
+  fill: #fdfdfd;
+  stroke: #e2e8f0;
+  stroke-width: 1.5;
+}
+
+.face-left {
+  fill: #f1f5f9;
+  stroke: #cbd5e1;
+  stroke-width: 1.5;
+}
+
+.face-right {
+  fill: #e2e8f0;
+  stroke: #94a3b8;
+  stroke-width: 1.5;
+}
+
+.block-label {
+  font-family: 'Outfit', sans-serif;
+  font-size: 10px;
+  font-weight: 800;
+  fill: #64748b;
+  text-anchor: middle;
+  pointer-events: none;
+  opacity: 0.7;
+  transition: all 0.4s ease;
+}
+
+/* ACTIVE STATE HIGHLIGHTS */
+.funnel-block-group.active .face-top {
+  fill: #ffffff;
+  stroke: #3b82f6;
+  stroke-width: 2.5;
+}
+
+.funnel-block-group.active .face-left {
+  fill: #eff6ff;
+  stroke: #3b82f6;
+  stroke-width: 2.5;
+}
+
+.funnel-block-group.active .face-right {
+  fill: #dbeafe;
+  stroke: #3b82f6;
+  stroke-width: 2.5;
+}
+
+.funnel-block-group.active .block-label {
+  fill: #1e40af;
+  font-weight: 900;
+  opacity: 1;
+}
+
+/* STACK ANIMATION EFFECT */
+.funnel-block-group {
+  transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.funnel-block-group.active {
+  transform: translateY(-12px);
+}
+
+/* BLUE DEAL CLOSED FLOATING PANEL */
+.funnel-deal-closed-panel {
+  pointer-events: none;
+}
+
+.deal-panel-bg {
+  fill: rgba(59, 130, 246, 0.03);
+  stroke: #3b82f6;
+  stroke-width: 1.8;
+  stroke-dasharray: 4 4;
+  opacity: 0.18;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  stroke-linejoin: round;
+}
+
+.deal-panel-text {
+  font-family: 'Outfit', sans-serif;
+  font-size: 7.5px;
+  font-weight: 900;
+  fill: #3b82f6;
+  text-anchor: middle;
+  opacity: 0.18;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  letter-spacing: 0.04em;
+}
+
+.projection-dashed-line {
+  stroke: #3b82f6;
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+  opacity: 0.18;
+  transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+/* GLOW STATE FOR DEAL CLOSED (Stage 4 active) */
+.funnel-deal-closed-panel.active .deal-panel-bg {
+  fill: rgba(59, 130, 246, 0.12);
+  stroke: #3b82f6;
+  stroke-width: 2.5;
+  stroke-dasharray: none;
+  opacity: 1;
+  filter: url(#funnel-glow);
+}
+
+.funnel-deal-closed-panel.active .deal-panel-text {
+  fill: #1e3a8a;
+  opacity: 1;
+  font-weight: 950;
+  text-shadow: 0 2px 4px rgba(59, 130, 246, 0.2);
+}
+
+.funnel-deal-closed-panel.active .projection-dashed-line {
+  stroke: #3b82f6;
+  stroke-width: 2;
+  opacity: 0.7;
+}
+
+/* SLIDE DOWN ANIMATION FOR EXPANDED INFO */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-down {
+  animation: slideDown 0.3s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* CUBE GRAPHICS STYLING */
+.cube-dashed-line {
+  stroke: rgba(148, 163, 184, 0.35);
+  stroke-width: 1.2;
+  stroke-dasharray: 2.5 2.5;
+  pointer-events: none;
+  transition: stroke 0.4s ease;
+}
+
+.funnel-block-group.active .cube-dashed-line {
+  stroke: rgba(59, 130, 246, 0.55);
+}
+
+.face-top-inset {
+  transition: stroke 0.4s ease, opacity 0.4s ease;
+}
+
+/* RESPONSIVE LAYOUTS */
+@media (max-width: 992px) {
+  .funnel-section-container {
+    flex-direction: column;
+    padding: 2rem 1.5rem;
+    gap: 2rem;
+  }
+  
+  .funnel-content-panel {
+    width: 100%;
+  }
+
+  .funnel-visual-panel {
+    width: 100%;
+    margin-top: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .funnel-section-wrapper {
+    padding: 4rem 1.25rem;
+  }
+
+  .funnel-section-container {
+    width: 100%;
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+  }
+}
