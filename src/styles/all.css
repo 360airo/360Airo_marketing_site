@@ -89,13 +89,13 @@ color:#fff;
 
  border-bottom: 1px solid rgba(255,255,255,0.09);
 
- overflow: hidden;
+ overflow: visible;
 }
 
 
 
 /* smooth color transition for nav text */
-#main-nav::before{content:"";position:absolute;top:-60%;left:-120%;width:55%;height:220%;background:linear-gradient(108deg,transparent 20%,rgba(255,255,255,.04) 38%,rgba(255,255,255,.16) 50%,rgba(255,255,255,.04) 62%,transparent 80%);transform:skewX(-12deg);animation:navRefract 7s cubic-bezier(.4,0,.2,1) infinite;pointer-events:none;z-index:1}
+#main-nav::before{content:"";position:absolute;top:0;left:-120%;width:55%;height:100%;background:linear-gradient(108deg,transparent 20%,rgba(255,255,255,.04) 38%,rgba(255,255,255,.16) 50%,rgba(255,255,255,.04) 62%,transparent 80%);transform:skewX(-12deg);animation:navRefract 7s cubic-bezier(.4,0,.2,1) infinite;pointer-events:none;z-index:1}
 #main-nav::after{content:"";position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.32) 50%,transparent);pointer-events:none;z-index:2}
 @keyframes navRefract{0%{left:-120%;opacity:0}8%{opacity:1}46%{left:160%;opacity:.7}54%{opacity:0}100%{left:160%;opacity:0}}
 .nav-wrap{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;max-width:1440px;margin:0 auto;padding:0 72px;position:relative;z-index:3}
