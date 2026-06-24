@@ -67,7 +67,7 @@ export default function App() {
             scrollTrigger: {
               trigger: heroStageRef.current,
               start: "top top",
-              end: "+=1800",
+              end: "+=1130",
               scrub: 1.15,
               pin: true,
               pinSpacing: true,
