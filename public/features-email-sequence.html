@@ -6447,10 +6447,10 @@
   .ccf-title h2 { margin:0; font-size:32px; line-height:1.08; letter-spacing:0; }
   .ccf-title p { margin:8px 0 0; color:var(--muted); font-size:15px; }
   .ccf-save { color:var(--muted); font-size:12px; font-weight:800; }
-  .ccf-grid { display:grid; grid-template-columns:minmax(0,1fr) 320px; gap:18px; align-items:start; }
+  .ccf-grid { display: grid; grid-template-columns: minmax(0, 740px) 320px; justify-content: center; gap: 24px; align-items: start; margin: 0 auto; }
   .ccf-card, .ccf-preview, .ccf-strip, .ccf-email-card, .ccf-modal-card {
-    border:1px solid var(--line);
-    border-radius:8px;
+    border: 1px solid var(--line);
+    border-radius: 14px;
     background:linear-gradient(180deg, color-mix(in srgb,var(--surface),transparent 4%), color-mix(in srgb,var(--surface-2),transparent 4%));
     box-shadow:0 18px 42px rgba(2,8,23,.10);
   }
@@ -6496,18 +6496,36 @@
   .ccf-vars { display:flex; gap:6px; flex-wrap:wrap; }
   .ccf-vars button, .ccf-chip { border:1px solid rgba(80,120,242,.22); border-radius:999px; background:rgba(80,120,242,.10); color:var(--ccf-blue); padding:4px 8px; font-size:11px; font-weight:900; }
   .ccf-stats { color:var(--muted); font-size:12px; font-weight:800; }
-  .ccf-ai-layout { display:grid; grid-template-columns:minmax(0,1fr) 310px; gap:18px; align-items:start; }
+  .ccf-ai-layout { display: grid; grid-template-columns: minmax(0, 740px) 320px; justify-content: center; gap: 24px; align-items: start; margin: 0 auto; }
   .ccf-question-card { padding:20px; }
   .ccf-step-dots { display:flex; gap:6px; margin:12px 0; }
   .ccf-step-dots span { width:28px; height:7px; border-radius:999px; background:var(--line); }
   .ccf-step-dots span.active { background:var(--ccf-blue); }
-  .ccf-summary-grid, .ccf-contact-grid, .ccf-draft-grid, .ccf-overview-strip, .ccf-schedule-grid { display:grid; gap:12px; }
-  .ccf-summary-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .ccf-summary-card, .ccf-contact-card, .ccf-draft-card, .ccf-mini { border:1px solid var(--line); border-radius:8px; background:var(--surface); padding:14px; }
-  .ccf-contact-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
-  .ccf-contact-card.selected { border-color:var(--ccf-blue); box-shadow:0 0 0 3px rgba(80,120,242,.12); }
-  .ccf-draft-card.accepted { border-color:rgba(16,185,129,.45); }
-  .ccf-draft-card.rejected { opacity:.6; }
+  .ccf-summary-grid { display: flex; flex-direction: column; gap: 16px; }
+  .ccf-summary-card { display: flex; flex-direction: column; align-items: flex-start; border: 1px solid var(--line); border-radius: 12px; background: var(--surface); padding: 24px; transition: all 0.2s ease; position: relative; }
+  .ccf-summary-card:hover { border-color: var(--ccf-blue); box-shadow: 0 12px 32px rgba(80,120,242,0.06); transform: translateY(-2px); }
+  .ccf-summary-card-content { margin-bottom: 12px; padding-right: 80px; }
+  .ccf-summary-card strong { display: block; font-size: 18px; margin-bottom: 8px; color: var(--text); }
+  .ccf-summary-card p { margin: 0; font-size: 15px; color: var(--muted); line-height: 1.6; }
+  .ccf-summary-card .ccf-btn { position: absolute; top: 24px; right: 24px; }
+  
+  .ccf-contact-grid, .ccf-draft-grid, .ccf-overview-strip, .ccf-schedule-grid { display: grid; gap: 24px; }
+  .ccf-contact-wrapper { max-width: 900px; margin: 0 auto; }
+  .ccf-contact-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ccf-contact-card { position: relative; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 26px; transition: all 0.2s ease; cursor: pointer; display: flex; flex-direction: column; gap: 10px; }
+  .ccf-contact-card:hover { border-color: var(--ccf-blue); box-shadow: 0 16px 40px rgba(80,120,242,0.08); transform: translateY(-4px); }
+  .ccf-contact-card.selected { border-color: var(--ccf-blue); background: linear-gradient(150deg, var(--surface), rgba(80,120,242,0.04)); box-shadow: 0 0 0 2px var(--ccf-blue); }
+  .ccf-contact-card .avatar { width: 46px; height: 46px; border-radius: 50%; background: linear-gradient(135deg, var(--ccf-blue), var(--ccf-purple)); color: #fff; display: grid; place-items: center; font-weight: 900; font-size: 16px; margin-bottom: 6px; }
+  .ccf-contact-card strong { font-size: 19px; color: var(--text); margin-bottom: 2px; }
+  .ccf-contact-card p { margin: 0; font-size: 15px; color: var(--muted); }
+  .ccf-contact-card .ccf-badge { width: fit-content; margin-top: 14px; background: rgba(80,120,242,0.1); color: var(--ccf-blue); border: none; font-weight: 800; padding: 6px 14px; border-radius: 999px; }
+  .ccf-contact-card.selected::after { content: "✓"; position: absolute; top: 26px; right: 26px; width: 28px; height: 28px; border-radius: 50%; background: var(--ccf-blue); color: #fff; display: grid; place-items: center; font-size: 14px; font-weight: bold; box-shadow: 0 4px 12px rgba(80,120,242,0.3); }
+  
+  .ccf-draft-wrapper { max-width: 800px; margin: 0 auto; }
+  .ccf-draft-grid { display: flex; flex-direction: column; gap: 24px; }
+  .ccf-draft-card { border: 1px solid var(--line); border-radius: 14px; background: var(--surface); padding: 30px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.04); }
+  .ccf-draft-card.accepted { border-color: rgba(16,185,129,.45); }
+  .ccf-draft-card.rejected { opacity: .6; }
   .ccf-overview-strip { grid-template-columns:repeat(4,minmax(0,1fr)); }
   .ccf-schedule-grid { grid-template-columns:1fr 1fr; align-items:start; }
   .ccf-sender { display:flex; gap:10px; align-items:flex-start; padding:12px; border:1px solid var(--line); border-radius:8px; margin-top:10px; cursor:pointer; }
@@ -13281,14 +13299,14 @@ Worth a quick look this week?</textarea></div>
         { id: "kilroy", name: "Dana Kilroy", title: "Operations Lead", company: "Kilroy Realty", email: "dana@kilroyrealty.com", city: "San Antonio, TX", score: 79 }
       ];
       const questions = [
-        ["Company Information", "What does your company do?", "Describe your business, products, services, and industry."],
-        ["Product or Service", "What product or service do you want to promote in this campaign?", "Explain the offer in plain language."],
-        ["Target Audience", "Who are you trying to reach?", "Include titles, industries, company types, locations, and decision-maker roles."],
-        ["Pain Points", "What challenges does your target audience currently face?", "List the problems your message should connect with."],
-        ["Desired Outcome", "What should recipients do after reading the email?", "Book a demo, request a consultation, reply, visit a website, or request a quote."],
-        ["Tone", "What tone should the emails use?", "Professional, friendly, conversational, consultative, persuasive, technical, or formal."],
-        ["Value Proposition", "What makes your offer different?", "Cost savings, faster implementation, support, AI automation, integrations, or expertise."],
-        ["Length and Format", "How would you like the emails to be written?", "Short and crisp, balanced, or detailed and elaborative."]
+        ["Company Information", "Hello! I'm excited to help you configure your email campaign. To get started, could you please provide some details about your company or business?", "What is the name, industry, and any key information that defines your business?"],
+        ["Product or Service", "Thank you for sharing that information about ServicePro Robotics. Now, can you tell me more about the specific products or services you offer?", "What are the key features and benefits that make them stand out in the market?"],
+        ["Target Audience", "Great! Now that I have a clear understanding of your products, let's move on to your target audience. Can you describe the characteristics of the audience you aim to reach with this campaign?", "What types of businesses or decision-makers are you looking to engage?"],
+        ["Pain Points", "Thank you for providing the details about your target audience. Now, could you share the key pain points or challenges that these businesses face, which your robots can help address?", "What specific issues do they encounter that lead them to seek out solutions like yours?"],
+        ["Key Issues", "Rising labor costs and staff shortages in housekeeping and cleaning.", "Inconsistent cleaning quality due to human fatigue or absenteeism. High operational expenses for maintaining hygiene standards. Pressure to enhance customer experience and reduce waiting time. Need for innovative, tech-friendly solutions that attract customers."],
+        ["Call-to-Action", "Thank you for clarifying the desired communication tone. Now, what is the primary call-to-action you would like to include in your email campaign?", "For example, do you want recipients to schedule a demo, request more information, or something else?"],
+        ["Value Proposition", "Thank you for outlining your call-to-action options. Now, could you describe your unique value proposition?", "What sets ServicePro Robotics apart from competitors in the market, and why should potential customers choose your robots over others?"],
+        ["Value Proposition Details", "Unique Value Proposition", "Reliable automation: Robots work tirelessly 24/7 with minimal maintenance. Custom integration: Each solution is tailored to the client’s environment and workflow. Cost savings: Reduce operational costs by up to 40%. Enhanced customer experience: Robots add a modern, high-tech appeal that attracts customers. Strong after-sales support: On-site service, training, and quick issue resolution."]
       ];
       const variables = ["{{first_name}}","{{last_name}}","{{company_name}}","{{job_title}}","{{industry}}","{{city}}","{{email}}","{{sender_name}}","{{company_url}}"];
       let state = {};
@@ -13347,13 +13365,13 @@ Worth a quick look this week?</textarea></div>
       };
       const renderAiInterview = () => {
         const q = questions[state.aiIndex];
-        shell(`<div class="ccf-ai-layout"><section class="ccf-card ccf-question-card"><div class="ccf-step">Step ${state.aiIndex + 1} of 8</div><div class="ccf-step-dots">${questions.map((_, i) => `<span class="${i <= state.aiIndex ? "active" : ""}"></span>`).join("")}</div><h3>${q[1]}</h3><p>${q[2]}</p><textarea class="ccf-textarea" data-ai-answer>${state.aiAnswers[state.aiIndex]}</textarea><div class="ccf-actions"><button class="ccf-btn" type="button" data-ai-prev ${state.aiIndex ? "" : "disabled"}>&larr; Previous</button><button class="ccf-btn" type="button" data-ai-skip>Skip</button><button class="ccf-btn primary" type="button" data-ai-next>${state.aiIndex === 7 ? "Review Configuration" : "Next"} &rarr;</button></div></section><aside class="ccf-preview"><h3>AI Assistant Progress</h3><p>Campaign: ${state.campaignName}</p><p>Email Sequence: ${aud()?.name}</p><p>Contacts: ${aud()?.valid || 0}</p><div class="ccf-progress"><i style="--w:${((state.aiIndex + 1) / 8) * 100}%"></i></div></aside></div>`, "Configure AI Assistant", "Help AI understand your business, audience, and campaign objective before generating personalized emails.", "Step 2 of 3 - AI Interview", "Back to Approach", "approach");
+        shell(`<div class="ccf-ai-layout"><section class="ccf-card ccf-question-card"><div class="ccf-step">Step ${state.aiIndex + 1} of 8</div><div class="ccf-step-dots">${questions.map((_, i) => `<span class="${i <= state.aiIndex ? "active" : ""}"></span>`).join("")}</div><h3>${q[1]}</h3><p>${q[2]}</p><textarea class="ccf-textarea" data-ai-answer>${state.aiAnswers[state.aiIndex]}</textarea><div class="ccf-actions"><button class="ccf-btn" type="button" data-ai-prev ${state.aiIndex ? "" : "disabled"}>&larr; Previous</button><button class="ccf-btn primary" type="button" data-ai-next>${state.aiIndex === 7 ? "Review Configuration" : "Next"} &rarr;</button></div></section><aside class="ccf-preview"><h3>AI Assistant Progress</h3><p>Campaign: ${state.campaignName}</p><p>Email Sequence: ${aud()?.name}</p><p>Contacts: ${aud()?.valid || 0}</p><div class="ccf-progress"><i style="--w:${((state.aiIndex + 1) / 8) * 100}%"></i></div></aside></div>`, "Configure AI Assistant", "Help AI understand your business, audience, and campaign objective before generating personalized emails.", "Step 2 of 3 - AI Interview", "Back to Approach", "approach");
       };
       const renderAiSummary = () => {
-        shell(`<div class="ccf-ai-layout"><section class="ccf-card"><h3>AI Assistant Configuration Complete</h3><div class="ccf-summary-grid">${questions.map((q, i) => `<div class="ccf-summary-card"><strong>${q[0]}</strong><p>${state.aiAnswers[i] || "Skipped for now."}</p><button class="ccf-btn" type="button" data-ai-edit="${i}">Edit</button></div>`).join("")}</div></section><aside class="ccf-preview"><h3>For Each Contact</h3><div class="ccf-checklist"><label><input type="checkbox" checked disabled> Personalized subject line</label><label><input type="checkbox" checked disabled> Tailored email content</label><label><input type="checkbox" checked disabled> Relevant pain points</label><label><input type="checkbox" checked disabled> Custom CTA</label><label><input type="checkbox" checked disabled> Prospect-specific context</label></div><div class="ccf-actions"><button class="ccf-btn" data-ccf-stage="ai">Reconfigure</button><button class="ccf-btn">Save for Reuse</button><button class="ccf-btn primary" data-ccf-stage="ai-contacts">Select Target Contacts &rarr;</button></div></aside></div>`, "AI Assistant Configuration Complete", "Review the configuration before selecting target contacts.", "Step 2 of 3 - AI Setup", "Back to Approach", "approach");
+        shell(`<div class="ccf-ai-layout"><section class="ccf-card" style="padding: 24px;"><div class="ccf-summary-grid">${questions.map((q, i) => `<div class="ccf-summary-card"><div class="ccf-summary-card-content"><strong>${q[0]}</strong><p>${state.aiAnswers[i] || "Skipped for now."}</p></div><button class="ccf-btn" type="button" data-ai-edit="${i}">Edit</button></div>`).join("")}</div></section><aside class="ccf-preview"><h3>For Each Contact</h3><div class="ccf-checklist"><label><input type="checkbox" checked disabled> Personalized subject line</label><label><input type="checkbox" checked disabled> Tailored email content</label><label><input type="checkbox" checked disabled> Relevant pain points</label><label><input type="checkbox" checked disabled> Custom CTA</label><label><input type="checkbox" checked disabled> Prospect-specific context</label></div><div class="ccf-actions"><button class="ccf-btn" data-ccf-stage="ai">Reconfigure</button><button class="ccf-btn">Save for Reuse</button><button class="ccf-btn primary" data-ccf-stage="ai-contacts">Select Target Contacts &rarr;</button></div></aside></div>`, "AI Assistant Configuration Complete", "Review the configuration before selecting target contacts.", "Step 2 of 3 - AI Setup", "Back to Approach", "approach");
       };
       const renderAiContacts = () => {
-        shell(`<div class="ccf-contact-toolbar"><input class="ccf-input" style="max-width:360px" placeholder="Search contacts"><button class="ccf-btn" type="button" data-select-all>Select all</button><button class="ccf-btn">Table view</button><span class="ccf-badge">${selectedContacts().length} selected</span></div><section class="ccf-contact-grid">${contacts.map((c) => `<article class="ccf-contact-card ${state.selectedContacts.includes(c.id) ? "selected" : ""}" data-contact="${c.id}"><strong>${c.name}</strong><p>${c.title} at ${c.company}</p><p>${c.email}</p><p>${c.city}</p><span class="ccf-badge">AI score ${c.score}</span></article>`).join("")}</section><div class="ccf-actions"><button class="ccf-btn" data-ccf-stage="ai-summary">&larr; Back</button><button class="ccf-btn primary" data-ccf-stage="ai-generate" ${state.selectedContacts.length ? "" : "disabled"}>Continue with ${selectedContacts().length} Contacts &rarr;</button></div>`, "Select Target Audience", "Choose the contacts for AI-generated emails.", "Step 2 of 3 - Contact Selection", "Back", "ai-summary");
+        shell(`<div class="ccf-contact-wrapper"><div class="ccf-contact-toolbar" style="margin-bottom: 24px;"><input class="ccf-input" style="max-width:360px" placeholder="Search contacts"><button class="ccf-btn" type="button" data-select-all>Select all</button><button class="ccf-btn">Table view</button><span class="ccf-badge">${selectedContacts().length} selected</span></div><section class="ccf-contact-grid">${contacts.map((c) => `<article class="ccf-contact-card ${state.selectedContacts.includes(c.id) ? "selected" : ""}" data-contact="${c.id}"><div class="avatar">${c.name.split(' ').map(n=>n[0]).join('').substring(0,2)}</div><strong>${c.name}</strong><p>${c.title} at ${c.company}</p><p>${c.email}</p><p>${c.city}</p><span class="ccf-badge">AI score ${c.score}</span></article>`).join("")}</section><div class="ccf-actions" style="margin-top: 32px;"><button class="ccf-btn" data-ccf-stage="ai-summary">&larr; Back</button><button class="ccf-btn primary" data-ccf-stage="ai-generate" ${state.selectedContacts.length ? "" : "disabled"}>Continue with ${selectedContacts().length} Contacts &rarr;</button></div></div>`, "Select Target Audience", "Choose the contacts for AI-generated emails.", "Step 2 of 3 - Contact Selection", "Back", "ai-summary");
       };
       const createDrafts = () => {
         state.drafts = selectedContacts().map((c) => ({ id: c.id, status: "pending", subject: `Idea for ${c.company}`, body: `Hi ${c.name.split(" ")[0]},\n\nI noticed ${c.company} is active in Texas operations. 360Airo can help teams turn verified prospect data into personalized outreach, then route positive replies into one clean workflow.\n\nWould a quick example be useful this week?`, score: c.score }));
@@ -13361,7 +13379,7 @@ Worth a quick look this week?</textarea></div>
       };
       const renderAiGenerate = () => {
         if (!state.drafts.length) createDrafts();
-        shell(`<section class="ccf-card"><h3>AI Generated Email Preview</h3><p>Review, edit, accept, reject, or regenerate each recipient-specific draft before scheduling.</p><div class="ccf-actions" style="justify-content:flex-start"><button class="ccf-btn primary" data-accept-all>Accept All</button><button class="ccf-btn" data-reject-all>Reject All</button><button class="ccf-btn" data-add-sample-pitch>Add sample pitch</button></div><div class="ccf-draft-grid">${state.drafts.map((d) => { const c = contacts.find((x) => x.id === d.id); return `<article class="ccf-draft-card ${d.status}"><strong>${c.name}</strong><p>${c.email} - ${c.company}</p><span class="ccf-badge">AI quality ${d.score}%</span><div class="ccf-field"><label>Subject</label><input class="ccf-input" data-draft-subject="${d.id}" value="${d.subject}"></div><textarea class="ccf-textarea" data-draft-body="${d.id}">${d.body}</textarea><div class="ccf-actions"><button class="ccf-btn primary" data-draft-status="${d.id}:accepted">Accept</button><button class="ccf-btn" data-draft-status="${d.id}:rejected">Reject</button><button class="ccf-btn" data-draft-status="${d.id}:pending">Regenerate</button></div></article>`; }).join("")}</div></section><div class="ccf-actions"><button class="ccf-btn" data-ccf-stage="ai-contacts">&larr; Back</button><button class="ccf-btn primary" data-ccf-stage="schedule" ${state.drafts.some((d) => d.status === "accepted") ? "" : "disabled"}>Validate & Schedule &rarr;</button></div>`, "AI Generated Email Preview", "Generate and approve personalized emails before launch.", "Step 2 of 3 - Draft Review", "Back", "ai-contacts");
+        shell(`<div class="ccf-draft-wrapper"><section class="ccf-card" style="padding: 32px;"><h3>AI Generated Email Preview</h3><p style="color: var(--muted); margin-bottom: 24px;">Review, edit, accept, reject, or regenerate each recipient-specific draft before scheduling.</p><div class="ccf-actions" style="justify-content:flex-start; margin-bottom: 24px;"><button class="ccf-btn primary" data-accept-all>Accept All</button><button class="ccf-btn" data-reject-all>Reject All</button><button class="ccf-btn" data-add-sample-pitch>Add sample pitch</button></div><div class="ccf-draft-grid">${state.drafts.map((d) => { const c = contacts.find((x) => x.id === d.id); return `<article class="ccf-draft-card ${d.status}"><strong>${c.name}</strong><p style="color: var(--muted);">${c.email} - ${c.company}</p><span class="ccf-badge" style="width: fit-content; background: rgba(80,120,242,0.1); color: var(--ccf-blue); border: none; font-weight: 800; padding: 6px 12px; border-radius: 999px;">AI quality ${d.score}%</span><div class="ccf-field"><label>Subject</label><input class="ccf-input" data-draft-subject="${d.id}" value="${d.subject}"></div><textarea class="ccf-textarea" data-draft-body="${d.id}">${d.body}</textarea><div class="ccf-actions"><button class="ccf-btn primary" data-draft-status="${d.id}:accepted">Accept</button><button class="ccf-btn" data-draft-status="${d.id}:rejected">Reject</button><button class="ccf-btn" data-draft-status="${d.id}:pending">Regenerate</button></div></article>`; }).join("")}</div></section><div class="ccf-actions" style="margin-top: 32px;"><button class="ccf-btn" data-ccf-stage="ai-contacts">&larr; Back</button><button class="ccf-btn primary" data-ccf-stage="schedule" ${state.drafts.some((d) => d.status === "accepted") ? "" : "disabled"}>Validate & Schedule &rarr;</button></div></div>`, "AI Generated Email Preview", "Generate and approve personalized emails before launch.", "Step 2 of 3 - Draft Review", "Back", "ai-contacts");
       };
       const renderSchedule = () => {
         const recipientCount = state.approach === "ai" ? Math.max(1, state.drafts.filter((d) => d.status === "accepted").length) : (aud()?.valid || 0);
@@ -13429,7 +13447,6 @@ Worth a quick look this week?</textarea></div>
         root.querySelector("[data-ai-answer]")?.addEventListener("input", (e) => { state.aiAnswers[state.aiIndex] = e.target.value; save(); });
         root.querySelector("[data-ai-next]")?.addEventListener("click", () => { state.aiIndex < 7 ? update({ aiIndex: state.aiIndex + 1 }) : setStage("ai-summary"); });
         root.querySelector("[data-ai-prev]")?.addEventListener("click", () => update({ aiIndex: Math.max(0, state.aiIndex - 1) }));
-        root.querySelector("[data-ai-skip]")?.addEventListener("click", () => { state.aiAnswers[state.aiIndex] ||= "Skipped"; state.aiIndex < 7 ? update({ aiIndex: state.aiIndex + 1 }) : setStage("ai-summary"); });
         root.querySelectorAll("[data-ai-edit]").forEach((btn) => btn.addEventListener("click", () => update({ stage: "ai", aiIndex: Number(btn.dataset.aiEdit) })));
         root.querySelectorAll("[data-contact]").forEach((card) => card.addEventListener("click", () => { const id = card.dataset.contact; state.selectedContacts = state.selectedContacts.includes(id) ? state.selectedContacts.filter((x) => x !== id) : [...state.selectedContacts, id]; save(); renderAiContacts(); }));
         root.querySelector("[data-select-all]")?.addEventListener("click", () => { state.selectedContacts = contacts.map((c) => c.id); save(); renderAiContacts(); });
@@ -14143,6 +14160,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const config = {
         view: "email-sequence",
         section: "campaigns",
+        activeView: "email-sequence",
         pageTitle: "Campaigns",
         pageSubtitle: "Email sequences and scheduled outreach",
         promptSelector: '[data-target-view="scheduled-event"]',
@@ -14164,8 +14182,24 @@ document.addEventListener('DOMContentLoaded', () => {
           ["Target Audience", '[data-field="audience"]', "Choose the target audience", "The selected Email Sequence decides which verified contacts will receive this outreach."],
           ["Live Preview", ".ccf-preview", "Watch the live setup preview", "The preview updates with campaign name, selected audience, progress, and available sending credits."],
           ["Approach", ".ccf-approach-grid", "Choose manual or AI content", "Users decide whether to write one standard sequence or let AI personalize messages for each recipient."],
-          ["Content Editor", ".ccf-email-card", "Write the email sequence", "The editor holds subject lines, preheaders, body copy, variables, tracking settings, and follow-up timing."],
+          ["Standard Content", '[data-ccf-approach="manual"]', "Explain Standard Content", "Standard Content creates one reusable email sequence for all selected recipients. It is best for announcements, newsletters, simple launches, and campaigns where every contact can receive the same message."],
+          ["AI Personalization", '[data-ccf-approach="ai"]', "Explain AI Personalization", "AI Personalization creates tailored email copy for each recipient using their company, title, pain points, and context. It is best when relevance and reply quality matter most."],
+          ["AI Interview", ".ccf-question-card", "Configure the AI assistant", "The AI assistant asks 8 focused questions so generated emails sound relevant, specific, and aligned with the campaign goal."],
+          ["Question 1", ".ccf-question-card", "What does your company do?", "This question gives AI the business context: industry, product category, services, and the plain-language description it should use in outreach."],
+          ["Question 2", ".ccf-question-card", "What product or service are you promoting?", "This tells AI the exact offer to position, so the generated emails stay centered on the right solution instead of becoming generic."],
+          ["Question 3", ".ccf-question-card", "Who are you trying to reach?", "This defines the target audience by title, industry, location, role, or company type so personalization matches the recipient."],
+          ["Question 4", ".ccf-question-card", "What challenges does the audience face?", "Pain points help AI write copy that connects with real problems instead of only describing features."],
+          ["Question 5", ".ccf-question-card", "What action should recipients take?", "This sets the campaign objective, such as booking a demo, replying, requesting a quote, or visiting a page."],
+          ["Question 6", ".ccf-question-card", "What tone should the emails use?", "Tone controls whether the campaign sounds professional, friendly, consultative, persuasive, technical, or formal."],
+          ["Question 7", ".ccf-question-card", "What makes your offer different?", "The value proposition gives AI the proof points and differentiators it should use to make the message stronger."],
+          ["Question 8", ".ccf-question-card", "How should the emails be written?", "Length and format guide whether the final emails should be short and crisp, balanced, or more detailed."],
+          ["AI Progress", ".ccf-ai-layout .ccf-preview", "Track AI assistant progress", "The progress panel confirms the selected campaign, audience, contact count, and how far the user is through the personalization interview."],
+          ["Content Editor", ".ccf-email-card", "Write the standard email sequence", "The Standard Content editor holds subject lines, preheaders, body copy, variables, tracking settings, and follow-up timing."],
+          ["Tracking", "details.ccf-card", "Confirm tracking settings", "Tracking controls decide whether opens, clicks, replies, unsubscribes, and tags are captured once the campaign is launched."],
           ["Schedule Review", ".ccf-schedule-grid", "Review sender and schedule", "The final setup step chooses the sending account, smart scheduler mode, timezone, and delivery timing."],
+          ["Scheduler Mode", ".ccf-segment", "Choose scheduling mode", "Scheduler Mode decides how delivery is controlled. Users can choose a simple manual cadence or let the system optimize sending behavior."],
+          ["Basic Scheduler", '[data-scheduler="basic"]', "Explain Basic Scheduler", "Basic Scheduler follows the selected time window directly. It is useful when the sender wants predictable, straightforward delivery control."],
+          ["Smart Scheduler", '[data-scheduler="smart"]', "Explain Smart Scheduler", "Smart Scheduler distributes messages based on sender health, daily capacity, time zones, and engagement-friendly sending windows."],
           ["Launch Checklist", ".ccf-checklist", "Confirm launch requirements", "The checklist confirms name, audience, content, sender, and unsubscribe handling before messages are sent."],
           ["Launch Button", ".ccf-footer", "Launch or go back to edit", "The footer is the final decision point: return to the editor or launch the campaign when everything is ready."]
         ],
@@ -14184,26 +14218,25 @@ document.addEventListener('DOMContentLoaded', () => {
             timezone: "GMT/UTC +0",
             selectedContacts: ["tyler", "jamie", "marco", "kilroy"],
             emails: [
-              {
-                subject: "Quick idea for {{company_name}}",
-                preheader: "A short outreach workflow example",
-                body: "Hi {{first_name}},\n\nI noticed {{company_name}} is growing across Texas. 360Airo helps teams turn verified contact lists into personalized outreach and clean reply workflows.\n\nWould a quick example be useful this week?",
-                days: 0,
-                hours: 0
-              },
-              {
-                subject: "Quick follow-up for {{company_name}}",
-                preheader: "",
-                body: "Hi {{first_name}},\n\nJust bringing this back to the top. If improving outreach quality is on your radar, I can share a concise workflow example.\n\nWorth exploring?",
-                days: 3,
-                hours: 0
-              }
+              { subject: "Quick idea for {{company_name}}", preheader: "A short outreach workflow example", body: "Hi {{first_name}},\n\nI noticed {{company_name}} is growing across Texas. 360Airo helps teams turn verified contact lists into personalized outreach and clean reply workflows.\n\nWould a quick example be useful this week?", days: 0, hours: 0 },
+              { subject: "Quick follow-up for {{company_name}}", preheader: "", body: "Hi {{first_name}},\n\nJust bringing this back to the top. If improving outreach quality is on your radar, I can share a concise workflow example.\n\nWorth exploring?", days: 3, hours: 0 }
             ],
             tracking: { opens: true, clicks: true, stopOnReply: true, unsubscribe: true, tags: false },
             aiIndex: 0,
-            aiAnswers: Array(8).fill(""),
+            aiAnswers: [
+              "360Airo helps outbound teams manage prospect data, personalized email, reply handling, and sales handoff in one workflow.",
+              "We are promoting AI-powered outbound campaign creation with verified lists and smart scheduling.",
+              "Revenue, sales, and operations leaders at growing B2B companies who need cleaner outreach workflows.",
+              "They struggle with messy data, generic messaging, poor deliverability, and slow reply follow-up.",
+              "Recipients should reply or book a short demo to see the workflow.",
+              "Professional, helpful, concise, and consultative.",
+              "360Airo combines list verification, AI copy, inbox signals, scheduling, and pipeline movement in one workspace.",
+              "Short and crisp with clear value, one proof point, and a simple call to action."
+            ],
             drafts: []
           };
+          if (index >= 15 && index <= 22) draft.aiIndex = index - 15;
+          if (index === 23) draft.aiIndex = 7;
           localStorage.setItem("ccfDraft", JSON.stringify(draft));
           document.querySelector("[data-sequence-launch]")?.click();
           const name = document.querySelector("[data-ccf-name]");
@@ -14216,16 +14249,18 @@ document.addEventListener('DOMContentLoaded', () => {
             audience.value = draft.audienceId;
             audience.dispatchEvent(new Event("change", { bubbles: true }));
           }
-          if (index >= 11) {
-            document.querySelector("[data-ccf-next-setup]")?.click();
+          if (index >= 11) document.querySelector("[data-ccf-next-setup]")?.click();
+          if (index >= 14 && index <= 23) {
+            document.querySelector('[data-ccf-approach="ai"]')?.click();
+            document.querySelector("[data-ccf-create-content]")?.click();
           }
-          if (index >= 12) {
+          if ((index >= 24 && index <= 25) || index >= 26) {
             document.querySelector('[data-ccf-approach="manual"]')?.click();
             document.querySelector("[data-ccf-create-content]")?.click();
           }
-          if (index >= 13) {
-            document.querySelector('[data-ccf-stage="schedule"]')?.click();
-          }
+          if (index >= 26) document.querySelector('[data-ccf-stage="schedule"]')?.click();
+          if (index === 28) document.querySelector('[data-scheduler="basic"]')?.click();
+          if (index >= 29) document.querySelector('[data-scheduler="smart"]')?.click();
         }
       };
       runStandaloneTour(config);
@@ -14255,7 +14290,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let i = 0, backdrop, spot, card;
         const q = (selector) => document.querySelector(selector);
-        const target = () => q(cfg.steps[i][1]) || q(`[data-view="${cfg.view}"]`);
+        const target = () => q(cfg.steps[i][1]) || q(`[data-view="${cfg.activeView || cfg.view}"]`);
         const clear = () => document.querySelectorAll(".gt-target").forEach((el) => el.classList.remove("gt-target"));
         const positionCard = (rect, el) => {
           const margin = 16, gap = 20, viewportW = innerWidth, viewportH = Math.max(innerHeight, 480);
