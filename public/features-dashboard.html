@@ -7787,7 +7787,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (event.target.closest('[data-target-view="inbox"]')) {
               event.preventDefault();
               event.stopPropagation();
-              event.stopImmediatePropagation();
+              
               promptCard.innerHTML = `
                 <div class="demo-tour-kicker">Inbox clicked</div>
                 <h3>Great, that is the Inbox tab</h3>

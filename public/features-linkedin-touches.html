@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>360Airo Dashboard - Scheduled Event</title>
+  <title>360Airo Dashboard - LinkedIn Touches</title>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap");
 
@@ -4222,261 +4222,6 @@
     }
   </style>
 
-  <style id="scheduled-event-demo-tour-styles">
-    .schedule-tour-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 9990;
-      background: radial-gradient(circle at 74% 18%, rgba(109, 93, 247, .14), transparent 28%), rgba(15, 23, 42, .08);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity .22s ease;
-    }
-    .schedule-tour-backdrop.active { opacity: 1; }
-    .schedule-tour-spotlight {
-      position: fixed;
-      z-index: 10000;
-      border: 2px solid rgba(109, 93, 247, .95);
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(109, 93, 247, .10), rgba(49, 88, 246, .04));
-      box-shadow: 0 0 0 9999px rgba(15, 23, 42, .34), 0 0 0 8px rgba(109, 93, 247, .08), 0 20px 70px rgba(80, 70, 210, .42), inset 0 0 34px rgba(109, 93, 247, .12);
-      pointer-events: none;
-      opacity: 0;
-      transform: scale(.98);
-      transition: top .22s ease, left .22s ease, width .22s ease, height .22s ease, opacity .18s ease, transform .18s ease;
-    }
-    .schedule-tour-spotlight.active {
-      opacity: 1;
-      transform: scale(1);
-      animation: scheduleTourPulse 1.7s ease-in-out infinite;
-    }
-    .schedule-tour-spotlight::after {
-      content: "";
-      position: absolute;
-      inset: -8px;
-      border-radius: inherit;
-      border: 1px solid rgba(109, 93, 247, .38);
-      animation: scheduleTourRipple 1.7s ease-in-out infinite;
-    }
-    .schedule-tour-spotlight::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,.16) 38%, transparent 58%);
-      transform: translateX(-120%);
-      animation: scheduleTourSweep 2.4s ease-in-out infinite;
-    }
-    .schedule-tour-card {
-      position: fixed;
-      z-index: 10030;
-      width: min(326px, calc(100vw - 28px));
-      max-width: calc(100vw - 28px);
-      max-height: calc(100vh - 32px);
-      padding: 18px 18px 16px;
-      overflow: auto;
-      border: 1px solid rgba(148, 163, 184, .34);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, .97);
-      color: #101827;
-      box-shadow: 0 18px 50px rgba(15, 23, 42, .20), 0 0 0 1px rgba(255, 255, 255, .7) inset;
-      backdrop-filter: blur(16px);
-      opacity: 0;
-      transform: translateY(8px);
-      transition: top .22s ease, left .22s ease, opacity .18s ease, transform .18s ease;
-    }
-    .schedule-tour-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto;
-      height: 3px;
-      background: linear-gradient(90deg, #3158F6, #6D5DF7, #0EB5BB);
-      background-size: 240% 100%;
-      animation: scheduleTourShimmer 2.8s linear infinite;
-    }
-    .schedule-tour-card.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .schedule-tour-kicker {
-      margin-bottom: 9px;
-      color: #3158F6;
-      font-size: 10.5px;
-      font-weight: 900;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-    .schedule-tour-card h3 {
-      margin: 0 0 10px;
-      color: #101827;
-      font-family: var(--font-display);
-      font-size: 20px;
-      line-height: 1.18;
-      letter-spacing: var(--tracking-tight);
-    }
-    .schedule-tour-card p {
-      margin: 0;
-      color: #52657D;
-      font-size: 14px;
-      line-height: 1.58;
-    }
-    .schedule-tour-progress-wrap {
-      margin-top: 16px;
-      height: 5px;
-      overflow: hidden;
-      border-radius: 999px;
-      background: #EEF2F7;
-    }
-    .schedule-tour-progress-bar {
-      display: block;
-      height: 100%;
-      width: var(--schedule-tour-progress, 8%);
-      border-radius: inherit;
-      background: linear-gradient(90deg, #3158F6, #6D5DF7);
-      transition: width .28s ease;
-    }
-    .schedule-tour-hint {
-      display: block;
-      margin-top: 11px;
-      color: #64748B;
-      font-size: 12px;
-      font-weight: 700;
-    }
-    .schedule-tour-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 14px;
-    }
-    .schedule-tour-progress {
-      flex: 0 0 auto;
-      min-width: max-content;
-      padding: 6px 9px;
-      border: 1px solid rgba(148, 163, 184, .24);
-      border-radius: 999px;
-      background: rgba(241, 245, 249, .72);
-      color: #475569;
-      font-size: 11px;
-      font-weight: 850;
-      line-height: 1;
-    }
-    .schedule-tour-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 7px;
-      min-width: 0;
-    }
-    .schedule-tour-btn {
-      height: 34px;
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      padding: 0 13px;
-      background: var(--surface);
-      color: var(--text);
-      font: inherit;
-      font-size: 13px;
-      font-weight: 850;
-      cursor: pointer;
-      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-    }
-    .schedule-tour-btn.primary {
-      border-color: transparent;
-      background: linear-gradient(135deg, #6254F3, #3158F6);
-      color: white;
-      box-shadow: 0 10px 22px rgba(80, 70, 210, .22);
-    }
-    .schedule-tour-btn:hover { transform: translateY(-1px); }
-    .schedule-tour-btn:disabled {
-      cursor: not-allowed;
-      opacity: .45;
-      transform: none;
-    }
-    html[data-theme="dark"] .schedule-tour-card {
-      background: rgba(15, 23, 42, .96);
-      border-color: rgba(148, 163, 184, .26);
-      color: #F8FAFC;
-      box-shadow: 0 18px 50px rgba(0, 0, 0, .36), 0 0 0 1px rgba(255, 255, 255, .06) inset;
-    }
-    html[data-theme="dark"] .schedule-tour-card h3 { color: #F8FAFC; }
-    html[data-theme="dark"] .schedule-tour-card p,
-    html[data-theme="dark"] .schedule-tour-hint { color: #CBD5E1; }
-    html[data-theme="dark"] .schedule-tour-progress-wrap { background: rgba(51, 65, 85, .78); }
-    html[data-theme="dark"] .schedule-tour-progress {
-      background: rgba(30, 41, 59, .88);
-      border-color: rgba(148, 163, 184, .24);
-      color: #DDE7F5;
-    }
-    html[data-theme="dark"] .schedule-tour-btn {
-      background: rgba(30, 41, 59, .96);
-      border-color: rgba(148, 163, 184, .24);
-      color: #F8FAFC;
-    }
-    html[data-theme="dark"] .schedule-tour-btn:disabled {
-      background: rgba(51, 65, 85, .72);
-      color: #94A3B8;
-      opacity: 1;
-    }
-    body.schedule-tour-running { overflow-x: hidden; }
-    .schedule-tour-target {
-      position: relative;
-      z-index: 10005;
-      filter: saturate(1.08) brightness(1.04);
-      animation: scheduleTourTargetLift 1.8s ease-in-out infinite;
-    }
-    .sched-header.schedule-tour-target,
-    .sched-card.schedule-tour-target,
-    .sched-insight.schedule-tour-target,
-    .sched-calendar.schedule-tour-target,
-    .sched-cal-toolbar.schedule-tour-target,
-    .sched-cal-view-tabs.schedule-tour-target,
-    .sched-cal-cell.schedule-tour-target,
-    .cal-event-bar.schedule-tour-target,
-    .sched-feed.schedule-tour-target,
-    .sched-feed-item.schedule-tour-target,
-    .sched-fab-wrapper.schedule-tour-target {
-      border-color: rgba(109, 93, 247, .72) !important;
-      box-shadow: 0 16px 38px rgba(49, 88, 246, .16), 0 0 0 1px rgba(109, 93, 247, .30) !important;
-    }
-    [data-schedule-tour-next-prompt="true"] {
-      position: relative;
-      z-index: 10005;
-      animation: scheduleTourTabPulse 1.4s ease-in-out infinite;
-    }
-    @keyframes scheduleTourPulse {
-      0%, 100% { box-shadow: 0 0 0 9999px rgba(15, 23, 42, .34), 0 0 0 8px rgba(109, 93, 247, .08), 0 20px 70px rgba(80, 70, 210, .42), inset 0 0 34px rgba(109, 93, 247, .12); }
-      50% { box-shadow: 0 0 0 9999px rgba(15, 23, 42, .34), 0 0 0 10px rgba(109, 93, 247, .10), 0 22px 78px rgba(80, 70, 210, .52), inset 0 0 38px rgba(109, 93, 247, .16); }
-    }
-    @keyframes scheduleTourRipple {
-      0%, 100% { opacity: .35; transform: scale(1); }
-      50% { opacity: .85; transform: scale(1.015); }
-    }
-    @keyframes scheduleTourSweep {
-      0% { transform: translateX(-120%); opacity: 0; }
-      18% { opacity: 1; }
-      55% { transform: translateX(120%); opacity: 0; }
-      100% { transform: translateX(120%); opacity: 0; }
-    }
-    @keyframes scheduleTourShimmer { to { background-position: 240% 0; } }
-    @keyframes scheduleTourTargetLift {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-2px); }
-    }
-    @keyframes scheduleTourTabPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(109, 93, 247, .42); }
-      50% { box-shadow: 0 0 0 8px rgba(109, 93, 247, 0); }
-    }
-    @media (max-width: 720px) {
-      .schedule-tour-card {
-        left: 14px !important;
-        right: 14px;
-        bottom: 14px !important;
-        top: auto !important;
-        width: auto !important;
-      }
-    }
-  </style>
-
   <style id="extra-interactive-animations">
     @keyframes iconSpin {
       0% { transform: rotate(0deg) scale(1); }
@@ -6075,282 +5820,1699 @@
 
       <main class="page">
         <div class="content">
-          <section class="view" data-view="scheduled-event">
-            <div class="sched-view">
-              <div class="sched-main">
-                <div class="sched-header">
-                  <h2>Scheduled Events</h2>
-                  <p>Plan, monitor, and manage every outreach activity from one intelligent calendar.</p>
-                </div>
-                
-                <div class="sched-hero">
-                  <div class="sched-card scheduled">
-                    <div class="sched-card-top">
-                      <div class="sched-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-                      <span class="sched-card-trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> +12%</span>
-                    </div>
-                    <div class="sched-card-value">24</div>
-                    <div class="sched-card-label">Total upcoming activities</div>
-                  </div>
-                  
-                  <div class="sched-card completed">
-                    <div class="sched-card-top">
-                      <div class="sched-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-                      <span class="sched-card-trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> +8%</span>
-                    </div>
-                    <div class="sched-card-value">142</div>
-                    <div class="sched-card-label">Finished activities</div>
-                  </div>
-                  
-                  <div class="sched-card attention">
-                    <div class="sched-card-top">
-                      <div class="sched-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-                    </div>
-                    <div class="sched-card-value">3</div>
-                    <div class="sched-card-label">Needs attention (paused/missed)</div>
-                  </div>
-                  
-                  <div class="sched-card canceled">
-                    <div class="sched-card-top">
-                      <div class="sched-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
-                      <span class="sched-card-trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg> -2%</span>
-                    </div>
-                    <div class="sched-card-value">1</div>
-                    <div class="sched-card-label">Canceled activities</div>
-                  </div>
-                </div>
-                
-                <div class="sched-insight" id="schedInsightBar">
-                  <div class="sched-insight-content">
-                    <svg class="sched-insight-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    <div class="sched-insight-text">
-                      <strong>360Airo Insight <span class="sched-insight-badge">New</span></strong>
-                      <span>You have 7 outreach steps scheduled tomorrow. 2 LinkedIn follow-ups overlap with email campaigns. Consider staggering send times.</span>
-                    </div>
-                  </div>
-                  <button class="sched-insight-close" onclick="document.getElementById('schedInsightBar').style.display='none'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-                </div>
-                
-                <div class="sched-calendar">
-                  <div class="sched-cal-toolbar">
-                    <div class="sched-cal-controls">
-                      <button class="btn ghost">Today</button>
-                      <div class="sched-cal-nav">
-                        <button class="btn ghost icon-only"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-                        <button class="btn ghost icon-only"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
-                      </div>
-                      <div class="sched-cal-title">June 2026</div>
-                    </div>
-                    <div class="sched-cal-controls">
-                      <div class="sched-cal-view-tabs">
-                        <button class="sched-cal-tab active" data-cal-view="month">Month</button>
-                        <button class="sched-cal-tab" data-cal-view="week">Week</button>
-                      </div>
-                      <button class="btn ghost icon-only"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg></button>
-                    </div>
-                  </div>
-                  <div class="sched-month-wrap" id="schedMonthWrap">
-                    <div class="sched-cal-days">
-                      <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-                    </div>
-                    <div class="sched-cal-grid" id="schedCalendarGrid">
-                      <!-- Calendar cells will be generated by JS -->
-                    </div>
-                    <script>
-                      (function() {
-                        const grid = document.getElementById('schedCalendarGrid');
-                        if (grid) {
-                          let htmlStr = '';
-                          htmlStr += '<div class="sched-cal-cell muted-date"><div class="sched-cal-date">31</div></div>';
-                          
-                          const emailIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>';
-                          const linkedInIcon = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>';
-                          const warningIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
+          <section class="view" data-view="linkedin-touches">
 
-                          for(let i=1; i<=30; i++) {
-                            let isToday = i === 12;
-                            let cellClass = isToday ? 'today' : '';
-                            let events = '';
-                            
-                            if ([5, 10, 15, 20, 25, 30].includes(i)) {
-                              events += '<div class="cal-event-bar cal-event-email">' + emailIcon + ' Q3 Outbound</div>';
-                            }
-                            if ([8, 12, 16, 24].includes(i)) {
-                              events += '<div class="cal-event-bar cal-event-linkedin">' + linkedInIcon + ' Connect Req</div>';
-                            }
-                            if ([14, 28].includes(i)) {
-                              events += '<div class="cal-event-bar cal-event-warning">' + warningIcon + ' Bounce</div>';
-                            }
+            <!-- ═══ LinkedIn Touches: inline CSS ═══ -->
+            <style>
+              /* ── Base layout ────────────────────────────── */
+              .lit-root { display:flex; flex-direction:column; gap:0; height:100%; min-height:0; font-family:var(--font-body); }
+              .lit-topbar { padding:20px 24px 0; display:flex; flex-direction:column; gap:16px; }
+              .lit-hero { display:flex; align-items:flex-start; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+              .lit-hero-left h1 { margin:0 0 4px; font-size:22px; font-weight:800; font-family:var(--font-heading); letter-spacing:-0.02em; }
+              .lit-hero-left p  { margin:0; font-size:13px; color:var(--muted); }
+              .lit-hero-actions { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
 
-                            
-                            // Add stagger animation delay
-                            const animDelay = (i * 0.02).toFixed(2);
-                            htmlStr += '<div class="sched-cal-cell ' + cellClass + '" style="opacity:0; animation: cellPopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: ' + animDelay + 's;">' +
-                              '<div class="sched-cal-date">' + i + '</div>' +
-                              events +
-                            '</div>';
-                          }
-                          
-                          for(let i=1; i<=4; i++) {
-                            htmlStr += '<div class="sched-cal-cell muted-date"><div class="sched-cal-date">0' + i + '</div></div>';
-                          }
-                          
-                          grid.innerHTML = htmlStr;
-                          
-                          grid.addEventListener('click', (e) => {
-                            const cell = e.target.closest('.sched-cal-cell');
-                            if (!cell || cell.classList.contains('muted-date')) return;
-                            
-                            const modal = document.getElementById('schedDateModal');
-                            if (!modal) return;
-                            
-                            const body = document.getElementById('schedDateModalBody');
-                            const dateLabel = document.getElementById('schedDateModalDate');
-                            const dayNum = cell.querySelector('.sched-cal-date').textContent;
-                            
-                            const dateObj = new Date(2026, 5, parseInt(dayNum));
-                            const formattedDate = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: '2-digit', year: 'numeric' });
-                            if(dateLabel) dateLabel.textContent = formattedDate;
-                            
-                            const events = Array.from(cell.querySelectorAll('.cal-event-bar'));
-                            
-                            if (events.length === 0) {
-                                body.innerHTML = `<div style="padding: 48px 20px; text-align: center; color: var(--muted); display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
-                                    <div class="modal-animated-item modal-icon-glow" style="animation-delay: 0.1s; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.05)); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(239,68,68,0.2);">
-                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #EF4444;">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <line x1="12" y1="8" x2="12" y2="12"></line>
-                                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                                        </svg>
-                                    </div>
-                                    <h4 class="modal-animated-item" style="animation-delay: 0.2s; color: var(--text); font-size: 18px; font-weight: 700; margin: 0 0 10px; font-family: var(--font-heading);">No Scheduled Meetings</h4>
-                                    <p class="modal-animated-item" style="animation-delay: 0.3s; font-size:14px; margin: 0; line-height: 1.6; max-width: 280px; opacity: 0.8;">There are no outreach activities scheduled for this date. Enjoy your free time or schedule a new activity!</p>
-                                    <button class="modal-animated-item btn btn-primary" style="animation-delay: 0.4s; margin-top: 24px; padding: 0 20px; height: 40px; border-radius: 8px; font-size: 14px;">Schedule Activity</button>
-                                </div>`;
-                            } else {
-                                let eventHtml = '<div style="padding: 24px; display: flex; flex-direction: column; gap: 16px;">';
-                                events.forEach((ev, idx) => {
-                                    const eventClass = Array.from(ev.classList).find(c => c !== 'cal-event-bar') || '';
-                                    const iconMatch = ev.innerHTML.match(/<svg.*?<\/svg>/);
-                                    const icon = iconMatch ? iconMatch[0] : '';
-                                    const text = ev.textContent.trim();
-                                    
-                                    let bg = 'rgba(80,120,242,0.08)';
-                                    let border = 'rgba(80,120,242,0.2)';
-                                    let color = '#5078F2';
-                                    
-                                    if(eventClass.includes('linkedin')) {
-                                      bg = 'rgba(10,102,194,0.08)'; border = 'rgba(10,102,194,0.2)'; color = '#0A66C2';
-                                    } else if(eventClass.includes('warning')) {
-                                      bg = 'rgba(239,68,68,0.08)'; border = 'rgba(239,68,68,0.2)'; color = '#EF4444';
-                                    }
+              /* ── Tab bar ────────────────────────────────── */
+              .lit-tabs { display:flex; gap:2px; padding:3px; background:var(--surface-2); border:1px solid var(--line); border-radius:10px; width:fit-content; }
+              .lit-tab { padding:7px 18px; border-radius:8px; border:none; background:transparent; color:var(--muted); font-size:13px; font-weight:700; cursor:pointer; transition:all 0.18s ease; white-space:nowrap; }
+              .lit-tab.active { background:var(--brand); color:#fff; box-shadow:0 4px 14px rgba(80,120,242,.35); }
+              .lit-tab:not(.active):hover { background:var(--surface-3); color:var(--text); }
 
-                                    const delay = 0.1 + (idx * 0.08);
-                                    
-                                    eventHtml += `<div class="modal-event-card modal-animated-item" style="animation-delay: ${delay}s; font-size: 15px; padding: 16px 20px; border-radius: 12px; gap: 14px; display: flex; align-items: center; background: ${bg}; border: 1px solid ${border}; color: ${color}; cursor: pointer;">
-                                      <div style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 10px; background: white; box-shadow: 0 2px 6px rgba(0,0,0,0.06); flex-shrink: 0;">${icon}</div>
-                                      <div style="display: flex; flex-direction: column; gap: 2px;">
-                                        <span style="font-weight: 700; color: var(--text);">${text}</span>
-                                        <span style="font-size: 12px; opacity: 0.8; font-weight: 500;">9:00 AM - Scheduled automatically</span>
-                                      </div>
-                                      <div style="margin-left: auto; opacity: 0.5;">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                      </div>
-                                    </div>`;
-                                });
-                                eventHtml += '</div>';
-                                body.innerHTML = eventHtml;
-                            }
-                            
-                            modal.classList.add('active');
-                          });
-                        }
-                      })();
-                    </script>
+              /* ── Metric cards row ───────────────────────── */
+              .lit-metrics { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:10px; padding:0 24px; }
+              .lit-metric { padding:14px; border:1px solid var(--line); border-radius:14px; background:linear-gradient(160deg,var(--surface),var(--surface-2)); position:relative; overflow:hidden; transition:transform 0.2s,box-shadow 0.2s; cursor:default; }
+              .lit-metric::after { content:''; position:absolute; top:0; right:0; width:48px; height:48px; border-radius:50%; background:var(--lit-accent,rgba(80,120,242,.12)); transform:translate(30%,-30%); pointer-events:none; }
+              .lit-metric:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(0,0,0,.08); }
+              .lit-metric-label { font-size:10px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:6px; }
+              .lit-metric-val { font-size:26px; font-weight:800; font-family:var(--font-heading); letter-spacing:-0.02em; line-height:1; }
+              .lit-metric-sub { font-size:11px; color:var(--muted); margin-top:4px; }
+              .lit-metric-icon { position:absolute; top:12px; right:12px; opacity:.55; }
+
+              /* ── Safety panel ───────────────────────────── */
+              .lit-safety { margin:0 24px; border:1px solid var(--line); border-radius:14px; background:var(--surface); overflow:hidden; }
+              .lit-safety-head { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; cursor:pointer; gap:12px; user-select:none; }
+              .lit-safety-head-left { display:flex; align-items:center; gap:10px; }
+              .lit-safety-badge { width:28px; height:28px; border-radius:8px; background:rgba(14,181,187,.15); color:#0EB5BB; display:grid; place-items:center; flex-shrink:0; border:1px solid rgba(14,181,187,.25); }
+              .lit-safety-title { font-size:13px; font-weight:700; }
+              .lit-safety-summary { font-size:12px; color:var(--muted); }
+              .lit-safety-toggle { width:28px; height:28px; border-radius:7px; border:1px solid var(--line); background:var(--surface-2); display:grid; place-items:center; color:var(--muted); transition:transform 0.2s; }
+              .lit-safety-toggle.open { transform:rotate(180deg); }
+              .lit-safety-body { display:none; padding:0 16px 14px; border-top:1px solid var(--line); }
+              .lit-safety-body.open { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; padding-top:14px; }
+              .lit-safety-rule { display:flex; align-items:flex-start; gap:10px; }
+              .lit-safety-dot { width:8px; height:8px; border-radius:50%; background:#0EB5BB; margin-top:4px; flex-shrink:0; }
+              .lit-safety-rule-text strong { display:block; font-size:12px; font-weight:700; margin-bottom:2px; }
+              .lit-safety-rule-text span { font-size:11px; color:var(--muted); line-height:1.5; }
+
+              /* ── Tab content panels ─────────────────────── */
+              .lit-panel { display:none; flex:1; min-height:0; }
+              .lit-panel.active { display:flex; flex-direction:column; }
+
+              /* ───────── CAMPAIGNS PANEL ─────────────────── */
+              .lit-campaigns { display:flex; flex-direction:column; gap:20px; padding:0 24px 24px; }
+
+              /* Stepper */
+              .lit-stepper { display:flex; align-items:center; gap:0; background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 20px; overflow-x:auto; }
+              .lit-step { display:flex; align-items:center; gap:10px; flex-shrink:0; cursor:pointer; }
+              .lit-step-num { width:28px; height:28px; border-radius:50%; border:2px solid var(--line); display:grid; place-items:center; font-size:12px; font-weight:800; color:var(--muted); background:var(--surface-2); transition:all .2s; flex-shrink:0; }
+              .lit-step.active .lit-step-num { border-color:var(--brand); background:var(--brand); color:#fff; box-shadow:0 0 0 4px rgba(80,120,242,.15); }
+              .lit-step.done .lit-step-num { border-color:var(--good); background:var(--good); color:#fff; }
+              .lit-step-info strong { display:block; font-size:12px; font-weight:700; transition:color .2s; }
+              .lit-step.active .lit-step-info strong { color:var(--brand); }
+              .lit-step.done .lit-step-info strong { color:var(--good); }
+              .lit-step-info span { font-size:10px; color:var(--muted); }
+              .lit-step-connector { flex:1; height:1px; background:var(--line); margin:0 12px; min-width:20px; }
+              .lit-step-connector.done { background:var(--good); }
+
+              /* Step content card */
+              .lit-step-card { border:1px solid var(--line); border-radius:16px; background:var(--surface); overflow:hidden; }
+              .lit-step-card-head { padding:16px 20px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; }
+              .lit-step-card-head-left h3 { margin:0 0 2px; font-size:16px; font-weight:800; font-family:var(--font-heading); }
+              .lit-step-card-head-left p { margin:0; font-size:12px; color:var(--muted); }
+              .lit-step-card-body { padding:20px; }
+
+              /* Account cards */
+              .lit-account-grid { display:grid; gap:10px; }
+              .lit-account-card { display:grid; grid-template-columns:auto auto minmax(0,1fr) auto; gap:12px; align-items:center; padding:14px 16px; border:2px solid var(--line); border-radius:12px; background:var(--surface-2); transition:all .2s; cursor:pointer; }
+              .lit-account-card:hover { border-color:rgba(80,120,242,.4); background:rgba(80,120,242,.04); }
+              .lit-account-card.selected { border-color:var(--brand); background:rgba(80,120,242,.06); }
+              .lit-account-avatar { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#5078F2,#C15AE6); display:grid; place-items:center; color:#fff; font-size:14px; font-weight:800; flex-shrink:0; }
+              .lit-account-name { font-size:13px; font-weight:700; margin-bottom:2px; }
+              .lit-account-meta { font-size:11px; color:var(--muted); }
+              .lit-account-health { display:flex; align-items:center; gap:6px; }
+              .lit-health-dot { width:7px; height:7px; border-radius:50%; }
+              .lit-health-dot.good { background:#10B981; }
+              .lit-health-dot.warn { background:#F59E0B; }
+              .lit-health-dot.bad  { background:#F43F5E; }
+              .lit-account-usage { font-size:11px; color:var(--muted); white-space:nowrap; }
+              .lit-account-select-box { width:18px; height:18px; border-radius:5px; border:2px solid var(--line); background:var(--surface); display:grid; place-items:center; flex-shrink:0; transition:all .2s; }
+              .lit-account-card.selected .lit-account-select-box { border-color:var(--brand); background:var(--brand); }
+
+              /* Empty account state */
+              .lit-empty-accounts { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; padding:40px 24px; text-align:center; }
+              .lit-empty-icon { width:60px; height:60px; border-radius:18px; background:linear-gradient(135deg,rgba(80,120,242,.15),rgba(193,90,230,.1)); border:1px solid rgba(80,120,242,.2); display:grid; place-items:center; color:var(--brand); }
+              .lit-empty-accounts h3 { margin:0; font-size:17px; font-weight:800; font-family:var(--font-heading); }
+              .lit-empty-accounts p  { margin:0; font-size:13px; color:var(--muted); max-width:340px; line-height:1.5; }
+              .lit-empty-actions { display:flex; gap:10px; flex-wrap:wrap; justify-content:center; }
+
+              /* Prospect list cards */
+              .lit-list-grid { display:grid; gap:10px; }
+              .lit-list-card { padding:14px 16px; border:2px solid var(--line); border-radius:12px; background:var(--surface-2); cursor:pointer; transition:all .2s; }
+              .lit-list-card:hover:not(.disabled) { border-color:rgba(80,120,242,.4); background:rgba(80,120,242,.03); }
+              .lit-list-card.selected { border-color:var(--brand); background:rgba(80,120,242,.05); }
+              .lit-list-card.disabled { opacity:.55; cursor:not-allowed; }
+              .lit-list-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+              .lit-list-name { font-size:13px; font-weight:700; }
+              .lit-list-quality { font-size:10px; font-weight:700; padding:2px 8px; border-radius:999px; }
+              .lit-list-quality.good { background:rgba(16,185,129,.12); color:#10B981; border:1px solid rgba(16,185,129,.25); }
+              .lit-list-quality.warn { background:rgba(245,158,11,.12); color:#F59E0B; border:1px solid rgba(245,158,11,.25); }
+              .lit-list-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; }
+              .lit-list-stat { text-align:center; }
+              .lit-list-stat strong { display:block; font-size:15px; font-weight:800; }
+              .lit-list-stat span { font-size:10px; color:var(--muted); font-weight:600; text-transform:uppercase; letter-spacing:.04em; }
+              .lit-list-updated { font-size:11px; color:var(--muted); margin-top:8px; }
+
+              /* Approach cards */
+              .lit-approach-grid { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+              .lit-approach-card { padding:20px; border:2px solid var(--line); border-radius:16px; background:var(--surface-2); cursor:pointer; transition:all .2s; position:relative; overflow:hidden; }
+              .lit-approach-card:hover { border-color:rgba(80,120,242,.4); transform:translateY(-2px); }
+              .lit-approach-card.selected { border-color:var(--brand); background:rgba(80,120,242,.05); }
+              .lit-approach-card.selected::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--brand),#C15AE6); }
+              .lit-approach-icon { width:40px; height:40px; border-radius:12px; display:grid; place-items:center; margin-bottom:12px; }
+              .lit-approach-card h4 { margin:0 0 6px; font-size:15px; font-weight:800; }
+              .lit-approach-card p  { margin:0 0 12px; font-size:12px; color:var(--muted); line-height:1.5; }
+              .lit-approach-badge { display:inline-flex; align-items:center; gap:4px; font-size:11px; font-weight:700; padding:3px 8px; border-radius:999px; }
+              .lit-approach-badge.manual { background:rgba(80,120,242,.12); color:var(--brand); }
+              .lit-approach-badge.ai     { background:rgba(193,90,230,.12); color:#C15AE6; }
+
+              /* Message editor */
+              .lit-msg-editor { display:grid; grid-template-columns:1fr 340px; gap:16px; }
+              .lit-msg-fields { display:grid; gap:12px; }
+              .lit-msg-field { display:grid; gap:6px; }
+              .lit-msg-label { font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; display:flex; justify-content:space-between; align-items:center; }
+              .lit-msg-label span { font-size:11px; color:var(--muted); font-weight:400; text-transform:none; letter-spacing:0; }
+              .lit-msg-input { width:100%; border:1px solid var(--line); border-radius:10px; background:var(--surface-2); color:var(--text); font:inherit; font-size:13px; padding:10px 12px; outline:none; resize:vertical; transition:border-color .2s,box-shadow .2s; box-sizing:border-box; }
+              .lit-msg-input:focus { border-color:var(--brand); box-shadow:0 0 0 3px rgba(80,120,242,.12); }
+              .lit-vars { display:flex; gap:6px; flex-wrap:wrap; }
+              .lit-var-chip { padding:4px 9px; border-radius:999px; background:rgba(80,120,242,.1); color:var(--brand); font-size:11px; font-weight:700; cursor:pointer; border:1px solid rgba(80,120,242,.2); transition:all .15s; font-family:var(--font-mono); }
+              .lit-var-chip:hover { background:rgba(80,120,242,.2); }
+              .lit-msg-preview { border:1px solid var(--line); border-radius:14px; background:var(--surface-2); overflow:hidden; position:sticky; top:0; }
+              .lit-preview-head { padding:12px 14px; border-bottom:1px solid var(--line); font-size:12px; font-weight:700; display:flex; align-items:center; gap:8px; }
+              .lit-preview-body { padding:14px; }
+              .lit-preview-prospect { display:flex; align-items:center; gap:10px; margin-bottom:14px; padding-bottom:12px; border-bottom:1px solid var(--line); }
+              .lit-preview-avatar { width:36px; height:36px; border-radius:50%; background:linear-gradient(135deg,#0EB5BB,#5078F2); color:#fff; display:grid; place-items:center; font-weight:800; font-size:14px; }
+              .lit-preview-name { font-size:13px; font-weight:700; }
+              .lit-preview-title { font-size:11px; color:var(--muted); }
+              .lit-preview-bubble { background:linear-gradient(135deg,rgba(80,120,242,.1),rgba(80,120,242,.06)); border:1px solid rgba(80,120,242,.2); border-radius:12px 12px 12px 2px; padding:12px; font-size:13px; line-height:1.55; color:var(--text); }
+              .lit-preview-chars { text-align:right; font-size:11px; color:var(--muted); margin-top:6px; }
+              .lit-msg-quality { margin-top:10px; display:flex; align-items:center; gap:8px; padding:10px 12px; border-radius:10px; background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.2); }
+              .lit-msg-quality svg { color:#10B981; flex-shrink:0; }
+              .lit-msg-quality span { font-size:12px; color:#10B981; font-weight:600; }
+
+              /* AI personalization */
+              .lit-ai-fields { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+              .lit-ai-field { display:grid; gap:6px; }
+              .lit-ai-label { font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
+              .lit-ai-select { width:100%; border:1px solid var(--line); border-radius:9px; background:var(--surface-2); color:var(--text); font:inherit; font-size:13px; padding:9px 10px; outline:none; transition:border-color .2s; }
+              .lit-ai-select:focus { border-color:var(--brand); }
+              .lit-ai-preview-box { margin-top:12px; padding:14px; border-radius:12px; background:linear-gradient(135deg,rgba(193,90,230,.08),rgba(80,120,242,.06)); border:1px solid rgba(193,90,230,.2); font-size:13px; line-height:1.6; color:var(--text); min-height:80px; }
+              .lit-ai-actions { display:flex; gap:8px; margin-top:10px; }
+
+              /* Schedule */
+              .lit-schedule { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+              .lit-sched-group { display:grid; gap:12px; }
+              .lit-sched-row { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+              .lit-sched-field { display:grid; gap:6px; }
+              .lit-sched-label { font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
+              .lit-sched-input { width:100%; border:1px solid var(--line); border-radius:9px; background:var(--surface-2); color:var(--text); font:inherit; font-size:13px; padding:9px 10px; outline:none; transition:border-color .2s; box-sizing:border-box; }
+              .lit-sched-input:focus { border-color:var(--brand); }
+              .lit-sched-toggle-row { display:flex; align-items:center; justify-content:space-between; padding:10px 14px; border-radius:10px; background:var(--surface-2); border:1px solid var(--line); }
+              .lit-sched-toggle-info strong { display:block; font-size:13px; font-weight:700; margin-bottom:2px; }
+              .lit-sched-toggle-info span   { font-size:11px; color:var(--muted); }
+              .lit-toggle { position:relative; width:38px; height:22px; flex-shrink:0; }
+              .lit-toggle input { opacity:0; width:0; height:0; }
+              .lit-toggle-slider { position:absolute; inset:0; background:var(--line-2); border-radius:999px; transition:.2s; cursor:pointer; }
+              .lit-toggle-slider::before { content:''; position:absolute; width:16px; height:16px; left:3px; top:3px; background:#fff; border-radius:50%; transition:.2s; }
+              .lit-toggle input:checked + .lit-toggle-slider { background:var(--brand); }
+              .lit-toggle input:checked + .lit-toggle-slider::before { transform:translateX(16px); }
+              .lit-safety-summary-box { padding:14px 16px; border-radius:12px; background:rgba(16,185,129,.08); border:1px solid rgba(16,185,129,.2); display:flex; align-items:center; gap:12px; }
+              .lit-safety-summary-box svg { color:#10B981; flex-shrink:0; }
+              .lit-safety-summary-box p { margin:0; font-size:13px; color:#10B981; font-weight:600; }
+
+              /* Step footer */
+              .lit-step-footer { display:flex; justify-content:space-between; align-items:center; padding:14px 20px; border-top:1px solid var(--line); background:var(--surface-2); }
+              .lit-step-status { font-size:12px; color:var(--muted); }
+
+              /* ───────── CONVERSATIONS PANEL ──────────────── */
+              .lit-convs { display:flex; flex:1; min-height:0; border:1px solid var(--line); border-radius:16px; background:var(--surface); overflow:hidden; margin:0 24px 24px; height:calc(100vh - 260px); }
+              .lit-convs-left { width:220px; flex-shrink:0; border-right:1px solid var(--line); display:flex; flex-direction:column; background:var(--surface-2); }
+              .lit-convs-left-head { padding:14px; border-bottom:1px solid var(--line); }
+              .lit-acc-selector { width:100%; border:1px solid var(--line); border-radius:8px; background:var(--surface); color:var(--text); font:inherit; font-size:12px; padding:7px 9px; outline:none; margin-bottom:10px; }
+              .lit-folder { display:flex; align-items:center; justify-content:space-between; padding:8px 10px; border-radius:8px; cursor:pointer; font-size:13px; font-weight:600; color:var(--muted); transition:all .15s; }
+              .lit-folder:hover { background:var(--surface); color:var(--text); }
+              .lit-folder.active { background:rgba(80,120,242,.1); color:var(--brand); }
+              .lit-folder-badge { min-width:18px; height:18px; border-radius:999px; background:var(--brand); color:#fff; font-size:10px; font-weight:800; display:grid; place-items:center; padding:0 4px; }
+              .lit-convs-search { padding:10px 14px; border-bottom:1px solid var(--line); }
+              .lit-convs-search-input { width:100%; border:1px solid var(--line); border-radius:8px; background:var(--surface-2); color:var(--text); font:inherit; font-size:12px; padding:7px 10px; outline:none; box-sizing:border-box; }
+              .lit-convs-list { flex:1; overflow-y:auto; }
+              .lit-conv-item { display:flex; align-items:center; gap:10px; padding:12px 14px; border-bottom:1px solid var(--line); cursor:pointer; transition:background .15s; }
+              .lit-conv-item:hover { background:rgba(80,120,242,.04); }
+              .lit-conv-item.active { background:rgba(80,120,242,.08); border-left:2px solid var(--brand); }
+              .lit-conv-avatar { width:36px; height:36px; border-radius:50%; display:grid; place-items:center; font-size:13px; font-weight:800; color:#fff; flex-shrink:0; position:relative; }
+              .lit-conv-online { position:absolute; bottom:0; right:0; width:10px; height:10px; border-radius:50%; background:#10B981; border:2px solid var(--surface); }
+              .lit-conv-info { flex:1; min-width:0; }
+              .lit-conv-name { font-size:13px; font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+              .lit-conv-preview { font-size:11px; color:var(--muted); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; margin-top:2px; }
+              .lit-conv-right { display:flex; flex-direction:column; align-items:flex-end; gap:4px; flex-shrink:0; }
+              .lit-conv-time { font-size:10px; color:var(--muted); }
+              .lit-conv-unread { width:16px; height:16px; border-radius:50%; background:var(--brand); font-size:9px; font-weight:800; color:#fff; display:grid; place-items:center; }
+
+              /* Middle: message thread */
+              .lit-convs-mid { flex:1; min-width:0; display:flex; flex-direction:column; border-right:1px solid var(--line); }
+              .lit-thread-head { padding:14px 16px; border-bottom:1px solid var(--line); display:flex; align-items:center; justify-content:space-between; }
+              .lit-thread-prospect { display:flex; align-items:center; gap:10px; }
+              .lit-thread-prospect-name { font-size:15px; font-weight:800; }
+              .lit-thread-prospect-sub  { font-size:11px; color:var(--muted); margin-top:2px; }
+              .lit-thread-actions { display:flex; gap:6px; }
+              .lit-thread-messages { flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:12px; }
+              .lit-msg-bubble { max-width:72%; padding:10px 14px; border-radius:14px; font-size:13px; line-height:1.5; }
+              .lit-msg-bubble.sent { align-self:flex-end; background:linear-gradient(135deg,var(--brand),#467AF4); color:#fff; border-radius:14px 14px 2px 14px; }
+              .lit-msg-bubble.recv { align-self:flex-start; background:var(--surface-2); border:1px solid var(--line); border-radius:14px 14px 14px 2px; }
+              .lit-msg-bubble-time { font-size:10px; color:rgba(255,255,255,.65); margin-top:4px; text-align:right; }
+              .lit-msg-bubble.recv .lit-msg-bubble-time { color:var(--muted); text-align:left; }
+              .lit-thread-composer { padding:14px 16px; border-top:1px solid var(--line); }
+              .lit-composer-input { width:100%; min-height:72px; border:1px solid var(--line); border-radius:10px; background:var(--surface-2); color:var(--text); font:inherit; font-size:13px; padding:10px 12px; outline:none; resize:none; box-sizing:border-box; transition:border-color .2s; }
+              .lit-composer-input:focus { border-color:var(--brand); }
+              .lit-composer-footer { display:flex; align-items:center; justify-content:space-between; margin-top:8px; gap:8px; }
+              .lit-composer-tools { display:flex; gap:6px; }
+              .lit-composer-tool { width:30px; height:30px; border-radius:8px; border:1px solid var(--line); background:var(--surface-2); color:var(--muted); display:grid; place-items:center; cursor:pointer; transition:all .15s; }
+              .lit-composer-tool:hover { border-color:var(--brand); color:var(--brand); background:rgba(80,120,242,.06); }
+              .lit-ai-suggest { padding:10px 14px; border-top:1px solid var(--line); background:rgba(193,90,230,.05); display:flex; align-items:center; gap:10px; }
+              .lit-ai-suggest-label { font-size:11px; font-weight:700; color:#C15AE6; flex-shrink:0; }
+              .lit-ai-chips { display:flex; gap:6px; flex-wrap:wrap; }
+              .lit-ai-chip { padding:4px 10px; border-radius:999px; border:1px solid rgba(193,90,230,.3); background:rgba(193,90,230,.08); color:#C15AE6; font-size:11px; font-weight:600; cursor:pointer; transition:all .15s; }
+              .lit-ai-chip:hover { background:rgba(193,90,230,.18); }
+
+              /* Right: prospect detail */
+              .lit-convs-right { width:260px; flex-shrink:0; display:flex; flex-direction:column; overflow-y:auto; }
+              .lit-prospect-card { padding:16px; border-bottom:1px solid var(--line); text-align:center; }
+              .lit-prospect-avatar-lg { width:56px; height:56px; border-radius:50%; background:linear-gradient(135deg,#5078F2,#C15AE6); color:#fff; font-size:20px; font-weight:800; display:grid; place-items:center; margin:0 auto 10px; }
+              .lit-prospect-name { font-size:15px; font-weight:800; margin-bottom:2px; }
+              .lit-prospect-title { font-size:12px; color:var(--muted); margin-bottom:10px; }
+              .lit-prospect-tags { display:flex; gap:6px; flex-wrap:wrap; justify-content:center; margin-bottom:10px; }
+              .lit-prospect-tag { padding:3px 8px; border-radius:999px; font-size:10px; font-weight:700; border:1px solid var(--line); background:var(--surface-2); color:var(--muted); }
+              .lit-prospect-actions { display:flex; gap:6px; flex-direction:column; }
+              .lit-prospect-actions button { width:100%; }
+              .lit-prospect-section { padding:12px 16px; border-bottom:1px solid var(--line); }
+              .lit-prospect-section h4 { margin:0 0 8px; font-size:11px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
+              .lit-detail-row { display:flex; justify-content:space-between; font-size:12px; margin-bottom:6px; }
+              .lit-detail-row span { color:var(--muted); }
+              .lit-detail-row strong { color:var(--text); }
+
+              /* Empty conv state */
+              .lit-convs-empty { flex:1; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px; color:var(--muted); text-align:center; padding:24px; }
+              .lit-convs-empty-icon { width:56px; height:56px; border-radius:16px; border:1px solid var(--line); background:var(--surface-2); display:grid; place-items:center; color:var(--muted); opacity:.6; }
+
+              /* ───────── ANALYTICS PANEL ──────────────────── */
+              .lit-analytics { display:flex; flex-direction:column; gap:20px; padding:0 24px 24px; }
+              .lit-analytics-metrics { display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); gap:8px; }
+              .lit-analytics-metric { padding:12px 14px; border:1px solid var(--line); border-radius:12px; background:var(--surface); }
+              .lit-analytics-metric-label { font-size:10px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; margin-bottom:4px; }
+              .lit-analytics-metric-val { font-size:22px; font-weight:800; font-family:var(--font-heading); letter-spacing:-0.02em; }
+              .lit-analytics-metric-sub { font-size:10px; color:var(--muted); margin-top:2px; }
+              .lit-analytics-row { display:grid; grid-template-columns:1.6fr 1fr; gap:16px; }
+              .lit-chart-card { border:1px solid var(--line); border-radius:14px; background:var(--surface); padding:18px; }
+              .lit-chart-title { font-size:14px; font-weight:800; margin:0 0 4px; font-family:var(--font-heading); }
+              .lit-chart-sub { font-size:11px; color:var(--muted); margin:0 0 16px; }
+              .lit-chart-legend { display:flex; gap:14px; margin-bottom:14px; flex-wrap:wrap; }
+              .lit-legend-dot { width:8px; height:8px; border-radius:50%; display:inline-block; margin-right:5px; }
+              .lit-legend-item { font-size:11px; font-weight:700; color:var(--muted); display:flex; align-items:center; }
+              /* Simple bar chart using CSS */
+              .lit-bar-chart { display:flex; align-items:flex-end; gap:8px; height:120px; }
+              .lit-bar-group { display:flex; gap:3px; align-items:flex-end; flex:1; }
+              .lit-bar { border-radius:4px 4px 0 0; transition:opacity .2s; min-width:8px; }
+              .lit-bar:hover { opacity:.75; }
+              .lit-bar-label { font-size:9px; color:var(--muted); text-align:center; margin-top:4px; }
+              /* Donut chart placeholder */
+              .lit-donut-wrap { display:flex; align-items:center; gap:16px; }
+              .lit-donut { width:100px; height:100px; border-radius:50%; background:conic-gradient(#10B981 0% 20%, #F43F5E 20% 80%, #5078F2 80% 100%); display:grid; place-items:center; position:relative; }
+              .lit-donut::after { content:''; position:absolute; width:62px; height:62px; border-radius:50%; background:var(--surface); }
+              .lit-donut-center { position:relative; z-index:1; text-align:center; }
+              .lit-donut-center strong { display:block; font-size:18px; font-weight:800; }
+              .lit-donut-center span { font-size:10px; color:var(--muted); }
+              .lit-donut-legend { display:flex; flex-direction:column; gap:8px; }
+              .lit-donut-legend-item { display:flex; align-items:center; justify-content:space-between; gap:10px; font-size:12px; }
+              .lit-donut-legend-label { display:flex; align-items:center; gap:6px; color:var(--muted); }
+              .lit-donut-legend-val { font-weight:800; }
+              /* Sender rows */
+              .lit-sender-rows { display:grid; gap:12px; }
+              .lit-sender-row { padding:14px 16px; border:1px solid var(--line); border-radius:12px; background:var(--surface); }
+              .lit-sender-head { display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+              .lit-sender-name { font-size:13px; font-weight:700; }
+              .lit-sender-rate { font-size:12px; font-weight:700; color:var(--good); }
+              .lit-sender-stats { display:grid; grid-template-columns:repeat(4,1fr); gap:8px; margin-bottom:10px; }
+              .lit-sender-stat { text-align:center; }
+              .lit-sender-stat strong { display:block; font-size:15px; font-weight:800; }
+              .lit-sender-stat span { font-size:10px; color:var(--muted); }
+              .lit-sender-bar { height:5px; border-radius:999px; background:var(--line); overflow:hidden; }
+              .lit-sender-bar-fill { height:100%; border-radius:inherit; background:linear-gradient(90deg,#5078F2,#0EB5BB); }
+              /* Log table */
+              .lit-log-table { border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+              .lit-log-head { display:grid; grid-template-columns:120px 160px 130px 130px 90px 90px 80px; gap:0; background:var(--surface-2); border-bottom:1px solid var(--line); }
+              .lit-log-head-cell { padding:9px 12px; font-size:10px; font-weight:700; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; white-space:nowrap; }
+              .lit-log-row { display:grid; grid-template-columns:120px 160px 130px 130px 90px 90px 80px; gap:0; border-bottom:1px solid var(--line); transition:background .15s; }
+              .lit-log-row:last-child { border-bottom:none; }
+              .lit-log-row:hover { background:var(--surface-2); }
+              .lit-log-cell { padding:10px 12px; font-size:12px; color:var(--text); align-items:center; display:flex; overflow:hidden; }
+              .lit-status-pill { padding:3px 8px; border-radius:999px; font-size:10px; font-weight:700; white-space:nowrap; }
+              .lit-status-pill.sent { background:rgba(80,120,242,.12); color:var(--brand); }
+              .lit-status-pill.accepted { background:rgba(16,185,129,.12); color:#10B981; }
+              .lit-status-pill.failed { background:rgba(244,63,94,.12); color:#F43F5E; }
+              .lit-status-pill.pending { background:rgba(245,158,11,.12); color:#F59E0B; }
+              .lit-log-controls { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; flex-wrap:wrap; }
+
+              /* ── Shared utilities ────────────────────────── */
+              .lit-section-title { font-size:16px; font-weight:800; font-family:var(--font-heading); margin:0 0 4px; }
+              .lit-section-sub { font-size:12px; color:var(--muted); margin:0 0 16px; }
+              .lit-divider { height:1px; background:var(--line); margin:4px 0; }
+              .btn-lit-primary { height:36px; padding:0 16px; border-radius:9px; background:linear-gradient(135deg,#5078F2,#467AF4); color:#fff; border:none; font:inherit; font-size:13px; font-weight:700; cursor:pointer; display:inline-flex; align-items:center; gap:7px; transition:all .2s; box-shadow:0 4px 12px rgba(80,120,242,.3); white-space:nowrap; }
+              .btn-lit-primary:hover { transform:translateY(-1px); box-shadow:0 6px 18px rgba(80,120,242,.4); }
+              .btn-lit-ghost { height:36px; padding:0 14px; border-radius:9px; border:1px solid var(--line); background:var(--surface-2); color:var(--text); font:inherit; font-size:13px; font-weight:600; cursor:pointer; display:inline-flex; align-items:center; gap:7px; transition:all .2s; white-space:nowrap; }
+              .btn-lit-ghost:hover { border-color:var(--brand); color:var(--brand); }
+              .btn-lit-sm { height:28px; padding:0 10px; border-radius:7px; font-size:11px; }
+              .btn-lit-primary:disabled, .btn-lit-ghost:disabled { opacity:.48; cursor:not-allowed; transform:none; box-shadow:none; }
+              .lit-icon-btn { width:36px; height:36px; padding:0; justify-content:center; }
+              .lit-progress { display:flex; align-items:center; gap:10px; min-width:180px; }
+              .lit-progress-track { height:6px; flex:1; border-radius:999px; background:var(--line); overflow:hidden; }
+              .lit-progress-fill { height:100%; width:20%; border-radius:inherit; background:linear-gradient(90deg,#5078F2,#0EB5BB); transition:width .2s ease; }
+              .lit-progress-text { font-size:11px; color:var(--muted); font-weight:700; white-space:nowrap; }
+              .lit-step.error .lit-step-num { border-color:#F59E0B; background:rgba(245,158,11,.16); color:#F59E0B; }
+              .lit-form-error { display:none; font-size:11px; color:#F43F5E; font-weight:700; margin-top:8px; }
+              .lit-form-error.show { display:block; }
+              .lit-list-toolbar { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:12px; flex-wrap:wrap; }
+              .lit-list-toolbar-left, .lit-list-toolbar-right { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+              .lit-benefits { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px; width:100%; max-width:720px; margin-top:4px; }
+              .lit-benefit { padding:10px 12px; border:1px solid var(--line); border-radius:10px; background:var(--surface-2); text-align:left; font-size:12px; color:var(--muted); }
+              .lit-benefit strong { display:block; color:var(--text); font-size:12px; margin-bottom:2px; }
+              .lit-modal[hidden], .lit-toast[hidden] { display:none; }
+              .lit-modal { position:fixed; inset:0; z-index:2400; display:grid; place-items:center; padding:18px; background:rgba(2,8,23,.72); backdrop-filter:blur(10px); }
+              .lit-dialog { width:min(540px,100%); border:1px solid var(--line); border-radius:18px; background:var(--surface); box-shadow:0 28px 80px rgba(0,0,0,.4); overflow:hidden; transform:scale(.98); animation:litDialogIn .18s ease forwards; }
+              .lit-dialog-head { padding:20px 22px 14px; display:flex; gap:12px; align-items:flex-start; border-bottom:1px solid var(--line); }
+              .lit-dialog-icon { width:38px; height:38px; border-radius:12px; display:grid; place-items:center; background:rgba(80,120,242,.14); color:#5078F2; flex-shrink:0; border:1px solid rgba(80,120,242,.24); }
+              .lit-dialog-title { margin:0 0 4px; font-size:20px; font-family:var(--font-heading); font-weight:800; }
+              .lit-dialog-sub { margin:0; font-size:13px; color:var(--muted); line-height:1.45; }
+              .lit-dialog-body { padding:18px 22px; display:grid; gap:12px; }
+              .lit-dialog-step { display:flex; align-items:center; gap:8px; font-size:11px; color:var(--muted); font-weight:700; text-transform:uppercase; letter-spacing:.06em; }
+              .lit-dialog-step span { width:20px; height:20px; border-radius:999px; display:grid; place-items:center; background:var(--brand); color:#fff; font-size:10px; }
+              .lit-field { display:grid; gap:6px; }
+              .lit-field label { font-size:12px; font-weight:800; color:var(--text); }
+              .lit-field input { width:100%; border:1px solid var(--line); border-radius:10px; background:var(--surface-2); color:var(--text); font:inherit; font-size:14px; padding:11px 12px; box-sizing:border-box; outline:none; }
+              .lit-field input:focus, .lit-sched-input:focus, .lit-convs-search-input:focus, .lit-acc-selector:focus { border-color:var(--brand); box-shadow:0 0 0 3px rgba(80,120,242,.14); }
+              .lit-password-row { position:relative; }
+              .lit-password-row input { padding-right:46px; }
+              .lit-password-toggle { position:absolute; right:6px; top:6px; width:34px; height:34px; border-radius:8px; border:1px solid var(--line); background:var(--surface); color:var(--muted); cursor:pointer; display:grid; place-items:center; }
+              .lit-secure-note { display:flex; gap:8px; align-items:flex-start; padding:10px 12px; border:1px solid rgba(14,181,187,.25); background:rgba(14,181,187,.08); border-radius:10px; color:#BDD4F1; font-size:12px; line-height:1.45; }
+              .lit-connect-state { min-height:22px; font-size:12px; color:var(--muted); font-weight:700; }
+              .lit-connect-state.error { color:#F43F5E; }
+              .lit-connect-state.success { color:#10B981; }
+              .lit-dialog-actions { display:flex; justify-content:flex-end; gap:10px; padding:14px 22px 20px; border-top:1px solid var(--line); }
+              .lit-toast { position:fixed; right:22px; bottom:22px; z-index:2500; min-width:260px; max-width:360px; padding:12px 14px; border:1px solid rgba(80,120,242,.35); border-radius:12px; background:var(--surface); color:var(--text); box-shadow:0 18px 50px rgba(0,0,0,.35); font-size:13px; font-weight:700; }
+              @keyframes litDialogIn { to { transform:scale(1); } }
+              @media (prefers-reduced-motion: reduce) {
+                .lit-dialog, .lit-progress-fill, .lit-metric, .lit-tab, .lit-step-num { animation:none; transition:none; }
+              }
+
+              @media (max-width:1400px) {
+                .lit-metrics { grid-template-columns:repeat(3,minmax(0,1fr)); }
+                .lit-analytics-metrics { grid-template-columns:repeat(4,minmax(0,1fr)); }
+                .lit-analytics-row { grid-template-columns:1fr; }
+                .lit-msg-editor { grid-template-columns:1fr; }
+                .lit-convs-right { display:none; }
+              }
+              @media (max-width:1100px) {
+                .lit-approach-grid { grid-template-columns:1fr; }
+                .lit-schedule { grid-template-columns:1fr; }
+                .lit-stepper { font-size:11px; }
+              }
+              @media (max-width:768px) {
+                .lit-topbar, .lit-metrics, .lit-campaigns, .lit-analytics { padding-left:14px; padding-right:14px; }
+                .lit-safety, .lit-convs { margin-left:14px; margin-right:14px; }
+                .lit-metrics, .lit-analytics-metrics, .lit-list-stats, .lit-benefits, .lit-ai-fields, .lit-sched-row { grid-template-columns:1fr; }
+                .lit-stepper { align-items:flex-start; flex-direction:column; gap:10px; }
+                .lit-step-connector { width:1px; height:14px; margin:0 0 0 13px; min-width:1px; flex:none; }
+                .lit-step-card-head, .lit-step-footer, .lit-hero { align-items:flex-start; flex-direction:column; }
+                .lit-step-footer, .lit-dialog-actions { align-items:stretch; }
+                .lit-step-footer .btn-lit-primary, .lit-step-footer .btn-lit-ghost, .lit-dialog-actions button { width:100%; justify-content:center; }
+                .lit-account-card { grid-template-columns:auto 1fr; }
+                .lit-account-card > div:last-child { grid-column:1 / -1; justify-content:space-between; }
+                .lit-convs { height:auto; min-height:720px; flex-direction:column; }
+                .lit-convs-left { width:100%; max-height:260px; border-right:none; border-bottom:1px solid var(--line); }
+                .lit-convs-mid { min-height:460px; border-right:none; }
+                .lit-thread-head { align-items:flex-start; flex-direction:column; gap:10px; }
+                .lit-thread-actions { flex-wrap:wrap; }
+                .lit-log-head, .lit-log-row { min-width:790px; }
+              }
+            </style>
+
+            <div class="lit-root">
+
+              <!-- Top bar -->
+              <div class="lit-topbar">
+                <div class="lit-hero">
+                  <div class="lit-hero-left">
+                    <h1>LinkedIn Outreach</h1>
+                    <p>Build personalized connection campaigns, manage conversations, and monitor account health from one workspace.</p>
                   </div>
-                  <!-- Week view -->
-                  <div class="sched-week-grid" id="schedWeekGrid">
-                    <!-- JS-generated week columns -->
+                  <div class="lit-hero-actions">
+                    <button class="btn-lit-ghost btn-lit-sm" onclick="litRefresh()">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                      Refresh
+                    </button>
+                    <button class="btn-lit-ghost btn-lit-sm" onclick="litSwitchTab('analytics')">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+                      Analytics
+                    </button>
+                    <button class="btn-lit-ghost btn-lit-sm" onclick="litSwitchTab('conversations')">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                      Conversations
+                    </button>
+                    <button class="btn-lit-ghost btn-lit-sm" onclick="litToggleSafety()">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                      Safety
+                    </button>
+                    <button class="btn-lit-primary" onclick="litSwitchTab('campaigns');litResetStepper()">
+                      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                      Create LinkedIn Touch
+                    </button>
                   </div>
                 </div>
-                
-                <div class="sched-feed">
-                  <div class="sched-feed-title">Upcoming Activities</div>
-                  
-                  <div class="sched-feed-group">
-                    <div class="sched-feed-group-label">Today</div>
-                    
-                    <div class="sched-feed-item">
-                      <div class="sched-feed-time">10:00 AM</div>
-                      <div class="sched-feed-icon" style="background: rgba(80,120,242,0.15); color: #96AAFA;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-                      <div class="sched-feed-info">
-                        <strong>Follow-up Email: SaaS Leads</strong>
-                        <span>John Doe (Acme Corp) • Retail CFO Pipeline</span>
-                      </div>
-                      <div class="sched-feed-actions">
-                        <button class="btn ghost icon-only" title="Edit Activity"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
-                        <button class="btn ghost icon-only" title="Pause Activity"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
-                      </div>
-                    </div>
-                    
-                    <div class="sched-feed-item">
-                      <div class="sched-feed-time">2:30 PM</div>
-                      <div class="sched-feed-icon" style="background: rgba(193,90,230,0.15); color: #E8B4F9;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-                      <div class="sched-feed-info">
-                        <strong>Connection Request</strong>
-                        <span>Jane Smith (TechFlow) • Healthcare Directors</span>
-                      </div>
-                      <div class="sched-feed-actions">
-                        <button class="btn ghost icon-only" title="Edit Activity"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
-                        <button class="btn ghost icon-only" title="Pause Activity"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
-                      </div>
-                    </div>
+
+                <!-- Tabs -->
+                <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;">
+                  <div class="lit-tabs" role="tablist" aria-label="LinkedIn Outreach workspace">
+                    <button class="lit-tab active" role="tab" aria-selected="true" aria-controls="litPanelCampaigns" onclick="litSwitchTab('campaigns')" id="litTabCampaigns">Campaign</button>
+                    <button class="lit-tab" role="tab" aria-selected="false" aria-controls="litPanelConversations" onclick="litSwitchTab('conversations')" id="litTabConversations">Chat</button>
+                    <button class="lit-tab" role="tab" aria-selected="false" aria-controls="litPanelAnalytics" onclick="litSwitchTab('analytics')" id="litTabAnalytics">Analytics</button>
                   </div>
-                  
-                  <div class="sched-feed-group">
-                    <div class="sched-feed-group-label">Tomorrow</div>
-                    
-                    <div class="sched-feed-item">
-                      <div class="sched-feed-time">9:00 AM</div>
-                      <div class="sched-feed-icon" style="background: rgba(14,181,187,0.15); color: #8BE4E8;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-                      <div class="sched-feed-info">
-                        <strong>Discovery Call</strong>
-                        <span>Mark Johnson (GlobalTrade)</span>
-                      </div>
-                      <div class="sched-feed-actions">
-                        <button class="btn ghost icon-only" title="Edit Activity"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
-                        <button class="btn ghost icon-only" title="Pause Activity"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
-                      </div>
-                    </div>
+                  <div class="lit-progress" aria-label="Campaign setup progress">
+                    <div class="lit-progress-track"><div class="lit-progress-fill" id="litProgressFill"></div></div>
+                    <span class="lit-progress-text" id="litProgressText">20% ready</span>
                   </div>
-                  
                 </div>
               </div>
-              
-            </div>
-            
-            <!-- FAB -->
-            <div class="sched-fab-wrapper">
-              <button class="sched-fab" id="schedFabBtn">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>New Activity</span>
-              </button>
-              <div class="sched-fab-menu" id="schedFabMenu">
-                <div class="sched-fab-item">
-                  <div class="sched-fab-item-icon email"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-                  <div class="sched-fab-item-label">Schedule Email<span>Queue personalized outreach</span></div>
+
+              <!-- Metrics row -->
+              <div class="lit-metrics" style="margin:14px 0;">
+                <div class="lit-metric" style="--lit-accent:rgba(80,120,242,.12)">
+                  <div class="lit-metric-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#5078F2" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></div>
+                  <div class="lit-metric-label">Sent This Month</div>
+                  <div class="lit-metric-val">4</div>
+                  <div class="lit-metric-sub">↑ 40% sent success</div>
                 </div>
-                <div class="sched-fab-item">
-                  <div class="sched-fab-item-icon linkedin"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-                  <div class="sched-fab-item-label">LinkedIn Touch<span>Send connection or follow-up</span></div>
+                <div class="lit-metric" style="--lit-accent:rgba(14,181,187,.12)">
+                  <div class="lit-metric-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#0EB5BB" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                  <div class="lit-metric-label">Total Invites</div>
+                  <div class="lit-metric-val">10</div>
+                  <div class="lit-metric-sub">All time</div>
                 </div>
-                <div class="sched-fab-item">
-                  <div class="sched-fab-item-icon meeting"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-                  <div class="sched-fab-item-label">Book Meeting<span>Schedule a discovery call</span></div>
+                <div class="lit-metric" style="--lit-accent:rgba(193,90,230,.12)">
+                  <div class="lit-metric-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C15AE6" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+                  <div class="lit-metric-label">LinkedIn Accounts</div>
+                  <div class="lit-metric-val">3</div>
+                  <div class="lit-metric-sub">2 active · 1 limited</div>
+                </div>
+                <div class="lit-metric" style="--lit-accent:rgba(16,185,129,.12)">
+                  <div class="lit-metric-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
+                  <div class="lit-metric-label">Acceptance Rate</div>
+                  <div class="lit-metric-val">30%</div>
+                  <div class="lit-metric-sub">2 accepted</div>
+                </div>
+                <div class="lit-metric" style="--lit-accent:rgba(245,158,11,.12)">
+                  <div class="lit-metric-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+                  <div class="lit-metric-label">Pending</div>
+                  <div class="lit-metric-val">0</div>
+                  <div class="lit-metric-sub">No queued actions</div>
+                </div>
+                <div class="lit-metric" style="--lit-accent:rgba(244,63,94,.12)">
+                  <div class="lit-metric-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#F43F5E" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
+                  <div class="lit-metric-label">Failed</div>
+                  <div class="lit-metric-val">6</div>
+                  <div class="lit-metric-sub">Rate limit errors</div>
+                </div>
+              </div>
+
+              <!-- Safety panel -->
+              <div class="lit-safety" style="margin-bottom:16px;">
+                <div class="lit-safety-head" onclick="litToggleSafety()" role="button" tabindex="0" aria-expanded="false" aria-controls="litSafetyBody" id="litSafetyHead">
+                  <div class="lit-safety-head-left">
+                    <div class="lit-safety-badge">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <div>
+                      <div class="lit-safety-title">LinkedIn Safety Center</div>
+                      <div class="lit-safety-summary">25 conn/day · 5s intervals · rotation enabled · auto-retry · logged</div>
+                    </div>
+                  </div>
+                  <div class="lit-safety-toggle" id="litSafetyToggle">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                  </div>
+                </div>
+                <div class="lit-safety-body" id="litSafetyBody">
+                  <div class="lit-safety-rule">
+                    <div class="lit-safety-dot"></div>
+                    <div class="lit-safety-rule-text">
+                      <strong>Daily Connection Limit</strong>
+                      <span>Each account sends up to 25 connection requests per day. Limits reset at midnight UTC.</span>
+                    </div>
+                  </div>
+                  <div class="lit-safety-rule">
+                    <div class="lit-safety-dot"></div>
+                    <div class="lit-safety-rule-text">
+                      <strong>Sending Pace (Throttling)</strong>
+                      <span>Connections spaced at least 5 seconds apart. Every 10 sends, the system pauses ~60s.</span>
+                    </div>
+                  </div>
+                  <div class="lit-safety-rule">
+                    <div class="lit-safety-dot"></div>
+                    <div class="lit-safety-rule-text">
+                      <strong>Multi-Account Rotation</strong>
+                      <span>Activities distributed in round-robin. If one fails, the next account is tried automatically.</span>
+                    </div>
+                  </div>
+                  <div class="lit-safety-rule">
+                    <div class="lit-safety-dot"></div>
+                    <div class="lit-safety-rule-text">
+                      <strong>Valid LinkedIn URLs Only</strong>
+                      <span>Only contacts with a valid linkedin.com/in/ profile URL are sent. Missing URLs are logged.</span>
+                    </div>
+                  </div>
+                  <div class="lit-safety-rule">
+                    <div class="lit-safety-dot"></div>
+                    <div class="lit-safety-rule-text">
+                      <strong>Rate Limit Retries</strong>
+                      <span>Temporary limits trigger automatic retries (up to 3) with increasing delays. Persistent limits skip.</span>
+                    </div>
+                  </div>
+                  <div class="lit-safety-rule">
+                    <div class="lit-safety-dot"></div>
+                    <div class="lit-safety-rule-text">
+                      <strong>Activity Logging</strong>
+                      <span>Every attempt — success, failure, skip — is recorded with message text and error reason.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ─── CAMPAIGNS panel ─── -->
+              <div class="lit-panel active" id="litPanelCampaigns">
+                <div class="lit-campaigns">
+
+                  <!-- Stepper -->
+                  <div class="lit-stepper" id="litStepper">
+                    <div class="lit-step active" onclick="litGoStep(1)" id="litStep1">
+                      <div class="lit-step-num" id="litStepNum1">1</div>
+                      <div class="lit-step-info"><strong>Account</strong><span>LinkedIn profile</span></div>
+                    </div>
+                    <div class="lit-step-connector" id="litConnector1"></div>
+                    <div class="lit-step" onclick="litGoStep(2)" id="litStep2">
+                      <div class="lit-step-num" id="litStepNum2">2</div>
+                      <div class="lit-step-info"><strong>Audience</strong><span>Prospect list</span></div>
+                    </div>
+                    <div class="lit-step-connector" id="litConnector2"></div>
+                    <div class="lit-step" onclick="litGoStep(3)" id="litStep3">
+                      <div class="lit-step-num" id="litStepNum3">3</div>
+                      <div class="lit-step-info"><strong>Approach</strong><span>Manual or AI</span></div>
+                    </div>
+                    <div class="lit-step-connector" id="litConnector3"></div>
+                    <div class="lit-step" onclick="litGoStep(4)" id="litStep4">
+                      <div class="lit-step-num" id="litStepNum4">4</div>
+                      <div class="lit-step-info"><strong>Message</strong><span>Write or generate</span></div>
+                    </div>
+                    <div class="lit-step-connector" id="litConnector4"></div>
+                    <div class="lit-step" onclick="litGoStep(5)" id="litStep5">
+                      <div class="lit-step-num" id="litStepNum5">5</div>
+                      <div class="lit-step-info"><strong>Schedule</strong><span>Safe sending</span></div>
+                    </div>
+                  </div>
+
+                  <!-- Step cards (only one visible at a time) -->
+
+                  <!-- STEP 1: Account -->
+                  <div class="lit-step-card" id="litStepCard1">
+                    <div class="lit-step-card-head">
+                      <div class="lit-step-card-head-left">
+                        <h3>Select LinkedIn Accounts</h3>
+                        <p>Choose one or more accounts — connections will be distributed through safe rotation.</p>
+                      </div>
+                      <span style="font-size:12px;color:var(--muted);background:var(--surface-2);border:1px solid var(--line);border-radius:999px;padding:4px 10px;">2 / 5 slots used</span>
+                    </div>
+                    <div class="lit-step-card-body">
+                      <div class="lit-account-grid" id="litAccountGrid">
+                        <!-- Account 1 -->
+                        <div class="lit-account-card selected" onclick="litToggleAccount(this)">
+                          <div class="lit-account-select-box">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                          </div>
+                          <img class="lit-account-avatar" style="object-fit:cover;" src="https://i.pravatar.cc/150?u=alexsmith" alt="A">
+                          <div style="flex:1;min-width:0;">
+                            <div class="lit-account-name">alex.smith@example.com</div>
+                            <div class="lit-account-meta">ID: p-A7g-rHM-S4G-Tk00dyN · 0/25 today</div>
+                          </div>
+                          <div style="display:flex;align-items:center;gap:10px;">
+                            <div class="lit-account-health">
+                              <div class="lit-health-dot good"></div>
+                              <span style="font-size:11px;color:#10B981;">Healthy</span>
+                            </div>
+                            <button class="btn-lit-ghost btn-lit-sm" style="color:#F43F5E;border-color:rgba(244,63,94,.3);" title="Disconnect">
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                            </button>
+                          </div>
+                        </div>
+                        <!-- Account 2 -->
+                        <div class="lit-account-card selected" onclick="litToggleAccount(this)">
+                          <div class="lit-account-select-box">
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+                          </div>
+                          <img class="lit-account-avatar" style="object-fit:cover;" src="https://i.pravatar.cc/150?u=sarahjones" alt="S">
+                          <div style="flex:1;min-width:0;">
+                            <div class="lit-account-name">sarah.jones@example.com</div>
+                            <div class="lit-account-meta">ID: p-rE0dlyQC-id713-7rCUk · 0/25 today</div>
+                          </div>
+                          <div style="display:flex;align-items:center;gap:10px;">
+                            <div class="lit-account-health">
+                              <div class="lit-health-dot warn"></div>
+                              <span style="font-size:11px;color:#F59E0B;">Limited</span>
+                            </div>
+                            <button class="btn-lit-ghost btn-lit-sm" style="color:#F43F5E;border-color:rgba(244,63,94,.3);" title="Disconnect">
+                              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6"/><path d="M14 11v6"/></svg>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <div style="margin-top:12px;text-align:center;font-size:12px;color:var(--muted);">2 / 5 accounts connected</div>
+                      <button class="btn-lit-ghost" type="button" onclick="litOpenConnectModal()" style="width:100%;margin-top:10px;justify-content:center;border-style:dashed;">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        Connect New LinkedIn Account
+                      </button>
+                    </div>
+                    <div class="lit-step-footer">
+                      <span class="lit-step-status">2 accounts selected · rotation enabled</span>
+                      <button class="btn-lit-primary" id="litAccountContinue" onclick="litNextStep(1)">Continue with Accounts <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+                    </div>
+                  </div>
+
+                  <!-- STEP 2: Audience -->
+                  <div class="lit-step-card" id="litStepCard2" style="display:none;">
+                    <div class="lit-step-card-head">
+                      <div class="lit-step-card-head-left">
+                        <h3>Select Prospect List</h3>
+                        <p>Choose a list with valid linkedin.com/in/ profile URLs to target.</p>
+                      </div>
+                    </div>
+                    <div class="lit-step-card-body">
+                      <div class="lit-list-grid">
+                        <div class="lit-list-card selected" onclick="litSelectList(this)">
+                          <div class="lit-list-head">
+                            <div class="lit-list-name">Retail Across Texas — CFO Pipeline</div>
+                            <span class="lit-list-quality good">95% Quality</span>
+                          </div>
+                          <div class="lit-list-stats">
+                            <div class="lit-list-stat"><strong>248</strong><span>Contacts</span></div>
+                            <div class="lit-list-stat" style="color:#10B981;"><strong>235</strong><span>Valid LI</span></div>
+                            <div class="lit-list-stat" style="color:#F59E0B;"><strong>13</strong><span>Invalid</span></div>
+                            <div class="lit-list-stat"><strong>95%</strong><span>Quality</span></div>
+                          </div>
+                          <div class="lit-list-updated">Updated 2 hours ago</div>
+                        </div>
+                        <div class="lit-list-card" onclick="litSelectList(this)">
+                          <div class="lit-list-head">
+                            <div class="lit-list-name">Healthcare Directors — Midwest</div>
+                            <span class="lit-list-quality warn">71% Quality</span>
+                          </div>
+                          <div class="lit-list-stats">
+                            <div class="lit-list-stat"><strong>2130</strong><span>Contacts</span></div>
+                            <div class="lit-list-stat" style="color:#10B981;"><strong>1520</strong><span>Valid LI</span></div>
+                            <div class="lit-list-stat" style="color:#F43F5E;"><strong>610</strong><span>Invalid</span></div>
+                            <div class="lit-list-stat"><strong>71%</strong><span>Quality</span></div>
+                          </div>
+                          <div class="lit-list-updated">Updated yesterday</div>
+                        </div>
+                        <div class="lit-list-card disabled" title="No valid LinkedIn URLs in this list">
+                          <div class="lit-list-head">
+                            <div class="lit-list-name">SaaS Founders — No URL Data</div>
+                            <span class="lit-list-quality" style="background:rgba(244,63,94,.1);color:#F43F5E;border:1px solid rgba(244,63,94,.25);">0% Valid LI</span>
+                          </div>
+                          <div class="lit-list-stats">
+                            <div class="lit-list-stat"><strong>89</strong><span>Contacts</span></div>
+                            <div class="lit-list-stat" style="color:#F43F5E;"><strong>0</strong><span>Valid LI</span></div>
+                            <div class="lit-list-stat"><strong>89</strong><span>Missing</span></div>
+                            <div class="lit-list-stat"><strong>0%</strong><span>Quality</span></div>
+                          </div>
+                          <div class="lit-list-updated" style="color:#F43F5E;">No linkedin.com/in/ URLs — list disabled</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="lit-step-footer">
+                      <button class="btn-lit-ghost" onclick="litPrevStep(2)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+                      <button class="btn-lit-primary" onclick="litNextStep(2)">Continue with List <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+                    </div>
+                  </div>
+
+                  <!-- STEP 3: Approach -->
+                  <div class="lit-step-card" id="litStepCard3" style="display:none;">
+                    <div class="lit-step-card-head">
+                      <div class="lit-step-card-head-left">
+                        <h3>Choose Your Approach</h3>
+                        <p>Select how connection messages will be written for your prospects.</p>
+                      </div>
+                    </div>
+                    <div class="lit-step-card-body">
+                      <div class="lit-approach-grid">
+                        <div class="lit-approach-card selected" onclick="litSelectApproach(this,'manual')" id="litApproachManual">
+                          <div class="lit-approach-icon" style="background:rgba(80,120,242,.12);color:var(--brand);">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                          </div>
+                          <h4>Manual Message</h4>
+                          <p>Write one polished connection request sent to all selected prospects. Best for approved templates and compliance-reviewed outreach.</p>
+                          <span class="lit-approach-badge manual">Supports {{variables}}</span>
+                        </div>
+                        <div class="lit-approach-card" onclick="litSelectApproach(this,'ai')" id="litApproachAI">
+                          <div class="lit-approach-icon" style="background:rgba(193,90,230,.12);color:#C15AE6;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                          </div>
+                          <h4>AI Personalization</h4>
+                          <p>Generate a unique message for each prospect using their job title, company, and profile data. Best for high-relevance outreach.</p>
+                          <span class="lit-approach-badge ai">✦ Unique per prospect</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="lit-step-footer">
+                      <button class="btn-lit-ghost" onclick="litPrevStep(3)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+                      <button class="btn-lit-primary" onclick="litNextStep(3)">Continue <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+                    </div>
+                  </div>
+
+                  <!-- STEP 4: Message -->
+                  <div class="lit-step-card" id="litStepCard4" style="display:none;">
+                    <div class="lit-step-card-head">
+                      <div class="lit-step-card-head-left">
+                        <h3>Build Your Message</h3>
+                        <p>Write the connection request and follow-up message your prospects will receive.</p>
+                      </div>
+                    </div>
+                    <div class="lit-step-card-body">
+                      <!-- Manual message editor -->
+                      <div id="litManualEditor">
+                        <div class="lit-msg-editor">
+                          <div class="lit-msg-fields">
+                            <div class="lit-msg-field">
+                              <div class="lit-msg-label">Connection Request <span id="litConnCount">0 / 300 chars</span></div>
+                              <textarea class="lit-msg-input" rows="4" id="litConnMsg" placeholder="Hi {{first_name}}, I noticed {{company}} is doing great work in..." oninput="litCountChars('litConnMsg','litConnCount',300)"></textarea>
+                            </div>
+                            <div class="lit-msg-field">
+                              <div class="lit-msg-label">Follow-up After Acceptance <span id="litFollowCount">0 / 500 chars</span></div>
+                              <textarea class="lit-msg-input" rows="4" id="litFollowMsg" placeholder="Thanks for connecting {{first_name}}! I wanted to reach out because..." oninput="litCountChars('litFollowMsg','litFollowCount',500)"></textarea>
+                            </div>
+                            <div class="lit-msg-field">
+                              <div class="lit-msg-label">Dynamic Variables — click to insert</div>
+                              <div class="lit-vars">
+                                <span class="lit-var-chip" onclick="litInsertVar('litConnMsg','{{first_name}}')">{{first_name}}</span>
+                                <span class="lit-var-chip" onclick="litInsertVar('litConnMsg','{{last_name}}')">{{last_name}}</span>
+                                <span class="lit-var-chip" onclick="litInsertVar('litConnMsg','{{company}}')">{{company}}</span>
+                                <span class="lit-var-chip" onclick="litInsertVar('litConnMsg','{{job_title}}')">{{job_title}}</span>
+                                <span class="lit-var-chip" onclick="litInsertVar('litConnMsg','{{full_name}}')">{{full_name}}</span>
+                              </div>
+                            </div>
+                            <div class="lit-msg-quality">
+                              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                              <span>Message looks good — personalized, within character limits, and professional.</span>
+                            </div>
+                          </div>
+                          <div class="lit-msg-preview">
+                            <div class="lit-preview-head">
+                              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                              Live Preview
+                            </div>
+                            <div class="lit-preview-body">
+                              <div class="lit-preview-prospect">
+                                <img class="lit-preview-avatar" style="object-fit:cover;" src="https://i.pravatar.cc/150?u=alexsmith" alt="A">
+                                <div>
+                                  <div class="lit-preview-name">Alex Smith</div>
+                                  <div class="lit-preview-title">CTO · Acme Corp</div>
+                                </div>
+                              </div>
+                              <div class="lit-preview-bubble" id="litPreviewBubble">Hi Alex, I noticed Acme Corp is doing great work in…</div>
+                              <div class="lit-preview-chars">300 chars max</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- AI editor (hidden by default) -->
+                      <div id="litAIEditor" style="display:none;">
+                        <div class="lit-ai-fields">
+                          <div class="lit-ai-field">
+                            <div class="lit-ai-label">Tone</div>
+                            <select class="lit-ai-select"><option>Professional</option><option>Friendly</option><option>Direct</option><option>Curious</option></select>
+                          </div>
+                          <div class="lit-ai-field">
+                            <div class="lit-ai-label">Style</div>
+                            <select class="lit-ai-select"><option>Concise</option><option>Conversational</option><option>Storytelling</option></select>
+                          </div>
+                          <div class="lit-ai-field">
+                            <div class="lit-ai-label">Focus Area</div>
+                            <select class="lit-ai-select"><option>Company news</option><option>Job title</option><option>Shared interest</option><option>Industry trend</option></select>
+                          </div>
+                          <div class="lit-ai-field">
+                            <div class="lit-ai-label">Goal / CTA</div>
+                            <select class="lit-ai-select"><option>Connect only</option><option>Book a call</option><option>Share resource</option><option>Ask question</option></select>
+                          </div>
+                        </div>
+                        <div class="lit-msg-field" style="margin-top:12px;">
+                          <div class="lit-msg-label">Optional Instruction</div>
+                          <textarea class="lit-msg-input" rows="2" placeholder="Mention their recent funding round, or their expansion into EU markets…"></textarea>
+                        </div>
+                        <div class="lit-ai-preview-box" id="litAIPreview">Click "Generate Preview" to see an AI-written message for your first prospect.</div>
+                        <div class="lit-ai-actions">
+                          <button class="btn-lit-primary" onclick="litGenerateAI()">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            Generate Preview
+                          </button>
+                          <button class="btn-lit-ghost" onclick="litGenerateAI()">
+                            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+                            Regenerate
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="lit-step-footer">
+                      <button class="btn-lit-ghost" onclick="litPrevStep(4)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+                      <button class="btn-lit-primary" onclick="litNextStep(4)">Continue to Schedule <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></button>
+                    </div>
+                  </div>
+
+                  <!-- STEP 5: Schedule -->
+                  <div class="lit-step-card" id="litStepCard5" style="display:none;">
+                    <div class="lit-step-card-head">
+                      <div class="lit-step-card-head-left">
+                        <h3>Schedule Safely</h3>
+                        <p>Configure sending windows to stay within LinkedIn's recommended activity limits.</p>
+                      </div>
+                    </div>
+                    <div class="lit-step-card-body">
+                      <div class="lit-schedule">
+                        <div class="lit-sched-group">
+                          <div class="lit-sched-row">
+                            <div class="lit-sched-field">
+                              <div class="lit-sched-label">Start Date</div>
+                              <input type="date" class="lit-sched-input" value="2026-06-14">
+                            </div>
+                            <div class="lit-sched-field">
+                              <div class="lit-sched-label">Time Zone</div>
+                              <select class="lit-sched-input"><option>UTC (GMT+0)</option><option>IST (GMT+5:30)</option><option>EST (GMT-5)</option><option>PST (GMT-8)</option></select>
+                            </div>
+                          </div>
+                          <div class="lit-sched-row">
+                            <div class="lit-sched-field">
+                              <div class="lit-sched-label">Sending Window</div>
+                              <select class="lit-sched-input"><option>Weekdays 9 AM – 5 PM</option><option>Weekdays 8 AM – 6 PM</option><option>All day</option><option>Custom</option></select>
+                            </div>
+                            <div class="lit-sched-field">
+                              <div class="lit-sched-label">Daily Connection Limit</div>
+                              <input type="number" class="lit-sched-input" value="20" min="1" max="25">
+                            </div>
+                          </div>
+                          <div class="lit-sched-row">
+                            <div class="lit-sched-field">
+                              <div class="lit-sched-label">Delay Between Actions</div>
+                              <select class="lit-sched-input"><option>5–10 seconds</option><option>10–20 seconds</option><option>30–60 seconds</option></select>
+                            </div>
+                            <div class="lit-sched-field">
+                              <div class="lit-sched-label">Retry Failed (max)</div>
+                              <input type="number" class="lit-sched-input" value="3" min="0" max="5">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="lit-sched-group">
+                          <div class="lit-sched-toggle-row">
+                            <div class="lit-sched-toggle-info">
+                              <strong>Account Rotation</strong>
+                              <span>Distribute across all selected accounts in round-robin</span>
+                            </div>
+                            <label class="lit-toggle"><input type="checkbox" checked><span class="lit-toggle-slider"></span></label>
+                          </div>
+                          <div class="lit-sched-toggle-row">
+                            <div class="lit-sched-toggle-info">
+                              <strong>Weekend Protection</strong>
+                              <span>Skip sending on Saturday and Sunday</span>
+                            </div>
+                            <label class="lit-toggle"><input type="checkbox" checked><span class="lit-toggle-slider"></span></label>
+                          </div>
+                          <div class="lit-sched-toggle-row">
+                            <div class="lit-sched-toggle-info">
+                              <strong>Auto-Retry on Rate Limit</strong>
+                              <span>Automatically retry failed sends with increasing delays</span>
+                            </div>
+                            <label class="lit-toggle"><input type="checkbox" checked><span class="lit-toggle-slider"></span></label>
+                          </div>
+                          <div class="lit-safety-summary-box">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+                            <p>Campaign is within recommended LinkedIn activity limits. Safe to launch.</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="lit-step-footer">
+                      <button class="btn-lit-ghost" onclick="litPrevStep(5)"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Back</button>
+                      <button class="btn-lit-primary" style="background:linear-gradient(135deg,#10B981,#0EB5BB);" onclick="litLaunch()">
+                        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+                        Launch Campaign
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- ─── CONVERSATIONS panel ─── -->
+              <div class="lit-panel" id="litPanelConversations">
+                <div class="lit-convs">
+
+                  <!-- Left: folders -->
+                  <div class="lit-convs-left">
+                    <div class="lit-convs-left-head">
+                      <select class="lit-acc-selector">
+                        <option>alex.smith@example.com</option>
+                        <option>sarah.jones@example.com</option>
+                        <option>All Accounts</option>
+                      </select>
+                      <div class="lit-folder active">
+                        <span>All Chats</span>
+                        <span class="lit-folder-badge">24</span>
+                      </div>
+                      <div class="lit-folder">
+                        <span>Unread</span>
+                        <span class="lit-folder-badge" style="background:#F43F5E;">5</span>
+                      </div>
+                      <div class="lit-folder">Accepted</div>
+                      <div class="lit-folder">Pending</div>
+                      <div class="lit-folder">Archived</div>
+                    </div>
+                    <div class="lit-divider"></div>
+                    <div class="lit-convs-search">
+                      <input class="lit-convs-search-input" placeholder="Search messages…" type="text">
+                    </div>
+                    <div class="lit-convs-list">
+                      <div class="lit-conv-item active" onclick="litSelectConv(this,'Alex Smith','CTO · Acme Corp')">
+                        <div class="lit-conv-avatar"><img src="https://i.pravatar.cc/150?u=alexsmith" style="width:100%;height:100%;border-radius:50%;object-fit:cover;" alt="A"><div class="lit-conv-online"></div></div>
+                        <div class="lit-conv-info">
+                          <div class="lit-conv-name">Alex Smith</div>
+                          <div class="lit-conv-preview">Hi! Our Contact Details</div>
+                        </div>
+                        <div class="lit-conv-right">
+                          <div class="lit-conv-time">May 27</div>
+                          <div class="lit-conv-unread">2</div>
+                        </div>
+                      </div>
+                      <div class="lit-conv-item" onclick="litSelectConv(this,'Michael T','Product Lead · TechFlow')">
+                        <img class="lit-conv-avatar" style="object-fit:cover;" src="https://i.pravatar.cc/150?u=michaelt" alt="M">
+                        <div class="lit-conv-info">
+                          <div class="lit-conv-name">Michael T</div>
+                          <div class="lit-conv-preview">You: Open conversation</div>
+                        </div>
+                        <div class="lit-conv-right"><div class="lit-conv-time">May 27</div></div>
+                      </div>
+                      <div class="lit-conv-item" onclick="litSelectConv(this,'Amazon Web Services','Enterprise Account')">
+                        <img class="lit-conv-avatar" style="object-fit:cover;" src="https://i.pravatar.cc/150?u=michaelt" alt="M">
+                        <div class="lit-conv-info">
+                          <div class="lit-conv-name">Amazon Web Services</div>
+                          <div class="lit-conv-preview">Amazon Web Services (AWS): Open…</div>
+                        </div>
+                        <div class="lit-conv-right"><div class="lit-conv-time">May 1</div></div>
+                      </div>
+                      <div class="lit-conv-item" onclick="litSelectConv(this,'Emily R','VP Sales · HealthOS')">
+                        <img class="lit-conv-avatar" style="object-fit:cover;" src="https://i.pravatar.cc/150?u=emilyr" alt="E">
+                        <div class="lit-conv-info">
+                          <div class="lit-conv-name">Emily R</div>
+                          <div class="lit-conv-preview">You: Open conversation</div>
+                        </div>
+                        <div class="lit-conv-right"><div class="lit-conv-time">Apr 13</div></div>
+                      </div>
+                      <div class="lit-conv-item" onclick="litSelectConv(this,'David W','Founder · StartupX')">
+                        <img class="lit-conv-avatar" style="object-fit:cover;" src="https://i.pravatar.cc/150?u=davidw" alt="D">
+                        <div class="lit-conv-info">
+                          <div class="lit-conv-name">David W</div>
+                          <div class="lit-conv-preview">You: Open conversation</div>
+                        </div>
+                        <div class="lit-conv-right"><div class="lit-conv-time">Mar 3</div></div>
+                      </div>
+                      <div class="lit-conv-item" onclick="litSelectConv(this,'Jessica L','Director · CloudCo')">
+                        <img class="lit-conv-avatar" style="object-fit:cover;" src="https://i.pravatar.cc/150?u=jessical" alt="J">
+                        <div class="lit-conv-info">
+                          <div class="lit-conv-name">Jessica L</div>
+                          <div class="lit-conv-preview">You: Open conversation</div>
+                        </div>
+                        <div class="lit-conv-right"><div class="lit-conv-time">Mar 12</div></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Middle: thread -->
+                  <div class="lit-convs-mid">
+                    <div class="lit-thread-head">
+                      <div class="lit-thread-prospect">
+                        <img class="lit-conv-avatar" style="object-fit:cover;" src="https://i.pravatar.cc/150?u=michaelt" alt="M">
+                        <div>
+                          <div class="lit-thread-prospect-name" id="litThreadName">Alex Smith</div>
+                          <div class="lit-thread-prospect-sub" id="litThreadSub">Connected via LinkedIn · Q3 Outbound</div>
+                        </div>
+                      </div>
+                      <div class="lit-thread-actions">
+                        <button class="btn-lit-ghost btn-lit-sm" title="Open LinkedIn Profile"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> Profile</button>
+                        <button class="btn-lit-ghost btn-lit-sm">Archive</button>
+                        <button class="btn-lit-ghost btn-lit-sm">Mark Unread</button>
+                      </div>
+                    </div>
+                    <div class="lit-thread-messages" id="litThreadMessages">
+                      <div style="text-align:center;font-size:11px;color:var(--muted);padding:8px 0;">May 27, 2026 · 5:21 PM</div>
+                      <div class="lit-msg-bubble sent">Hi! Our Contact Details<div class="lit-msg-bubble-time">5:21 PM · Delivered</div></div>
+                      <div class="lit-msg-bubble recv">Thanks for connecting! I'll be happy to get in touch. You can reach me at alex.s@acme.com<div class="lit-msg-bubble-time" style="color:var(--muted);">5:43 PM</div></div>
+                      <div class="lit-msg-bubble sent">Great to hear! Would love to explore how we could work together.<div class="lit-msg-bubble-time">5:50 PM · Delivered</div></div>
+                    </div>
+                    <div class="lit-ai-suggest">
+                      <div class="lit-ai-suggest-label">✦ AI Suggestions</div>
+                      <div class="lit-ai-chips">
+                        <span class="lit-ai-chip" onclick="litInsertSuggestion('Would you be open to a 15-min intro call this week?')">Book a call</span>
+                        <span class="lit-ai-chip" onclick="litInsertSuggestion('I\'d love to share a quick resource on this topic — want me to send it over?')">Share resource</span>
+                        <span class="lit-ai-chip" onclick="litInsertSuggestion('What\'s the biggest challenge your team is facing right now?')">Ask a question</span>
+                      </div>
+                    </div>
+                    <div class="lit-thread-composer">
+                      <textarea class="lit-composer-input" id="litComposerInput" placeholder="Write a message…" rows="3"></textarea>
+                      <div class="lit-composer-footer">
+                        <div class="lit-composer-tools">
+                          <div class="lit-composer-tool" title="Templates">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+                          </div>
+                          <div class="lit-composer-tool" title="AI Generate">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                          </div>
+                        </div>
+                        <button class="btn-lit-primary btn-lit-sm">Send <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg></button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Right: prospect details -->
+                  <div class="lit-convs-right">
+                    <div class="lit-prospect-card">
+                      <img class="lit-prospect-avatar-lg" style="object-fit:cover;" src="https://i.pravatar.cc/150?u=alexsmith" alt="A">
+                      <div class="lit-prospect-name" id="litProspectName">Alex Smith</div>
+                      <div class="lit-prospect-title" id="litProspectTitle">CTO · Acme Corp</div>
+                      <div class="lit-prospect-tags">
+                        <span class="lit-prospect-tag">Connected</span>
+                        <span class="lit-prospect-tag">Q3 Outbound</span>
+                        <span class="lit-prospect-tag">Healthcare</span>
+                      </div>
+                      <div class="lit-prospect-actions">
+                        <button class="btn-lit-ghost" style="width:100%;justify-content:center;font-size:12px;">View LinkedIn Profile</button>
+                        <button class="btn-lit-ghost" style="width:100%;justify-content:center;font-size:12px;color:#F43F5E;border-color:rgba(244,63,94,.3);">Archive Conversation</button>
+                      </div>
+                    </div>
+                    <div class="lit-prospect-section">
+                      <h4>Campaign Info</h4>
+                      <div class="lit-detail-row"><span>Campaign</span><strong>Q3 Outbound</strong></div>
+                      <div class="lit-detail-row"><span>Account</span><strong>shreeniketh…</strong></div>
+                      <div class="lit-detail-row"><span>Status</span><strong style="color:#10B981;">Accepted</strong></div>
+                      <div class="lit-detail-row"><span>Connected</span><strong>May 27, 2026</strong></div>
+                    </div>
+                    <div class="lit-prospect-section">
+                      <h4>Activity</h4>
+                      <div class="lit-detail-row"><span>Messages Sent</span><strong>3</strong></div>
+                      <div class="lit-detail-row"><span>Last Activity</span><strong>Today</strong></div>
+                      <div class="lit-detail-row"><span>Response Rate</span><strong>100%</strong></div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- ─── ANALYTICS panel ─── -->
+              <div class="lit-panel" id="litPanelAnalytics">
+                <div class="lit-analytics">
+
+                  <!-- Analytics metrics -->
+                  <div class="lit-analytics-metrics">
+                    <div class="lit-analytics-metric">
+                      <div class="lit-analytics-metric-label">Total Invites</div>
+                      <div class="lit-analytics-metric-val">10</div>
+                    </div>
+                    <div class="lit-analytics-metric">
+                      <div class="lit-analytics-metric-label">Sent</div>
+                      <div class="lit-analytics-metric-val">4</div>
+                      <div class="lit-analytics-metric-sub">40% success</div>
+                    </div>
+                    <div class="lit-analytics-metric">
+                      <div class="lit-analytics-metric-label">Accepted</div>
+                      <div class="lit-analytics-metric-val" style="color:#10B981;">2</div>
+                      <div class="lit-analytics-metric-sub">30% rate</div>
+                    </div>
+                    <div class="lit-analytics-metric">
+                      <div class="lit-analytics-metric-label">Pending</div>
+                      <div class="lit-analytics-metric-val" style="color:#F59E0B;">0</div>
+                    </div>
+                    <div class="lit-analytics-metric">
+                      <div class="lit-analytics-metric-label">Failed</div>
+                      <div class="lit-analytics-metric-val" style="color:#F43F5E;">6</div>
+                    </div>
+                    <div class="lit-analytics-metric">
+                      <div class="lit-analytics-metric-label">Active Accts</div>
+                      <div class="lit-analytics-metric-val">3</div>
+                    </div>
+                    <div class="lit-analytics-metric">
+                      <div class="lit-analytics-metric-label">Acceptance</div>
+                      <div class="lit-analytics-metric-val" style="color:#10B981;">30%</div>
+                    </div>
+                    <div class="lit-analytics-metric">
+                      <div class="lit-analytics-metric-label">TX Success</div>
+                      <div class="lit-analytics-metric-val">40%</div>
+                    </div>
+                  </div>
+
+                  <!-- Charts row -->
+                  <div class="lit-analytics-row">
+                    <!-- Activity trend -->
+                    <div class="lit-chart-card">
+                      <div class="lit-chart-title">Daily Activity Trend</div>
+                      <div class="lit-chart-sub">Outreach volume history (last 14 days)</div>
+                      <div class="lit-chart-legend">
+                        <div class="lit-legend-item"><span class="lit-legend-dot" style="background:#5078F2;"></span>Sent</div>
+                        <div class="lit-legend-item"><span class="lit-legend-dot" style="background:#F43F5E;"></span>Failed</div>
+                        <div class="lit-legend-item"><span class="lit-legend-dot" style="background:#F59E0B;"></span>Skipped</div>
+                        <div class="lit-legend-item"><span class="lit-legend-dot" style="background:#10B981;"></span>Accepted</div>
+                      </div>
+                      <div class="lit-bar-chart">
+                        <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+                          <div class="lit-bar-group">
+                            <div class="lit-bar" style="height:40px;background:#5078F2;"></div>
+                            <div class="lit-bar" style="height:60px;background:#F43F5E;"></div>
+                            <div class="lit-bar" style="height:10px;background:#F59E0B;"></div>
+                          </div>
+                          <div class="lit-bar-label">May 27</div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+                          <div class="lit-bar-group">
+                            <div class="lit-bar" style="height:25px;background:#5078F2;"></div>
+                            <div class="lit-bar" style="height:18px;background:#F43F5E;"></div>
+                          </div>
+                          <div class="lit-bar-label">May 29</div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+                          <div class="lit-bar-group">
+                            <div class="lit-bar" style="height:80px;background:#5078F2;"></div>
+                            <div class="lit-bar" style="height:90px;background:#F43F5E;"></div>
+                            <div class="lit-bar" style="height:20px;background:#F59E0B;"></div>
+                            <div class="lit-bar" style="height:30px;background:#10B981;"></div>
+                          </div>
+                          <div class="lit-bar-label">May 31</div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+                          <div class="lit-bar-group">
+                            <div class="lit-bar" style="height:15px;background:#5078F2;"></div>
+                            <div class="lit-bar" style="height:8px;background:#F43F5E;"></div>
+                          </div>
+                          <div class="lit-bar-label">Jun 2</div>
+                        </div>
+                        <div style="display:flex;flex-direction:column;align-items:center;flex:1;">
+                          <div class="lit-bar-group">
+                            <div class="lit-bar" style="height:20px;background:#5078F2;"></div>
+                            <div class="lit-bar" style="height:5px;background:#10B981;"></div>
+                          </div>
+                          <div class="lit-bar-label">Jun 5</div>
+                        </div>
+                      </div>
+                    </div>
+                    <!-- Status donut -->
+                    <div class="lit-chart-card">
+                      <div class="lit-chart-title">Status Distribution</div>
+                      <div class="lit-chart-sub">Outreach state breakdown</div>
+                      <div class="lit-donut-wrap" style="margin-top:16px;">
+                        <div class="lit-donut">
+                          <div class="lit-donut-center">
+                            <strong>10</strong>
+                            <span>invites</span>
+                          </div>
+                        </div>
+                        <div class="lit-donut-legend">
+                          <div class="lit-donut-legend-item">
+                            <div class="lit-donut-legend-label"><span style="width:10px;height:10px;border-radius:50%;background:#10B981;display:inline-block;"></span>Completed</div>
+                            <div class="lit-donut-legend-val">2 · 20%</div>
+                          </div>
+                          <div class="lit-donut-legend-item">
+                            <div class="lit-donut-legend-label"><span style="width:10px;height:10px;border-radius:50%;background:#F43F5E;display:inline-block;"></span>Failed</div>
+                            <div class="lit-donut-legend-val">6 · 60%</div>
+                          </div>
+                          <div class="lit-donut-legend-item">
+                            <div class="lit-donut-legend-label"><span style="width:10px;height:10px;border-radius:50%;background:#5078F2;display:inline-block;"></span>Processing</div>
+                            <div class="lit-donut-legend-val">2 · 20%</div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Sender account performance -->
+                  <div>
+                    <div class="lit-section-title" style="margin-bottom:12px;">Sender Account Performance</div>
+                    <div class="lit-sender-rows">
+                      <div class="lit-sender-row">
+                        <div class="lit-sender-head">
+                          <div>
+                            <div class="lit-sender-name">VERs2jl_Pz7K6Q</div>
+                            <div style="font-size:11px;color:var(--muted);">alex.smith@example.com</div>
+                          </div>
+                          <div class="lit-sender-rate">60% success · 5 invites</div>
+                        </div>
+                        <div class="lit-sender-stats">
+                          <div class="lit-sender-stat"><strong>5</strong><span>Attempted</span></div>
+                          <div class="lit-sender-stat"><strong style="color:#5078F2;">3</strong><span>Sent</span></div>
+                          <div class="lit-sender-stat"><strong style="color:#10B981;">1</strong><span>Accepted</span></div>
+                          <div class="lit-sender-stat"><strong style="color:#F43F5E;">2</strong><span>Failed</span></div>
+                        </div>
+                        <div class="lit-sender-bar"><div class="lit-sender-bar-fill" style="width:60%;"></div></div>
+                      </div>
+                      <div class="lit-sender-row">
+                        <div class="lit-sender-head">
+                          <div>
+                            <div class="lit-sender-name">3YAMIFKZ...0031uA</div>
+                            <div style="font-size:11px;color:var(--muted);">sarah.jones@example.com</div>
+                          </div>
+                          <div class="lit-sender-rate">33% success · 3 invites</div>
+                        </div>
+                        <div class="lit-sender-stats">
+                          <div class="lit-sender-stat"><strong>3</strong><span>Attempted</span></div>
+                          <div class="lit-sender-stat"><strong style="color:#5078F2;">1</strong><span>Sent</span></div>
+                          <div class="lit-sender-stat"><strong style="color:#10B981;">1</strong><span>Accepted</span></div>
+                          <div class="lit-sender-stat"><strong style="color:#F43F5E;">2</strong><span>Failed</span></div>
+                        </div>
+                        <div class="lit-sender-bar"><div class="lit-sender-bar-fill" style="width:33%;background:linear-gradient(90deg,#F59E0B,#F43F5E);"></div></div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Detailed activity logs -->
+                  <div>
+                    <div class="lit-log-controls">
+                      <div class="lit-section-title">Activity Logs</div>
+                      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                        <input type="text" class="lit-sched-input" style="width:200px;" placeholder="Search logs…">
+                        <select class="lit-sched-input" style="width:130px;"><option>All Statuses</option><option>Sent</option><option>Failed</option><option>Accepted</option></select>
+                        <button class="btn-lit-ghost btn-lit-sm"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg> Export</button>
+                      </div>
+                    </div>
+                    <div class="lit-log-table" style="overflow-x:auto;">
+                      <div class="lit-log-head">
+                        <div class="lit-log-head-cell">Date / Time</div>
+                        <div class="lit-log-head-cell">LinkedIn Account</div>
+                        <div class="lit-log-head-cell">Prospect</div>
+                        <div class="lit-log-head-cell">Campaign</div>
+                        <div class="lit-log-head-cell">Action</div>
+                        <div class="lit-log-head-cell">Status</div>
+                        <div class="lit-log-head-cell">Retry</div>
+                      </div>
+                      <div class="lit-log-row">
+                        <div class="lit-log-cell" style="font-size:11px;color:var(--muted);">May 31 · 10:22 AM</div>
+                        <div class="lit-log-cell" style="font-size:11px;">shreeniketh…</div>
+                        <div class="lit-log-cell">Alex Smith</div>
+                        <div class="lit-log-cell" style="font-size:11px;color:var(--muted);">Q3 Outbound</div>
+                        <div class="lit-log-cell" style="font-size:11px;">Connect</div>
+                        <div class="lit-log-cell"><span class="lit-status-pill accepted">Accepted</span></div>
+                        <div class="lit-log-cell" style="font-size:11px;color:var(--muted);">0</div>
+                      </div>
+                      <div class="lit-log-row">
+                        <div class="lit-log-cell" style="font-size:11px;color:var(--muted);">May 31 · 10:20 AM</div>
+                        <div class="lit-log-cell" style="font-size:11px;">shreeniketh…</div>
+                        <div class="lit-log-cell">Emily R</div>
+                        <div class="lit-log-cell" style="font-size:11px;color:var(--muted);">Q3 Outbound</div>
+                        <div class="lit-log-cell" style="font-size:11px;">Connect</div>
+                        <div class="lit-log-cell"><span class="lit-status-pill failed">Failed</span></div>
+                        <div class="lit-log-cell" style="font-size:11px;color:#F43F5E;">3 / 3</div>
+                      </div>
+                      <div class="lit-log-row">
+                        <div class="lit-log-cell" style="font-size:11px;color:var(--muted);">May 29 · 2:14 PM</div>
+                        <div class="lit-log-cell" style="font-size:11px;">zarachandler…</div>
+                        <div class="lit-log-cell">Michael T</div>
+                        <div class="lit-log-cell" style="font-size:11px;color:var(--muted);">Q3 Outbound</div>
+                        <div class="lit-log-cell" style="font-size:11px;">Connect</div>
+                        <div class="lit-log-cell"><span class="lit-status-pill sent">Sent</span></div>
+                        <div class="lit-log-cell" style="font-size:11px;color:var(--muted);">0</div>
+                      </div>
+                      <div class="lit-log-row">
+                        <div class="lit-log-cell" style="font-size:11px;color:var(--muted);">May 27 · 5:21 PM</div>
+                        <div class="lit-log-cell" style="font-size:11px;">shreeniketh…</div>
+                        <div class="lit-log-cell">Alex Smith</div>
+                        <div class="lit-log-cell" style="font-size:11px;color:var(--muted);">Q3 Outbound</div>
+                        <div class="lit-log-cell" style="font-size:11px;">Follow-up</div>
+                        <div class="lit-log-cell"><span class="lit-status-pill sent">Sent</span></div>
+                        <div class="lit-log-cell" style="font-size:11px;color:var(--muted);">0</div>
+                      </div>
+                      <div class="lit-log-row">
+                        <div class="lit-log-cell" style="font-size:11px;color:var(--muted);">May 27 · 3:04 PM</div>
+                        <div class="lit-log-cell" style="font-size:11px;">zarachandler…</div>
+                        <div class="lit-log-cell">David W</div>
+                        <div class="lit-log-cell" style="font-size:11px;color:var(--muted);">Healthcare Dirs</div>
+                        <div class="lit-log-cell" style="font-size:11px;">Connect</div>
+                        <div class="lit-log-cell"><span class="lit-status-pill failed">Failed</span></div>
+                        <div class="lit-log-cell" style="font-size:11px;color:#F43F5E;">3 / 3</div>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div><!-- end .lit-root -->
+
+            <div class="lit-modal" id="litConnectModal" role="dialog" aria-modal="true" aria-labelledby="litConnectTitle" hidden>
+              <div class="lit-dialog">
+                <div class="lit-dialog-head">
+                  <div class="lit-dialog-icon">
+                    <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                  </div>
+                  <div>
+                    <h2 class="lit-dialog-title" id="litConnectTitle">Connect LinkedIn Account</h2>
+                    <p class="lit-dialog-sub">Securely connect an account to send personalized connection requests and manage conversations from 360Airo.</p>
+                  </div>
+                </div>
+                <form class="lit-dialog-body" id="litConnectForm" novalidate>
+                  <div class="lit-dialog-step"><span>1</span> Account verification</div>
+                  <div class="lit-field">
+                    <label for="litLinkedinEmail">LinkedIn email</label>
+                    <input id="litLinkedinEmail" name="email" type="email" autocomplete="username" placeholder="your.email@example.com" required>
+                  </div>
+                  <div class="lit-field">
+                    <label for="litLinkedinPassword">LinkedIn password</label>
+                    <div class="lit-password-row">
+                      <input id="litLinkedinPassword" name="password" type="password" autocomplete="current-password" placeholder="Enter LinkedIn password" required>
+                      <button class="lit-password-toggle" type="button" onclick="litTogglePassword()" aria-label="Show password">
+                        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="lit-secure-note">
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>Your credentials are encrypted and are never displayed after connection. Use connection help if LinkedIn asks for OTP, CAPTCHA, or device verification.</span>
+                  </div>
+                  <div class="lit-connect-state" id="litConnectState" aria-live="polite">Ready to verify securely.</div>
+                  <div class="lit-form-error" id="litConnectError">Enter a valid LinkedIn email and password to continue.</div>
+                </form>
+                <div class="lit-dialog-actions">
+                  <button class="btn-lit-ghost" type="button" onclick="litCloseConnectModal()">Cancel</button>
+                  <button class="btn-lit-primary" type="submit" form="litConnectForm" id="litConnectSubmit">Continue</button>
                 </div>
               </div>
             </div>
-            
+
+            <div class="lit-toast" id="litToast" role="status" aria-live="polite" hidden></div>
+
+            <!-- Inline JS -->
+            <script>
+              /* ── Tab switching ── */
+              function litSwitchTab(tab) {
+                ['campaigns','conversations','analytics'].forEach(t => {
+                  document.getElementById('litPanel'+t.charAt(0).toUpperCase()+t.slice(1)).classList.toggle('active', t===tab);
+                  document.getElementById('litTab'+t.charAt(0).toUpperCase()+t.slice(1)).classList.toggle('active', t===tab);
+                });
+              }
+
+              /* ── Safety panel ── */
+              function litToggleSafety(head) {
+                const body = document.getElementById('litSafetyBody');
+                const toggle = document.getElementById('litSafetyToggle');
+                body.classList.toggle('open');
+                toggle.classList.toggle('open');
+              }
+
+              /* ── Stepper ── */
+              let litCurrentStep = 1;
+              let litApproach = 'manual';
+
+              function litGoStep(n) {
+                for(let i=1;i<=5;i++){
+                  const step = document.getElementById('litStep'+i);
+                  const card = document.getElementById('litStepCard'+i);
+                  const conn = document.getElementById('litConnector'+i);
+                  step.className = 'lit-step' + (i===n?' active':i<n?' done':'');
+                  document.getElementById('litStepNum'+i).textContent = i<n ? '✓' : i;
+                  card.style.display = i===n ? 'block' : 'none';
+                  if(conn) conn.className = 'lit-step-connector' + (i<n?' done':'');
+                }
+                litCurrentStep = n;
+              }
+
+              function litNextStep(from) { if(from<5) litGoStep(from+1); }
+              function litPrevStep(from) { if(from>1) litGoStep(from-1); }
+              function litResetStepper() { litGoStep(1); }
+
+              /* ── Account toggle ── */
+              function litToggleAccount(card) {
+                card.classList.toggle('selected');
+              }
+
+              /* ── List select ── */
+              function litSelectList(card) {
+                if(card.classList.contains('disabled')) return;
+                document.querySelectorAll('.lit-list-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+              }
+
+              /* ── Approach select ── */
+              function litSelectApproach(card, approach) {
+                document.querySelectorAll('.lit-approach-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                litApproach = approach;
+                document.getElementById('litManualEditor').style.display = approach==='manual' ? '' : 'none';
+                document.getElementById('litAIEditor').style.display = approach==='ai' ? '' : 'none';
+              }
+
+              /* ── Character counter ── */
+              function litCountChars(inputId, counterId, max) {
+                const len = document.getElementById(inputId).value.length;
+                const el = document.getElementById(counterId);
+                el.textContent = len + ' / ' + max + ' chars';
+                el.style.color = len > max ? '#F43F5E' : 'var(--muted)';
+              }
+
+              /* ── Insert variable ── */
+              function litInsertVar(inputId, varText) {
+                const el = document.getElementById(inputId);
+                const start = el.selectionStart, end = el.selectionEnd;
+                el.value = el.value.slice(0,start) + varText + el.value.slice(end);
+                el.setSelectionRange(start + varText.length, start + varText.length);
+                el.focus();
+              }
+
+              /* ── AI preview generate (simulated) ── */
+              function litGenerateAI() {
+                const box = document.getElementById('litAIPreview');
+                box.textContent = 'Generating…';
+                setTimeout(() => {
+                  box.textContent = 'Hi Alex! I came across your profile while researching innovative CTOs in the healthcare space. The work Acme Corp is doing around AI-driven diagnostics is impressive. Would love to connect and exchange perspectives — no pitch, just a genuine conversation.';
+                }, 900);
+              }
+
+              /* ── Conversation select ── */
+              function litSelectConv(el, name, title) {
+                document.querySelectorAll('.lit-conv-item').forEach(i => i.classList.remove('active'));
+                el.classList.add('active');
+                document.getElementById('litThreadName').textContent = name;
+                document.getElementById('litThreadSub').textContent = 'Connected via LinkedIn · Q3 Outbound';
+                document.getElementById('litProspectName').textContent = name;
+                document.getElementById('litProspectTitle').textContent = title;
+                document.getElementById('litProspectAvatar').src = `https://i.pravatar.cc/150?u=${name.replace(/\s/g,'')}`;
+              }
+
+              /* ── AI chip insert ── */
+              function litInsertSuggestion(text) {
+                document.getElementById('litComposerInput').value = text;
+              }
+
+              /* ── Launch (stub) ── */
+              function litLaunch() {
+                alert('Campaign launched successfully! 235 prospects queued across 2 accounts.');
+              }
+
+              /* ── Refresh (stub) ── */
+              function litRefresh() {
+                const btn = event.target.closest('button');
+                btn.textContent = 'Refreshing…';
+                setTimeout(() => { btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> Refresh'; }, 1200);
+              }
+            </script>
+
+            <script>
+              let litLastFocus = null;
+              function litSwitchTab(tab) {
+                ['campaigns','conversations','analytics'].forEach(t => {
+                  const panel = document.getElementById('litPanel' + t.charAt(0).toUpperCase() + t.slice(1));
+                  const tabBtn = document.getElementById('litTab' + t.charAt(0).toUpperCase() + t.slice(1));
+                  const active = t === tab;
+                  panel.classList.toggle('active', active);
+                  panel.setAttribute('aria-hidden', String(!active));
+                  tabBtn.classList.toggle('active', active);
+                  tabBtn.setAttribute('aria-selected', String(active));
+                });
+              }
+              function litToggleSafety() {
+                const body = document.getElementById('litSafetyBody');
+                const toggle = document.getElementById('litSafetyToggle');
+                const head = document.getElementById('litSafetyHead');
+                body.classList.toggle('open');
+                toggle.classList.toggle('open');
+                if(head) head.setAttribute('aria-expanded', String(body.classList.contains('open')));
+              }
+              function litGoStep(n) {
+                for(let i=1;i<=5;i++){
+                  const step = document.getElementById('litStep' + i);
+                  const card = document.getElementById('litStepCard' + i);
+                  const conn = document.getElementById('litConnector' + i);
+                  step.className = 'lit-step' + (i === n ? ' active' : i < n ? ' done' : '');
+                  document.getElementById('litStepNum' + i).textContent = i < n ? 'OK' : i;
+                  card.style.display = i === n ? 'block' : 'none';
+                  if(conn) conn.className = 'lit-step-connector' + (i < n ? ' done' : '');
+                }
+                litCurrentStep = n;
+                litUpdateProgress();
+              }
+              function litNextStep(from) {
+                if(!litValidateStep(from)) return;
+                if(from < 5) litGoStep(from + 1);
+              }
+              function litValidateStep(step) {
+                if(step === 1 && document.querySelectorAll('.lit-account-card.selected').length === 0) {
+                  document.getElementById('litStep1').classList.add('error');
+                  litUpdateAccountState();
+                  litToast('Select at least one LinkedIn account before continuing.');
+                  return false;
+                }
+                if(step === 4 && litApproach === 'manual') {
+                  const msg = document.getElementById('litConnMsg');
+                  if(!msg.value.trim()) {
+                    msg.focus();
+                    litToast('Add a connection request message before scheduling.');
+                    return false;
+                  }
+                  if(msg.value.length > 300) {
+                    msg.focus();
+                    litToast('Connection request must stay within 300 characters.');
+                    return false;
+                  }
+                }
+                return true;
+              }
+              function litUpdateProgress() {
+                const pct = Math.min(100, litCurrentStep * 20);
+                const fill = document.getElementById('litProgressFill');
+                const text = document.getElementById('litProgressText');
+                if(fill) fill.style.width = pct + '%';
+                if(text) text.textContent = pct + '% ready';
+              }
+              function litToggleAccount(card) {
+                card.classList.toggle('selected');
+                litUpdateAccountState();
+              }
+              function litUpdateAccountState() {
+                const selected = document.querySelectorAll('.lit-account-card.selected').length;
+                const status = document.querySelector('#litStepCard1 .lit-step-status');
+                const btn = document.getElementById('litAccountContinue');
+                if(status) status.textContent = selected ? selected + ' account' + (selected > 1 ? 's' : '') + ' selected - rotation enabled' : 'Select at least one account to continue';
+                if(btn) btn.disabled = selected === 0;
+                document.getElementById('litStep1').classList.toggle('error', selected === 0);
+              }
+              function litSelectList(card) {
+                if(card.classList.contains('disabled')) {
+                  litToast('This list has no valid LinkedIn profile URLs.');
+                  return;
+                }
+                document.querySelectorAll('.lit-list-card').forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                litToast('Prospect list selected. LinkedIn-ready contacts are available.');
+              }
+              function litCountChars(inputId, counterId, max) {
+                const len = document.getElementById(inputId).value.length;
+                const el = document.getElementById(counterId);
+                el.textContent = len + ' / ' + max + ' chars';
+                el.style.color = len > max ? '#F43F5E' : 'var(--muted)';
+                litUpdatePreview();
+              }
+              function litInsertVar(inputId, varText) {
+                const el = document.getElementById(inputId);
+                const start = el.selectionStart, end = el.selectionEnd;
+                el.value = el.value.slice(0,start) + varText + el.value.slice(end);
+                el.setSelectionRange(start + varText.length, start + varText.length);
+                el.focus();
+                litCountChars(inputId, inputId === 'litConnMsg' ? 'litConnCount' : 'litFollowCount', inputId === 'litConnMsg' ? 300 : 500);
+              }
+              function litGenerateAI() {
+                const box = document.getElementById('litAIPreview');
+                box.textContent = 'Generating...';
+                setTimeout(() => {
+                  box.textContent = 'Hi Alex, I came across your work at Acme Corp while researching healthcare technology leaders. Your focus on practical AI adoption stood out. I would value connecting and exchanging perspectives.';
+                  litToast('AI preview generated. Review it before scheduling.');
+                }, 900);
+              }
+              function litSelectConv(el, name, title) {
+                document.querySelectorAll('.lit-conv-item').forEach(i => i.classList.remove('active'));
+                el.classList.add('active');
+                document.getElementById('litThreadName').textContent = name;
+                document.getElementById('litThreadSub').textContent = 'Connected via LinkedIn - Q3 Outbound';
+                document.getElementById('litProspectName').textContent = name;
+                document.getElementById('litProspectTitle').textContent = title;
+                const avatar = document.getElementById('litProspectAvatar');
+                if(avatar) avatar.src = `https://i.pravatar.cc/150?u=${name.replace(/\s/g,'')}`;
+              }
+              function litLaunch() {
+                litToast('Campaign launched. 235 prospects queued across selected accounts.');
+                litSwitchTab('analytics');
+              }
+              function litRefresh() {
+                const btn = event.target.closest('button');
+                btn.disabled = true;
+                btn.textContent = 'Refreshing...';
+                setTimeout(() => {
+                  btn.innerHTML = '<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg> Refresh';
+                  btn.disabled = false;
+                  litToast('LinkedIn outreach data refreshed.');
+                }, 1200);
+              }
+              function litOpenConnectModal() {
+                const modal = document.getElementById('litConnectModal');
+                litLastFocus = document.activeElement;
+                modal.hidden = false;
+                document.getElementById('litLinkedinEmail').focus();
+              }
+              function litCloseConnectModal() {
+                document.getElementById('litConnectModal').hidden = true;
+                document.getElementById('litConnectForm').reset();
+                document.getElementById('litConnectError').classList.remove('show');
+                document.getElementById('litConnectState').className = 'lit-connect-state';
+                document.getElementById('litConnectState').textContent = 'Ready to verify securely.';
+                document.getElementById('litConnectSubmit').disabled = false;
+                document.getElementById('litConnectSubmit').textContent = 'Continue';
+                if(litLastFocus) litLastFocus.focus();
+              }
+              function litTogglePassword() {
+                const input = document.getElementById('litLinkedinPassword');
+                input.type = input.type === 'password' ? 'text' : 'password';
+              }
+              function litSubmitConnection(event) {
+                event.preventDefault();
+                const email = document.getElementById('litLinkedinEmail');
+                const password = document.getElementById('litLinkedinPassword');
+                const state = document.getElementById('litConnectState');
+                const error = document.getElementById('litConnectError');
+                const submit = document.getElementById('litConnectSubmit');
+                if(!email.validity.valid || !password.value.trim()) {
+                  error.classList.add('show');
+                  state.className = 'lit-connect-state error';
+                  state.textContent = 'Validation needed before secure verification.';
+                  return;
+                }
+                error.classList.remove('show');
+                submit.disabled = true;
+                submit.textContent = 'Connecting...';
+                state.className = 'lit-connect-state';
+                state.textContent = 'Encrypting credentials and starting LinkedIn verification...';
+                setTimeout(() => { state.textContent = 'Checking account status and device verification requirements...'; }, 700);
+                setTimeout(() => {
+                  state.className = 'lit-connect-state success';
+                  state.textContent = 'Connected successfully. Account is ready for safe rotation.';
+                  litToast('LinkedIn account connected successfully.');
+                  setTimeout(litCloseConnectModal, 900);
+                }, 1500);
+              }
+              function litUpdatePreview() {
+                const msg = document.getElementById('litConnMsg');
+                const preview = document.getElementById('litPreviewBubble');
+                if(!msg || !preview) return;
+                const value = msg.value.trim() || 'Hi Alex, I noticed Acme Corp is doing great work in healthcare technology.';
+                preview.textContent = value
+                  .replaceAll('{{first_name}}','Alex')
+                  .replaceAll('{{last_name}}','Smith')
+                  .replaceAll('{{full_name}}','Alex Smith')
+                  .replaceAll('{{company}}','Acme Corp')
+                  .replaceAll('{{company_name}}','Acme Corp')
+                  .replaceAll('{{job_title}}','CTO')
+                  .replaceAll('{{industry}}','Healthcare');
+              }
+              function litToast(message) {
+                const toast = document.getElementById('litToast');
+                toast.textContent = message;
+                toast.hidden = false;
+                clearTimeout(window.litToastTimer);
+                window.litToastTimer = setTimeout(() => { toast.hidden = true; }, 3200);
+              }
+              document.getElementById('litConnectForm').addEventListener('submit', litSubmitConnection);
+              document.getElementById('litConnectModal').addEventListener('click', (event) => {
+                if(event.target.id === 'litConnectModal') litCloseConnectModal();
+              });
+              document.addEventListener('keydown', (event) => {
+                if(event.key === 'Escape' && !document.getElementById('litConnectModal').hidden) litCloseConnectModal();
+                if((event.key === 'Enter' || event.key === ' ') && event.target.id === 'litSafetyHead') {
+                  event.preventDefault();
+                  litToggleSafety();
+                }
+              });
+              document.getElementById('litConnMsg').addEventListener('input', litUpdatePreview);
+              document.querySelectorAll('.lit-account-card button').forEach(btn => btn.addEventListener('click', event => {
+                event.stopPropagation();
+                litToast('Disconnect action is ready for the existing account API.');
+              }));
+              const safetySummary = document.querySelector('.lit-safety-summary');
+              if(safetySummary) safetySummary.textContent = 'Outreach Health: 86/100 - safe to continue. Daily limits, pace, rotation, retries, and logging are active.';
+              litUpdateProgress();
+              litUpdateAccountState();
+            </script>
+
           </section>
         </div>
       </main>
@@ -6513,7 +7675,7 @@
         fab.style.display = target === 'scheduled-event' ? 'flex' : 'none';
       }
     };
-    showView(location.hash.replace("#", "") || "scheduled-event");
+    showView(location.hash.replace("#", "") || "linkedin-touches");
     resetPageScroll();
     initSequenceLibrary();
 
@@ -7783,9 +8945,8 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
   <script>
     (() => {
-      const currentView = "scheduled-event";
-      const currentSection = "campaigns";
-      const nextPage = "Email Lists.html";
+      const currentView = "linkedin-touches";
+      const currentSection = "account";
       const lockCurrentPage = () => {
         document.querySelectorAll("[data-view]").forEach((section) => {
           section.hidden = section.dataset.view !== currentView;
@@ -7811,311 +8972,36 @@ document.addEventListener('DOMContentLoaded', () => {
       document.addEventListener("click", (event) => {
         const lockedControl = event.target.closest("[data-section-target], [data-target-view]");
         if (!lockedControl) return;
-        if (lockedControl.dataset.scheduleTourNextPrompt) return;
-        // allow parent iframe listener to catch this click
+        event.preventDefault();
+        event.stopPropagation();
+        
         lockCurrentPage();
       }, true);
 
       window.addEventListener("hashchange", lockCurrentPage);
-
-      const scheduleTourSteps = [
-        { selector: ".sched-header", kicker: "Scheduled Events", title: "Start with the calendar workspace", body: "This page helps users plan, monitor, and manage email, LinkedIn, and meeting activities from one calendar." },
-        { selector: ".sched-hero .sched-card:nth-child(1)", kicker: "Upcoming Work", title: "See total upcoming activities", body: "The first card shows how much outreach is scheduled ahead so users understand workload and campaign pressure." },
-        { selector: ".sched-hero .sched-card:nth-child(2)", kicker: "Completed Activity", title: "Track finished steps", body: "Completed activities show whether outbound plans are actually being executed, not just queued." },
-        { selector: ".sched-hero .sched-card:nth-child(3)", kicker: "Needs Attention", title: "Spot missed or paused work", body: "Attention cards call out paused, failed, or missed items before they create gaps in a campaign." },
-        { selector: ".sched-insight", kicker: "AI Insight", title: "Use scheduling recommendations", body: "The insight bar warns about overlaps, clustered touchpoints, and better timing opportunities." },
-        { selector: ".sched-calendar", targetSelector: ".sched-cal-toolbar", kicker: "Calendar Toolbar", title: "Control the calendar view", body: "The toolbar provides today navigation, previous and next controls, the active month, and view options." },
-        { selector: ".sched-cal-view-tabs", kicker: "Month and Week", title: "Switch calendar density", body: "Month view gives a broad campaign schedule, while week view helps inspect daily sequencing more closely." },
-        { selector: "#schedCalendarGrid .sched-cal-cell.today", kicker: "Today", title: "Focus the current day", body: "The current date is highlighted so users can quickly find today’s scheduled outreach activity." },
-        { selector: "#schedCalendarGrid .cal-event-bar", kicker: "Event Pills", title: "Read scheduled touchpoints", body: "Colored event pills show whether an activity is email, LinkedIn, meeting, or a warning item." },
-        { selector: ".sched-feed", kicker: "Activity Feed", title: "Review the upcoming queue", body: "The feed turns the calendar into a readable timeline of what will happen today and tomorrow." },
-        { selector: ".sched-feed-item", kicker: "Activity Row", title: "Act on individual activities", body: "Each row shows time, channel, contact, sequence context, and quick actions like edit or pause." },
-        { selector: ".sched-fab-wrapper", kicker: "New Activity", title: "Create scheduled work quickly", body: "The floating action button gives users a quick path to schedule email, LinkedIn touches, or meetings." }
-      ];
-
-      const startScheduleTour = () => {
-        lockCurrentPage();
-        document.querySelectorAll(".schedule-tour-card, .schedule-tour-backdrop, .schedule-tour-spotlight").forEach((item) => item.remove());
-
-        let index = 0;
-        const backdrop = document.createElement("div");
-        const spotlight = document.createElement("div");
-        const card = document.createElement("div");
-        backdrop.className = "schedule-tour-backdrop";
-        spotlight.className = "schedule-tour-spotlight";
-        card.className = "schedule-tour-card";
-        card.setAttribute("role", "dialog");
-        card.setAttribute("aria-live", "polite");
-        card.setAttribute("aria-label", "Scheduled Event demo tour");
-        document.body.append(backdrop, spotlight, card);
-
-        const clearTargetEffects = () => document.querySelectorAll(".schedule-tour-target").forEach((item) => item.classList.remove("schedule-tour-target"));
-        const getStep = () => scheduleTourSteps[index];
-        const getTarget = () => document.querySelector(getStep().selector);
-        const getHighlightTarget = () => document.querySelector(getStep().targetSelector || getStep().selector);
-        const getTargetRect = () => {
-          const target = getHighlightTarget();
-          if (!target) return null;
-          if (window.innerWidth < 980) {
-            if (getStep().selector === ".sched-calendar") return document.querySelector(".sched-cal-toolbar")?.getBoundingClientRect() || target.getBoundingClientRect();
-            if (getStep().selector === ".sched-feed") return document.querySelector(".sched-feed-title")?.getBoundingClientRect() || target.getBoundingClientRect();
-          }
-          return target.getBoundingClientRect();
-        };
-        const applyTargetEffects = () => {
-          clearTargetEffects();
-          const target = getHighlightTarget();
-          if (target) target.classList.add("schedule-tour-target");
-        };
-        const endTour = () => {
-          document.body.classList.remove("schedule-tour-running");
-          clearTargetEffects();
-          backdrop.remove();
-          spotlight.remove();
-          card.remove();
-          window.removeEventListener("resize", positionStep);
-          document.removeEventListener("keydown", handleKeydown);
-        };
-
-        const positionFloatingCard = (rect, hostCard) => {
-          const margin = 16;
-          const gap = 20;
-          const viewportW = Math.max(window.innerWidth, document.documentElement.clientWidth || 0);
-          const viewportH = Math.max(window.innerHeight, document.documentElement.clientHeight || 0, 480);
-          const clamp = (value, min, max) => max < min ? min : Math.min(Math.max(value, min), max);
-          const workspaceLeft = document.querySelector(".workspace")?.getBoundingClientRect().left || 0;
-          const safeLeft = Math.max(margin, workspaceLeft + margin);
-          const sideSlotWidth = Math.floor(rect.left - safeLeft - gap);
-          const defaultWidth = Math.min(326, viewportW - margin * 2);
-          const canUseSideSlot = sideSlotWidth >= 258;
-          const cardWidth = canUseSideSlot ? Math.min(defaultWidth, sideSlotWidth) : defaultWidth;
-          hostCard.style.width = `${cardWidth}px`;
-          hostCard.style.right = "auto";
-          hostCard.style.bottom = "auto";
-          const cardHeight = Math.min(hostCard.offsetHeight || 230, 270, viewportH - margin * 2);
-          const spaces = { left: rect.left - margin, right: viewportW - rect.right - margin, top: rect.top - margin, bottom: viewportH - rect.bottom - margin };
-          let cardLeft;
-          let cardTop;
-          if (canUseSideSlot) {
-            cardLeft = safeLeft;
-            cardTop = clamp(rect.top, margin, viewportH - cardHeight - margin);
-          } else if (spaces.right >= cardWidth + gap) {
-            cardLeft = rect.right + gap;
-            cardTop = clamp(rect.top, margin, viewportH - cardHeight - margin);
-          } else if (spaces.left >= cardWidth + gap) {
-            cardLeft = rect.left - cardWidth - gap;
-            cardTop = clamp(rect.top, margin, viewportH - cardHeight - margin);
-          } else if (spaces.top >= cardHeight + gap) {
-            cardLeft = clamp(rect.left + rect.width / 2 - cardWidth / 2, safeLeft, viewportW - cardWidth - margin);
-            cardTop = rect.top - cardHeight - gap;
-          } else if (spaces.bottom >= cardHeight + gap) {
-            cardLeft = clamp(rect.left + rect.width / 2 - cardWidth / 2, safeLeft, viewportW - cardWidth - margin);
-            cardTop = rect.bottom + gap;
-          } else {
-            cardLeft = clamp(rect.left + rect.width / 2 - cardWidth / 2, safeLeft, viewportW - cardWidth - margin);
-            cardTop = rect.top < viewportH / 2 ? viewportH - cardHeight - margin : margin;
-          }
-          const overlapsTarget = () => !(cardLeft + cardWidth <= rect.left || cardLeft >= rect.right || cardTop + cardHeight <= rect.top || cardTop >= rect.bottom);
-          if (overlapsTarget()) {
-            if (rect.bottom + gap + cardHeight <= viewportH - margin) cardTop = rect.bottom + gap;
-            else if (rect.top - gap - cardHeight >= margin) cardTop = rect.top - gap - cardHeight;
-            else if (rect.left - gap - cardWidth >= margin) {
-              cardLeft = rect.left - gap - cardWidth;
-              cardTop = clamp(rect.top, margin, viewportH - cardHeight - margin);
-            } else if (rect.right + gap + cardWidth <= viewportW - margin) {
-              cardLeft = rect.right + gap;
-              cardTop = clamp(rect.top, margin, viewportH - cardHeight - margin);
-            }
-          }
-          cardLeft = clamp(cardLeft, safeLeft, viewportW - cardWidth - margin);
-          cardTop = clamp(cardTop, margin, viewportH - cardHeight - margin);
-          hostCard.style.left = `${cardLeft}px`;
-          hostCard.style.top = `${cardTop}px`;
-        };
-
-        function positionStep() {
-          const target = getHighlightTarget();
-          const rect = getTargetRect();
-          if (!target || !rect) {
-            endTour();
-            return;
-          }
-          const padding = 10;
-          const viewportW = Math.max(window.innerWidth, document.documentElement.clientWidth || 0);
-          const viewportH = Math.max(window.innerHeight, document.documentElement.clientHeight || 0, 480);
-          const top = Math.max(8, rect.top - padding);
-          const left = Math.max(8, rect.left - padding);
-          spotlight.style.top = `${top}px`;
-          spotlight.style.left = `${left}px`;
-          spotlight.style.width = `${Math.min(viewportW - left - 8, rect.width + padding * 2)}px`;
-          spotlight.style.height = `${Math.min(viewportH - top - 8, rect.height + padding * 2)}px`;
-          positionFloatingCard(rect, card);
-        }
-
-        const renderStep = () => {
-          lockCurrentPage();
-          const step = getStep();
-          const target = getTarget();
-          if (!target) {
-            endTour();
-            return;
-          }
-          document.body.classList.add("schedule-tour-running");
-          const rect = getTargetRect() || target.getBoundingClientRect();
-          if (rect.top < 88 || rect.bottom > window.innerHeight - 36) target.scrollIntoView({ behavior: "auto", block: "center", inline: "nearest" });
-          applyTargetEffects();
-          const progress = Math.round(((index + 1) / scheduleTourSteps.length) * 100);
-          card.innerHTML = `
-            <div class="schedule-tour-kicker">${step.kicker}</div>
-            <h3>${step.title}</h3>
-            <p>${step.body}</p>
-            <div class="schedule-tour-progress-wrap" aria-hidden="true"><i class="schedule-tour-progress-bar" style="--schedule-tour-progress:${progress}%"></i></div>
-            <span class="schedule-tour-hint">Tip: press Enter for Next, Esc to Skip.</span>
-            <div class="schedule-tour-footer">
-              <span class="schedule-tour-progress">${index + 1}/${scheduleTourSteps.length}</span>
-              <div class="schedule-tour-actions">
-                <button class="schedule-tour-btn" type="button" data-schedule-tour-skip>Skip</button>
-                <button class="schedule-tour-btn" type="button" data-schedule-tour-back ${index === 0 ? "disabled" : ""}>Back</button>
-                <button class="schedule-tour-btn primary" type="button" data-schedule-tour-next>${index === scheduleTourSteps.length - 1 ? "Done" : "Next"}</button>
-              </div>
-            </div>
-          `;
-          window.setTimeout(() => {
-            positionStep();
-            backdrop.classList.add("active");
-            spotlight.classList.add("active");
-            card.classList.add("active");
-            card.querySelector("[data-schedule-tour-next]")?.focus({ preventScroll: true });
-          }, 120);
-        };
-
-        const showDataPrompt = () => {
-          const dataTarget = document.querySelector('[data-section-target="contacts"]');
-          if (!dataTarget) return;
-          const promptBackdrop = document.createElement("div");
-          const promptSpotlight = document.createElement("div");
-          const promptCard = document.createElement("div");
-          promptBackdrop.className = "schedule-tour-backdrop active";
-          promptSpotlight.className = "schedule-tour-spotlight active";
-          promptCard.className = "schedule-tour-card active";
-          promptCard.setAttribute("role", "dialog");
-          promptCard.setAttribute("aria-live", "polite");
-          promptCard.setAttribute("aria-label", "Click Data prompt");
-          promptCard.innerHTML = `
-            <div class="schedule-tour-kicker">Next Step</div>
-            <h3>Click on Data</h3>
-            <p>The Scheduled Event walkthrough is complete. Now click the Data section in the left sidebar to continue toward Email Lists.</p>
-            <div class="schedule-tour-footer">
-              <span class="schedule-tour-progress">Complete</span>
-              <div class="schedule-tour-actions">
-                <button class="schedule-tour-btn" type="button" data-schedule-tour-skip>Skip</button>
-              </div>
-            </div>
-          `;
-          document.body.append(promptBackdrop, promptSpotlight, promptCard);
-          dataTarget.dataset.scheduleTourNextPrompt = "true";
-          const closePrompt = () => {
-            document.body.classList.remove("schedule-tour-running");
-            promptBackdrop.remove();
-            promptSpotlight.remove();
-            promptCard.remove();
-            delete dataTarget.dataset.scheduleTourNextPrompt;
-            window.removeEventListener("resize", positionPrompt);
-            document.removeEventListener("click", handleDataClick, true);
-          };
-          const positionPrompt = () => {
-            const rect = dataTarget.getBoundingClientRect();
-            const padding = 8;
-            promptSpotlight.style.top = `${Math.max(8, rect.top - padding)}px`;
-            promptSpotlight.style.left = `${Math.max(8, rect.left - padding)}px`;
-            promptSpotlight.style.width = `${Math.min(window.innerWidth - rect.left - 8, rect.width + padding * 2)}px`;
-            promptSpotlight.style.height = `${rect.height + padding * 2}px`;
-            positionFloatingCard(rect, promptCard);
-          };
-          const handleDataClick = (event) => {
-            if (event.target.closest('[data-section-target="contacts"]')) {
-              event.preventDefault();
-              event.stopPropagation();
-              
-              promptCard.innerHTML = `
-                <div class="schedule-tour-kicker">Data clicked</div>
-                <h3>Great, that is the Data section</h3>
-                <p>This standalone page stays locked on Scheduled Event. To open the next standalone demo, use ${nextPage}.</p>
-                <div class="schedule-tour-footer">
-                  <span class="schedule-tour-progress">Complete</span>
-                  <div class="schedule-tour-actions">
-                    <button class="schedule-tour-btn primary" type="button" data-schedule-tour-skip>Done</button>
-                  </div>
-                </div>
-              `;
-              positionPrompt();
-            }
-          };
-          promptCard.addEventListener("click", (event) => {
-            if (event.target.closest("[data-schedule-tour-skip]")) closePrompt();
-          });
-          window.addEventListener("resize", positionPrompt);
-          document.addEventListener("click", handleDataClick, true);
-          document.body.classList.add("schedule-tour-running");
-          dataTarget.scrollIntoView({ behavior: "auto", block: "nearest", inline: "nearest" });
-          positionPrompt();
-        };
-
-        const handleKeydown = (event) => {
-          if (event.key === "Escape") endTour();
-          if (event.key === "Enter" || event.key === "ArrowRight") {
-            event.preventDefault();
-            card.querySelector("[data-schedule-tour-next]")?.click();
-          }
-          if (event.key === "ArrowLeft") {
-            event.preventDefault();
-            card.querySelector("[data-schedule-tour-back]")?.click();
-          }
-        };
-
-        card.addEventListener("click", (event) => {
-          if (event.target.closest("[data-schedule-tour-skip]")) {
-            endTour();
-            return;
-          }
-          if (event.target.closest("[data-schedule-tour-back]")) {
-            if (index === 0) return;
-            index -= 1;
-            renderStep();
-            return;
-          }
-          if (event.target.closest("[data-schedule-tour-next]")) {
-            if (index >= scheduleTourSteps.length - 1) {
-              endTour();
-              showDataPrompt();
-              return;
-            }
-            index += 1;
-            renderStep();
-          }
-        });
-
-        window.addEventListener("resize", positionStep);
-        document.addEventListener("keydown", handleKeydown);
-        renderStep();
-      };
-
-      let tourStarted = false;
-      const scheduleTourStart = () => {
-        lockCurrentPage();
-        if (tourStarted) return;
-        tourStarted = true;
-        window.setTimeout(startScheduleTour, 650);
-      };
-
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", scheduleTourStart, { once: true });
-        window.addEventListener("load", scheduleTourStart, { once: true });
-      } else {
-        scheduleTourStart();
-      }
+      lockCurrentPage();
     })();
   </script>
 
+  <script id="linkedin-touches-guided-tour">
+    (() => {
+      const cfg={view:"linkedin-touches",promptSelector:'[data-section-target="automation"]',promptTitle:"Click on Automation",promptBody:"The LinkedIn Touches walkthrough is complete. Now click Automation in the left sidebar to continue the demo flow.",clickedKicker:"Automation clicked",clickedTitle:"Great, that is the next section",clickedBody:"This standalone page stays locked on LinkedIn Touches.",steps:[
+        ["LinkedIn Touches",".lit-hero","Start with LinkedIn outreach","This header introduces LinkedIn campaigns, conversations, and account-health monitoring."],
+        ["Actions",".lit-hero-actions","Use quick actions","Top actions help users create campaigns, refresh data, or access setup shortcuts."],
+        ["Tabs",".lit-tabs","Switch workspace areas","Tabs organize LinkedIn campaigns, conversations, and analytics into focused work areas."],
+        ["Metrics",".lit-metrics","Read LinkedIn performance","Metric cards summarize connection activity, replies, accepted requests, and safety signals."],
+        ["Safety",".lit-safety","Check account safety","The safety panel keeps LinkedIn limits and risk rules visible before sending touches."],
+        ["Campaign Setup",".lit-stepper","Follow the campaign builder", "The stepper guides users through sender, list, approach, message, schedule, and review steps."],
+        ["Current Step",".lit-step.active","Track setup progress","The active step shows where the user is in the LinkedIn campaign creation flow."],
+        ["Campaign Card",".lit-step-card","Configure the selected step","The main card changes based on the setup step and keeps controls in one focused panel."],
+        ["Accounts",".lit-account-card","Choose a LinkedIn account","Account cards show selected senders, usage, and health before launch."],
+        ["Prospect Lists",".lit-list-card","Choose a prospect list","List cards show audience quality, contact counts, and availability for LinkedIn outreach."],
+        ["Approach",".lit-approach-card","Pick the outreach style","Approach cards let users choose manual control or AI-assisted personalization."],
+        ["Message Editor",".lit-msg-editor","Write and preview messages","The editor supports variables, live preview, quality checks, and personalized LinkedIn copy."]
+      ]};
+      runGuidedDemo(cfg);
+      function runGuidedDemo(config){const style=document.createElement("style");style.textContent=`.gt-backdrop{position:fixed;inset:0;z-index:9990;background:radial-gradient(circle at 74% 18%,rgba(109,93,247,.14),transparent 28%),rgba(15,23,42,.08);pointer-events:none;opacity:0;transition:opacity .22s}.gt-backdrop.active{opacity:1}.gt-spot{position:fixed;z-index:10000;border:2px solid rgba(109,93,247,.95);border-radius:14px;background:rgba(109,93,247,.08);box-shadow:0 0 0 9999px rgba(15,23,42,.34),0 20px 70px rgba(80,70,210,.42);pointer-events:none;opacity:0;transition:.22s}.gt-spot.active{opacity:1;animation:gtPulse 1.7s infinite}.gt-card{position:fixed;z-index:10030;width:min(326px,calc(100vw - 28px));max-height:calc(100vh - 32px);overflow:auto;padding:18px;border:1px solid rgba(148,163,184,.34);border-radius:14px;background:rgba(255,255,255,.97);color:#101827;box-shadow:0 18px 50px rgba(15,23,42,.20);backdrop-filter:blur(16px);opacity:0;transform:translateY(8px);transition:.2s}.gt-card.active{opacity:1;transform:none}.gt-card:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,#3158F6,#6D5DF7,#0EB5BB)}.gt-kicker{margin-bottom:9px;color:#3158F6;font-size:10.5px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}.gt-card h3{margin:0 0 10px;color:#101827;font-family:var(--font-display);font-size:20px;line-height:1.18}.gt-card p{margin:0;color:#52657D;font-size:14px;line-height:1.58}.gt-bar{margin-top:16px;height:5px;border-radius:999px;background:#EEF2F7;overflow:hidden}.gt-bar i{display:block;height:100%;width:var(--p);background:linear-gradient(90deg,#3158F6,#6D5DF7)}.gt-hint{display:block;margin-top:11px;color:#64748B;font-size:12px;font-weight:700}.gt-footer{display:flex;justify-content:space-between;gap:12px;margin-top:14px}.gt-count{padding:6px 9px;border-radius:999px;background:rgba(241,245,249,.72);color:#475569;font-size:11px;font-weight:850}.gt-actions{display:flex;gap:7px}.gt-btn{height:34px;border:1px solid var(--line);border-radius:9px;padding:0 13px;background:var(--surface);color:var(--text);font:inherit;font-size:13px;font-weight:850}.gt-btn.primary{border:0;background:linear-gradient(135deg,#6254F3,#3158F6);color:#fff}.gt-btn:disabled{opacity:.45}.gt-target{position:relative;z-index:10005;box-shadow:0 16px 38px rgba(49,88,246,.16),0 0 0 1px rgba(109,93,247,.30)!important;animation:gtLift 1.8s infinite}[data-gt-next=true]{position:relative;z-index:10005;animation:gtTab 1.4s infinite}html[data-theme=dark] .gt-card{background:rgba(15,23,42,.96);color:#F8FAFC}html[data-theme=dark] .gt-card h3{color:#F8FAFC}html[data-theme=dark] .gt-card p,html[data-theme=dark] .gt-hint{color:#CBD5E1}@keyframes gtPulse{50%{box-shadow:0 0 0 9999px rgba(15,23,42,.34),0 22px 78px rgba(80,70,210,.52)}}@keyframes gtLift{50%{transform:translateY(-2px)}}@keyframes gtTab{50%{box-shadow:0 0 0 8px rgba(109,93,247,0)}}@media(max-width:720px){.gt-card{left:14px!important;right:14px;bottom:14px!important;top:auto!important;width:auto!important}}`;document.head.appendChild(style);const view=document.querySelector(`[data-view="${config.view}"]`);let i=0,backdrop,spot,card;const q=s=>document.querySelector(s),target=()=>q(config.steps[i][1])||view,clear=()=>document.querySelectorAll(".gt-target").forEach(e=>e.classList.remove("gt-target"));const pos=(r,e)=>{const m=16,g=20,vw=innerWidth,vh=Math.max(innerHeight,480),cw=Math.min(326,vw-m*2),wl=q(".workspace")?.getBoundingClientRect().left||0,sl=Math.max(m,wl+m);let ch=Math.min(e.offsetHeight||230,270,vh-m*2),left=r.right+g,top=Math.min(Math.max(r.top,m),vh-ch-m);if(left+cw>vw-m)left=r.left-cw-g;left=Math.min(Math.max(left,sl),vw-cw-m);if(!(left+cw<=r.left||left>=r.right||top+ch<=r.top||top>=r.bottom))top=r.bottom+g+ch<vh-m?r.bottom+g:Math.max(m,r.top-g-ch);e.style.left=`${left}px`;e.style.top=`${Math.min(Math.max(top,m),vh-ch-m)}px`;e.style.width=`${cw}px`};function place(){const r=target().getBoundingClientRect(),p=10;spot.style.top=`${Math.max(8,r.top-p)}px`;spot.style.left=`${Math.max(8,r.left-p)}px`;spot.style.width=`${Math.min(innerWidth-r.left-8,r.width+p*2)}px`;spot.style.height=`${Math.min(innerHeight-r.top-8,r.height+p*2)}px`;pos(r,card)}function render(){clear();const s=config.steps[i],el=target();el.scrollIntoView({block:"center",inline:"nearest"});el.classList.add("gt-target");const p=Math.round((i+1)/config.steps.length*100);card.innerHTML=`<div class="gt-kicker">${s[0]}</div><h3>${s[2]}</h3><p>${s[3]}</p><div class="gt-bar"><i style="--p:${p}%"></i></div><span class="gt-hint">Tip: press Enter for Next, Esc to Skip.</span><div class="gt-footer"><span class="gt-count">${i+1}/${config.steps.length}</span><div class="gt-actions"><button class="gt-btn" data-skip>Skip</button><button class="gt-btn" data-back ${i===0?"disabled":""}>Back</button><button class="gt-btn primary" data-next>${i===config.steps.length-1?"Done":"Next"}</button></div></div>`;setTimeout(()=>{place();backdrop.classList.add("active");spot.classList.add("active");card.classList.add("active")},120)}function end(){clear();backdrop?.remove();spot?.remove();card?.remove();removeEventListener("resize",place);document.removeEventListener("keydown",keys)}function prompt(){const tab=q(config.promptSelector);if(!tab)return;backdrop=document.createElement("div");spot=document.createElement("div");card=document.createElement("div");backdrop.className="gt-backdrop active";spot.className="gt-spot active";card.className="gt-card active";card.innerHTML=`<div class="gt-kicker">Next Step</div><h3>${config.promptTitle}</h3><p>${config.promptBody}</p><div class="gt-footer"><span class="gt-count">Complete</span><div class="gt-actions"><button class="gt-btn" data-skip>Skip</button></div></div>`;document.body.append(backdrop,spot,card);tab.dataset.gtNext="true";const pp=()=>{const r=tab.getBoundingClientRect(),p=8;spot.style.top=`${Math.max(8,r.top-p)}px`;spot.style.left=`${Math.max(8,r.left-p)}px`;spot.style.width=`${r.width+p*2}px`;spot.style.height=`${r.height+p*2}px`;pos(r,card)};const click=e=>{if(e.target.closest(config.promptSelector)){e.preventDefault();e.stopImmediatePropagation();card.innerHTML=`<div class="gt-kicker">${config.clickedKicker}</div><h3>${config.clickedTitle}</h3><p>${config.clickedBody}</p><div class="gt-footer"><span class="gt-count">Complete</span><div class="gt-actions"><button class="gt-btn primary" data-skip>Done</button></div></div>`;pp()}};card.addEventListener("click",e=>{if(e.target.closest("[data-skip]")){delete tab.dataset.gtNext;end();removeEventListener("click",click,true)}});addEventListener("click",click,true);pp()}function keys(e){if(e.key==="Escape")end();if(e.key==="Enter"||e.key==="ArrowRight"){e.preventDefault();card.querySelector("[data-next]")?.click()}if(e.key==="ArrowLeft"){e.preventDefault();card.querySelector("[data-back]")?.click()}}function start(){backdrop=document.createElement("div");spot=document.createElement("div");card=document.createElement("div");backdrop.className="gt-backdrop";spot.className="gt-spot";card.className="gt-card";document.body.append(backdrop,spot,card);addEventListener("resize",place);document.addEventListener("keydown",keys);card.addEventListener("click",e=>{if(e.target.closest("[data-skip]"))return end();if(e.target.closest("[data-back]")&&i>0){i--;render()}if(e.target.closest("[data-next]")){if(i>=config.steps.length-1){end();prompt()}else{i++;render()}}});render()}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(start,650),{once:true});else setTimeout(start,650)}
+    })();
+  </script>
 </body>
 </html>

@@ -97,6 +97,41 @@ export default function FeaturesDashboardMockup() {
               e.stopPropagation();
               e.stopImmediatePropagation();
               setIframeSrc('/features-scheduled-event.html');
+            } else if (targetView === 'email-lists') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-email-lists.html');
+            } else if (targetView === 'template-library') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-template-library.html');
+            } else if (targetView === 'warmup-control') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-warmup-control.html');
+            } else if (targetView === 'email-accounts') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-email-account.html');
+            } else if (targetView === 'linkedin-touches') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-linkedin-touches.html');
+            } else if (targetView === 'ai-workflow') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-ai-workflow.html');
+            } else if (targetView === 'pipeline-handoff') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-pipeline-handoff.html');
             }
           }
 
@@ -114,6 +149,21 @@ export default function FeaturesDashboardMockup() {
               e.stopPropagation();
               e.stopImmediatePropagation();
               setIframeSrc('/features-dashboard.html');
+            } else if (defaultView === 'email-lists') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-email-lists.html');
+            } else if (defaultView === 'email-accounts') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-email-account.html');
+            } else if (defaultView === 'ai-workflow') {
+              e.preventDefault();
+              e.stopPropagation();
+              e.stopImmediatePropagation();
+              setIframeSrc('/features-ai-workflow.html');
             }
           }
 

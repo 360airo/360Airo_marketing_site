@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>360Airo Dashboard - Scheduled Event</title>
+  <title>360Airo Dashboard - Warmup Control</title>
   <style>
     @import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap");
 
@@ -4222,261 +4222,6 @@
     }
   </style>
 
-  <style id="scheduled-event-demo-tour-styles">
-    .schedule-tour-backdrop {
-      position: fixed;
-      inset: 0;
-      z-index: 9990;
-      background: radial-gradient(circle at 74% 18%, rgba(109, 93, 247, .14), transparent 28%), rgba(15, 23, 42, .08);
-      pointer-events: none;
-      opacity: 0;
-      transition: opacity .22s ease;
-    }
-    .schedule-tour-backdrop.active { opacity: 1; }
-    .schedule-tour-spotlight {
-      position: fixed;
-      z-index: 10000;
-      border: 2px solid rgba(109, 93, 247, .95);
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(109, 93, 247, .10), rgba(49, 88, 246, .04));
-      box-shadow: 0 0 0 9999px rgba(15, 23, 42, .34), 0 0 0 8px rgba(109, 93, 247, .08), 0 20px 70px rgba(80, 70, 210, .42), inset 0 0 34px rgba(109, 93, 247, .12);
-      pointer-events: none;
-      opacity: 0;
-      transform: scale(.98);
-      transition: top .22s ease, left .22s ease, width .22s ease, height .22s ease, opacity .18s ease, transform .18s ease;
-    }
-    .schedule-tour-spotlight.active {
-      opacity: 1;
-      transform: scale(1);
-      animation: scheduleTourPulse 1.7s ease-in-out infinite;
-    }
-    .schedule-tour-spotlight::after {
-      content: "";
-      position: absolute;
-      inset: -8px;
-      border-radius: inherit;
-      border: 1px solid rgba(109, 93, 247, .38);
-      animation: scheduleTourRipple 1.7s ease-in-out infinite;
-    }
-    .schedule-tour-spotlight::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      background: linear-gradient(115deg, transparent 0%, rgba(255,255,255,.16) 38%, transparent 58%);
-      transform: translateX(-120%);
-      animation: scheduleTourSweep 2.4s ease-in-out infinite;
-    }
-    .schedule-tour-card {
-      position: fixed;
-      z-index: 10030;
-      width: min(326px, calc(100vw - 28px));
-      max-width: calc(100vw - 28px);
-      max-height: calc(100vh - 32px);
-      padding: 18px 18px 16px;
-      overflow: auto;
-      border: 1px solid rgba(148, 163, 184, .34);
-      border-radius: 14px;
-      background: rgba(255, 255, 255, .97);
-      color: #101827;
-      box-shadow: 0 18px 50px rgba(15, 23, 42, .20), 0 0 0 1px rgba(255, 255, 255, .7) inset;
-      backdrop-filter: blur(16px);
-      opacity: 0;
-      transform: translateY(8px);
-      transition: top .22s ease, left .22s ease, opacity .18s ease, transform .18s ease;
-    }
-    .schedule-tour-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto;
-      height: 3px;
-      background: linear-gradient(90deg, #3158F6, #6D5DF7, #0EB5BB);
-      background-size: 240% 100%;
-      animation: scheduleTourShimmer 2.8s linear infinite;
-    }
-    .schedule-tour-card.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    .schedule-tour-kicker {
-      margin-bottom: 9px;
-      color: #3158F6;
-      font-size: 10.5px;
-      font-weight: 900;
-      letter-spacing: .14em;
-      text-transform: uppercase;
-    }
-    .schedule-tour-card h3 {
-      margin: 0 0 10px;
-      color: #101827;
-      font-family: var(--font-display);
-      font-size: 20px;
-      line-height: 1.18;
-      letter-spacing: var(--tracking-tight);
-    }
-    .schedule-tour-card p {
-      margin: 0;
-      color: #52657D;
-      font-size: 14px;
-      line-height: 1.58;
-    }
-    .schedule-tour-progress-wrap {
-      margin-top: 16px;
-      height: 5px;
-      overflow: hidden;
-      border-radius: 999px;
-      background: #EEF2F7;
-    }
-    .schedule-tour-progress-bar {
-      display: block;
-      height: 100%;
-      width: var(--schedule-tour-progress, 8%);
-      border-radius: inherit;
-      background: linear-gradient(90deg, #3158F6, #6D5DF7);
-      transition: width .28s ease;
-    }
-    .schedule-tour-hint {
-      display: block;
-      margin-top: 11px;
-      color: #64748B;
-      font-size: 12px;
-      font-weight: 700;
-    }
-    .schedule-tour-footer {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-top: 14px;
-    }
-    .schedule-tour-progress {
-      flex: 0 0 auto;
-      min-width: max-content;
-      padding: 6px 9px;
-      border: 1px solid rgba(148, 163, 184, .24);
-      border-radius: 999px;
-      background: rgba(241, 245, 249, .72);
-      color: #475569;
-      font-size: 11px;
-      font-weight: 850;
-      line-height: 1;
-    }
-    .schedule-tour-actions {
-      display: flex;
-      justify-content: flex-end;
-      gap: 7px;
-      min-width: 0;
-    }
-    .schedule-tour-btn {
-      height: 34px;
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      padding: 0 13px;
-      background: var(--surface);
-      color: var(--text);
-      font: inherit;
-      font-size: 13px;
-      font-weight: 850;
-      cursor: pointer;
-      transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease;
-    }
-    .schedule-tour-btn.primary {
-      border-color: transparent;
-      background: linear-gradient(135deg, #6254F3, #3158F6);
-      color: white;
-      box-shadow: 0 10px 22px rgba(80, 70, 210, .22);
-    }
-    .schedule-tour-btn:hover { transform: translateY(-1px); }
-    .schedule-tour-btn:disabled {
-      cursor: not-allowed;
-      opacity: .45;
-      transform: none;
-    }
-    html[data-theme="dark"] .schedule-tour-card {
-      background: rgba(15, 23, 42, .96);
-      border-color: rgba(148, 163, 184, .26);
-      color: #F8FAFC;
-      box-shadow: 0 18px 50px rgba(0, 0, 0, .36), 0 0 0 1px rgba(255, 255, 255, .06) inset;
-    }
-    html[data-theme="dark"] .schedule-tour-card h3 { color: #F8FAFC; }
-    html[data-theme="dark"] .schedule-tour-card p,
-    html[data-theme="dark"] .schedule-tour-hint { color: #CBD5E1; }
-    html[data-theme="dark"] .schedule-tour-progress-wrap { background: rgba(51, 65, 85, .78); }
-    html[data-theme="dark"] .schedule-tour-progress {
-      background: rgba(30, 41, 59, .88);
-      border-color: rgba(148, 163, 184, .24);
-      color: #DDE7F5;
-    }
-    html[data-theme="dark"] .schedule-tour-btn {
-      background: rgba(30, 41, 59, .96);
-      border-color: rgba(148, 163, 184, .24);
-      color: #F8FAFC;
-    }
-    html[data-theme="dark"] .schedule-tour-btn:disabled {
-      background: rgba(51, 65, 85, .72);
-      color: #94A3B8;
-      opacity: 1;
-    }
-    body.schedule-tour-running { overflow-x: hidden; }
-    .schedule-tour-target {
-      position: relative;
-      z-index: 10005;
-      filter: saturate(1.08) brightness(1.04);
-      animation: scheduleTourTargetLift 1.8s ease-in-out infinite;
-    }
-    .sched-header.schedule-tour-target,
-    .sched-card.schedule-tour-target,
-    .sched-insight.schedule-tour-target,
-    .sched-calendar.schedule-tour-target,
-    .sched-cal-toolbar.schedule-tour-target,
-    .sched-cal-view-tabs.schedule-tour-target,
-    .sched-cal-cell.schedule-tour-target,
-    .cal-event-bar.schedule-tour-target,
-    .sched-feed.schedule-tour-target,
-    .sched-feed-item.schedule-tour-target,
-    .sched-fab-wrapper.schedule-tour-target {
-      border-color: rgba(109, 93, 247, .72) !important;
-      box-shadow: 0 16px 38px rgba(49, 88, 246, .16), 0 0 0 1px rgba(109, 93, 247, .30) !important;
-    }
-    [data-schedule-tour-next-prompt="true"] {
-      position: relative;
-      z-index: 10005;
-      animation: scheduleTourTabPulse 1.4s ease-in-out infinite;
-    }
-    @keyframes scheduleTourPulse {
-      0%, 100% { box-shadow: 0 0 0 9999px rgba(15, 23, 42, .34), 0 0 0 8px rgba(109, 93, 247, .08), 0 20px 70px rgba(80, 70, 210, .42), inset 0 0 34px rgba(109, 93, 247, .12); }
-      50% { box-shadow: 0 0 0 9999px rgba(15, 23, 42, .34), 0 0 0 10px rgba(109, 93, 247, .10), 0 22px 78px rgba(80, 70, 210, .52), inset 0 0 38px rgba(109, 93, 247, .16); }
-    }
-    @keyframes scheduleTourRipple {
-      0%, 100% { opacity: .35; transform: scale(1); }
-      50% { opacity: .85; transform: scale(1.015); }
-    }
-    @keyframes scheduleTourSweep {
-      0% { transform: translateX(-120%); opacity: 0; }
-      18% { opacity: 1; }
-      55% { transform: translateX(120%); opacity: 0; }
-      100% { transform: translateX(120%); opacity: 0; }
-    }
-    @keyframes scheduleTourShimmer { to { background-position: 240% 0; } }
-    @keyframes scheduleTourTargetLift {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-2px); }
-    }
-    @keyframes scheduleTourTabPulse {
-      0%, 100% { box-shadow: 0 0 0 0 rgba(109, 93, 247, .42); }
-      50% { box-shadow: 0 0 0 8px rgba(109, 93, 247, 0); }
-    }
-    @media (max-width: 720px) {
-      .schedule-tour-card {
-        left: 14px !important;
-        right: 14px;
-        bottom: 14px !important;
-        top: auto !important;
-        width: auto !important;
-      }
-    }
-  </style>
-
   <style id="extra-interactive-animations">
     @keyframes iconSpin {
       0% { transform: rotate(0deg) scale(1); }
@@ -6075,282 +5820,262 @@
 
       <main class="page">
         <div class="content">
-          <section class="view" data-view="scheduled-event">
-            <div class="sched-view">
-              <div class="sched-main">
-                <div class="sched-header">
-                  <h2>Scheduled Events</h2>
-                  <p>Plan, monitor, and manage every outreach activity from one intelligent calendar.</p>
+          <section class="view" data-view="warmup-control">
+            <style>
+              .wc-root { padding:28px; display:flex; flex-direction:column; gap:16px; font-family:var(--font-body); }
+              .wc-hero { border:1px solid var(--line); border-radius:16px; background:linear-gradient(135deg,var(--surface),rgba(14,181,187,.05)); padding:22px 24px; display:flex; align-items:flex-start; justify-content:space-between; gap:18px; flex-wrap:wrap; }
+              .wc-title { display:flex; align-items:center; gap:12px; margin-bottom:8px; }
+              .wc-icon { width:38px; height:38px; border-radius:12px; display:grid; place-items:center; color:#0EB5BB; background:rgba(14,181,187,.12); border:1px solid rgba(14,181,187,.24); flex-shrink:0; }
+              .wc-title h2 { margin:0; font-size:26px; line-height:1; font-family:var(--font-heading); font-weight:800; }
+              .wc-hero p { margin:0; color:var(--muted); font-size:14px; line-height:1.55; max-width:720px; }
+              .wc-summary { display:block; margin-top:8px; color:var(--text); font-size:12px; font-weight:800; }
+              .wc-actions, .wc-toolbar, .wc-toolbar-left, .wc-toolbar-right { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+              .wc-btn { height:38px; border-radius:10px; border:1px solid var(--line); background:var(--surface); color:var(--text); padding:0 14px; font:inherit; font-size:13px; font-weight:800; cursor:pointer; display:inline-flex; align-items:center; gap:8px; transition:.18s ease; }
+              .wc-btn:hover { border-color:var(--brand); color:var(--brand); }
+              .wc-btn.primary { background:var(--brand); border-color:var(--brand); color:#fff; box-shadow:0 8px 20px rgba(80,120,242,.24); }
+              .wc-btn.danger { color:#F43F5E; border-color:rgba(244,63,94,.35); }
+              .wc-btn:disabled { opacity:.55; cursor:not-allowed; box-shadow:none; }
+              .wc-metrics { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:12px; }
+              .wc-metric { border:1px solid var(--line); border-radius:14px; background:var(--surface); padding:15px; min-height:98px; position:relative; overflow:hidden; }
+              .wc-metric span { display:block; color:var(--muted); font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:.06em; margin-bottom:8px; }
+              .wc-metric strong { display:block; font-size:28px; line-height:1; font-family:var(--font-heading); color:var(--text); }
+              .wc-metric em { display:block; color:var(--muted); font-style:normal; font-size:12px; margin-top:8px; }
+              .wc-metric i { position:absolute; right:12px; top:12px; width:28px; height:28px; border-radius:9px; display:grid; place-items:center; background:rgba(80,120,242,.1); color:var(--brand); font-style:normal; }
+              .wc-insight { border:1px solid rgba(245,158,11,.28); border-radius:16px; background:rgba(245,158,11,.08); padding:14px 16px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+              .wc-insight strong { display:block; font-size:14px; margin-bottom:3px; }
+              .wc-insight span { color:var(--muted); font-size:13px; line-height:1.45; }
+              .wc-panel { border:1px solid var(--line); border-radius:16px; background:var(--surface); overflow:hidden; }
+              .wc-toolbar { padding:16px; border-bottom:1px solid var(--line); justify-content:space-between; }
+              .wc-search { min-width:300px; height:38px; border:1px solid var(--line); border-radius:10px; background:var(--surface-2); color:var(--text); padding:0 12px; font:inherit; font-size:13px; outline:none; }
+              .wc-search:focus, .wc-select:focus, .wc-field input:focus, .wc-field select:focus { border-color:var(--brand); box-shadow:0 0 0 3px rgba(80,120,242,.14); }
+              .wc-select { height:38px; border:1px solid var(--line); border-radius:10px; background:var(--surface-2); color:var(--text); padding:0 10px; font:inherit; font-size:13px; outline:none; }
+              .wc-tabs { display:inline-flex; gap:3px; padding:4px; border:1px solid var(--line); border-radius:12px; background:var(--surface-2); }
+              .wc-tab { height:30px; border:0; border-radius:8px; background:transparent; color:var(--muted); padding:0 11px; font:inherit; font-size:12px; font-weight:800; cursor:pointer; }
+              .wc-tab.active { background:var(--brand); color:#fff; }
+              .wc-list { display:grid; gap:12px; padding:16px; min-height:320px; }
+              .wc-account { border:1px solid var(--line); border-radius:14px; background:var(--surface-2); padding:14px; display:grid; grid-template-columns:auto minmax(240px,1.4fr) repeat(4,minmax(100px,.7fr)) auto; gap:12px; align-items:center; cursor:pointer; transition:.18s ease; }
+              .wc-account:hover { border-color:rgba(80,120,242,.45); transform:translateY(-1px); }
+              .wc-check { width:18px; height:18px; border-radius:5px; border:1px solid var(--brand); background:transparent; }
+              .wc-sender { display:flex; align-items:center; gap:12px; min-width:0; }
+              .wc-avatar { width:42px; height:42px; border-radius:50%; display:grid; place-items:center; color:#fff; background:linear-gradient(135deg,#5078F2,#0EB5BB); font-weight:900; flex-shrink:0; }
+              .wc-email { font-size:14px; font-weight:900; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+              .wc-meta { color:var(--muted); font-size:12px; line-height:1.45; margin-top:3px; }
+              .wc-badges { display:flex; gap:6px; flex-wrap:wrap; margin-top:6px; }
+              .wc-badge { border-radius:999px; padding:3px 8px; font-size:10px; font-weight:900; border:1px solid var(--line); color:var(--muted); background:var(--surface); }
+              .wc-badge.active { color:#10B981; background:rgba(16,185,129,.1); border-color:rgba(16,185,129,.24); }
+              .wc-badge.paused { color:#F59E0B; background:rgba(245,158,11,.1); border-color:rgba(245,158,11,.24); }
+              .wc-badge.risk { color:#F43F5E; background:rgba(244,63,94,.1); border-color:rgba(244,63,94,.24); }
+              .wc-cell span { display:block; color:var(--muted); font-size:10px; font-weight:800; text-transform:uppercase; letter-spacing:.05em; margin-bottom:5px; }
+              .wc-cell strong { font-size:14px; }
+              .wc-health { display:grid; gap:6px; }
+              .wc-health-top { display:flex; align-items:center; justify-content:space-between; gap:8px; }
+              .wc-bar { height:7px; border-radius:999px; background:var(--line); overflow:hidden; }
+              .wc-bar i { display:block; height:100%; width:var(--w); background:var(--c,#10B981); border-radius:inherit; }
+              .wc-row-actions { display:flex; gap:6px; justify-content:flex-end; flex-wrap:wrap; }
+              .wc-icon-btn { width:34px; height:34px; padding:0; border-radius:9px; justify-content:center; }
+              .wc-empty { display:none; margin:18px; border:1px dashed var(--line); border-radius:16px; padding:24px; background:rgba(80,120,242,.04); text-align:center; }
+              .wc-empty.show { display:block; }
+              .wc-empty-icon { width:64px; height:64px; border-radius:18px; display:grid; place-items:center; color:var(--brand); background:rgba(80,120,242,.12); margin:0 auto 14px; }
+              .wc-empty h3 { margin:0 0 8px; font-size:20px; font-family:var(--font-heading); }
+              .wc-empty p { margin:0 auto 16px; color:var(--muted); max-width:520px; line-height:1.55; font-size:13px; }
+              .wc-benefits, .wc-process { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin:16px auto; max-width:760px; }
+              .wc-process { grid-template-columns:repeat(4,1fr); }
+              .wc-mini { border:1px solid var(--line); border-radius:12px; background:var(--surface); padding:12px; text-align:left; }
+              .wc-mini strong { display:block; font-size:13px; margin-bottom:4px; }
+              .wc-mini span { color:var(--muted); font-size:12px; line-height:1.4; }
+              .wc-drawer[hidden], .wc-modal[hidden], .wc-toast[hidden] { display:none; }
+              .wc-drawer { position:fixed; inset:0; z-index:2400; background:rgba(2,8,23,.48); display:flex; justify-content:flex-end; }
+              .wc-drawer-panel { width:min(620px,100%); height:100%; background:var(--surface); border-left:1px solid var(--line); box-shadow:-28px 0 80px rgba(0,0,0,.3); display:flex; flex-direction:column; animation:wcSlide .22s ease; }
+              .wc-drawer-head { padding:18px 20px; border-bottom:1px solid var(--line); display:flex; align-items:flex-start; justify-content:space-between; gap:14px; }
+              .wc-drawer-head h3 { margin:0 0 5px; font-size:20px; font-family:var(--font-heading); }
+              .wc-drawer-body { padding:16px 20px 24px; overflow:auto; display:grid; gap:14px; }
+              .wc-drawer-tabs { display:flex; gap:6px; border-bottom:1px solid var(--line); padding:0 20px; }
+              .wc-drawer-tab { height:40px; border:0; border-bottom:2px solid transparent; background:transparent; color:var(--muted); font:inherit; font-weight:900; cursor:pointer; padding:0 8px; }
+              .wc-drawer-tab.active { color:var(--brand); border-color:var(--brand); }
+              .wc-drawer-view { display:none; }
+              .wc-drawer-view.active { display:grid; gap:14px; }
+              .wc-stat-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+              .wc-stat { border:1px solid var(--line); border-radius:12px; background:var(--surface-2); padding:12px; }
+              .wc-stat span { color:var(--muted); font-size:11px; font-weight:800; text-transform:uppercase; }
+              .wc-stat strong { display:block; font-size:24px; margin-top:7px; }
+              .wc-chart { border:1px solid var(--line); border-radius:14px; background:var(--surface-2); padding:16px; }
+              .wc-chart-head { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:12px; }
+              .wc-chart-head strong { display:block; font-size:15px; margin-bottom:3px; }
+              .wc-chart-head span { display:block; color:var(--muted); font-size:12px; line-height:1.4; }
+              .wc-chart-legend { display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end; }
+              .wc-chart-legend span { display:inline-flex; align-items:center; gap:5px; color:var(--muted); font-size:11px; font-weight:800; }
+              .wc-chart-legend i { width:8px; height:8px; border-radius:50%; background:var(--c); }
+              .wc-chart-stage { position:relative; height:180px; display:grid; grid-template-rows:1fr auto; padding:8px 0 0; }
+              .wc-chart-grid { position:absolute; inset:8px 0 34px; display:grid; grid-template-rows:repeat(4,1fr); pointer-events:none; }
+              .wc-chart-grid span { border-top:1px solid rgba(148,163,184,.22); }
+              .wc-chart-bars { position:relative; z-index:1; height:138px; display:flex; gap:14px; align-items:end; padding:0 4px; }
+              .wc-chart-day { flex:1; min-width:0; display:grid; grid-template-rows:1fr auto; gap:8px; align-items:end; }
+              .wc-chart-stack { height:138px; display:flex; gap:4px; align-items:end; justify-content:center; }
+              .wc-chart-stack i { width:11px; border-radius:6px 6px 2px 2px; min-height:6px; background:var(--c); height:var(--h); box-shadow:0 1px 0 rgba(255,255,255,.2) inset; }
+              .wc-chart-day em { color:var(--muted); font-style:normal; font-size:11px; font-weight:800; text-align:center; }
+              .wc-chart-summary { display:flex; gap:10px; flex-wrap:wrap; margin-top:14px; }
+              .wc-chart-summary span { border:1px solid var(--line); background:var(--surface); border-radius:999px; padding:5px 9px; color:var(--muted); font-size:11px; font-weight:800; }
+              .wc-form-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+              .wc-field { display:grid; gap:6px; }
+              .wc-field label { font-size:12px; font-weight:900; }
+              .wc-field input, .wc-field select { height:40px; border:1px solid var(--line); border-radius:10px; background:var(--surface-2); color:var(--text); padding:0 11px; font:inherit; outline:none; }
+              .wc-toggle { display:flex; justify-content:space-between; gap:12px; padding:12px; border:1px solid var(--line); border-radius:12px; background:var(--surface-2); }
+              .wc-log { border:1px solid var(--line); border-radius:12px; overflow:hidden; }
+              .wc-log-row { display:grid; grid-template-columns:110px 90px 1fr 90px; gap:10px; padding:10px 12px; border-bottom:1px solid var(--line); font-size:12px; }
+              .wc-log-row:last-child { border-bottom:0; }
+              .wc-modal { position:fixed; inset:0; z-index:2500; background:rgba(2,8,23,.66); backdrop-filter:blur(8px); display:grid; place-items:center; padding:18px; }
+              .wc-dialog { width:min(560px,100%); border:1px solid var(--line); border-radius:18px; background:var(--surface); box-shadow:0 28px 80px rgba(0,0,0,.4); overflow:hidden; }
+              .wc-dialog-head { padding:20px 22px 14px; border-bottom:1px solid var(--line); }
+              .wc-dialog-head h3 { margin:0 0 5px; font-size:20px; font-family:var(--font-heading); }
+              .wc-dialog-head p { margin:0; color:var(--muted); font-size:13px; line-height:1.45; }
+              .wc-dialog-body { padding:18px 22px; display:grid; gap:14px; }
+              .wc-dialog-actions { padding:14px 22px 20px; border-top:1px solid var(--line); display:flex; justify-content:flex-end; gap:10px; }
+              .wc-source-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+              .wc-source { border:1px solid var(--line); border-radius:12px; padding:12px; background:var(--surface-2); cursor:pointer; }
+              .wc-source.selected { border-color:var(--brand); background:rgba(80,120,242,.08); }
+              .wc-toast { position:fixed; right:22px; bottom:22px; z-index:2600; background:var(--surface); border:1px solid rgba(80,120,242,.35); border-radius:12px; padding:12px 14px; box-shadow:0 18px 50px rgba(0,0,0,.35); font-size:13px; font-weight:900; }
+              @keyframes wcSlide { from { transform:translateX(24px); opacity:.7; } to { transform:none; opacity:1; } }
+              @media (prefers-reduced-motion:reduce) { .wc-drawer-panel, .wc-account, .wc-btn { animation:none; transition:none; } }
+              @media (max-width:1280px) { .wc-metrics { grid-template-columns:repeat(3,1fr); } .wc-account { grid-template-columns:auto minmax(220px,1fr) repeat(2,minmax(100px,.6fr)) auto; } .wc-hide-md { display:none; } }
+              @media (max-width:900px) { .wc-root { padding:16px; } .wc-metrics, .wc-benefits, .wc-process, .wc-stat-grid, .wc-form-grid, .wc-source-grid { grid-template-columns:1fr; } .wc-account { grid-template-columns:auto 1fr; align-items:start; } .wc-cell, .wc-row-actions { grid-column:1 / -1; } .wc-search { min-width:100%; } .wc-drawer { align-items:flex-end; } .wc-drawer-panel { width:100%; height:88%; border-radius:18px 18px 0 0; } .wc-dialog-actions { flex-direction:column; } .wc-dialog-actions .wc-btn { justify-content:center; width:100%; } }
+            </style>
+            <div class="wc-root">
+              <section class="wc-hero">
+                <div>
+                  <div class="wc-title"><div class="wc-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2c3 3 5 6 5 10a5 5 0 0 1-10 0c0-4 2-7 5-10z"/></svg></div><h2>Warmup Control</h2></div>
+                  <p>Build, monitor, and protect sender reputation before launching outbound campaigns.</p>
+                  <span class="wc-summary" id="wcSummary">2 accounts connected - 1 active - 1 needs attention</span>
                 </div>
-                
-                <div class="sched-hero">
-                  <div class="sched-card scheduled">
-                    <div class="sched-card-top">
-                      <div class="sched-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-                      <span class="sched-card-trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> +12%</span>
-                    </div>
-                    <div class="sched-card-value">24</div>
-                    <div class="sched-card-label">Total upcoming activities</div>
-                  </div>
-                  
-                  <div class="sched-card completed">
-                    <div class="sched-card-top">
-                      <div class="sched-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div>
-                      <span class="sched-card-trend up"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg> +8%</span>
-                    </div>
-                    <div class="sched-card-value">142</div>
-                    <div class="sched-card-label">Finished activities</div>
-                  </div>
-                  
-                  <div class="sched-card attention">
-                    <div class="sched-card-top">
-                      <div class="sched-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
-                    </div>
-                    <div class="sched-card-value">3</div>
-                    <div class="sched-card-label">Needs attention (paused/missed)</div>
-                  </div>
-                  
-                  <div class="sched-card canceled">
-                    <div class="sched-card-top">
-                      <div class="sched-card-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg></div>
-                      <span class="sched-card-trend down"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 18 13.5 8.5 8.5 13.5 1 6"/><polyline points="17 18 23 18 23 12"/></svg> -2%</span>
-                    </div>
-                    <div class="sched-card-value">1</div>
-                    <div class="sched-card-label">Canceled activities</div>
-                  </div>
+                <div class="wc-actions">
+                  <button class="wc-btn" type="button" onclick="wcRefresh()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>Refresh</button>
+                  <button class="wc-btn" type="button" onclick="wcToast('Warmup guide opened.')">Warmup Guide</button>
+                  <button class="wc-btn primary" type="button" onclick="wcOpenAdd()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Add Account</button>
                 </div>
-                
-                <div class="sched-insight" id="schedInsightBar">
-                  <div class="sched-insight-content">
-                    <svg class="sched-insight-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                    <div class="sched-insight-text">
-                      <strong>360Airo Insight <span class="sched-insight-badge">New</span></strong>
-                      <span>You have 7 outreach steps scheduled tomorrow. 2 LinkedIn follow-ups overlap with email campaigns. Consider staggering send times.</span>
+              </section>
+              <section class="wc-metrics" aria-label="Warmup health overview">
+                <article class="wc-metric" title="Accounts currently warming up"><i>A</i><span>Active accounts</span><strong>1</strong><em>1 paused sender</em></article>
+                <article class="wc-metric" title="Accounts that require action"><i>!</i><span>Needs attention</span><strong>1</strong><em>Paused for review</em></article>
+                <article class="wc-metric" title="Warmup emails sent in the last week"><i>S</i><span>Sent this week</span><strong>62</strong><em>+12 vs prior week</em></article>
+                <article class="wc-metric" title="Percentage landing in inbox"><i>I</i><span>Inbox placement</span><strong>98.4%</strong><em>+2.1% compared with last week</em></article>
+                <article class="wc-metric" title="Percentage landing in spam"><i>SP</i><span>Spam placement</span><strong>1.6%</strong><em>Down from 4%</em></article>
+                <article class="wc-metric" title="Average sender reputation score"><i>H</i><span>Avg health score</span><strong>70%</strong><em>1 sender excellent</em></article>
+              </section>
+              <section class="wc-insight">
+                <div><strong>360Airo Deliverability Insight</strong><span>One sender is paused and has no recent warmup activity. Resume warmup or review its daily sending settings before using it in a campaign.</span></div>
+                <button class="wc-btn" type="button" onclick="wcOpenDrawer('chrishemsworth5205@gmail.com')">Review sender</button>
+              </section>
+              <section class="wc-panel">
+                <div class="wc-toolbar">
+                  <div class="wc-toolbar-left">
+                    <input class="wc-search" id="wcSearch" type="search" placeholder="Search email, sender, provider, or status..." oninput="wcApplyFilters()">
+                    <div class="wc-tabs" role="tablist" aria-label="Warmup status filters">
+                      <button class="wc-tab active" type="button" data-wc-filter="all" onclick="wcSetStatus('all', this)">All</button>
+                      <button class="wc-tab" type="button" data-wc-filter="active" onclick="wcSetStatus('active', this)">Active</button>
+                      <button class="wc-tab" type="button" data-wc-filter="paused" onclick="wcSetStatus('paused', this)">Paused</button>
+                      <button class="wc-tab" type="button" data-wc-filter="attention" onclick="wcSetStatus('attention', this)">Needs Attention</button>
+                      <button class="wc-tab" type="button" data-wc-filter="disconnected" onclick="wcSetStatus('disconnected', this)">Disconnected</button>
                     </div>
                   </div>
-                  <button class="sched-insight-close" onclick="document.getElementById('schedInsightBar').style.display='none'"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
-                </div>
-                
-                <div class="sched-calendar">
-                  <div class="sched-cal-toolbar">
-                    <div class="sched-cal-controls">
-                      <button class="btn ghost">Today</button>
-                      <div class="sched-cal-nav">
-                        <button class="btn ghost icon-only"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg></button>
-                        <button class="btn ghost icon-only"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></button>
-                      </div>
-                      <div class="sched-cal-title">June 2026</div>
-                    </div>
-                    <div class="sched-cal-controls">
-                      <div class="sched-cal-view-tabs">
-                        <button class="sched-cal-tab active" data-cal-view="month">Month</button>
-                        <button class="sched-cal-tab" data-cal-view="week">Week</button>
-                      </div>
-                      <button class="btn ghost icon-only"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg></button>
-                    </div>
-                  </div>
-                  <div class="sched-month-wrap" id="schedMonthWrap">
-                    <div class="sched-cal-days">
-                      <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-                    </div>
-                    <div class="sched-cal-grid" id="schedCalendarGrid">
-                      <!-- Calendar cells will be generated by JS -->
-                    </div>
-                    <script>
-                      (function() {
-                        const grid = document.getElementById('schedCalendarGrid');
-                        if (grid) {
-                          let htmlStr = '';
-                          htmlStr += '<div class="sched-cal-cell muted-date"><div class="sched-cal-date">31</div></div>';
-                          
-                          const emailIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>';
-                          const linkedInIcon = '<svg viewBox="0 0 24 24" fill="currentColor" stroke="none"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>';
-                          const warningIcon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>';
-
-                          for(let i=1; i<=30; i++) {
-                            let isToday = i === 12;
-                            let cellClass = isToday ? 'today' : '';
-                            let events = '';
-                            
-                            if ([5, 10, 15, 20, 25, 30].includes(i)) {
-                              events += '<div class="cal-event-bar cal-event-email">' + emailIcon + ' Q3 Outbound</div>';
-                            }
-                            if ([8, 12, 16, 24].includes(i)) {
-                              events += '<div class="cal-event-bar cal-event-linkedin">' + linkedInIcon + ' Connect Req</div>';
-                            }
-                            if ([14, 28].includes(i)) {
-                              events += '<div class="cal-event-bar cal-event-warning">' + warningIcon + ' Bounce</div>';
-                            }
-
-                            
-                            // Add stagger animation delay
-                            const animDelay = (i * 0.02).toFixed(2);
-                            htmlStr += '<div class="sched-cal-cell ' + cellClass + '" style="opacity:0; animation: cellPopIn 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards; animation-delay: ' + animDelay + 's;">' +
-                              '<div class="sched-cal-date">' + i + '</div>' +
-                              events +
-                            '</div>';
-                          }
-                          
-                          for(let i=1; i<=4; i++) {
-                            htmlStr += '<div class="sched-cal-cell muted-date"><div class="sched-cal-date">0' + i + '</div></div>';
-                          }
-                          
-                          grid.innerHTML = htmlStr;
-                          
-                          grid.addEventListener('click', (e) => {
-                            const cell = e.target.closest('.sched-cal-cell');
-                            if (!cell || cell.classList.contains('muted-date')) return;
-                            
-                            const modal = document.getElementById('schedDateModal');
-                            if (!modal) return;
-                            
-                            const body = document.getElementById('schedDateModalBody');
-                            const dateLabel = document.getElementById('schedDateModalDate');
-                            const dayNum = cell.querySelector('.sched-cal-date').textContent;
-                            
-                            const dateObj = new Date(2026, 5, parseInt(dayNum));
-                            const formattedDate = dateObj.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: '2-digit', year: 'numeric' });
-                            if(dateLabel) dateLabel.textContent = formattedDate;
-                            
-                            const events = Array.from(cell.querySelectorAll('.cal-event-bar'));
-                            
-                            if (events.length === 0) {
-                                body.innerHTML = `<div style="padding: 48px 20px; text-align: center; color: var(--muted); display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%;">
-                                    <div class="modal-animated-item modal-icon-glow" style="animation-delay: 0.1s; width: 64px; height: 64px; border-radius: 50%; background: linear-gradient(135deg, rgba(239,68,68,0.15), rgba(239,68,68,0.05)); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; border: 1px solid rgba(239,68,68,0.2);">
-                                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: #EF4444;">
-                                            <circle cx="12" cy="12" r="10"></circle>
-                                            <line x1="12" y1="8" x2="12" y2="12"></line>
-                                            <line x1="12" y1="16" x2="12.01" y2="16"></line>
-                                        </svg>
-                                    </div>
-                                    <h4 class="modal-animated-item" style="animation-delay: 0.2s; color: var(--text); font-size: 18px; font-weight: 700; margin: 0 0 10px; font-family: var(--font-heading);">No Scheduled Meetings</h4>
-                                    <p class="modal-animated-item" style="animation-delay: 0.3s; font-size:14px; margin: 0; line-height: 1.6; max-width: 280px; opacity: 0.8;">There are no outreach activities scheduled for this date. Enjoy your free time or schedule a new activity!</p>
-                                    <button class="modal-animated-item btn btn-primary" style="animation-delay: 0.4s; margin-top: 24px; padding: 0 20px; height: 40px; border-radius: 8px; font-size: 14px;">Schedule Activity</button>
-                                </div>`;
-                            } else {
-                                let eventHtml = '<div style="padding: 24px; display: flex; flex-direction: column; gap: 16px;">';
-                                events.forEach((ev, idx) => {
-                                    const eventClass = Array.from(ev.classList).find(c => c !== 'cal-event-bar') || '';
-                                    const iconMatch = ev.innerHTML.match(/<svg.*?<\/svg>/);
-                                    const icon = iconMatch ? iconMatch[0] : '';
-                                    const text = ev.textContent.trim();
-                                    
-                                    let bg = 'rgba(80,120,242,0.08)';
-                                    let border = 'rgba(80,120,242,0.2)';
-                                    let color = '#5078F2';
-                                    
-                                    if(eventClass.includes('linkedin')) {
-                                      bg = 'rgba(10,102,194,0.08)'; border = 'rgba(10,102,194,0.2)'; color = '#0A66C2';
-                                    } else if(eventClass.includes('warning')) {
-                                      bg = 'rgba(239,68,68,0.08)'; border = 'rgba(239,68,68,0.2)'; color = '#EF4444';
-                                    }
-
-                                    const delay = 0.1 + (idx * 0.08);
-                                    
-                                    eventHtml += `<div class="modal-event-card modal-animated-item" style="animation-delay: ${delay}s; font-size: 15px; padding: 16px 20px; border-radius: 12px; gap: 14px; display: flex; align-items: center; background: ${bg}; border: 1px solid ${border}; color: ${color}; cursor: pointer;">
-                                      <div style="display: flex; align-items: center; justify-content: center; width: 36px; height: 36px; border-radius: 10px; background: white; box-shadow: 0 2px 6px rgba(0,0,0,0.06); flex-shrink: 0;">${icon}</div>
-                                      <div style="display: flex; flex-direction: column; gap: 2px;">
-                                        <span style="font-weight: 700; color: var(--text);">${text}</span>
-                                        <span style="font-size: 12px; opacity: 0.8; font-weight: 500;">9:00 AM - Scheduled automatically</span>
-                                      </div>
-                                      <div style="margin-left: auto; opacity: 0.5;">
-                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
-                                      </div>
-                                    </div>`;
-                                });
-                                eventHtml += '</div>';
-                                body.innerHTML = eventHtml;
-                            }
-                            
-                            modal.classList.add('active');
-                          });
-                        }
-                      })();
-                    </script>
-                  </div>
-                  <!-- Week view -->
-                  <div class="sched-week-grid" id="schedWeekGrid">
-                    <!-- JS-generated week columns -->
+                  <div class="wc-toolbar-right">
+                    <select class="wc-select" id="wcProvider" onchange="wcApplyFilters()"><option value="all">All providers</option><option>Gmail</option><option>Outlook</option></select>
+                    <select class="wc-select" id="wcSort" onchange="wcToast('Sort updated.')"><option>Health score</option><option>Recent activity</option><option>Inbox rate</option><option>Warmup volume</option></select>
                   </div>
                 </div>
-                
-                <div class="sched-feed">
-                  <div class="sched-feed-title">Upcoming Activities</div>
-                  
-                  <div class="sched-feed-group">
-                    <div class="sched-feed-group-label">Today</div>
-                    
-                    <div class="sched-feed-item">
-                      <div class="sched-feed-time">10:00 AM</div>
-                      <div class="sched-feed-icon" style="background: rgba(80,120,242,0.15); color: #96AAFA;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-                      <div class="sched-feed-info">
-                        <strong>Follow-up Email: SaaS Leads</strong>
-                        <span>John Doe (Acme Corp) • Retail CFO Pipeline</span>
+                <div class="wc-list" id="wcList">
+                  <article class="wc-account" tabindex="0" data-email="rex8182004@gmail.com" data-status="active" data-provider="Gmail" onclick="wcOpenDrawer('rex8182004@gmail.com')" onkeydown="if(event.key==='Enter')wcOpenDrawer('rex8182004@gmail.com')">
+                    <span class="wc-check" aria-hidden="true"></span>
+                    <div class="wc-sender"><div class="wc-avatar">R</div><div><div class="wc-email">rex8182004@gmail.com</div><div class="wc-meta">Gmail - Last updated 2 minutes ago</div><div class="wc-badges"><span class="wc-badge active">Active</span><span class="wc-badge active">Excellent</span></div></div></div>
+                    <div class="wc-cell"><span>Daily usage</span><strong>0 / 20</strong></div>
+                    <div class="wc-cell wc-hide-md"><span>Warmup sent</span><strong>62</strong></div>
+                    <div class="wc-cell wc-hide-md"><span>Inbox / spam</span><strong>61 / 1</strong></div>
+                    <div class="wc-health"><div class="wc-health-top"><strong>99%</strong><span class="wc-badge active">Excellent</span></div><div class="wc-bar"><i style="--w:99%;--c:#10B981"></i></div></div>
+                    <div class="wc-row-actions"><button class="wc-btn wc-icon-btn" type="button" onclick="event.stopPropagation();wcConfirmPause('rex8182004@gmail.com','pause')" title="Pause">||</button><button class="wc-btn wc-icon-btn" type="button" onclick="event.stopPropagation();wcOpenDrawer('rex8182004@gmail.com','settings')" title="Settings">⚙</button><button class="wc-btn wc-icon-btn danger" type="button" onclick="event.stopPropagation();wcConfirmRemove('rex8182004@gmail.com')" title="Remove">×</button></div>
+                  </article>
+                  <article class="wc-account" tabindex="0" data-email="chrishemsworth5205@gmail.com" data-status="paused attention" data-provider="Gmail" onclick="wcOpenDrawer('chrishemsworth5205@gmail.com')" onkeydown="if(event.key==='Enter')wcOpenDrawer('chrishemsworth5205@gmail.com')">
+                    <span class="wc-check" aria-hidden="true"></span>
+                    <div class="wc-sender"><div class="wc-avatar">C</div><div><div class="wc-email">chrishemsworth5205@gmail.com</div><div class="wc-meta">Gmail - No recent activity</div><div class="wc-badges"><span class="wc-badge paused">Paused</span><span class="wc-badge risk">Needs Attention</span></div></div></div>
+                    <div class="wc-cell"><span>Daily usage</span><strong>0 / 20</strong></div>
+                    <div class="wc-cell wc-hide-md"><span>Warmup sent</span><strong>0</strong></div>
+                    <div class="wc-cell wc-hide-md"><span>Inbox / spam</span><strong>0 / 0</strong></div>
+                    <div class="wc-health"><div class="wc-health-top"><strong>42%</strong><span class="wc-badge paused">Paused</span></div><div class="wc-bar"><i style="--w:42%;--c:#F59E0B"></i></div></div>
+                    <div class="wc-row-actions"><button class="wc-btn wc-icon-btn" type="button" onclick="event.stopPropagation();wcConfirmPause('chrishemsworth5205@gmail.com','resume')" title="Resume">▶</button><button class="wc-btn wc-icon-btn" type="button" onclick="event.stopPropagation();wcOpenDrawer('chrishemsworth5205@gmail.com','settings')" title="Settings">⚙</button><button class="wc-btn wc-icon-btn danger" type="button" onclick="event.stopPropagation();wcConfirmRemove('chrishemsworth5205@gmail.com')" title="Remove">×</button></div>
+                  </article>
+                </div>
+                <div class="wc-empty" id="wcEmpty">
+                  <div class="wc-empty-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                  <h3>Protect your sender reputation before launching</h3>
+                  <p>Connect an email account and start gradual warmup to improve inbox placement and reduce spam risk.</p>
+                  <div class="wc-actions" style="justify-content:center;"><button class="wc-btn primary" type="button" onclick="wcOpenAdd()">Add Warmup Account</button><button class="wc-btn" type="button" onclick="wcToast('Warmup guide opened.')">Learn How Warmup Works</button></div>
+                  <div class="wc-benefits"><div class="wc-mini"><strong>Improve inbox placement</strong><span>Track inbox and spam placement.</span></div><div class="wc-mini"><strong>Build reputation gradually</strong><span>Ramp activity with safe limits.</span></div><div class="wc-mini"><strong>Detect risks early</strong><span>Surface authentication and spam issues.</span></div></div>
+                  <div class="wc-process"><div class="wc-mini"><strong>1. Connect</strong><span>Add an account.</span></div><div class="wc-mini"><strong>2. Set limits</strong><span>Choose safe defaults.</span></div><div class="wc-mini"><strong>3. Start</strong><span>Begin gradual activity.</span></div><div class="wc-mini"><strong>4. Monitor</strong><span>Watch inbox vs spam.</span></div></div>
+                </div>
+              </section>
+            </div>
+            <aside class="wc-drawer" id="wcDrawer" hidden aria-modal="true" role="dialog" aria-labelledby="wcDrawerTitle">
+              <div class="wc-drawer-panel">
+                <div class="wc-drawer-head"><div><h3 id="wcDrawerTitle">rex8182004@gmail.com</h3><p class="wc-meta" id="wcDrawerMeta">Gmail - Active - 99 health score</p></div><div class="wc-actions"><button class="wc-btn" type="button" onclick="wcConfirmPause(document.getElementById('wcDrawerTitle').textContent,'pause')">Pause</button><button class="wc-btn danger" type="button" onclick="wcConfirmRemove(document.getElementById('wcDrawerTitle').textContent)">Remove</button><button class="wc-btn wc-icon-btn" type="button" onclick="wcCloseDrawer()">×</button></div></div>
+                <div class="wc-drawer-tabs"><button class="wc-drawer-tab active" type="button" onclick="wcDrawerTab('overview',this)">Overview</button><button class="wc-drawer-tab" type="button" onclick="wcDrawerTab('settings',this)">Settings</button><button class="wc-drawer-tab" type="button" onclick="wcDrawerTab('activity',this)">Activity</button><button class="wc-drawer-tab" type="button" onclick="wcDrawerTab('deliverability',this)">Deliverability</button></div>
+                <div class="wc-drawer-body">
+                  <section class="wc-drawer-view active" id="wcDrawerOverview">
+                    <div class="wc-stat-grid"><div class="wc-stat"><span>Received</span><strong>71</strong></div><div class="wc-stat"><span>Sent</span><strong>62</strong></div><div class="wc-stat"><span>Saved from spam</span><strong>0</strong></div><div class="wc-stat"><span>Inbox rate</span><strong>98%</strong></div><div class="wc-stat"><span>Spam rate</span><strong>1.6%</strong></div><div class="wc-stat"><span>Current streak</span><strong>7d</strong></div></div>
+                    <div class="wc-insight"><div><strong>Status explanation</strong><span>This sender is healthy and consistently landing in the inbox. Continue warmup until the target duration is complete.</span></div></div>
+                    <div class="wc-chart" role="img" aria-label="Seven day warmup activity chart comparing sent emails, inbox placement, and spam placement.">
+                      <div class="wc-chart-head">
+                        <div><strong>Daily activity trend</strong><span>Last 7 days: sent volume is steady, inbox placement is high, spam remains low.</span></div>
+                        <div class="wc-chart-legend"><span><i style="--c:#5078F2"></i>Sent</span><span><i style="--c:#10B981"></i>Inbox</span><span><i style="--c:#F59E0B"></i>Spam</span></div>
                       </div>
-                      <div class="sched-feed-actions">
-                        <button class="btn ghost icon-only" title="Edit Activity"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
-                        <button class="btn ghost icon-only" title="Pause Activity"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
+                      <div class="wc-chart-stage">
+                        <div class="wc-chart-grid"><span></span><span></span><span></span><span></span></div>
+                        <div class="wc-chart-bars">
+                          <div class="wc-chart-day"><div class="wc-chart-stack"><i title="Mon sent 8" style="--h:48%;--c:#5078F2"></i><i title="Mon inbox 8" style="--h:46%;--c:#10B981"></i><i title="Mon spam 0" style="--h:6%;--c:#F59E0B"></i></div><em>Mon</em></div>
+                          <div class="wc-chart-day"><div class="wc-chart-stack"><i title="Tue sent 9" style="--h:56%;--c:#5078F2"></i><i title="Tue inbox 8" style="--h:50%;--c:#10B981"></i><i title="Tue spam 1" style="--h:10%;--c:#F59E0B"></i></div><em>Tue</em></div>
+                          <div class="wc-chart-day"><div class="wc-chart-stack"><i title="Wed sent 10" style="--h:64%;--c:#5078F2"></i><i title="Wed inbox 10" style="--h:62%;--c:#10B981"></i><i title="Wed spam 0" style="--h:6%;--c:#F59E0B"></i></div><em>Wed</em></div>
+                          <div class="wc-chart-day"><div class="wc-chart-stack"><i title="Thu sent 9" style="--h:56%;--c:#5078F2"></i><i title="Thu inbox 9" style="--h:54%;--c:#10B981"></i><i title="Thu spam 0" style="--h:6%;--c:#F59E0B"></i></div><em>Thu</em></div>
+                          <div class="wc-chart-day"><div class="wc-chart-stack"><i title="Fri sent 11" style="--h:72%;--c:#5078F2"></i><i title="Fri inbox 10" style="--h:66%;--c:#10B981"></i><i title="Fri spam 1" style="--h:10%;--c:#F59E0B"></i></div><em>Fri</em></div>
+                          <div class="wc-chart-day"><div class="wc-chart-stack"><i title="Sat sent 7" style="--h:42%;--c:#5078F2"></i><i title="Sat inbox 7" style="--h:41%;--c:#10B981"></i><i title="Sat spam 0" style="--h:6%;--c:#F59E0B"></i></div><em>Sat</em></div>
+                          <div class="wc-chart-day"><div class="wc-chart-stack"><i title="Sun sent 8" style="--h:48%;--c:#5078F2"></i><i title="Sun inbox 8" style="--h:46%;--c:#10B981"></i><i title="Sun spam 0" style="--h:6%;--c:#F59E0B"></i></div><em>Sun</em></div>
+                        </div>
                       </div>
+                      <div class="wc-chart-summary"><span>62 sent</span><span>61 inbox</span><span>1 spam</span><span>98.4% inbox placement</span></div>
                     </div>
-                    
-                    <div class="sched-feed-item">
-                      <div class="sched-feed-time">2:30 PM</div>
-                      <div class="sched-feed-icon" style="background: rgba(193,90,230,0.15); color: #E8B4F9;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-                      <div class="sched-feed-info">
-                        <strong>Connection Request</strong>
-                        <span>Jane Smith (TechFlow) • Healthcare Directors</span>
-                      </div>
-                      <div class="sched-feed-actions">
-                        <button class="btn ghost icon-only" title="Edit Activity"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
-                        <button class="btn ghost icon-only" title="Pause Activity"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
-                      </div>
-                    </div>
-                  </div>
-                  
-                  <div class="sched-feed-group">
-                    <div class="sched-feed-group-label">Tomorrow</div>
-                    
-                    <div class="sched-feed-item">
-                      <div class="sched-feed-time">9:00 AM</div>
-                      <div class="sched-feed-icon" style="background: rgba(14,181,187,0.15); color: #8BE4E8;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-                      <div class="sched-feed-info">
-                        <strong>Discovery Call</strong>
-                        <span>Mark Johnson (GlobalTrade)</span>
-                      </div>
-                      <div class="sched-feed-actions">
-                        <button class="btn ghost icon-only" title="Edit Activity"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg></button>
-                        <button class="btn ghost icon-only" title="Pause Activity"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg></button>
-                      </div>
-                    </div>
-                  </div>
-                  
+                  </section>
+                  <section class="wc-drawer-view" id="wcDrawerSettings">
+                    <div class="wc-form-grid"><div class="wc-field"><label>Daily Warmup Limit</label><input type="number" value="20" min="1" max="50"></div><div class="wc-field"><label>Ramp-up speed</label><select><option>Recommended</option><option>Conservative</option><option>Aggressive</option></select></div><div class="wc-field"><label>Sending window</label><select><option>Weekdays 9 AM - 5 PM</option><option>All days</option></select></div><div class="wc-field"><label>Time zone</label><select><option>Asia/Calcutta</option><option>UTC</option></select></div></div>
+                    <div class="wc-toggle"><div><strong>Spam rescue</strong><div class="wc-meta">Move safe warmup messages out of spam when detected.</div></div><input type="checkbox" checked></div><div class="wc-toggle"><div><strong>Automatic pause protection</strong><div class="wc-meta">Pause when spam placement or failures rise sharply.</div></div><input type="checkbox" checked></div>
+                  </section>
+                  <section class="wc-drawer-view" id="wcDrawerActivity"><div class="wc-log"><div class="wc-log-row"><strong>Time</strong><strong>Direction</strong><strong>Recipient</strong><strong>Outcome</strong></div><div class="wc-log-row"><span>10:42</span><span>Sent</span><span>warmup-peer@360airo.com</span><span>Inbox</span></div><div class="wc-log-row"><span>09:10</span><span>Received</span><span>sender-pool@360airo.com</span><span>Replied</span></div><div class="wc-log-row"><span>Yesterday</span><span>Sent</span><span>deliverability@360airo.com</span><span>Spam rescued</span></div></div></section>
+                  <section class="wc-drawer-view" id="wcDrawerDeliverability"><div class="wc-stat-grid"><div class="wc-stat"><span>Inbox</span><strong>61</strong></div><div class="wc-stat"><span>Spam</span><strong>1</strong></div><div class="wc-stat"><span>Failed</span><strong>0</strong></div></div><div class="wc-insight"><div><strong>Deliverability report</strong><span>Inbox placement is strong. Keep current warmup settings and avoid pausing this sender before launch.</span></div></div></section>
                 </div>
               </div>
-              
+            </aside>
+            <div class="wc-modal" id="wcAddModal" hidden role="dialog" aria-modal="true" aria-labelledby="wcAddTitle">
+              <div class="wc-dialog"><div class="wc-dialog-head"><h3 id="wcAddTitle">Add Warmup Account</h3><p>Choose an account source, configure safe limits, and review before starting warmup.</p></div><div class="wc-dialog-body"><div class="wc-source-grid"><button class="wc-source selected" type="button">Existing email account</button><button class="wc-source" type="button">Gmail</button><button class="wc-source" type="button">Outlook / Microsoft 365</button><button class="wc-source" type="button">Custom SMTP/IMAP</button></div><div class="wc-form-grid"><div class="wc-field"><label>Daily limit</label><input type="number" value="20"></div><div class="wc-field"><label>Ramp-up speed</label><select><option>Recommended</option><option>Conservative</option></select></div><div class="wc-field"><label>Sending window</label><select><option>Weekdays 9 AM - 5 PM</option></select></div><div class="wc-field"><label>Weekend behaviour</label><select><option>Pause weekends</option><option>Continue lightly</option></select></div></div><div class="wc-insight"><div><strong>Review</strong><span>Starting volume: 5/day. Target volume: 20/day. Estimated ramp-up: 8 days. Automatic protection enabled.</span></div></div></div><div class="wc-dialog-actions"><button class="wc-btn" type="button" onclick="wcCloseAdd()">Cancel</button><button class="wc-btn primary" type="button" onclick="wcStartWarmup()">Start Warmup</button></div></div>
             </div>
-            
-            <!-- FAB -->
-            <div class="sched-fab-wrapper">
-              <button class="sched-fab" id="schedFabBtn">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-                <span>New Activity</span>
-              </button>
-              <div class="sched-fab-menu" id="schedFabMenu">
-                <div class="sched-fab-item">
-                  <div class="sched-fab-item-icon email"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
-                  <div class="sched-fab-item-label">Schedule Email<span>Queue personalized outreach</span></div>
-                </div>
-                <div class="sched-fab-item">
-                  <div class="sched-fab-item-icon linkedin"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
-                  <div class="sched-fab-item-label">LinkedIn Touch<span>Send connection or follow-up</span></div>
-                </div>
-                <div class="sched-fab-item">
-                  <div class="sched-fab-item-icon meeting"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg></div>
-                  <div class="sched-fab-item-label">Book Meeting<span>Schedule a discovery call</span></div>
-                </div>
-              </div>
+            <div class="wc-modal" id="wcConfirmModal" hidden role="dialog" aria-modal="true" aria-labelledby="wcConfirmTitle">
+              <div class="wc-dialog"><div class="wc-dialog-head"><h3 id="wcConfirmTitle">Pause Warmup?</h3><p id="wcConfirmText">Warmup activity will stop for this account.</p></div><div class="wc-dialog-actions"><button class="wc-btn" type="button" onclick="wcCloseConfirm()">Cancel</button><button class="wc-btn primary" id="wcConfirmAction" type="button">Pause Warmup</button></div></div>
             </div>
-            
+            <div class="wc-toast" id="wcToast" hidden role="status" aria-live="polite"></div>
+            <script>
+              let wcStatus = 'all';
+              function wcToast(message){ const toast=document.getElementById('wcToast'); toast.textContent=message; toast.hidden=false; clearTimeout(window.wcToastTimer); window.wcToastTimer=setTimeout(()=>toast.hidden=true,3200); }
+              function wcRefresh(){ wcToast('Warmup signals refreshed.'); }
+              function wcSetStatus(status, btn){ wcStatus=status; document.querySelectorAll('.wc-tab').forEach(t=>t.classList.remove('active')); btn.classList.add('active'); wcApplyFilters(); }
+              function wcApplyFilters(){ const q=document.getElementById('wcSearch').value.toLowerCase(); const provider=document.getElementById('wcProvider').value; let visible=0; document.querySelectorAll('.wc-account').forEach(row=>{ const matchText=row.dataset.email.toLowerCase().includes(q)||row.dataset.status.includes(q)||row.dataset.provider.toLowerCase().includes(q); const matchStatus=wcStatus==='all'||row.dataset.status.includes(wcStatus); const matchProvider=provider==='all'||row.dataset.provider===provider; const show=matchText&&matchStatus&&matchProvider; row.style.display=show?'grid':'none'; if(show) visible++; }); document.getElementById('wcEmpty').classList.toggle('show', visible===0); document.getElementById('wcList').style.display=visible===0?'none':'grid'; }
+              function wcToggleEmpty(){ document.querySelectorAll('.wc-account').forEach(row=>row.style.display='none'); document.getElementById('wcList').style.display='none'; document.getElementById('wcEmpty').classList.add('show'); }
+              function wcOpenDrawer(email, tab='overview'){ const drawer=document.getElementById('wcDrawer'); document.getElementById('wcDrawerTitle').textContent=email; document.getElementById('wcDrawerMeta').textContent=email.includes('chris')?'Gmail - Paused - 42 health score':'Gmail - Active - 99 health score'; drawer.hidden=false; wcDrawerTab(tab, document.querySelector(`.wc-drawer-tab[onclick*="${tab}"]`)||document.querySelector('.wc-drawer-tab')); }
+              function wcCloseDrawer(){ document.getElementById('wcDrawer').hidden=true; }
+              function wcDrawerTab(name, btn){ document.querySelectorAll('.wc-drawer-tab').forEach(t=>t.classList.remove('active')); if(btn) btn.classList.add('active'); document.querySelectorAll('.wc-drawer-view').forEach(v=>v.classList.remove('active')); document.getElementById('wcDrawer'+name.charAt(0).toUpperCase()+name.slice(1)).classList.add('active'); }
+              function wcOpenAdd(){ document.getElementById('wcAddModal').hidden=false; }
+              function wcCloseAdd(){ document.getElementById('wcAddModal').hidden=true; }
+              function wcStartWarmup(){ wcCloseAdd(); wcToast('Warmup started successfully. Initial reputation signals may take several days to appear.'); }
+              function wcConfirmPause(email, mode){ const modal=document.getElementById('wcConfirmModal'); document.getElementById('wcConfirmTitle').textContent=mode==='resume'?'Resume Warmup?':'Pause Warmup?'; document.getElementById('wcConfirmText').textContent=mode==='resume'?`Warmup will resume for ${email}.`:`Warmup activity will stop for ${email}. Extended pauses may slow sender-reputation growth.`; const action=document.getElementById('wcConfirmAction'); action.textContent=mode==='resume'?'Resume Warmup':'Pause Warmup'; action.className='wc-btn primary'; action.onclick=()=>{ wcCloseConfirm(); wcToast(mode==='resume'?`Warmup resumed successfully for ${email}.`:`Warmup paused for ${email}.`); }; modal.hidden=false; }
+              function wcConfirmRemove(email){ const modal=document.getElementById('wcConfirmModal'); document.getElementById('wcConfirmTitle').textContent='Remove Warmup Account?'; document.getElementById('wcConfirmText').textContent=`${email} will be removed from Warmup Control. Existing warmup history may no longer be available in this workspace.`; const action=document.getElementById('wcConfirmAction'); action.textContent='Remove Account'; action.className='wc-btn danger'; action.onclick=()=>{ wcCloseConfirm(); wcToast(`Warmup account removed: ${email}.`); }; modal.hidden=false; }
+              function wcCloseConfirm(){ document.getElementById('wcConfirmModal').hidden=true; }
+              document.addEventListener('keydown', event=>{ if(event.key==='Escape'){ wcCloseDrawer(); wcCloseAdd(); wcCloseConfirm(); } });
+              document.getElementById('wcDrawer').addEventListener('click', event=>{ if(event.target.id==='wcDrawer') wcCloseDrawer(); });
+              document.getElementById('wcAddModal').addEventListener('click', event=>{ if(event.target.id==='wcAddModal') wcCloseAdd(); });
+              document.getElementById('wcConfirmModal').addEventListener('click', event=>{ if(event.target.id==='wcConfirmModal') wcCloseConfirm(); });
+            </script>
           </section>
         </div>
       </main>
@@ -6513,7 +6238,7 @@
         fab.style.display = target === 'scheduled-event' ? 'flex' : 'none';
       }
     };
-    showView(location.hash.replace("#", "") || "scheduled-event");
+    showView(location.hash.replace("#", "") || "warmup-control");
     resetPageScroll();
     initSequenceLibrary();
 
@@ -7783,9 +7508,8 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
   <script>
     (() => {
-      const currentView = "scheduled-event";
-      const currentSection = "campaigns";
-      const nextPage = "Email Lists.html";
+      const currentView = "warmup-control";
+      const currentSection = "contacts";
       const lockCurrentPage = () => {
         document.querySelectorAll("[data-view]").forEach((section) => {
           section.hidden = section.dataset.view !== currentView;
@@ -7811,311 +7535,46 @@ document.addEventListener('DOMContentLoaded', () => {
       document.addEventListener("click", (event) => {
         const lockedControl = event.target.closest("[data-section-target], [data-target-view]");
         if (!lockedControl) return;
-        if (lockedControl.dataset.scheduleTourNextPrompt) return;
         // allow parent iframe listener to catch this click
         lockCurrentPage();
       }, true);
 
       window.addEventListener("hashchange", lockCurrentPage);
-
-      const scheduleTourSteps = [
-        { selector: ".sched-header", kicker: "Scheduled Events", title: "Start with the calendar workspace", body: "This page helps users plan, monitor, and manage email, LinkedIn, and meeting activities from one calendar." },
-        { selector: ".sched-hero .sched-card:nth-child(1)", kicker: "Upcoming Work", title: "See total upcoming activities", body: "The first card shows how much outreach is scheduled ahead so users understand workload and campaign pressure." },
-        { selector: ".sched-hero .sched-card:nth-child(2)", kicker: "Completed Activity", title: "Track finished steps", body: "Completed activities show whether outbound plans are actually being executed, not just queued." },
-        { selector: ".sched-hero .sched-card:nth-child(3)", kicker: "Needs Attention", title: "Spot missed or paused work", body: "Attention cards call out paused, failed, or missed items before they create gaps in a campaign." },
-        { selector: ".sched-insight", kicker: "AI Insight", title: "Use scheduling recommendations", body: "The insight bar warns about overlaps, clustered touchpoints, and better timing opportunities." },
-        { selector: ".sched-calendar", targetSelector: ".sched-cal-toolbar", kicker: "Calendar Toolbar", title: "Control the calendar view", body: "The toolbar provides today navigation, previous and next controls, the active month, and view options." },
-        { selector: ".sched-cal-view-tabs", kicker: "Month and Week", title: "Switch calendar density", body: "Month view gives a broad campaign schedule, while week view helps inspect daily sequencing more closely." },
-        { selector: "#schedCalendarGrid .sched-cal-cell.today", kicker: "Today", title: "Focus the current day", body: "The current date is highlighted so users can quickly find today’s scheduled outreach activity." },
-        { selector: "#schedCalendarGrid .cal-event-bar", kicker: "Event Pills", title: "Read scheduled touchpoints", body: "Colored event pills show whether an activity is email, LinkedIn, meeting, or a warning item." },
-        { selector: ".sched-feed", kicker: "Activity Feed", title: "Review the upcoming queue", body: "The feed turns the calendar into a readable timeline of what will happen today and tomorrow." },
-        { selector: ".sched-feed-item", kicker: "Activity Row", title: "Act on individual activities", body: "Each row shows time, channel, contact, sequence context, and quick actions like edit or pause." },
-        { selector: ".sched-fab-wrapper", kicker: "New Activity", title: "Create scheduled work quickly", body: "The floating action button gives users a quick path to schedule email, LinkedIn touches, or meetings." }
-      ];
-
-      const startScheduleTour = () => {
-        lockCurrentPage();
-        document.querySelectorAll(".schedule-tour-card, .schedule-tour-backdrop, .schedule-tour-spotlight").forEach((item) => item.remove());
-
-        let index = 0;
-        const backdrop = document.createElement("div");
-        const spotlight = document.createElement("div");
-        const card = document.createElement("div");
-        backdrop.className = "schedule-tour-backdrop";
-        spotlight.className = "schedule-tour-spotlight";
-        card.className = "schedule-tour-card";
-        card.setAttribute("role", "dialog");
-        card.setAttribute("aria-live", "polite");
-        card.setAttribute("aria-label", "Scheduled Event demo tour");
-        document.body.append(backdrop, spotlight, card);
-
-        const clearTargetEffects = () => document.querySelectorAll(".schedule-tour-target").forEach((item) => item.classList.remove("schedule-tour-target"));
-        const getStep = () => scheduleTourSteps[index];
-        const getTarget = () => document.querySelector(getStep().selector);
-        const getHighlightTarget = () => document.querySelector(getStep().targetSelector || getStep().selector);
-        const getTargetRect = () => {
-          const target = getHighlightTarget();
-          if (!target) return null;
-          if (window.innerWidth < 980) {
-            if (getStep().selector === ".sched-calendar") return document.querySelector(".sched-cal-toolbar")?.getBoundingClientRect() || target.getBoundingClientRect();
-            if (getStep().selector === ".sched-feed") return document.querySelector(".sched-feed-title")?.getBoundingClientRect() || target.getBoundingClientRect();
-          }
-          return target.getBoundingClientRect();
-        };
-        const applyTargetEffects = () => {
-          clearTargetEffects();
-          const target = getHighlightTarget();
-          if (target) target.classList.add("schedule-tour-target");
-        };
-        const endTour = () => {
-          document.body.classList.remove("schedule-tour-running");
-          clearTargetEffects();
-          backdrop.remove();
-          spotlight.remove();
-          card.remove();
-          window.removeEventListener("resize", positionStep);
-          document.removeEventListener("keydown", handleKeydown);
-        };
-
-        const positionFloatingCard = (rect, hostCard) => {
-          const margin = 16;
-          const gap = 20;
-          const viewportW = Math.max(window.innerWidth, document.documentElement.clientWidth || 0);
-          const viewportH = Math.max(window.innerHeight, document.documentElement.clientHeight || 0, 480);
-          const clamp = (value, min, max) => max < min ? min : Math.min(Math.max(value, min), max);
-          const workspaceLeft = document.querySelector(".workspace")?.getBoundingClientRect().left || 0;
-          const safeLeft = Math.max(margin, workspaceLeft + margin);
-          const sideSlotWidth = Math.floor(rect.left - safeLeft - gap);
-          const defaultWidth = Math.min(326, viewportW - margin * 2);
-          const canUseSideSlot = sideSlotWidth >= 258;
-          const cardWidth = canUseSideSlot ? Math.min(defaultWidth, sideSlotWidth) : defaultWidth;
-          hostCard.style.width = `${cardWidth}px`;
-          hostCard.style.right = "auto";
-          hostCard.style.bottom = "auto";
-          const cardHeight = Math.min(hostCard.offsetHeight || 230, 270, viewportH - margin * 2);
-          const spaces = { left: rect.left - margin, right: viewportW - rect.right - margin, top: rect.top - margin, bottom: viewportH - rect.bottom - margin };
-          let cardLeft;
-          let cardTop;
-          if (canUseSideSlot) {
-            cardLeft = safeLeft;
-            cardTop = clamp(rect.top, margin, viewportH - cardHeight - margin);
-          } else if (spaces.right >= cardWidth + gap) {
-            cardLeft = rect.right + gap;
-            cardTop = clamp(rect.top, margin, viewportH - cardHeight - margin);
-          } else if (spaces.left >= cardWidth + gap) {
-            cardLeft = rect.left - cardWidth - gap;
-            cardTop = clamp(rect.top, margin, viewportH - cardHeight - margin);
-          } else if (spaces.top >= cardHeight + gap) {
-            cardLeft = clamp(rect.left + rect.width / 2 - cardWidth / 2, safeLeft, viewportW - cardWidth - margin);
-            cardTop = rect.top - cardHeight - gap;
-          } else if (spaces.bottom >= cardHeight + gap) {
-            cardLeft = clamp(rect.left + rect.width / 2 - cardWidth / 2, safeLeft, viewportW - cardWidth - margin);
-            cardTop = rect.bottom + gap;
-          } else {
-            cardLeft = clamp(rect.left + rect.width / 2 - cardWidth / 2, safeLeft, viewportW - cardWidth - margin);
-            cardTop = rect.top < viewportH / 2 ? viewportH - cardHeight - margin : margin;
-          }
-          const overlapsTarget = () => !(cardLeft + cardWidth <= rect.left || cardLeft >= rect.right || cardTop + cardHeight <= rect.top || cardTop >= rect.bottom);
-          if (overlapsTarget()) {
-            if (rect.bottom + gap + cardHeight <= viewportH - margin) cardTop = rect.bottom + gap;
-            else if (rect.top - gap - cardHeight >= margin) cardTop = rect.top - gap - cardHeight;
-            else if (rect.left - gap - cardWidth >= margin) {
-              cardLeft = rect.left - gap - cardWidth;
-              cardTop = clamp(rect.top, margin, viewportH - cardHeight - margin);
-            } else if (rect.right + gap + cardWidth <= viewportW - margin) {
-              cardLeft = rect.right + gap;
-              cardTop = clamp(rect.top, margin, viewportH - cardHeight - margin);
-            }
-          }
-          cardLeft = clamp(cardLeft, safeLeft, viewportW - cardWidth - margin);
-          cardTop = clamp(cardTop, margin, viewportH - cardHeight - margin);
-          hostCard.style.left = `${cardLeft}px`;
-          hostCard.style.top = `${cardTop}px`;
-        };
-
-        function positionStep() {
-          const target = getHighlightTarget();
-          const rect = getTargetRect();
-          if (!target || !rect) {
-            endTour();
-            return;
-          }
-          const padding = 10;
-          const viewportW = Math.max(window.innerWidth, document.documentElement.clientWidth || 0);
-          const viewportH = Math.max(window.innerHeight, document.documentElement.clientHeight || 0, 480);
-          const top = Math.max(8, rect.top - padding);
-          const left = Math.max(8, rect.left - padding);
-          spotlight.style.top = `${top}px`;
-          spotlight.style.left = `${left}px`;
-          spotlight.style.width = `${Math.min(viewportW - left - 8, rect.width + padding * 2)}px`;
-          spotlight.style.height = `${Math.min(viewportH - top - 8, rect.height + padding * 2)}px`;
-          positionFloatingCard(rect, card);
-        }
-
-        const renderStep = () => {
-          lockCurrentPage();
-          const step = getStep();
-          const target = getTarget();
-          if (!target) {
-            endTour();
-            return;
-          }
-          document.body.classList.add("schedule-tour-running");
-          const rect = getTargetRect() || target.getBoundingClientRect();
-          if (rect.top < 88 || rect.bottom > window.innerHeight - 36) target.scrollIntoView({ behavior: "auto", block: "center", inline: "nearest" });
-          applyTargetEffects();
-          const progress = Math.round(((index + 1) / scheduleTourSteps.length) * 100);
-          card.innerHTML = `
-            <div class="schedule-tour-kicker">${step.kicker}</div>
-            <h3>${step.title}</h3>
-            <p>${step.body}</p>
-            <div class="schedule-tour-progress-wrap" aria-hidden="true"><i class="schedule-tour-progress-bar" style="--schedule-tour-progress:${progress}%"></i></div>
-            <span class="schedule-tour-hint">Tip: press Enter for Next, Esc to Skip.</span>
-            <div class="schedule-tour-footer">
-              <span class="schedule-tour-progress">${index + 1}/${scheduleTourSteps.length}</span>
-              <div class="schedule-tour-actions">
-                <button class="schedule-tour-btn" type="button" data-schedule-tour-skip>Skip</button>
-                <button class="schedule-tour-btn" type="button" data-schedule-tour-back ${index === 0 ? "disabled" : ""}>Back</button>
-                <button class="schedule-tour-btn primary" type="button" data-schedule-tour-next>${index === scheduleTourSteps.length - 1 ? "Done" : "Next"}</button>
-              </div>
-            </div>
-          `;
-          window.setTimeout(() => {
-            positionStep();
-            backdrop.classList.add("active");
-            spotlight.classList.add("active");
-            card.classList.add("active");
-            card.querySelector("[data-schedule-tour-next]")?.focus({ preventScroll: true });
-          }, 120);
-        };
-
-        const showDataPrompt = () => {
-          const dataTarget = document.querySelector('[data-section-target="contacts"]');
-          if (!dataTarget) return;
-          const promptBackdrop = document.createElement("div");
-          const promptSpotlight = document.createElement("div");
-          const promptCard = document.createElement("div");
-          promptBackdrop.className = "schedule-tour-backdrop active";
-          promptSpotlight.className = "schedule-tour-spotlight active";
-          promptCard.className = "schedule-tour-card active";
-          promptCard.setAttribute("role", "dialog");
-          promptCard.setAttribute("aria-live", "polite");
-          promptCard.setAttribute("aria-label", "Click Data prompt");
-          promptCard.innerHTML = `
-            <div class="schedule-tour-kicker">Next Step</div>
-            <h3>Click on Data</h3>
-            <p>The Scheduled Event walkthrough is complete. Now click the Data section in the left sidebar to continue toward Email Lists.</p>
-            <div class="schedule-tour-footer">
-              <span class="schedule-tour-progress">Complete</span>
-              <div class="schedule-tour-actions">
-                <button class="schedule-tour-btn" type="button" data-schedule-tour-skip>Skip</button>
-              </div>
-            </div>
-          `;
-          document.body.append(promptBackdrop, promptSpotlight, promptCard);
-          dataTarget.dataset.scheduleTourNextPrompt = "true";
-          const closePrompt = () => {
-            document.body.classList.remove("schedule-tour-running");
-            promptBackdrop.remove();
-            promptSpotlight.remove();
-            promptCard.remove();
-            delete dataTarget.dataset.scheduleTourNextPrompt;
-            window.removeEventListener("resize", positionPrompt);
-            document.removeEventListener("click", handleDataClick, true);
-          };
-          const positionPrompt = () => {
-            const rect = dataTarget.getBoundingClientRect();
-            const padding = 8;
-            promptSpotlight.style.top = `${Math.max(8, rect.top - padding)}px`;
-            promptSpotlight.style.left = `${Math.max(8, rect.left - padding)}px`;
-            promptSpotlight.style.width = `${Math.min(window.innerWidth - rect.left - 8, rect.width + padding * 2)}px`;
-            promptSpotlight.style.height = `${rect.height + padding * 2}px`;
-            positionFloatingCard(rect, promptCard);
-          };
-          const handleDataClick = (event) => {
-            if (event.target.closest('[data-section-target="contacts"]')) {
-              event.preventDefault();
-              event.stopPropagation();
-              
-              promptCard.innerHTML = `
-                <div class="schedule-tour-kicker">Data clicked</div>
-                <h3>Great, that is the Data section</h3>
-                <p>This standalone page stays locked on Scheduled Event. To open the next standalone demo, use ${nextPage}.</p>
-                <div class="schedule-tour-footer">
-                  <span class="schedule-tour-progress">Complete</span>
-                  <div class="schedule-tour-actions">
-                    <button class="schedule-tour-btn primary" type="button" data-schedule-tour-skip>Done</button>
-                  </div>
-                </div>
-              `;
-              positionPrompt();
-            }
-          };
-          promptCard.addEventListener("click", (event) => {
-            if (event.target.closest("[data-schedule-tour-skip]")) closePrompt();
-          });
-          window.addEventListener("resize", positionPrompt);
-          document.addEventListener("click", handleDataClick, true);
-          document.body.classList.add("schedule-tour-running");
-          dataTarget.scrollIntoView({ behavior: "auto", block: "nearest", inline: "nearest" });
-          positionPrompt();
-        };
-
-        const handleKeydown = (event) => {
-          if (event.key === "Escape") endTour();
-          if (event.key === "Enter" || event.key === "ArrowRight") {
-            event.preventDefault();
-            card.querySelector("[data-schedule-tour-next]")?.click();
-          }
-          if (event.key === "ArrowLeft") {
-            event.preventDefault();
-            card.querySelector("[data-schedule-tour-back]")?.click();
-          }
-        };
-
-        card.addEventListener("click", (event) => {
-          if (event.target.closest("[data-schedule-tour-skip]")) {
-            endTour();
-            return;
-          }
-          if (event.target.closest("[data-schedule-tour-back]")) {
-            if (index === 0) return;
-            index -= 1;
-            renderStep();
-            return;
-          }
-          if (event.target.closest("[data-schedule-tour-next]")) {
-            if (index >= scheduleTourSteps.length - 1) {
-              endTour();
-              showDataPrompt();
-              return;
-            }
-            index += 1;
-            renderStep();
-          }
-        });
-
-        window.addEventListener("resize", positionStep);
-        document.addEventListener("keydown", handleKeydown);
-        renderStep();
-      };
-
-      let tourStarted = false;
-      const scheduleTourStart = () => {
-        lockCurrentPage();
-        if (tourStarted) return;
-        tourStarted = true;
-        window.setTimeout(startScheduleTour, 650);
-      };
-
-      if (document.readyState === "loading") {
-        document.addEventListener("DOMContentLoaded", scheduleTourStart, { once: true });
-        window.addEventListener("load", scheduleTourStart, { once: true });
-      } else {
-        scheduleTourStart();
-      }
+      lockCurrentPage();
     })();
   </script>
 
+  <script id="warmup-control-guided-tour">
+    (() => {
+      const cfg = {
+        view: "warmup-control",
+        promptSelector: '[data-target-view="email-accounts"]',
+        promptTitle: "Click on Email Account",
+        promptBody: "The Warmup Control walkthrough is complete. Now click Email Account in the upper navbar to continue the demo flow.",
+        clickedKicker: "Email Account clicked",
+        clickedTitle: "Great, that is the next section",
+        clickedBody: "This standalone page stays locked on Warmup Control. To open the next standalone demo, use Email Account.html.",
+        steps: [
+          ["Warmup Control", ".wc-hero", "Start with deliverability control", "This header explains warmup status and gives quick actions for refresh, guidance, and adding an account."],
+          ["Metrics", ".wc-metrics", "Read warmup health at a glance", "The metrics summarize active accounts, attention items, sent volume, inbox placement, spam placement, and average health."],
+          ["Inbox Placement", ".wc-metric:nth-child(4)", "Protect inbox placement", "Inbox placement shows whether warmup is helping messages land where prospects can see them."],
+          ["Spam Placement", ".wc-metric:nth-child(5)", "Watch spam risk", "Spam placement is separated so risky senders can be paused before live campaigns are affected."],
+          ["Insight", ".wc-insight", "Use deliverability recommendations", "The insight panel calls out senders that need review before they enter outbound campaigns."],
+          ["Toolbar", ".wc-toolbar", "Search and filter senders", "Search, status tabs, provider filter, and sort controls help manage multiple warmup accounts."],
+          ["Status Tabs", ".wc-tabs", "Filter by sender state", "These tabs quickly isolate active, paused, attention, and disconnected accounts."],
+          ["Active Sender", ".wc-account:nth-child(1)", "Review a healthy sender", "The active sender row shows provider, usage, warmup volume, inbox/spam split, and health score."],
+          ["Paused Sender", ".wc-account:nth-child(2)", "Find accounts needing attention", "Paused senders remain visible so users can review limits or resume warmup when safe."],
+          ["Row Actions", ".wc-account:nth-child(1) .wc-row-actions", "Act on a sender", "Pause, settings, and remove controls are available directly from each row."],
+          ["Drawer", ".wc-drawer-panel", "Inspect detailed warmup history", "The drawer contains overview stats, settings, activity, and deliverability details for a sender."],
+          ["Activity Chart", ".wc-chart", "Review trends over time", "The chart compares sent volume, inbox placement, and spam placement across the week."]
+        ]
+      };
+      runGuidedDemo(cfg);
+      function runGuidedDemo(config){
+        const style=document.createElement("style");style.textContent=`.gt-backdrop{position:fixed;inset:0;z-index:9990;background:radial-gradient(circle at 74% 18%,rgba(109,93,247,.14),transparent 28%),rgba(15,23,42,.08);pointer-events:none;opacity:0;transition:opacity .22s}.gt-backdrop.active{opacity:1}.gt-spot{position:fixed;z-index:10000;border:2px solid rgba(109,93,247,.95);border-radius:14px;background:rgba(109,93,247,.08);box-shadow:0 0 0 9999px rgba(15,23,42,.34),0 20px 70px rgba(80,70,210,.42);pointer-events:none;opacity:0;transition:.22s}.gt-spot.active{opacity:1;animation:gtPulse 1.7s infinite}.gt-card{position:fixed;z-index:10030;width:min(326px,calc(100vw - 28px));max-height:calc(100vh - 32px);overflow:auto;padding:18px;border:1px solid rgba(148,163,184,.34);border-radius:14px;background:rgba(255,255,255,.97);color:#101827;box-shadow:0 18px 50px rgba(15,23,42,.20);backdrop-filter:blur(16px);opacity:0;transform:translateY(8px);transition:.2s}.gt-card.active{opacity:1;transform:none}.gt-card:before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,#3158F6,#6D5DF7,#0EB5BB)}.gt-kicker{margin-bottom:9px;color:#3158F6;font-size:10.5px;font-weight:900;letter-spacing:.14em;text-transform:uppercase}.gt-card h3{margin:0 0 10px;color:#101827;font-family:var(--font-display);font-size:20px;line-height:1.18}.gt-card p{margin:0;color:#52657D;font-size:14px;line-height:1.58}.gt-bar{margin-top:16px;height:5px;border-radius:999px;background:#EEF2F7;overflow:hidden}.gt-bar i{display:block;height:100%;width:var(--p);background:linear-gradient(90deg,#3158F6,#6D5DF7)}.gt-hint{display:block;margin-top:11px;color:#64748B;font-size:12px;font-weight:700}.gt-footer{display:flex;justify-content:space-between;gap:12px;margin-top:14px}.gt-count{padding:6px 9px;border-radius:999px;background:rgba(241,245,249,.72);color:#475569;font-size:11px;font-weight:850}.gt-actions{display:flex;gap:7px}.gt-btn{height:34px;border:1px solid var(--line);border-radius:9px;padding:0 13px;background:var(--surface);color:var(--text);font:inherit;font-size:13px;font-weight:850}.gt-btn.primary{border:0;background:linear-gradient(135deg,#6254F3,#3158F6);color:#fff}.gt-btn:disabled{opacity:.45}.gt-target{position:relative;z-index:10005;box-shadow:0 16px 38px rgba(49,88,246,.16),0 0 0 1px rgba(109,93,247,.30)!important;animation:gtLift 1.8s infinite}[data-gt-next=true]{position:relative;z-index:10005;animation:gtTab 1.4s infinite}html[data-theme=dark] .gt-card{background:rgba(15,23,42,.96);color:#F8FAFC}html[data-theme=dark] .gt-card h3{color:#F8FAFC}html[data-theme=dark] .gt-card p,html[data-theme=dark] .gt-hint{color:#CBD5E1}@keyframes gtPulse{50%{box-shadow:0 0 0 9999px rgba(15,23,42,.34),0 22px 78px rgba(80,70,210,.52)}}@keyframes gtLift{50%{transform:translateY(-2px)}}@keyframes gtTab{50%{box-shadow:0 0 0 8px rgba(109,93,247,0)}}@media(max-width:720px){.gt-card{left:14px!important;right:14px;bottom:14px!important;top:auto!important;width:auto!important}}`;document.head.appendChild(style);
+        const view=document.querySelector(`[data-view="${config.view}"]`);let i=0,backdrop,spot,card;const q=s=>document.querySelector(s),target=()=>q(config.steps[i][1])||view,clear=()=>document.querySelectorAll(".gt-target").forEach(e=>e.classList.remove("gt-target"));const pos=(r,e)=>{const m=16,g=20,vw=innerWidth,vh=Math.max(innerHeight,480),cw=Math.min(326,vw-m*2),wl=q(".workspace")?.getBoundingClientRect().left||0,sl=Math.max(m,wl+m);let ch=Math.min(e.offsetHeight||230,270,vh-m*2),left=r.right+g,top=Math.min(Math.max(r.top,m),vh-ch-m);if(left+cw>vw-m)left=r.left-cw-g;left=Math.min(Math.max(left,sl),vw-cw-m);if(!(left+cw<=r.left||left>=r.right||top+ch<=r.top||top>=r.bottom))top=r.bottom+g+ch<vh-m?r.bottom+g:Math.max(m,r.top-g-ch);e.style.left=`${left}px`;e.style.top=`${Math.min(Math.max(top,m),vh-ch-m)}px`;e.style.width=`${cw}px`};function place(){const r=target().getBoundingClientRect(),p=10;spot.style.top=`${Math.max(8,r.top-p)}px`;spot.style.left=`${Math.max(8,r.left-p)}px`;spot.style.width=`${Math.min(innerWidth-r.left-8,r.width+p*2)}px`;spot.style.height=`${Math.min(innerHeight-r.top-8,r.height+p*2)}px`;pos(r,card)}function render(){clear();const s=config.steps[i],el=target();if(config.view==="warmup-control"&&i>=10)document.getElementById("wcDrawer")?.removeAttribute("hidden");el.scrollIntoView({block:"center",inline:"nearest"});el.classList.add("gt-target");const p=Math.round((i+1)/config.steps.length*100);card.innerHTML=`<div class="gt-kicker">${s[0]}</div><h3>${s[2]}</h3><p>${s[3]}</p><div class="gt-bar"><i style="--p:${p}%"></i></div><span class="gt-hint">Tip: press Enter for Next, Esc to Skip.</span><div class="gt-footer"><span class="gt-count">${i+1}/${config.steps.length}</span><div class="gt-actions"><button class="gt-btn" data-skip>Skip</button><button class="gt-btn" data-back ${i===0?"disabled":""}>Back</button><button class="gt-btn primary" data-next>${i===config.steps.length-1?"Done":"Next"}</button></div></div>`;setTimeout(()=>{place();backdrop.classList.add("active");spot.classList.add("active");card.classList.add("active")},120)}function end(){clear();backdrop?.remove();spot?.remove();card?.remove();removeEventListener("resize",place);document.removeEventListener("keydown",keys)}function prompt(){const tab=q(config.promptSelector);if(!tab)return;backdrop=document.createElement("div");spot=document.createElement("div");card=document.createElement("div");backdrop.className="gt-backdrop active";spot.className="gt-spot active";card.className="gt-card active";card.innerHTML=`<div class="gt-kicker">Next Step</div><h3>${config.promptTitle}</h3><p>${config.promptBody}</p><div class="gt-footer"><span class="gt-count">Complete</span><div class="gt-actions"><button class="gt-btn" data-skip>Skip</button></div></div>`;document.body.append(backdrop,spot,card);tab.dataset.gtNext="true";const pp=()=>{const r=tab.getBoundingClientRect(),p=8;spot.style.top=`${Math.max(8,r.top-p)}px`;spot.style.left=`${Math.max(8,r.left-p)}px`;spot.style.width=`${r.width+p*2}px`;spot.style.height=`${r.height+p*2}px`;pos(r,card)};const click=e=>{if(e.target.closest(config.promptSelector)){card.innerHTML=`<div class="gt-kicker">${config.clickedKicker}</div><h3>${config.clickedTitle}</h3><p>${config.clickedBody}</p><div class="gt-footer"><span class="gt-count">Complete</span><div class="gt-actions"><button class="gt-btn primary" data-skip>Done</button></div></div>`;pp()}};card.addEventListener("click",e=>{if(e.target.closest("[data-skip]")){delete tab.dataset.gtNext;end();removeEventListener("click",click,true)}});addEventListener("click",click,true);pp()}function keys(e){if(e.key==="Escape")end();if(e.key==="Enter"||e.key==="ArrowRight"){e.preventDefault();card.querySelector("[data-next]")?.click()}if(e.key==="ArrowLeft"){e.preventDefault();card.querySelector("[data-back]")?.click()}}function start(){backdrop=document.createElement("div");spot=document.createElement("div");card=document.createElement("div");backdrop.className="gt-backdrop";spot.className="gt-spot";card.className="gt-card";document.body.append(backdrop,spot,card);addEventListener("resize",place);document.addEventListener("keydown",keys);card.addEventListener("click",e=>{if(e.target.closest("[data-skip]"))return end();if(e.target.closest("[data-back]")&&i>0){i--;render()}if(e.target.closest("[data-next]")){if(i>=config.steps.length-1){end();prompt()}else{i++;render()}}});render()}if(document.readyState==="loading")document.addEventListener("DOMContentLoaded",()=>setTimeout(start,650),{once:true});else setTimeout(start,650);
+      }
+    })();
+  </script>
 </body>
 </html>
