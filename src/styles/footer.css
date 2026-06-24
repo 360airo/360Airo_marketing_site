@@ -1,0 +1,315 @@
+/* src/styles/footer.css */
+
+.cs-footer-dark {
+  background-color: #0B0410;
+  color: #E2E8F0;
+  padding: 64px 24px 32px;
+  font-family: 'Outfit', sans-serif;
+  margin-top: -1px;
+}
+
+.cs-footer-dark-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Newsletter Section */
+.cs-footer-newsletter {
+  background-color: #160B1F;
+  border-radius: 16px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 64px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@media (min-width: 1024px) {
+  .cs-footer-newsletter {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 48px;
+  }
+}
+
+.cs-newsletter-content {
+  flex: 1;
+  max-width: 500px;
+}
+
+.cs-newsletter-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.cs-newsletter-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.cs-newsletter-content p {
+  color: #94A3B8;
+  font-size: 15px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cs-newsletter-form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.cs-newsletter-input {
+  background-color: #0B0410;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 14px 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 320px;
+  font-size: 15px;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.cs-newsletter-input:focus {
+  border-color: #C084FC;
+}
+
+.cs-newsletter-button {
+  background: linear-gradient(90deg, #A855F7 0%, #7E22CE 100%);
+  color: white;
+  border: none;
+  padding: 14px 24px;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: opacity 0.2s;
+}
+
+.cs-newsletter-button:hover {
+  opacity: 0.9;
+}
+
+/* Footer Grid */
+.cs-footer-dark-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
+}
+
+@media (min-width: 640px) {
+  .cs-footer-dark-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .cs-footer-dark-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr 1.5fr;
+  }
+}
+
+.cs-footer-brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.cs-footer-logo-img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  background: white;
+  border-radius: 8px;
+  padding: 4px;
+}
+
+.cs-footer-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.cs-brand-name {
+  color: white;
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.cs-brand-tagline {
+  color: #C084FC;
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 4px;
+}
+
+.cs-brand-desc {
+  color: #94A3B8;
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 280px;
+  margin-bottom: 24px;
+}
+
+.cs-social-icons {
+  display: flex;
+  gap: 12px;
+}
+
+.cs-social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background-color: #1A0D23;
+  color: #94A3B8;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  transition: all 0.2s;
+}
+
+.cs-social-icons a:hover {
+  background-color: #C084FC;
+  color: white;
+}
+
+.cs-footer-link-col h3 {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.cs-purple-dot {
+  width: 6px;
+  height: 6px;
+  background-color: #A855F7;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.cs-footer-dark-links {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.cs-footer-dark-links a {
+  color: #94A3B8;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+
+.cs-footer-dark-links a:hover {
+  color: #C084FC;
+}
+
+/* CTA Card */
+.cs-footer-cta-card {
+  background-color: #160B1F;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 24px;
+}
+
+.cs-footer-cta-card h3 {
+  color: white;
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.cs-footer-cta-card p {
+  color: #94A3B8;
+  font-size: 13px;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.cs-footer-cta-button {
+  width: 100%;
+  background: linear-gradient(90deg, #A855F7 0%, #7E22CE 100%);
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.cs-footer-cta-button:hover {
+  opacity: 0.9;
+}
+
+/* Bottom Bar */
+.cs-footer-dark-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .cs-footer-dark-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.cs-copyright {
+  color: #64748B;
+  font-size: 12px;
+  margin: 0;
+}
+
+.cs-copyright a {
+  color: #94A3B8;
+  text-decoration: underline;
+}
+
+.cs-copyright a:hover {
+  color: white;
+}
+
+.cs-bottom-links {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cs-bottom-links a {
+  color: #64748B;
+  text-decoration: none;
+  font-size: 12px;
+  transition: color 0.2s;
+}
+
+.cs-bottom-links a:hover {
+  color: white;
+}

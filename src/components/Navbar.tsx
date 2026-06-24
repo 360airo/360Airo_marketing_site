@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { navLinks } from '../data/navLinks';
 
 interface NavbarProps {
-  activeTab?: 'home' | 'features' | 'solutions' | 'resources' | 'pricing';
+  activeTab?: string;
 }
 
 const dropdownItems = [
