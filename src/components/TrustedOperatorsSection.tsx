@@ -7,11 +7,44 @@ export default function TrustedOperatorsSection() {
   const sectionRef = useRef(null);
 
   useEffect(() => {
+    function animateCounters(container) {
+      const counters = container.querySelectorAll('.to-counter');
+      counters.forEach((counter) => {
+        const target = parseFloat(counter.dataset.target || "0");
+        const decimals = parseInt(counter.dataset.decimals || "0", 10);
+        const prefix = counter.dataset.prefix || "";
+        const suffix = counter.dataset.suffix || "";
+        const duration = 2000;
+        const startTime = performance.now();
+
+        function updateCounter(currentTime) {
+          const elapsed = currentTime - startTime;
+          const progress = Math.min(elapsed / duration, 1);
+          const easedProgress = 1 - Math.pow(1 - progress, 3);
+          const currentValue = target * easedProgress;
+
+          const formatted = currentValue.toFixed(decimals);
+          counter.textContent = prefix + formatted + suffix;
+
+          if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+          } else {
+            counter.textContent = prefix + target.toFixed(decimals) + suffix;
+          }
+        }
+        requestAnimationFrame(updateCounter);
+      });
+    }
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             entry.target.classList.add('to-visible');
+            if (!entry.target.dataset.animated) {
+              entry.target.dataset.animated = "true";
+              animateCounters(entry.target);
+            }
           }
         });
       },
@@ -31,25 +64,25 @@ export default function TrustedOperatorsSection() {
         {/* STATS CARD */}
         <div className="trusted-stats-card">
           <article className="trusted-stat-item" style={{ animationDelay: '0s' }}>
-            <strong>6.5M+</strong>
+            <strong className="to-counter" data-target="6.5" data-decimals="1" data-suffix="M+">0.0M+</strong>
             <span>Emails sent / month</span>
           </article>
           <div className="trusted-divider"></div>
           
           <article className="trusted-stat-item" style={{ animationDelay: '0.08s' }}>
-            <strong>13.6M+</strong>
+            <strong className="to-counter" data-target="13.6" data-decimals="1" data-suffix="M+">0.0M+</strong>
             <span>Prospects contacted / month</span>
           </article>
           <div className="trusted-divider"></div>
 
           <article className="trusted-stat-item" style={{ animationDelay: '0.16s' }}>
-            <strong>$5M+</strong>
+            <strong className="to-counter" data-target="5" data-decimals="0" data-prefix="$" data-suffix="M+">$0M+</strong>
             <span>Pipeline generated / month</span>
           </article>
           <div className="trusted-divider"></div>
 
           <article className="trusted-stat-item" style={{ animationDelay: '0.24s' }}>
-            <strong>$1.25M+</strong>
+            <strong className="to-counter" data-target="1.25" data-decimals="2" data-prefix="$" data-suffix="M+">$0.00M+</strong>
             <span>Revenue generated / month</span>
           </article>
         </div>
