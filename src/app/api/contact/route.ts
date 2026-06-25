@@ -55,11 +55,23 @@ export async function POST(request: Request) {
           phone: phone || '',
           phone_number: phone || '',
           phoneNumber: phone || '',
+          // Variations for Interested In
           interestedIn: interestedIn || '',
           interested_in: interestedIn || '',
+          interestedin: interestedIn || '',
+          'Interested In': interestedIn || '',
+          'Interested in': interestedIn || '',
+          interest: interestedIn || '',
+          interested: interestedIn || '',
+          // Variations for How can we help / Message
           message: message || '',
           how_can_we_help: message || '',
           howCanWeHelp: message || '',
+          howcanwehelp: message || '',
+          'How can we help': message || '',
+          'How Can We Help': message || '',
+          'How can we help?': message || '',
+          'How Can We Help?': message || '',
           submittedAt: new Date().toISOString()
         }),
       });
