@@ -147,8 +147,8 @@ body {
   position: absolute;
   top: 50%;
   right: 7%;
-  width: min(680px, 46vw);
-  aspect-ratio: 1.48 / 1;
+  width: min(600px, 42vw);
+  aspect-ratio: 1.25 / 1;
   transform: translateY(-50%);
   transform-origin: center center;
   will-change: auto;
