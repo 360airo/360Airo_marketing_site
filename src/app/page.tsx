@@ -13,7 +13,7 @@ import AiroAgentBuilder from '../components/AiroAgentBuilder';
 import FunnelStagesSection from '../components/FunnelStagesSection';
 import OutreachDeploySection from '../components/OutreachDeploySection';
 import OutreachBentoSection from '../components/OutreachBentoSection';
-import PricingSection from '../components/PricingSection';
+
 import PhoneDashboard from '../components/PhoneDashboard';
 import ModernOutreachSection from '../components/ModernOutreachSection';
 import Navbar from '../components/Navbar';
@@ -55,8 +55,10 @@ export default function App() {
     const initTimeline = () => {
       ctx = gsap.context(() => {
         let mm = gsap.matchMedia();
-        mm.add("(prefers-reduced-motion: no-preference)", () => {
-                  gsap.set(tabletMotionRef.current, {
+        
+        // --- DESKTOP ANIMATION ---
+        mm.add("(min-width: 901px) and (prefers-reduced-motion: no-preference)", () => {
+          gsap.set(tabletMotionRef.current, {
             xPercent: 0,
             yPercent: -50,
             x: 0,
@@ -87,32 +89,12 @@ export default function App() {
 
           timeline
             .addLabel("heroExit")
-            .to(heroContentRef.current, {
-              opacity: 0,
-              y: -50,
-              duration: 1,
-              ease: "none"
-            }, "heroExit")
-            .to(dashboardUiRef.current, {
-              opacity: 0,
-              scale: 0.96,
-              filter: "blur(4px)",
-              duration: 1,
-              ease: "none"
-            }, "heroExit")
+            .to(heroContentRef.current, { opacity: 0, y: -50, duration: 1, ease: "none" }, "heroExit")
+            .to(dashboardUiRef.current, { opacity: 0, scale: 0.96, filter: "blur(4px)", duration: 1, ease: "none" }, "heroExit")
             .addLabel("futureTitleEnter", "heroExit+=0.35")
-            .to(futureTabletContentRef.current, {
-              autoAlpha: 1,
-              opacity: 0.65,
-              duration: 0.55,
-              ease: "none"
-            }, "futureTitleEnter")
+            .to(futureTabletContentRef.current, { autoAlpha: 1, opacity: 0.65, duration: 0.55, ease: "none" }, "futureTitleEnter")
             .addLabel("futureTitleCrisp", "futureTitleEnter+=0.4")
-            .to(futureTabletContentRef.current, {
-              opacity: 1,
-              duration: 0.65,
-              ease: "none"
-            }, "futureTitleCrisp")
+            .to(futureTabletContentRef.current, { opacity: 1, duration: 0.65, ease: "none" }, "futureTitleCrisp")
             .addLabel("tabletPullForward", "futureTitleCrisp+=0.45")
             .to(tabletMotionRef.current, {
               x: () => {
@@ -139,11 +121,68 @@ export default function App() {
               duration: 2.8,
               ease: "none"
             }, "tabletZoomToViewport")
-            .to(phoneDashboardRef.current, {
-              opacity: 1,
-              duration: 1.98,
+            .to(phoneDashboardRef.current, { opacity: 1, duration: 1.98, ease: "none" }, 2.97);
+        });
+
+        // --- MOBILE ANIMATION ---
+        mm.add("(max-width: 900px) and (prefers-reduced-motion: no-preference)", () => {
+          gsap.set(tabletMotionRef.current, {
+            xPercent: 50,
+            yPercent: 0,
+            x: 0,
+            y: 0,
+            scale: 1,
+            transformOrigin: "center center"
+          });
+
+          const timeline = gsap.timeline({
+            scrollTrigger: {
+              trigger: heroStageRef.current,
+              start: "top top",
+              end: "+=1000",
+              scrub: 1.15,
+              pin: true,
+              pinSpacing: true,
+              anticipatePin: 1,
+              invalidateOnRefresh: true
+            },
+            onUpdate: function() {
+              const currentScale = parseFloat(gsap.getProperty(tabletMotionRef.current, "scaleX") as string) || 1;
+              if (futureTabletContentRef.current) {
+                const inverseScale = 1 / currentScale;
+                futureTabletContentRef.current.style.setProperty('--tablet-scale-inverse', inverseScale.toString());
+              }
+            }
+          });
+
+          timeline
+            .addLabel("heroExit")
+            .to(heroContentRef.current, { opacity: 0, y: -30, duration: 1, ease: "none" }, "heroExit")
+            .to(dashboardUiRef.current, { opacity: 0, scale: 0.96, filter: "blur(4px)", duration: 1, ease: "none" }, "heroExit")
+            .addLabel("futureTitleEnter", "heroExit+=0.35")
+            .to(futureTabletContentRef.current, { autoAlpha: 1, opacity: 0.65, duration: 0.55, ease: "none" }, "futureTitleEnter")
+            .addLabel("futureTitleCrisp", "futureTitleEnter+=0.4")
+            .to(futureTabletContentRef.current, { opacity: 1, duration: 0.65, ease: "none" }, "futureTitleCrisp")
+            .addLabel("tabletPullForward", "futureTitleCrisp+=0.45")
+            .to(tabletMotionRef.current, {
+              y: () => {
+                const shell = tabletMotionRef.current;
+                if (!shell) return 0;
+                const rect = shell.getBoundingClientRect();
+                const currentCenterY = rect.top + rect.height / 2;
+                return window.innerHeight / 2 - currentCenterY;
+              },
+              scale: 1.4,
+              duration: 1.2,
               ease: "none"
-            }, 2.97);
+            }, "tabletPullForward")
+            .addLabel("tabletZoomToViewport", "tabletPullForward+=0.95")
+            .to(tabletMotionRef.current, {
+              scale: getViewportScreenCoverScale,
+              duration: 2.8,
+              ease: "none"
+            }, "tabletZoomToViewport")
+            .to(phoneDashboardRef.current, { opacity: 1, duration: 1.98, ease: "none" }, 2.97);
         });
       });
     };
@@ -322,7 +361,7 @@ export default function App() {
   <FunnelStagesSection />
   <OutreachDeploySection />
   <OutreachBentoSection />
-  <PricingSection />
+
   <CTASection />
   <FAQSection />
   <div id="section-pricing" style={{ position: 'relative', zIndex: 10, width: '100%' }}>
