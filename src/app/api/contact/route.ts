@@ -41,7 +41,7 @@ export async function POST(request: Request) {
     }
 
     // Trigger Google Apps Script Webhook
-    const webhookUrl = process.env.CONTACT_US_WEBHOOK_URL || 'https://script.google.com/macros/s/AKfycbxjqQqTnJCC6jWWaILBVXRRZE3GC1T5oDuumcfZCOO9M48_VtuJK7WDiP-S6O3sGcmBnw/exec';
+    const webhookUrl = process.env.CONTACT_US_WEBHOOK_URL || 'https://script.google.com/macros/s/AKfycbymjqbLqCxh5UOneK_GbBNnPKzLlzc503pYTlGyK7n90rU2O7RzkEbJyrZzIjBua5sN9g/exec';
     
     try {
       const webhookResponse = await fetch(webhookUrl, {

@@ -92,6 +92,11 @@ color:#fff;
  overflow: visible;
 }
 
+.features-page-root #main-nav {
+  position: fixed !important;
+  z-index: 9999 !important;
+}
+
 
 
 /* smooth color transition for nav text */

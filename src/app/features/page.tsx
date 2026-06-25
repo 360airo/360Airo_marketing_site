@@ -584,7 +584,7 @@ export default function FeaturesPage() {
   }, [interactiveMode]);
 
   return (
-    <div className="app-container">
+    <div className="app-container features-page-root">
       <canvas id="aurora-canvas" />
       <canvas id="aurora-light-canvas" />
       <Navbar activeTab="features" />
