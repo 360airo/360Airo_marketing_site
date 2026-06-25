@@ -1934,3 +1934,111 @@ filter:none;
     gap: 30px;
   }
 }
+
+/* Resources Dropdown Custom Styles */
+.nav-dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 10px;
+  width: 380px;
+  background: rgba(3, 7, 18, 0.45) !important;
+  backdrop-filter: blur(32px) saturate(180%) brightness(110%);
+  -webkit-backdrop-filter: blur(32px) saturate(180%) brightness(110%);
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 16px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6);
+  padding: 16px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.nav-dropdown-item {
+  padding: 12px;
+  border-radius: 12px;
+  text-decoration: none;
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  cursor: pointer;
+  background: transparent;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.nav-dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nav-dropdown-icon-box {
+  width: 42px;
+  height: 42px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.nav-dropdown-item:hover .nav-dropdown-icon-box {
+  background: rgba(139, 92, 246, 0.08);
+  border-color: rgba(139, 92, 246, 0.3);
+}
+
+.nav-dropdown-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  transition: color 0.2s;
+}
+
+.nav-dropdown-item:hover .nav-dropdown-title {
+  color: #8B5CF6;
+}
+
+.nav-dropdown-desc {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.48);
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.nav-dropdown-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 8px -16px;
+}
+
+.nav-dropdown-footer {
+  padding: 10px 12px;
+  border-radius: 10px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  background: transparent;
+  transition: background 0.2s;
+}
+
+.nav-dropdown-footer:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nav-dropdown-footer-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.2s;
+}
+
+.nav-dropdown-footer:hover .nav-dropdown-footer-text {
+  color: #fff;
+}
+
