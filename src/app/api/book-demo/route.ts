@@ -97,6 +97,37 @@ export async function POST(request: Request) {
       );
     }
 
+    // Trigger webhook if configured (e.g. to feed Excel sheet via Power Automate/Zapier)
+    const webhookUrl = process.env.DEMO_BOOKING_WEBHOOK_URL;
+    if (webhookUrl) {
+      try {
+        const webhookResponse = await fetch(webhookUrl, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            firstName,
+            lastName,
+            email,
+            phone: `'${countryCode || '+1'} ${phone}`,
+            organization: orgName,
+            employeeSize: employeeSize || '1-10',
+            demoDate: dateFormatted,
+            demoTime: time24h,
+            timezone,
+            teamType: teamType || 'small-team',
+            bookedAt: new Date().toISOString()
+          }),
+        });
+        if (!webhookResponse.ok) {
+          console.error(`Webhook returned status ${webhookResponse.status}`);
+        }
+      } catch (webhookErr) {
+        console.error('Failed to send data to webhook:', webhookErr);
+      }
+    }
+
     return NextResponse.json({ success: true, data });
   } catch (err: any) {
     console.error('Error handling demo booking submission:', err);

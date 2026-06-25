@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from 'react';
+import Link from 'next/link';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import '../../styles/PricingPage.css';
@@ -119,7 +120,7 @@ export default function PricingPage() {
                 <div className="pp-card-price-subtext">per user / month, billed {isYearly ? 'annually' : 'monthly'}</div>
               </div>
               
-              <a href="#" className="pp-btn pp-btn-outline">Start 14-day trial</a>
+              <Link href="/contact-us" className="pp-btn pp-btn-outline">Start 14-day trial</Link>
               
               <div className="pp-card-divider"></div>
               
@@ -160,7 +161,7 @@ export default function PricingPage() {
                 <div className="pp-card-price-subtext">per user / month, billed {isYearly ? 'annually' : 'monthly'}</div>
               </div>
               
-              <a href="#" className="pp-btn pp-btn-solid">Start 14-day trial</a>
+              <Link href="/contact-us" className="pp-btn pp-btn-solid">Start 14-day trial</Link>
               
               <div className="pp-card-divider"></div>
               
@@ -201,7 +202,7 @@ export default function PricingPage() {
                 <div className="pp-card-price-subtext">/ month, billed {isYearly ? 'annually' : 'monthly'}</div>
               </div>
               
-              <a href="#" className="pp-btn pp-btn-white" style={{color: 'var(--pp-bg-navy)'}}>Hire AI SDR</a>
+              <Link href="/contact-us" className="pp-btn pp-btn-white" style={{color: 'var(--pp-bg-navy)'}}>Hire AI SDR</Link>
               
               <div className="pp-card-divider"></div>
               
@@ -376,7 +377,7 @@ export default function PricingPage() {
             <div className="pp-cta-eyebrow">START YOUR OUTREACH ENGINE</div>
             <h2 className="pp-cta-heading">Start building better outbound campaigns today.</h2>
             <p className="pp-cta-desc">Create your first campaign, connect an inbox, and explore AI-powered outreach in minutes. No credit card required.</p>
-            <a href="#" className="pp-btn pp-btn-solid">Start Free Trial <span className="pp-cta-arrow">&rarr;</span></a>
+            <Link href="/contact-us" className="pp-btn pp-btn-solid">Start Free Trial <span className="pp-cta-arrow">&rarr;</span></Link>
             
             <div className="pp-cta-trust">
               <span><CheckIcon /> No credit card required</span>

@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 import '../styles/CTASection.css';
 
 export default function CTASection() {
@@ -9,7 +10,9 @@ export default function CTASection() {
         <p className="cta-description">
           We are here to help you with your business. Get in touch with us and we will get back to you as soon as possible.
         </p>
-        <button className="cta-button">Contact Us</button>
+        <Link href="/contact-us" className="cta-button">
+          Contact Us
+        </Link>
       </div>
     </section>
   );
