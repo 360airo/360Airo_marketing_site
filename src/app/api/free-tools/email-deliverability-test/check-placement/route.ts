@@ -93,7 +93,7 @@ async function checkGmailPlacement(subjectCode: string): Promise<PlacementResult
 
       imap.on('ready', () => {
         // Define Gmail folders to check
-        const foldersToCheck = ['INBOX', '[Gmail]/Spam', '[Gmail]/All Mail'];
+        const foldersToCheck = ['INBOX', '[Gmail]/Spam', '[Gmail]/Promotions', '[Gmail]/Updates', '[Gmail]/All Mail'];
         let boxesProcessed = 0;
         let foundMostRecent = false;
 
@@ -136,6 +136,12 @@ async function checkGmailPlacement(subjectCode: string): Promise<PlacementResult
 
               f.on('message', (msg: any, seqno: any) => {
                 let rawEmail = '';
+                let labels: string[] = [];
+
+                msg.on('attributes', (attrs: any) => {
+                  labels = attrs['x-gm-labels'] || [];
+                  console.log(`🏷️ [IMAP] Gmail labels for message:`, labels);
+                });
 
                 msg.on('body', (stream: any) => {
                   stream.on('data', (chunk: any) => {
@@ -168,12 +174,33 @@ async function checkGmailPlacement(subjectCode: string): Promise<PlacementResult
                       const spamTriggers = ['act now', 'click here', '100% free', 'make money', 'buy now', 'cheap', 'earn money', 'winner', 'gift card', 'guaranteed'];
                       const foundTriggers = spamTriggers.filter(trigger => textContent.toLowerCase().includes(trigger));
 
+                      // Determine placement folder based on Box and labels
+                      let folderPlacement = boxName;
+                      if (boxName === 'INBOX' || boxName === '[Gmail]/All Mail') {
+                        if (labels.some(l => l.toLowerCase().includes('promotions') || l.toLowerCase().includes('category/promotions'))) {
+                          folderPlacement = 'Promotions';
+                        } else if (labels.some(l => l.toLowerCase().includes('updates') || l.toLowerCase().includes('category/updates'))) {
+                          folderPlacement = 'Updates';
+                        } else if (labels.some(l => l.toLowerCase().includes('social') || l.toLowerCase().includes('category/social'))) {
+                          folderPlacement = 'Social';
+                        } else if (labels.some(l => l.toLowerCase().includes('spam') || l.toLowerCase().includes('spam'))) {
+                          folderPlacement = 'Spam';
+                        } else {
+                          folderPlacement = 'Inbox (Primary)';
+                        }
+                      } else {
+                        if (boxName.toLowerCase().includes('spam')) folderPlacement = 'Spam';
+                        else if (boxName.toLowerCase().includes('promotions')) folderPlacement = 'Promotions';
+                        else if (boxName.toLowerCase().includes('updates')) folderPlacement = 'Updates';
+                        else if (boxName === 'INBOX') folderPlacement = 'Inbox (Primary)';
+                      }
+
                       results.push({
                         id: `${boxName}-${seqno}`,
                         from,
                         to,
                         subject,
-                        folder: boxName,
+                        folder: folderPlacement,
                         date,
                         provider: 'Gmail',
                         dns: {

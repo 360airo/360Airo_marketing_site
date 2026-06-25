@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import dns from 'dns';
 import { promisify } from 'util';
 import net from 'net';
+import axios from 'axios';
 
 const resolveMx = promisify(dns.resolveMx);
 
@@ -175,7 +176,48 @@ async function testEmailDeliverability(email: string): Promise<DeliverabilityRes
   // Sort by priority
   mxRecords.sort((a: any, b: any) => a.priority - b.priority);
 
-  // Step 3: SMTP Check
+  // Step 3: SMTP Check - Try MailTester Ninja API first to avoid Port 25 blocking issues
+  const mailtesterKey = process.env.NEXT_PUBLIC_MAILTESTER_API_KEY || process.env.MAILTESTER_KEY;
+  if (mailtesterKey) {
+    try {
+      console.log(`🔍 [Deliverability] Using MailTester API for ${email}...`);
+      const { data } = await axios.get('https://happy.mailtester.ninja/ninja', {
+        params: {
+          email: email.toLowerCase().trim(),
+          key: mailtesterKey,
+        },
+        timeout: 8000,
+        family: 4,
+      });
+
+      console.log(`📥 [Deliverability] API response:`, data);
+
+      let status: 'valid' | 'invalid' | 'unknown' = 'unknown';
+      if (data.message) {
+        const msg = data.message.toLowerCase();
+        if (msg.includes('accepted')) {
+          status = 'valid';
+        } else if (msg.includes('rejected') || msg.includes('invalid') || msg.includes('no mx records')) {
+          status = 'invalid';
+        }
+      }
+
+      return {
+        email,
+        status,
+        reason: data.message || 'Verification completed via MailTester API',
+        verificationTime: Date.now() - startTime,
+        mxRecords: mxRecords.slice(0, 3).map((mx: any) => mx.exchange),
+        formatCheck: true,
+        domainCheck: true,
+        smtpCheck: status === 'valid',
+      };
+    } catch (apiErr: any) {
+      console.warn('⚠️ [Deliverability] MailTester API failed, falling back to raw SMTP check:', apiErr.message);
+    }
+  }
+
+  // Fallback to Raw SMTP Check
   for (const mx of mxRecords) {
     const host = mx.exchange.toLowerCase();
 
@@ -205,7 +247,7 @@ async function testEmailDeliverability(email: string): Promise<DeliverabilityRes
   return {
     email,
     status: 'unknown',
-    reason: 'No definitive SMTP response from MX hosts',
+    reason: 'No SMTP response from MX hosts and no API service available',
     verificationTime: Date.now() - startTime,
     mxRecords: mxRecords.slice(0, 3).map((mx: any) => mx.exchange),
     formatCheck: true,
