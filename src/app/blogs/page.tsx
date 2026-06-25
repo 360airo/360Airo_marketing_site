@@ -19,6 +19,8 @@ import { Footer } from '@/components/Footer';
 import Link from 'next/link';
 import { useMemo, useRef, useState } from 'react';
 import '../../styles/blogs.css';
+import '../../styles/customer-stories.css';
+import FeatureMarquee from '../../components/FeatureMarquee';
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -213,15 +215,65 @@ const blogPosts = [
 ];
 
 export default function BlogsPage() {
-  const featuredPost = blogPosts[0];
-  const gridPosts = blogPosts.slice(1);
-  const recentTitles = blogPosts.map((post) => ({
-    title: post.title,
-    slug: post.slug,
-  }));
+  const categories = [
+    'Blog',
+    'Cold Emailing',
+    'B2B Database',
+    'Lead Generation',
+    'Email Deliverability',
+    'Sales Engagement',
+    'Sales Development',
+    'Product Updates',
+    'Agency',
+    'Email Productivity',
+    'Cold Calling'
+  ];
 
-  const categoriesRef = useRef<HTMLDivElement>(null);
+  const [selectedCategory, setSelectedCategory] = useState('Blog');
   const [searchQuery, setSearchQuery] = useState('');
+  const categoriesRef = useRef<HTMLDivElement>(null);
+
+  const filteredPosts = useMemo(() => {
+    let posts = blogPosts;
+
+    // Filter by category
+    if (selectedCategory !== 'Blog') {
+      const catLower = selectedCategory.toLowerCase();
+      // Simplify category mapping matching logic
+      const mapKeyword = catLower
+        .replace('ing', '')
+        .replace('emailing', 'email')
+        .replace('productivity', 'tools')
+        .replace('database', 'data');
+
+      posts = blogPosts.filter(post => {
+        const matchCategory = post.category.toLowerCase().includes(mapKeyword) || 
+          mapKeyword.includes(post.category.toLowerCase());
+        const matchTags = post.tags.some(tag => tag.toLowerCase().includes(mapKeyword));
+        return matchCategory || matchTags;
+      });
+    }
+
+    // Filter by search query if any
+    if (searchQuery.trim()) {
+      const query = searchQuery.trim().toLowerCase();
+      posts = posts.filter(post => {
+        const haystack = [
+          post.title,
+          post.excerpt,
+          post.category,
+          post.author,
+          ...(post.tags || []),
+        ].join(' ').toLowerCase();
+        return haystack.includes(query);
+      });
+    }
+
+    return posts;
+  }, [selectedCategory, searchQuery]);
+
+  const featuredPost = filteredPosts[0] || blogPosts[0];
+  const gridPosts = filteredPosts.length > 1 ? filteredPosts.slice(1) : filteredPosts;
 
   const filteredResults = useMemo(() => {
     const query = searchQuery.trim().toLowerCase();
@@ -256,36 +308,35 @@ export default function BlogsPage() {
     <div className="blog-shell">
       <Navbar activeTab="resources" />
 
-      <div className="mt-20 border-b border-gray-200 bg-[#f3f3f3]">
-        <div className="mx-auto flex max-w-full items-center justify-between gap-4 px-4 py-0">
+      <div className="mt-20 border-b border-gray-100 bg-white">
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-2">
           <div className="flex min-w-0 flex-1 items-center gap-3">
             <button
               type="button"
               onClick={() => scrollCategories('left')}
-              className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-gray-200 bg-white text-gray-700 transition hover:bg-gray-50 md:flex"
+              className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-gray-100 bg-white text-gray-700 transition hover:bg-gray-50 md:flex"
             >
-              <ChevronLeft className="h-5 w-5" />
+              <ChevronLeft className="h-4 w-4" />
             </button>
 
             <div className="min-w-0 flex-1 overflow-hidden">
               <div
                 ref={categoriesRef}
-                className="scrollbar-hide flex items-center gap-10 overflow-x-auto whitespace-nowrap px-4 py-5"
+                className="scrollbar-hide flex items-center gap-8 overflow-x-auto whitespace-nowrap px-2 py-4"
               >
-                {recentTitles.map((post, index) => (
-                  <Link
-                    key={`${post.slug}-${index}`}
-                    href={`/blogs/${post.slug}`}
-                    className={`shrink-0 text-[15px] transition-colors ${
-                      index === 0
-                        ? 'font-semibold text-[#4b5563]'
-                        : index === 1
-                        ? 'font-medium text-[#2563eb]'
-                        : 'font-medium text-[#5f6368] hover:text-[#2563eb]'
+                {categories.map((cat) => (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => setSelectedCategory(cat)}
+                    className={`shrink-0 text-[14.5px] transition-colors ${
+                      selectedCategory === cat
+                        ? 'font-bold text-[#111827]'
+                        : 'text-[#4b5563] hover:text-[#111827] font-normal'
                     }`}
                   >
-                    {post.title}
-                  </Link>
+                    {cat}
+                  </button>
                 ))}
               </div>
             </div>
@@ -293,21 +344,21 @@ export default function BlogsPage() {
             <button
               type="button"
               onClick={() => scrollCategories('right')}
-              className="hidden h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-gray-200 bg-white text-gray-700 transition hover:bg-gray-50 md:flex"
+              className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-gray-100 bg-white text-gray-700 transition hover:bg-gray-50 md:flex"
             >
-              <ChevronRight className="h-5 w-5" />
+              <ChevronRight className="h-4 w-4" />
             </button>
           </div>
 
-          <div className="relative hidden min-w-[280px] md:block">
-            <div className="flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2 text-sm text-gray-500">
-              <Search className="h-4 w-4" />
+          <div className="relative hidden min-w-[260px] md:block">
+            <div className="flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-500">
+              <Search className="h-3.5 w-3.5" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search Blog"
-                className="w-full bg-transparent outline-none placeholder:text-gray-400"
+                className="w-full bg-transparent outline-none placeholder:text-gray-400 text-sm"
               />
             </div>
 
@@ -322,17 +373,17 @@ export default function BlogsPage() {
                         onClick={() => setSearchQuery('')}
                         className="block px-4 py-3 transition-colors hover:bg-[#f8f9ff]"
                       >
-                        <p className="text-[14px] font-semibold text-[#111827]">
+                        <p className="text-[13.5px] font-semibold text-[#111827]">
                           {post.title}
                         </p>
-                        <p className="mt-1 line-clamp-2 text-[12px] text-gray-500">
+                        <p className="mt-1 line-clamp-2 text-[11.5px] text-gray-500">
                           {post.excerpt}
                         </p>
                       </Link>
                     ))}
                   </div>
                 ) : (
-                  <div className="px-4 py-4 text-[13px] text-gray-500">
+                  <div className="px-4 py-4 text-[12.5px] text-gray-500">
                     No matching blog posts found.
                   </div>
                 )}
@@ -406,112 +457,57 @@ export default function BlogsPage() {
 
         <section className="px-4 pb-16">
           <div className="mx-auto max-w-7xl">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={containerVariants}
-              className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
-            >
+            <div className="cs-grid">
               {gridPosts.map((post) => (
-                <motion.article
+                <div
                   key={post.id}
-                  variants={itemVariants}
-                  whileHover={{ y: -4 }}
-                  className="overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-md"
+                  className="w-full flex"
                 >
-                  <div className="p-3">
-                    <img
-                      src={post.image}
-                      alt={post.title}
-                      className="h-52 w-full rounded-xl object-cover"
-                    />
-                  </div>
-
-                  <div className="px-5 pb-5">
-                    <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.16em] text-teal-700">
-                      {post.category}
-                    </p>
-
-                    <Link href={`/blogs/${post.slug}`}>
-                      <h2 className="line-clamp-2 text-2xl font-semibold leading-snug text-gray-900 transition-colors hover:text-teal-700">
-                        {post.title}
-                      </h2>
-                    </Link>
-
-                    <p className="mt-3 line-clamp-3 text-sm leading-6 text-gray-600">
-                      {post.excerpt}
-                    </p>
-
-                    <div className="mt-5 flex flex-wrap items-center gap-3 text-xs text-gray-500">
-                      <span className="flex items-center gap-1.5">
-                        <User className="h-3.5 w-3.5" />
-                        {post.author}
-                      </span>
-                      <span>{post.date}</span>
-                      <span>{post.readTime}</span>
+                  <Link className="cs-card-modern group" href={`/blogs/${post.slug}`} style={{ width: '100%' }}>
+                    <div className="cs-card-image-wrapper">
+                      <img
+                        src={post.image}
+                        alt={post.title}
+                        className="cs-card-img"
+                        width="800"
+                        height="533"
+                        loading="lazy"
+                        decoding="async"
+                      />
                     </div>
-
-                    <div className="mt-5 flex items-center justify-between">
-                      <Link href={`/blogs/${post.slug}`}>
-                        <button className="inline-flex items-center gap-2 text-sm font-semibold text-gray-900 hover:text-teal-700">
-                          Read more
-                          <ArrowRight className="h-4 w-4" />
-                        </button>
-                      </Link>
-
-                      <span className="flex items-center gap-1 text-xs text-gray-400">
-                        <Eye className="h-3.5 w-3.5" />
-                        {post.views}
-                      </span>
+                    <div className="cs-card-content-modern">
+                      <h2 className="cs-card-title-modern">{post.title}</h2>
+                      <div className="cs-card-footer" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
+                        <div className="cs-card-tags" style={{ margin: 0 }}>
+                          <span className="cs-card-tag">{post.category}</span>
+                          <span className="cs-card-tag">{post.readTime}</span>
+                        </div>
+                        <span className="cs-card-read-more" style={{ fontSize: '13px', fontWeight: 600, color: '#3B82F6', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Read More →</span>
+                      </div>
                     </div>
-                  </div>
-                </motion.article>
+                  </Link>
+                </div>
               ))}
-            </motion.div>
-          </div>
-        </section>
-
-        <section className="px-4 pb-20 pt-4">
-          <div className="mx-auto max-w-6xl rounded-[32px] bg-white px-6 py-12 text-center md:px-10 md:py-16">
-            <h2 className="mx-auto max-w-5xl text-3xl font-semibold leading-tight text-[#111827] md:text-5xl">
-              Find Leads, Automate Outreach, Book More Meetings
-            </h2>
-
-            <div className="mx-auto mt-10 max-w-4xl rounded-2xl border border-gray-200 bg-white p-2 shadow-[0_6px_24px_rgba(17,24,39,0.06)]">
-              <div className="flex flex-col gap-2 md:flex-row md:items-center">
-                <input
-                  type="email"
-                  placeholder="Enter your work email"
-                  className="h-16 flex-1 rounded-xl border-0 bg-transparent px-5 text-base text-gray-900 outline-none placeholder:text-gray-400"
-                />
-
-                <button className="inline-flex h-16 items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-[#5B6CFF] to-[#2457F5] px-8 text-lg font-semibold text-white shadow-[0_8px_24px_rgba(59,91,255,0.28)] transition hover:opacity-95 md:min-w-[270px]">
-                  Sign up for free
-                  <ArrowRight className="h-5 w-5" />
-                </button>
-              </div>
-            </div>
-
-            <div className="mt-8 flex flex-col items-center justify-center gap-4 text-sm font-medium text-[#111827] md:flex-row md:gap-10 md:text-base">
-              <div className="flex items-center gap-3">
-                <CalendarDays className="h-5 w-5 text-[#111827]" />
-                <span>7-day free trial</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <CreditCard className="h-5 w-5 text-[#111827]" />
-                <span>No credit card required</span>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <ShieldCheck className="h-5 w-5 text-[#111827]" />
-                <span>SOC 2 Certified</span>
-              </div>
             </div>
           </div>
         </section>
       </main>
+
+      {/* Final CTA */}
+      <section className="cs-cta-modern">
+        <div className="cs-cta-bg">
+          <div className="cs-cta-pattern"></div>
+        </div>
+        <div className="cs-cta-content" style={{width: '100%'}}>
+          <h2>Put multichannel outbound on autopilot<br/>with 360Airo</h2>
+          <div className="cs-cta-buttons">
+            <button className="btn-primary-purple">Start free &rarr;</button>
+            <button className="btn-secondary-white">Book a demo &rarr;</button>
+          </div>
+          
+          <FeatureMarquee />
+        </div>
+      </section>
 
       <Footer />
 

@@ -397,13 +397,11 @@
 @media (min-width: 1024px) {
   .scs-right-details-column {
     width: 100% !important;
-    position: sticky;
-    top: 128px;
-    align-self: flex-start;
     display: flex;
     flex-direction: column;
     gap: 20px;
-    align-self: start;
+    position: sticky;
+    top: 128px;
   }
 }
 /* Custom Visual Illustrations */
