@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { ChevronDown, MessageCircle } from 'lucide-react';
 import '../styles/FAQSection.css';
 
@@ -72,10 +73,10 @@ export default function FAQSection() {
             <p className="faq-card-desc">
               Our team can help you connect your sending accounts, import prospects, set up AI personalization, and launch outreach with confidence.
             </p>
-            <a href="mailto:support@360airo.com" className="faq-card-btn">
+            <Link href="/contact-us" className="faq-card-btn">
               <MessageCircle size={18} />
               Talk to Our Team
-            </a>
+            </Link>
           </div>
         </div>
 

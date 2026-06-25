@@ -20,6 +20,7 @@ import Navbar from '../components/Navbar';
 import DashboardMockup from '../components/DashboardMockup';
 import CTASection from '../components/CTASection';
 import FAQSection from '../components/FAQSection';
+import Footer from '../components/Footer';
 export default function App() {
   const heroStageRef = useRef(null);
   const heroContentRef = useRef(null);
@@ -127,7 +128,7 @@ export default function App() {
         // --- MOBILE ANIMATION ---
         mm.add("(max-width: 900px) and (prefers-reduced-motion: no-preference)", () => {
           gsap.set(tabletMotionRef.current, {
-            xPercent: 50,
+            xPercent: 0,
             yPercent: 0,
             x: 0,
             y: 0,
@@ -365,7 +366,7 @@ export default function App() {
   <CTASection />
   <FAQSection />
   <div id="section-pricing" style={{ position: 'relative', zIndex: 10, width: '100%' }}>
-    <footer><div className="fg"><div className="fb"><img src="/logo.svg" alt="360Airo Logo" style={{height: 36, marginBottom: 8, filter: 'brightness(0) invert(1)'}} /><p>AI-powered multichannel sales outreach. Discover prospects, start conversations, close more deals.</p></div><div className="fc"><h4>Product</h4><a href="#">Features</a><a href="#">Pricing</a><a href="#">Integrations</a></div><div className="fc"><h4>Solutions</h4><a href="#">For SDRs</a><a href="#">For Agencies</a><a href="#">For Founders</a></div><div className="fc"><h4>Resources</h4><a href="#">Blog</a><a href="#">Docs</a><a href="#">Case Studies</a></div><div className="fc"><h4>Company</h4><a href="#">About</a><a href="#">Careers</a><a href="#">Contact</a></div></div><div className="fbot"><p>© 2024 360Airo. All rights reserved.</p><div className="fsc"><a href="#">𝕏</a><a href="#">in</a><a href="#">▶</a></div></div></footer>
+    <Footer />
   </div>
 </div>
 

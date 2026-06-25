@@ -457,7 +457,7 @@ export default function ContactUsPage() {
               height: '350px'
             }}>
               <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.6175394468694!2d-74.01358582343274!3d40.712775371391515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25a07e2c949c3%3A0xe7585a21e6992d9f!2sOne%20World%20Trade%20Center!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus" 
+                src="https://maps.google.com/maps?q=9314%20Forest%20Hill%20Blvd,%20Wellington,%20FL%2033411&t=&z=14&ie=UTF8&iwloc=&output=embed" 
                 width="100%" 
                 height="100%" 
                 style={{ 
@@ -485,17 +485,18 @@ export default function ContactUsPage() {
               <div>
                 <span style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#64748B', display: 'block', marginBottom: '6px' }}>Address</span>
                 <p style={{ fontSize: '16px', fontWeight: 600, color: '#0F172A', lineHeight: '1.4', marginBottom: '20px' }}>
-                  One World Trade Center, Suite 85,<br />New York, NY 10007
+                  #744 - 9314 Forest Hill Blvd,<br />Wellington, FL 33411, United States
                 </p>
 
                 <span style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#64748B', display: 'block', marginBottom: '6px' }}>Email Address</span>
                 <p style={{ fontSize: '16px', fontWeight: 600, color: '#0052FF', marginBottom: '20px' }}>
-                  <a href="mailto:support@360airo.com" style={{ color: 'inherit', textDecoration: 'none' }}>support@360airo.com</a>
+                  <a href="mailto:info@360airo.com" style={{ color: 'inherit', textDecoration: 'none' }}>info@360airo.com</a>
                 </p>
 
-                <span style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#64748B', display: 'block', marginBottom: '6px' }}>Phone (for sales enquiries)</span>
-                <p style={{ fontSize: '16px', fontWeight: 600, color: '#0F172A', marginBottom: '0' }}>
-                  +1 (800) 555-0199
+                <span style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#64748B', display: 'block', marginBottom: '6px' }}>Phone</span>
+                <p style={{ fontSize: '16px', fontWeight: 600, color: '#0F172A', marginBottom: '0', lineHeight: '1.5' }}>
+                  +1 (561) 257-4066<br />
+                  +1 (561) 489-3335
                 </p>
               </div>
 

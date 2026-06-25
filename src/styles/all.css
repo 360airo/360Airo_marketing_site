@@ -1576,18 +1576,20 @@ color:#fff;
 #section-pricing .cin{max-width:700px;margin:0 auto;padding:56px 48px;background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(99,102,241,.08));border:1px solid rgba(59,130,246,.2);border-radius:24px}
 #section-pricing .cin h2{font-family:'Outfit',sans-serif;font-weight:700;font-size:clamp(32px,4vw,48px);letter-spacing:-1.5px;margin-bottom:12px;color:#fff}
 #section-pricing .cin p{color:var(--text-muted);margin-bottom:28px}
-#section-pricing footer{background:linear-gradient(to bottom,transparent 0%,rgba(3,7,18,.85) 8%,rgba(3,7,18,.98) 18%,rgba(3,7,18,.98) 100%);padding:64px 32px 32px;position:relative;z-index:2}
-#section-pricing .fg{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid var(--border-subtle)}
-#section-pricing .fb p{font-size:14px;color:var(--text-muted);margin-top:12px;max-width:260px}
-#section-pricing .fc h4{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:16px}
-#section-pricing .fc a{display:block;font-size:14px;color:var(--text-muted);padding:4px 0}
-#section-pricing .fc a:hover{color:#fff}
-#section-pricing .fbot{max-width:1100px;margin:0 auto;padding-top:24px;display:flex;justify-content:space-between;align-items:center}
-#section-pricing .fbot p{font-size:13px;color:var(--text-subtle)}
-#section-pricing .fsc{display:flex;gap:12px}
-#section-pricing .fsc a{width:34px;height:34px;border-radius:50%;border:1px solid var(--border-subtle);display:flex;align-items:center;justify-content:center;color:var(--text-muted)}
-@media(max-width:1024px){#section-pricing .pcs{grid-template-columns:1fr 1fr}}
-@media(max-width:768px){#section-pricing .pcs{grid-template-columns:1fr}#section-pricing .fg{grid-template-columns:1fr}#section-pricing .fbot{flex-direction:column;gap:12px;text-align:center}}
+#section-pricing footer{background:linear-gradient(to bottom,transparent 0%,rgba(3,7,18,.85) 8%,rgba(3,7,18,.98) 18%,rgba(3,7,18,.98) 100%)}
+footer{background:#030712;padding:64px 32px 32px;position:relative;z-index:10;font-family:'Outfit',sans-serif;color:#fff;width:100%}
+footer .fg{max-width:1100px;margin:0 auto;display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:40px;padding-bottom:40px;border-bottom:1px solid rgba(255,255,255,.08)}
+footer .fb p{font-size:14px;color:rgba(255,255,255,.6);margin-top:12px;max-width:260px;line-height:1.5}
+footer .fc h4{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.6);margin-bottom:16px}
+footer .fc a{display:block;font-size:14px;color:rgba(255,255,255,.5);padding:4px 0;text-decoration:none;transition:color .2s}
+footer .fc a:hover{color:#fff}
+footer .fbot{max-width:1100px;margin:0 auto;padding-top:24px;display:flex;justify-content:space-between;align-items:center}
+footer .fbot p{font-size:13px;color:rgba(255,255,255,.4);margin:0}
+footer .fsc{display:flex;gap:12px}
+footer .fsc a{width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.08);display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,.6);text-decoration:none;transition:color .2s,border-color .2s}
+footer .fsc a:hover{color:#fff;border-color:#fff}
+@media(max-width:1024px){#section-pricing .pcs{grid-template-columns:1fr 1fr}footer .fg{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){#section-pricing .pcs{grid-template-columns:1fr}footer .fg{grid-template-columns:1fr}footer .fbot{flex-direction:column;gap:12px;text-align:center}}
 
 
 
