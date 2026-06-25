@@ -31,3 +31,4 @@ section {
   width: 100%;
   position: relative;
 }
+@media (max-width: 1024px) { * { transition: none !important; animation: none !important; } }

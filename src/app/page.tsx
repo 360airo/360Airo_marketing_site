@@ -135,55 +135,7 @@ export default function App() {
             scale: 1,
             transformOrigin: "center center"
           });
-
-          const timeline = gsap.timeline({
-            scrollTrigger: {
-              trigger: heroStageRef.current,
-              start: "top top",
-              end: "+=1000",
-              scrub: 1.15,
-              pin: true,
-              pinSpacing: true,
-              anticipatePin: 1,
-              invalidateOnRefresh: true
-            },
-            onUpdate: function() {
-              const currentScale = parseFloat(gsap.getProperty(tabletMotionRef.current, "scaleX") as string) || 1;
-              if (futureTabletContentRef.current) {
-                const inverseScale = 1 / currentScale;
-                futureTabletContentRef.current.style.setProperty('--tablet-scale-inverse', inverseScale.toString());
-              }
-            }
-          });
-
-          timeline
-            .addLabel("heroExit")
-            .to(heroContentRef.current, { opacity: 0, y: -30, duration: 1, ease: "none" }, "heroExit")
-            .to(dashboardUiRef.current, { opacity: 0, scale: 0.96, filter: "blur(4px)", duration: 1, ease: "none" }, "heroExit")
-            .addLabel("futureTitleEnter", "heroExit+=0.35")
-            .to(futureTabletContentRef.current, { autoAlpha: 1, opacity: 0.65, duration: 0.55, ease: "none" }, "futureTitleEnter")
-            .addLabel("futureTitleCrisp", "futureTitleEnter+=0.4")
-            .to(futureTabletContentRef.current, { opacity: 1, duration: 0.65, ease: "none" }, "futureTitleCrisp")
-            .addLabel("tabletPullForward", "futureTitleCrisp+=0.45")
-            .to(tabletMotionRef.current, {
-              y: () => {
-                const shell = tabletMotionRef.current;
-                if (!shell) return 0;
-                const rect = shell.getBoundingClientRect();
-                const currentCenterY = rect.top + rect.height / 2;
-                return window.innerHeight / 2 - currentCenterY;
-              },
-              scale: 1.4,
-              duration: 1.2,
-              ease: "none"
-            }, "tabletPullForward")
-            .addLabel("tabletZoomToViewport", "tabletPullForward+=0.95")
-            .to(tabletMotionRef.current, {
-              scale: getViewportScreenCoverScale,
-              duration: 2.8,
-              ease: "none"
-            }, "tabletZoomToViewport")
-            .to(phoneDashboardRef.current, { opacity: 1, duration: 1.98, ease: "none" }, 2.97);
+          // Disabled scroll animation for mobile/tablet per user request
         });
       });
     };
@@ -327,7 +279,32 @@ export default function App() {
       </div>{/* closes future-transition-layer */}
       </div>{/* closes hero-scene */}
     </section>
-  </div>{/* /#section-home */}
+  </div>{/* closes section-home */}
+
+  <div id="section-phone">
+    <section className="p2-hero">
+      <div className="hero-main">
+        <div className="hero-center">
+          <h1 className="hero-headline">
+            <span className="headline-line">
+              <span className="headline-inner revealed">THE FUTURE</span>
+            </span>
+            <span className="headline-line line2">
+              <span className="headline-inner revealed">OF</span>
+            </span>
+            <span className="headline-line">
+              <span className="headline-inner revealed">OUTREACH</span>
+            </span>
+          </h1>
+        </div>
+        <div className="hero-right">
+          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
+            <PhoneDashboard style={{ width: '100%', maxWidth: '360px' }} />
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
 
   <div id="section-trusted-startups">
     <section className="trusted-startups-inner">
