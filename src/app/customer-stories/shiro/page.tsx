@@ -487,10 +487,7 @@ export default function ShiroCaseStudy() {
             backgroundImage: 'linear-gradient(135deg, #070b17 0%, #0c162c 40%, #1a244d 100%)',
             color: 'white',
             marginTop: '12px',
-            boxShadow: '0 8px 20px rgba(12, 22, 44, 0.25)',
-            position: 'sticky',
-            top: '128px',
-            zIndex: 10
+            boxShadow: '0 8px 20px rgba(12, 22, 44, 0.25)'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
               <img src="/logo.png" alt="360Airo Logo" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
