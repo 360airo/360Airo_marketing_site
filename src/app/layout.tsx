@@ -3,8 +3,10 @@ import "../index.css";
 import "../styles/globals.css";
 import "../styles/all.css";
 import "../styles/hero-bg.css";
+import "../styles/chatbot.css";
 import SmoothScroller from "../components/SmoothScroller";
 import BookDemoModalWrapper from "../components/BookDemoModalWrapper";
+import ChatBot from "../components/ChatBot";
 
 export const metadata: Metadata = {
   title: "360 Airo - AI SDR Built for High-Growth B2B Teams",
@@ -38,6 +40,7 @@ export default function RootLayout({
           {children}
         </SmoothScroller>
         <BookDemoModalWrapper />
+        <ChatBot />
       </body>
     </html>
   );
