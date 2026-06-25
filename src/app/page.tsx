@@ -128,7 +128,7 @@ export default function App() {
         // --- MOBILE ANIMATION ---
         mm.add("(max-width: 900px) and (prefers-reduced-motion: no-preference)", () => {
           gsap.set(tabletMotionRef.current, {
-            xPercent: 50,
+            xPercent: 0,
             yPercent: 0,
             x: 0,
             y: 0,
