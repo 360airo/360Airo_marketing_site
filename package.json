@@ -23,6 +23,7 @@
     "next": "^16.2.9",
     "nodemailer": "^9.0.1",
     "omggif": "^1.0.10",
+    "openai": "^6.45.0",
     "papaparse": "^5.5.4",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",

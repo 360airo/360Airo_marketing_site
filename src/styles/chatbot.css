@@ -1,0 +1,983 @@
+.airo-chatbot-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0);
+  backdrop-filter: blur(0px);
+  -webkit-backdrop-filter: blur(0px);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: 
+    background 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+    backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+    -webkit-backdrop-filter 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.airo-chatbot-backdrop.is-active {
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.airo-chatbot {
+  position: fixed;
+  right: 22px;
+  bottom: 22px;
+  z-index: 1000;
+  font-family: "Inter", "DM Sans", sans-serif;
+}
+
+.airo-chatbot-panel {
+  width: min(390px, calc(100vw - 24px));
+  height: min(660px, calc(100vh - 172px));
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-bottom: 14px;
+  color: #0e1a2e;
+  background: #ffffff;
+  border: 1px solid rgba(74, 87, 246, 0.12);
+  border-radius: 34px;
+  box-shadow: 
+    0 0 0 1.5px rgba(255, 255, 255, 0.9) inset, 
+    0 4px 15px rgba(0, 0, 0, 0.03), 
+    0 20px 50px rgba(4, 16, 38, 0.18),
+    0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.airo-chatbot-main {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: #f4f5f8;
+}
+
+.airo-chatbot-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  color: #1d1f24;
+  background: #ffffff;
+  border-bottom: 1px solid #eceef1;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.airo-chatbot-tab-title {
+  margin: 0;
+  color: #1d1f24;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.airo-chatbot-brand {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.airo-chatbot-brand-mark {
+  display: flex;
+  align-items: center;
+  width: 32px;
+  height: 32px;
+  overflow: hidden;
+  background: transparent;
+}
+
+.airo-chatbot-brand-mark img,
+.airo-chatbot-launcher-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 0;
+}
+
+.airo-chatbot-icon-button,
+.airo-chatbot-launcher,
+.airo-chatbot-form button,
+.airo-chatbot-prompts button,
+.airo-chatbot-start-card,
+.airo-chatbot-message-start,
+.airo-chatbot-help-list button,
+.airo-chatbot-tabs button,
+.airo-chatbot-news-card {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+.airo-chatbot-icon-button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  color: #ffffff;
+  background: transparent;
+  border-radius: 50%;
+}
+
+.airo-chatbot-header-plain .airo-chatbot-icon-button {
+  color: #626872;
+}
+
+.airo-chatbot-icon-button svg {
+  width: 21px;
+  height: 21px;
+}
+
+.airo-chatbot-home,
+.airo-chatbot-simple-tab {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 0 28px 24px;
+  overflow-y: auto;
+}
+
+.airo-chatbot-home {
+  gap: 18px;
+  padding-top: 4px;
+  padding-bottom: 28px;
+}
+
+.airo-chatbot-home,
+.airo-chatbot-simple-tab,
+.airo-chatbot-messages,
+.airo-chatbot-prompts {
+  scrollbar-width: none;
+}
+
+.airo-chatbot-home::-webkit-scrollbar,
+.airo-chatbot-simple-tab::-webkit-scrollbar,
+.airo-chatbot-messages::-webkit-scrollbar,
+.airo-chatbot-prompts::-webkit-scrollbar {
+  display: none;
+}
+
+.airo-chatbot-greeting {
+  position: relative;
+  top: auto;
+  z-index: 0;
+  padding: 0;
+  color: #1d1f24;
+  flex-shrink: 0;
+}
+
+.airo-chatbot-greeting p {
+  margin: 0 0 2px;
+  color: #626872;
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+.airo-chatbot-greeting h2,
+.airo-chatbot-simple-tab h2 {
+  margin: 0;
+  color: #1d1f24;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.18;
+  letter-spacing: 0;
+}
+
+.airo-chatbot-greeting h2 {
+  padding-bottom: 4px;
+}
+
+.airo-chatbot-start-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  width: 100%;
+  min-height: 84px;
+  padding: 18px 24px;
+  color: #16233b;
+  text-align: left;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 12px 28px rgba(34, 65, 117, 0.18);
+  flex-shrink: 0;
+}
+
+.airo-chatbot-start-card strong,
+.airo-chatbot-start-card small {
+  display: block;
+}
+
+.airo-chatbot-start-card strong {
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.3;
+}
+
+.airo-chatbot-start-card small {
+  margin-top: 6px;
+  color: #737982;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
+.airo-chatbot-start-card svg {
+  flex: 0 0 auto;
+  width: 26px;
+  height: 26px;
+  color: #1a2e4f;
+}
+
+.airo-chatbot-home-threads {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px 14px 16px;
+  color: #17233a;
+  background: #ffffff;
+  border: 1px solid #eceef1;
+  border-radius: 18px;
+  box-shadow: 0 10px 24px rgba(22, 33, 52, 0.12);
+}
+
+.airo-chatbot-home-threads h3 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.airo-chatbot-start-card-scroll {
+  opacity: 1;
+}
+
+.airo-chatbot-help-card {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-top: 0;
+  padding: 16px;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.04);
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+  flex-shrink: 0;
+  margin-bottom: 24px;
+}
+
+.airo-chatbot-help-card.is-flat {
+  margin-top: 18px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.02);
+}
+
+.airo-chatbot-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 48px;
+  padding: 0 16px;
+  color: #64748b;
+  background: #f1f5f9;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.2;
+  transition: all 0.2s ease;
+}
+
+.airo-chatbot-search svg {
+  width: 22px;
+  height: 22px;
+  color: #193151;
+}
+
+.airo-chatbot-help-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 14px;
+  padding-bottom: 10px;
+}
+
+.airo-chatbot-help-list button {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 64px;
+  padding: 10px 16px;
+  color: #767b82;
+  text-align: left;
+  background: transparent;
+  border: 1px solid #f0f2f5;
+  border-radius: 16px;
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.airo-chatbot-help-list button:hover {
+  color: #152947;
+  background: #f7f8fb;
+}
+
+.airo-chatbot-help-list button span:last-child {
+  color: #112848;
+  font-size: 20px;
+  line-height: 1;
+}
+
+.airo-chatbot-conversation {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding-top: 0;
+  overflow: hidden;
+  background: #f4f5f8;
+}
+
+.airo-chatbot-messages {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 0;
+  padding: 16px 18px;
+  overflow-y: auto;
+  background: #f4f5f8;
+}
+
+.airo-chatbot-message-start {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: calc(100% - 128px);
+  min-height: 50px;
+  margin: 0 auto 28px;
+  padding: 0 20px;
+  color: #ffffff;
+  text-align: left;
+  background: #20385d;
+  border-radius: 18px;
+  box-shadow: none;
+}
+
+.airo-chatbot-message-start span {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.airo-chatbot-message-start svg {
+  flex: 0 0 auto;
+  width: 24px;
+  height: 24px;
+  color: #ffffff;
+}
+
+.airo-chatbot-thread-view {
+  min-height: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 20px 26px;
+  overflow-y: auto;
+  background: #ffffff;
+}
+
+.airo-chatbot-thread-view .airo-chatbot-message-start {
+  width: max-content;
+  min-width: 230px;
+  margin-top: auto;
+  margin-bottom: 0;
+  color: #15181e;
+  background: #ffffff;
+  border: 1px solid #e7e9ee;
+  border-radius: 11px;
+}
+
+.airo-chatbot-thread-view .airo-chatbot-message-start svg {
+  color: #11151b;
+  stroke-width: 3;
+}
+
+.airo-chatbot-thread-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.airo-chatbot-thread-list button {
+  display: grid;
+  grid-template-columns: 36px 1fr auto;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  padding: 12px 0;
+  color: #17233a;
+  text-align: left;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  cursor: pointer;
+  font: inherit;
+  transition: all 0.25s ease;
+}
+
+.airo-chatbot-thread-list button:hover {
+  background: rgba(74, 87, 246, 0.02);
+  padding-left: 8px;
+  padding-right: 8px;
+  border-radius: 12px;
+}
+
+.airo-chatbot-thread-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
+  flex-shrink: 0;
+  overflow: hidden;
+  padding: 3px;
+}
+
+.airo-chatbot-thread-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.airo-chatbot-thread-list.is-compact button {
+  grid-template-columns: 32px 1fr auto;
+  padding: 10px 0;
+}
+
+.airo-chatbot-thread-list.is-compact .airo-chatbot-thread-avatar {
+  width: 32px;
+  height: 32px;
+  padding: 2px;
+}
+
+.airo-chatbot-thread-copy {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.airo-chatbot-thread-copy strong,
+.airo-chatbot-thread-copy small {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.airo-chatbot-thread-copy strong {
+  color: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.airo-chatbot-thread-copy small {
+  color: #737982;
+  font-size: 12px;
+  line-height: 1.25;
+}
+
+.airo-chatbot-thread-list.is-compact .airo-chatbot-thread-copy strong {
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.airo-chatbot-thread-list.is-compact .airo-chatbot-thread-copy small {
+  color: #737982;
+  font-size: 11px;
+}
+
+.airo-chatbot-thread-list time {
+  align-self: start;
+  padding-top: 2px;
+  color: #747b85;
+  font-size: 11px;
+  line-height: 1.2;
+}
+
+.airo-chatbot-thread-list.is-compact time {
+  color: #747b85;
+  font-size: 10px;
+}
+
+.airo-chatbot-empty-state {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  align-content: center;
+  gap: 14px;
+  min-height: 320px;
+  color: #1d1f24;
+  text-align: center;
+}
+
+.airo-chatbot-empty-state svg {
+  width: 34px;
+  height: 34px;
+  color: #1d1f24;
+  fill: #1d1f24;
+  stroke: #ffffff;
+}
+
+.airo-chatbot-empty-state h3 {
+  margin: 10px 0 0;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.airo-chatbot-empty-state p {
+  margin: 0;
+  color: #1d1f24;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* Sleek Chat Messages & Bubbles */
+.airo-chatbot-message-row {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  max-width: 88%;
+  margin-bottom: 16px;
+}
+
+.airo-chatbot-message-user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.airo-chatbot-message-assistant {
+  align-self: flex-start;
+  flex-direction: row;
+}
+
+.airo-chatbot-avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  overflow: hidden;
+  padding: 2px;
+}
+
+.airo-chatbot-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+}
+
+.airo-chatbot-bubble {
+  padding: 10px 16px;
+  font-size: 12px;
+  line-height: 1.45;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+  overflow-wrap: anywhere;
+}
+
+.airo-chatbot-message-user .airo-chatbot-bubble {
+  background: linear-gradient(135deg, #4A57F6, #805DF7);
+  color: #ffffff;
+  border-radius: 20px 20px 4px 20px;
+  box-shadow: 0 4px 12px rgba(128, 93, 247, 0.2);
+}
+
+.airo-chatbot-message-assistant .airo-chatbot-bubble {
+  background: #ffffff;
+  color: #2D3748;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  border-radius: 20px 20px 20px 4px;
+}
+
+/* Thinking Indicator */
+.airo-chatbot-thinking-indicator {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #718096;
+  font-size: 12px;
+  padding: 4px 8px;
+}
+
+.airo-chatbot-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px dashed #718096;
+  border-radius: 50%;
+  animation: airo-spin 1.5s linear infinite;
+}
+
+@keyframes airo-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Input Area Styling */
+.airo-chatbot-input-area {
+  padding: 16px;
+  background: #f4f5f8;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.airo-chatbot-prompts-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.airo-chatbot-prompts-row::-webkit-scrollbar {
+  display: none;
+}
+
+.airo-chatbot-prompts-row button {
+  flex: 0 0 auto;
+  padding: 8px 14px;
+  color: #718096;
+  background: #cbd5e177;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.airo-chatbot-prompts-row button:hover {
+  background: #cbd5e1;
+  color: #4a5568;
+}
+
+.airo-chatbot-prompts-row button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.airo-chatbot-form-sleek {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 20px;
+  padding: 8px 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+}
+
+.airo-chatbot-form-globe {
+  color: #a0aec0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 6px;
+  padding-right: 10px;
+}
+
+.airo-chatbot-form-sleek input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 12px;
+  color: #2d3748;
+  background: transparent;
+  padding: 8px 0;
+  min-width: 0;
+}
+
+.airo-chatbot-form-sleek input::placeholder {
+  color: #a0aec0;
+}
+
+.airo-chatbot-send-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #1a202c;
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+}
+
+.airo-chatbot-send-btn svg {
+  color: #ffffff;
+}
+
+.airo-chatbot-send-btn:hover {
+  background: #2d3748;
+}
+
+.airo-chatbot-send-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.airo-chatbot-simple-tab {
+  padding-top: 20px;
+  background: #ffffff;
+}
+
+.airo-chatbot-main-plain .airo-chatbot-simple-tab h2 {
+  color: #1d1f24;
+}
+
+.airo-chatbot-news-card {
+  margin-top: 18px;
+  padding: 20px;
+  color: #16233b;
+  text-align: left;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 9px 24px rgba(22, 33, 52, 0.1);
+}
+
+.airo-chatbot-news-card strong,
+.airo-chatbot-news-card span {
+  display: block;
+}
+
+.airo-chatbot-news-card strong {
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.airo-chatbot-news-card span {
+  margin-top: 8px;
+  color: #737982;
+  font-size: 11px;
+  line-height: 1.5;
+}
+
+.airo-chatbot-tabs {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  height: 72px;
+  background: #ffffff;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.015);
+}
+
+.airo-chatbot-tabs button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 0;
+  padding: 8px 0 6px;
+  color: #94a3b8;
+  background: transparent;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.05;
+  transition: all 0.25s ease;
+}
+
+.airo-chatbot-tabs button:hover {
+  color: #4A57F6;
+}
+
+.airo-chatbot-tabs button svg {
+  width: 20px;
+  height: 20px;
+}
+
+.airo-chatbot-tabs button.is-active {
+  color: #4A57F6;
+  font-weight: 700;
+}
+
+.airo-chatbot-tab-icon-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.airo-chatbot-tab-dot {
+  position: absolute;
+  bottom: -6px;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #4A57F6;
+  box-shadow: 0 0 8px rgba(74, 87, 246, 0.6);
+}
+
+.airo-chatbot-launcher {
+  display: grid;
+  place-items: center;
+  margin-left: auto;
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  color: #ffffff;
+  background: linear-gradient(135deg, #061a3d 0%, #0b2d63 58%, #ffffff 160%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  box-shadow: 0 16px 44px rgba(0, 0, 0, 0.34);
+}
+
+.airo-chatbot-launcher svg {
+  width: 27px;
+  height: 27px;
+}
+
+.airo-chatbot-launcher-mark {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  background: transparent;
+  border-radius: 50%;
+}
+
+.airo-chatbot-launcher-text {
+  font-size: 14px;
+  font-weight: 800;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .airo-chatbot-start-card-scroll {
+    opacity: 1;
+    clip-path: inset(0 0 0 0);
+    animation: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .airo-chatbot {
+    right: 0;
+    bottom: 0;
+    left: 0;
+  }
+
+  .airo-chatbot-panel {
+    width: 100%;
+    height: min(810px, 100vh);
+    margin-bottom: 0;
+    border-radius: 0;
+  }
+
+  .airo-chatbot-header {
+    grid-template-columns: 1fr 40px;
+    gap: 10px;
+    padding: 12px 18px 0;
+  }
+
+  .airo-chatbot-header-plain {
+    grid-template-columns: 40px 1fr 40px;
+    gap: 0;
+    padding: 14px 16px 12px;
+  }
+
+  .airo-chatbot-brand {
+    font-size: 23px;
+  }
+
+  .airo-chatbot-brand-mark {
+    width: 150px;
+    height: 82px;
+  }
+
+  .airo-chatbot-home,
+  .airo-chatbot-simple-tab {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .airo-chatbot-greeting {
+    padding-top: 2px;
+  }
+}
+
+@media (max-width: 430px) {
+  .airo-chatbot-header {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .airo-chatbot-header-plain {
+    padding: 14px 14px 12px;
+  }
+
+  .airo-chatbot-brand {
+    font-size: 21px;
+  }
+
+  .airo-chatbot-brand-mark {
+    width: 138px;
+    height: 74px;
+  }
+
+  .airo-chatbot-greeting p,
+  .airo-chatbot-greeting h2,
+  .airo-chatbot-simple-tab h2 {
+    font-size: 19px;
+  }
+
+  .airo-chatbot-home,
+  .airo-chatbot-simple-tab {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .airo-chatbot-help-list button,
+  .airo-chatbot-start-card small {
+    font-size: 12px;
+  }
+
+  .airo-chatbot-tabs button {
+    font-size: 9px;
+    gap: 3px;
+    padding: 6px 0 4px;
+  }
+
+  .airo-chatbot-tabs button svg {
+    width: 20px;
+    height: 20px;
+  }
+}
