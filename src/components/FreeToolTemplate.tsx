@@ -90,7 +90,10 @@ export default function FreeToolTemplate({
         <section className="ft-tool-shell ft-container">
           <aside className="ft-tool-rail" aria-label="360Airo promo">
             <div className="ft-tool-rail-card">
-              <p className="ft-tool-rail-kicker">360Airo</p>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
+                <img src="/FinalLogo_icon_transparent.png" alt="360Airo Logo" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
+                <p className="ft-tool-rail-kicker" style={{ margin: 0 }}>360Airo</p>
+              </div>
               <h3>Run outbound with fewer moving parts.</h3>
               <p>
                 One place for deliverability, sequencing, verification, and campaign control.
