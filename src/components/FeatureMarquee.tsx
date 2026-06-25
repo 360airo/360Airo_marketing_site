@@ -4,7 +4,7 @@ import '../styles/feature-marquee.css';
 const features = [
   {
     title: "Find and prioritize ICP fit leads",
-    background: "linear-gradient(145deg, #4C1D95 0%, #312E81 100%)", // deep purple gradient
+    background: "linear-gradient(135deg, rgb(7, 11, 23) 0%, rgb(12, 22, 44) 40%, rgb(26, 36, 77) 100%)",
     textColor: "#ffffff",
     uiElements: ["Company Size", "Industry", "Funding Round"]
   },

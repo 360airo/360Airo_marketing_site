@@ -216,20 +216,14 @@ const blogPosts = [
 
 export default function BlogsPage() {
   const categories = [
-    'Blog',
-    'Cold Emailing',
-    'B2B Database',
-    'Lead Generation',
-    'Email Deliverability',
-    'Sales Engagement',
-    'Sales Development',
-    'Product Updates',
-    'Agency',
-    'Email Productivity',
-    'Cold Calling'
+    'All',
+    'Cold Email',
+    'Email Marketing',
+    'LinkedIn',
+    'Email Tools'
   ];
 
-  const [selectedCategory, setSelectedCategory] = useState('Blog');
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const categoriesRef = useRef<HTMLDivElement>(null);
 
@@ -237,21 +231,10 @@ export default function BlogsPage() {
     let posts = blogPosts;
 
     // Filter by category
-    if (selectedCategory !== 'Blog') {
-      const catLower = selectedCategory.toLowerCase();
-      // Simplify category mapping matching logic
-      const mapKeyword = catLower
-        .replace('ing', '')
-        .replace('emailing', 'email')
-        .replace('productivity', 'tools')
-        .replace('database', 'data');
-
-      posts = blogPosts.filter(post => {
-        const matchCategory = post.category.toLowerCase().includes(mapKeyword) || 
-          mapKeyword.includes(post.category.toLowerCase());
-        const matchTags = post.tags.some(tag => tag.toLowerCase().includes(mapKeyword));
-        return matchCategory || matchTags;
-      });
+    if (selectedCategory !== 'All') {
+      posts = blogPosts.filter(post => 
+        post.category.toLowerCase() === selectedCategory.toLowerCase()
+      );
     }
 
     // Filter by search query if any
@@ -308,145 +291,73 @@ export default function BlogsPage() {
     <div className="blog-shell">
       <Navbar activeTab="resources" />
 
-      <div className="mt-20 border-b border-gray-100 bg-white">
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-2">
-          <div className="flex min-w-0 flex-1 items-center gap-3">
-            <button
-              type="button"
-              onClick={() => scrollCategories('left')}
-              className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-gray-100 bg-white text-gray-700 transition hover:bg-gray-50 md:flex"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-
-            <div className="min-w-0 flex-1 overflow-hidden">
-              <div
-                ref={categoriesRef}
-                className="scrollbar-hide flex items-center gap-8 overflow-x-auto whitespace-nowrap px-2 py-4"
-              >
-                {categories.map((cat) => (
-                  <button
-                    key={cat}
-                    type="button"
-                    onClick={() => setSelectedCategory(cat)}
-                    className={`shrink-0 text-[14.5px] transition-colors ${
-                      selectedCategory === cat
-                        ? 'font-bold text-[#111827]'
-                        : 'text-[#4b5563] hover:text-[#111827] font-normal'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => scrollCategories('right')}
-              className="hidden h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-gray-100 bg-white text-gray-700 transition hover:bg-gray-50 md:flex"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
-
-          <div className="relative hidden min-w-[260px] md:block">
-            <div className="flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-1.5 text-sm text-gray-500">
-              <Search className="h-3.5 w-3.5" />
-              <input
-                type="text"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search Blog"
-                className="w-full bg-transparent outline-none placeholder:text-gray-400 text-sm"
-              />
-            </div>
-
-            {searchQuery.trim() && (
-              <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-50 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-[0_12px_32px_rgba(15,23,42,0.12)]">
-                {filteredResults.length > 0 ? (
-                  <div className="max-h-[320px] overflow-y-auto py-2">
-                    {filteredResults.map((post) => (
-                      <Link
-                        key={post.id}
-                        href={`/blogs/${post.slug}`}
-                        onClick={() => setSearchQuery('')}
-                        className="block px-4 py-3 transition-colors hover:bg-[#f8f9ff]"
-                      >
-                        <p className="text-[13.5px] font-semibold text-[#111827]">
-                          {post.title}
-                        </p>
-                        <p className="mt-1 line-clamp-2 text-[11.5px] text-gray-500">
-                          {post.excerpt}
-                        </p>
-                      </Link>
-                    ))}
-                  </div>
-                ) : (
-                  <div className="px-4 py-4 text-[12.5px] text-gray-500">
-                    No matching blog posts found.
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
+      <main className="blog-light-main pt-28 pb-16">
+        {/* Header Title */}
+        <div className="mx-auto max-w-7xl px-6 mb-12 text-center md:text-left">
+          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight text-gray-900" style={{ fontFamily: "'Barlow Condensed', sans-serif", textTransform: 'uppercase', fontWeight: 900 }}>
+            Insights & Resources
+          </h1>
+          <p className="mt-3 text-sm md:text-base text-gray-500 max-w-2xl leading-relaxed" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+            Expert guides, product updates, and growth strategies for modern outreach teams.
+          </p>
         </div>
-      </div>
 
-      <main className="bg-[#f7f8fc]">
-        <section className="px-4 py-10 md:py-14">
+        {/* Featured Post (recent post) */}
+        <section className="px-4 pb-12">
           <div className="mx-auto max-w-7xl">
             <motion.div
               initial="hidden"
               animate="visible"
               variants={containerVariants}
-              className="grid gap-8 rounded-[28px] bg-[#eef0fb] p-5 md:grid-cols-2 md:p-8"
+              className="grid gap-8 rounded-[24px] premium-featured-card p-6 md:grid-cols-2 md:p-8"
             >
-              <motion.div variants={itemVariants} className="overflow-hidden rounded-2xl">
+              <motion.div variants={itemVariants} className="overflow-hidden rounded-xl h-[320px] relative shadow-md">
                 <img
                   src={featuredPost.image}
                   alt={featuredPost.title}
-                  className="h-full max-h-[420px] w-full rounded-2xl object-cover"
+                  className="h-full w-full rounded-xl object-cover hover:scale-105 transition-transform duration-500"
                 />
               </motion.div>
 
               <motion.div variants={itemVariants} className="flex flex-col justify-center">
-                <p className="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-teal-700">
-                  {featuredPost.category}
-                </p>
+                <div>
+                  <span className="premium-badge mb-4" style={{ fontFamily: "'DM Sans', sans-serif" }}>
+                    {featuredPost.category}
+                  </span>
+                </div>
 
-                <h1 className="max-w-xl text-3xl font-semibold leading-tight text-gray-900 md:text-5xl">
+                <h1 className="max-w-xl text-2xl font-bold leading-tight text-white md:text-3xl tracking-tight" style={{ fontFamily: "'Outfit', sans-serif" }}>
                   {featuredPost.title}
                 </h1>
 
-                <p className="mt-5 max-w-lg text-base leading-7 text-gray-600">
+                <p className="mt-4 max-w-lg text-[13px] leading-relaxed text-gray-300 line-clamp-2" style={{ fontFamily: "'DM Sans', sans-serif" }}>
                   {featuredPost.excerpt}
                 </p>
 
-                <div className="mt-6 flex flex-wrap items-center gap-4 text-sm text-gray-500">
-                  <div className="flex items-center gap-2">
-                    <User className="h-4 w-4" />
+                <div className="mt-6 flex flex-wrap items-center gap-4 text-xs text-gray-400">
+                  <div className="flex items-center gap-1.5">
+                    <User className="h-3.5 w-3.5 text-blue-400" />
                     <span>{featuredPost.author}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
+                  <div className="flex items-center gap-1.5">
+                    <Calendar className="h-3.5 w-3.5 text-blue-400" />
                     <span>{featuredPost.date}</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <Clock className="h-4 w-4" />
+                  <div className="flex items-center gap-1.5">
+                    <Clock className="h-3.5 w-3.5 text-blue-400" />
                     <span>{featuredPost.readTime}</span>
                   </div>
                 </div>
 
-                <div className="mt-8">
+                <div className="mt-6">
                   <Link href={`/blogs/${featuredPost.slug}`}>
                     <motion.button
-                      whileHover={{ x: 4 }}
+                      whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
-                      className="inline-flex items-center gap-2 text-sm font-semibold text-gray-900"
+                      className="premium-button"
                     >
                       Read article
-                      <ArrowRight className="h-4 w-4" />
+                      <ArrowRight className="h-3.5 w-3.5" />
                     </motion.button>
                   </Link>
                 </div>
@@ -455,34 +366,103 @@ export default function BlogsPage() {
           </div>
         </section>
 
+        {/* Categories / Search Bar - Displayed after the recent/featured post */}
+        <div className="blog-sticky-nav-light">
+          <div className="blog-sticky-container">
+            <div className="flex min-w-0 flex-1 items-center">
+              <div className="min-w-0 flex-1 overflow-hidden">
+                <div
+                  ref={categoriesRef}
+                  className="scrollbar-hide flex items-center gap-6 overflow-x-auto whitespace-nowrap"
+                >
+                  {categories.map((cat) => (
+                    <button
+                      key={cat}
+                      type="button"
+                      onClick={() => setSelectedCategory(cat)}
+                      className={`minimal-tab-btn-light ${selectedCategory === cat ? 'active' : ''}`}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="relative hidden min-w-[260px] md:block">
+              <div className="minimal-search-box-light">
+                <Search className="h-4 w-4 text-blue-400" />
+                <input
+                  type="text"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search Blog"
+                  className="w-full bg-transparent outline-none placeholder:text-gray-500 text-xs text-gray-800"
+                />
+              </div>
+
+              {searchQuery.trim() && (
+                <div className="absolute left-0 right-0 top-[calc(100%+8px)] z-50 overflow-hidden rounded-lg border border-gray-200 bg-white shadow-[0_12px_32px_rgba(15,23,42,0.12)]">
+                  {filteredResults.length > 0 ? (
+                    <div className="max-h-[320px] overflow-y-auto py-2">
+                      {filteredResults.map((post) => (
+                        <Link
+                          key={post.id}
+                          href={`/blogs/${post.slug}`}
+                          onClick={() => setSearchQuery('')}
+                          className="block px-4 py-3 transition-colors hover:bg-gray-50"
+                        >
+                          <p className="text-[13px] font-semibold text-gray-900">
+                            {post.title}
+                          </p>
+                          <p className="mt-1 line-clamp-2 text-[11px] text-gray-500">
+                            {post.excerpt}
+                          </p>
+                        </Link>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="px-4 py-4 text-[12px] text-gray-500">
+                      No matching blog posts found.
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
         <section className="px-4 pb-16">
           <div className="mx-auto max-w-7xl">
-            <div className="cs-grid">
+            <div className="blog-grid">
               {gridPosts.map((post) => (
                 <div
                   key={post.id}
                   className="w-full flex"
                 >
-                  <Link className="cs-card-modern group" href={`/blogs/${post.slug}`} style={{ width: '100%' }}>
-                    <div className="cs-card-image-wrapper">
+                  <Link className="blog-light-card" href={`/blogs/${post.slug}`} style={{ width: '100%' }}>
+                    <div className="blog-light-card-image-wrapper">
                       <img
                         src={post.image}
                         alt={post.title}
-                        className="cs-card-img"
+                        className="blog-light-card-img"
                         width="800"
                         height="533"
                         loading="lazy"
                         decoding="async"
                       />
                     </div>
-                    <div className="cs-card-content-modern">
-                      <h2 className="cs-card-title-modern">{post.title}</h2>
-                      <div className="cs-card-footer" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginTop: 'auto' }}>
-                        <div className="cs-card-tags" style={{ margin: 0 }}>
-                          <span className="cs-card-tag">{post.category}</span>
-                          <span className="cs-card-tag">{post.readTime}</span>
+                    <div className="blog-light-card-content">
+                      <h2 className="blog-light-card-title">{post.title}</h2>
+                      <p className="blog-light-card-excerpt">
+                        {post.excerpt}
+                      </p>
+                      <div className="blog-light-card-footer">
+                        <div className="blog-light-card-tags">
+                          <span className="blog-light-card-tag">{post.category}</span>
+                          <span className="blog-light-card-tag">{post.readTime}</span>
                         </div>
-                        <span className="cs-card-read-more" style={{ fontSize: '13px', fontWeight: 600, color: '#3B82F6', textTransform: 'uppercase', letterSpacing: '0.05em' }}>Read More →</span>
+                        <span className="blog-light-card-read-more">Read More →</span>
                       </div>
                     </div>
                   </Link>

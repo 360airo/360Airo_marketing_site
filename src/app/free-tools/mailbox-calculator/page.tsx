@@ -25,87 +25,117 @@ export default function MailboxCalculatorPage() {
 
   const sections = [
     {
-      title: "Why Do You Need Multiple Domains and Mailboxes?",
-      content: "Sending thousands of emails from your primary company domain is the fastest way to get blacklisted. Modern outbound requires a decentralized infrastructure where sending volume is spread across multiple secondary domains and mailboxes to protect your primary domain's reputation.",
-      list: [
-        ". Protect Primary Domain",
-        ". Avoid Spam Filters",
-        ". Scale Sending Volume Safely",
-        ". Maintain Sender Reputation",
-        ". Ensure Consistent Delivery",
-        ". Isolate Risk"
-      ]
+      title: "Planning to Send More Emails? Calculate Your Mailbox Infrastructure First",
+      content: "Use the 360 AIRO Mailbox Calculator to determine the ideal number of mailboxes, domains, and daily sending capacity needed to scale outreach safely. Mailbox planning helps protect deliverability while creating room for predictable pipeline growth.",
     },
     {
-      title: "Cold Email Sending Limits and Best Practices",
-      content: "Inbox providers like Google and Microsoft have strict limits on sending volume. Pushing past these limits triggers spam filters.",
-      list: [
-        ". Max 30-50 Cold Emails Per Day Per Mailbox",
-        ". Max 2-3 Mailboxes Per Domain",
-        ". Use Secondary Domains (e.g., getcompany.com)",
-        ". Always Warm Up New Mailboxes",
-        ". Monitor Domain Health Regularly"
-      ]
+      title: "Why Mailbox Planning Matters",
+      content: "Mailbox providers monitor sending patterns, engagement, and reputation before deciding where your emails belong. Sending too much volume through a limited number of mailboxes increases the likelihood of spam placement and reputation damage. Proper mailbox distribution creates a healthier foundation for scaling cold outreach.",
     },
     {
-      title: "How to Setup Your Cold Email Infrastructure",
-      content: "Building an outbound infrastructure requires careful planning. Here is the standard process for safe sending:",
+      title: "Benefits of Proper Mailbox Allocation",
       list: [
-        ". Purchase Secondary Domains",
-        ". Setup Google Workspace or Microsoft 365 Accounts",
-        ". Configure SPF, DKIM, and DMARC Records",
-        ". Connect to a Warmup Tool",
-        ". Wait 14-21 Days Before Sending"
-      ]
+        "Protect Sender Reputation",
+        "Improve Inbox Placement",
+        "Reduce Spam Folder Risk",
+        "Scale Outreach Safely",
+        "Increase Reply Rates",
+        "Generate More Pipeline",
+      ],
     },
     {
-      title: "Who Is This Calculator For?",
-      content: "This tool is built for teams planning their outbound strategy and need to understand the technical requirements for scale.",
+      title: "Calculate Before You Scale",
+      content: "Many outbound campaigns fail because teams focus on volume instead of infrastructure. Before increasing sending activity, you need to understand the capacity of your domains and mailboxes. A mailbox calculator removes guesswork and provides a realistic roadmap for growth.",
       list: [
-        ". Founders",
-        ". SDR Teams",
-        ". Sales Leaders",
-        ". Marketing Professionals",
-        ". RevOps Specialists",
-        ". Agencies",
-        ". Consultants"
-      ]
-    }
+        "Monthly Outreach Goals",
+        "Mailbox Sending Limits",
+        "Domain Distribution",
+        "Deliverability Risk",
+        "Outreach Capacity",
+        "Growth Potential",
+      ],
+    },
+    {
+      title: "Recommended Mailbox Capacity",
+      content: "The safest outbound programs distribute email volume across multiple mailboxes and domains. This approach reduces risk while creating sustainable growth. Instead of relying on a single inbox, build an infrastructure that can support long-term outreach.",
+      list: [
+        "New Mailbox: 20–50 Emails/Day",
+        "Warmed Mailbox: 50–150 Emails/Day",
+        "Multiple Mailboxes = Higher Capacity",
+        "Multiple Domains = Better Risk Distribution",
+        "Actual recommendations vary based on deliverability performance and domain health.",
+      ],
+    },
+    {
+      title: "Example Mailbox Scenarios",
+      content: "Different outreach goals require different infrastructure setups. Use these examples to understand how mailbox requirements scale with campaign volume.",
+      list: [
+        "Startup Founder — Goal: 10 Meetings / Month • Mailboxes: 2–3 • Domains: 1",
+        "Growing SDR Team — Goal: 50 Meetings / Month • Mailboxes: 10–15 • Domains: 2–3",
+        "Agency or Revenue Team — Goal: 100+ Meetings / Month • Mailboxes: 20+ • Domains: 4+",
+      ],
+    },
+    {
+      title: "Mailbox Best Practices",
+      content: "Mailbox infrastructure is only one part of the equation. Deliverability depends on how you manage volume, reputation, and engagement over time. Following best practices helps maintain inbox placement as you scale.",
+      list: [
+        "Warm Up New Mailboxes",
+        "Verify SPF, DKIM & DMARC",
+        "Increase Volume Gradually",
+        "Monitor Bounce Rates",
+        "Track Spam Complaints",
+        "Use Multiple Domains",
+        "Rotate Sending Capacity",
+        "Maintain Consistent Activity",
+      ],
+    },
+    {
+      title: "Build The Infrastructure Before You Need It",
+      content: "Most companies wait until deliverability drops before fixing their email infrastructure. By then, sender reputation has already been damaged. The best outbound teams build mailbox capacity before they scale campaigns.",
+      list: [
+        "Calculate Mailbox Requirements",
+        "Plan Domain Infrastructure",
+        "Warm Up Mailboxes",
+        "Monitor Deliverability",
+        "Automate Outreach",
+        "Generate More Pipeline",
+      ],
+    },
   ];
 
   const faqs = [
     {
-      q: "What is the maximum number of emails I can send per day?",
-      a: "For cold email, we strongly recommend sending no more than 30 to 50 emails per day, per mailbox. Sending more increases the risk of being marked as spam."
+      q: "What is a mailbox calculator?",
+      a: "A mailbox calculator estimates the number of mailboxes and domains required to safely achieve your outreach goals while maintaining healthy sender reputation."
     },
     {
-      q: "How many mailboxes should I have per domain?",
-      a: "You should set up a maximum of 2 to 3 mailboxes per domain. This ensures that if one domain is flagged, the impact on your overall sending capacity is minimized."
+      q: "Why can't I send everything from one mailbox?",
+      a: "Mailbox providers monitor sending behavior and may flag sudden volume increases as suspicious activity. Distributing volume helps reduce risk and improve deliverability."
     },
     {
-      q: "Why shouldn't I use my primary domain?",
-      a: "If your primary domain gets blacklisted for spam, your company's internal emails, customer communications, and system notifications will also go to spam. Always use secondary domains for cold outreach."
+      q: "How many emails can one mailbox send per day?",
+      a: "Capacity varies depending on provider, domain reputation, mailbox age, and engagement levels. Mailboxes typically require proper warmup before reaching higher sending volumes."
     },
     {
-      q: "How long should I warm up new mailboxes?",
-      a: "New mailboxes should be warmed up for at least 14 to 21 days before sending any cold emails. Warmup should continue even after you start sending campaigns."
+      q: "Do I need multiple domains?",
+      a: "For larger outreach programs, multiple domains help distribute risk and create additional sending capacity."
     },
     {
-      q: "Is this calculator free?",
-      a: "Yes. The 360 AIRO Mailbox Calculator is completely free to use."
-    }
+      q: "Should I warm up every mailbox?",
+      a: "Yes. Every mailbox should establish its own sender reputation before being used for large-scale outreach."
+    },
   ];
 
   return (
     <FreeToolTemplate
       title="Email Mailbox Calculator"
-      subtitle="Calculate the Number of Domains and Mailboxes Needed for Cold Email"
-      description="Scaling outbound requires the right infrastructure. Sending too many emails from a single domain or mailbox will destroy your sender reputation and send your emails to spam. Use the 360 AIRO Mailbox Calculator to determine exactly how many domains and mailboxes you need to hit your sending goals safely."
+      subtitle="Planning to Send More Emails? Calculate Your Mailbox Infrastructure First"
+      description="Use the 360 AIRO Mailbox Calculator to determine the ideal number of mailboxes, domains, and daily sending capacity needed to scale outreach safely. Mailbox planning helps protect deliverability while creating room for predictable pipeline growth."
       sections={sections}
       faqs={faqs}
-      ctaTitle="Still Guessing Your Infrastructure Requirements?"
-      ctaSubtitle="Your Competitors Are Scaling Safely While You're Risking the Spam Folder. Calculate your exact infrastructure needs and start building a predictable outbound engine today."
-      ctaButtonText="Calculate My Infrastructure Now"
+      ctaTitle="Your Next Meeting Starts With The Right Infrastructure"
+      ctaSubtitle="Find out exactly how many mailboxes you need before you send another campaign. Protect deliverability, improve inbox placement, and build an outbound engine that scales without damaging your sender reputation."
+      ctaButtonText="Calculate My Mailbox Capacity"
       calculator={
         <div style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
           <h3 style={{ fontFamily: '"Barlow Condensed", sans-serif', fontSize: '32px', marginBottom: '32px', textAlign: 'center', color: '#111827' }}>Interactive Capacity Planner</h3>

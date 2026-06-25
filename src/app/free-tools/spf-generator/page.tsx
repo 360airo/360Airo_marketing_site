@@ -72,11 +72,11 @@ export default function SpfGeneratorPage() {
       ctaSubtitle="SPF is just one piece of the puzzle. Ensure your complete infrastructure is bulletproof."
       ctaButtonText="Learn About Infrastructure"
       calculator={
-        <div style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
+        <div style={{ padding: '32px', maxWidth: '800px', margin: '0 auto' }}>
           
-          <h3 style={{ fontFamily: '"Barlow Condensed", sans-serif', fontSize: '32px', marginBottom: '24px', textAlign: 'center', color: '#111827' }}>Build SPF Record</h3>
+          <h3 style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 700, fontSize: '28px', marginBottom: '24px', textAlign: 'center', color: '#0F172A' }}>Build SPF Record</h3>
           
-          <div style={{ backgroundColor: '#F9FAFB', padding: '32px', borderRadius: '16px', border: '1px solid #E5E7EB', marginBottom: '24px', display: 'flex', flexDirection: 'column', gap: '20px' }}>
+          <div style={{ backgroundColor: '#FFFFFF', padding: '32px', borderRadius: '16px', border: '1px solid #E2E8F0', marginBottom: '24px', display: 'flex', flexDirection: 'column', gap: '20px', boxShadow: '0 4px 20px -2px rgba(0,0,0,0.02)' }}>
             <div>
               <label style={{ display: 'block', fontFamily: '"DM Sans", sans-serif', fontWeight: 600, marginBottom: '8px', color: '#374151' }}>Domain Name</label>
               <input 
@@ -89,19 +89,19 @@ export default function SpfGeneratorPage() {
 
             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: '"DM Sans", sans-serif', fontSize: '15px', color: '#374151', cursor: 'pointer' }}>
-                <input type="checkbox" checked={allowMx} onChange={(e) => setAllowMx(e.target.checked)} style={{ width: '18px', height: '18px', accentColor: '#3B82F6' }} />
+                <input type="checkbox" checked={allowMx} onChange={(e) => setAllowMx(e.target.checked)} style={{ width: '18px', height: '18px', accentColor: '#4F46E5' }} />
                 Allow MX servers to send
               </label>
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: '"DM Sans", sans-serif', fontSize: '15px', color: '#374151', cursor: 'pointer' }}>
-                <input type="checkbox" checked={allowA} onChange={(e) => setAllowA(e.target.checked)} style={{ width: '18px', height: '18px', accentColor: '#3B82F6' }} />
+                <input type="checkbox" checked={allowA} onChange={(e) => setAllowA(e.target.checked)} style={{ width: '18px', height: '18px', accentColor: '#4F46E5' }} />
                 Allow A records to send
               </label>
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: '"DM Sans", sans-serif', fontSize: '15px', color: '#374151', cursor: 'pointer' }}>
-                <input type="checkbox" checked={includeGoogle} onChange={(e) => setIncludeGoogle(e.target.checked)} style={{ width: '18px', height: '18px', accentColor: '#3B82F6' }} />
+                <input type="checkbox" checked={includeGoogle} onChange={(e) => setIncludeGoogle(e.target.checked)} style={{ width: '18px', height: '18px', accentColor: '#4F46E5' }} />
                 Include Google Workspace
               </label>
               <label style={{ display: 'flex', alignItems: 'center', gap: '8px', fontFamily: '"DM Sans", sans-serif', fontSize: '15px', color: '#374151', cursor: 'pointer' }}>
-                <input type="checkbox" checked={includeOutlook} onChange={(e) => setIncludeOutlook(e.target.checked)} style={{ width: '18px', height: '18px', accentColor: '#3B82F6' }} />
+                <input type="checkbox" checked={includeOutlook} onChange={(e) => setIncludeOutlook(e.target.checked)} style={{ width: '18px', height: '18px', accentColor: '#4F46E5' }} />
                 Include Outlook / Office365
               </label>
             </div>
@@ -126,7 +126,7 @@ export default function SpfGeneratorPage() {
                   <button 
                     key={p.value}
                     onClick={() => setPolicy(p.value)}
-                    style={{ padding: '12px', borderRadius: '8px', border: policy === p.value ? '2px solid #3B82F6' : '1px solid #D1D5DB', backgroundColor: policy === p.value ? '#EFF6FF' : 'white', color: policy === p.value ? '#2563EB' : '#4B5563', cursor: 'pointer', fontFamily: '"DM Sans", sans-serif', fontWeight: 600 }}
+                    style={{ padding: '12px', borderRadius: '8px', border: policy === p.value ? '2px solid #4F46E5' : '1px solid #D1D5DB', backgroundColor: policy === p.value ? '#EEF2FF' : 'white', color: policy === p.value ? '#4F46E5' : '#4B5563', cursor: 'pointer', fontFamily: '"DM Sans", sans-serif', fontWeight: 600 }}
                   >
                     {p.label}
                   </button>
@@ -136,7 +136,7 @@ export default function SpfGeneratorPage() {
             
             <button 
               onClick={generateRecord}
-              style={{ width: '100%', marginTop: '8px', backgroundColor: '#111827', color: 'white', border: 'none', padding: '16px', borderRadius: '100px', cursor: 'pointer', fontFamily: '"DM Sans", sans-serif', fontWeight: 600, fontSize: '16px', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+              style={{ width: '100%', marginTop: '8px', background: 'linear-gradient(135deg, #4f46e5, #2563eb)', color: 'white', border: 'none', padding: '16px', borderRadius: '100px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', fontWeight: 700, fontSize: '16px', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: '0 4px 14px rgba(79, 70, 229, 0.25)' }}
             >
               <Shield size={18} /> Generate SPF Record
             </button>
@@ -144,10 +144,10 @@ export default function SpfGeneratorPage() {
 
           {record && (
             <div style={{ animation: 'fadeIn 0.5s ease-in-out' }}>
-              <h4 style={{ fontFamily: '"Barlow Condensed", sans-serif', fontSize: '24px', color: '#111827', marginBottom: '16px' }}>Your DNS Record</h4>
+              <h4 style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 700, fontSize: '22px', color: '#0F172A', marginBottom: '16px' }}>Your DNS Record</h4>
               
-              <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '12px', overflow: 'hidden' }}>
-                <div style={{ backgroundColor: '#F3F4F6', borderBottom: '1px solid #E5E7EB', padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: '"DM Sans", sans-serif', fontSize: '14px', fontWeight: 600, color: '#374151' }}>
+              <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', overflow: 'hidden' }}>
+                <div style={{ backgroundColor: '#F8FAFC', borderBottom: '1px solid #E2E8F0', padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: '"DM Sans", sans-serif', fontSize: '14px', fontWeight: 600, color: '#374151' }}>
                   <span>Type: TXT</span>
                   <span>Name: @ (or root)</span>
                 </div>

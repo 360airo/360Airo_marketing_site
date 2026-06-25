@@ -3,13 +3,12 @@
 import { useMemo, useState } from "react";
 import Link from "next/link";
 import { ArrowRight, Search } from "lucide-react";
-import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import {
   AnalyzerIcon, CalculatorIcon, DeliverabilityIcon, DmarcIcon, PermutatorIcon,
   PitchIcon, SequencerIcon, SignatureIcon, SpamCheckerIcon, SpfIcon, VerifierIcon,
 } from "../../components/ModernIcons";
 import "../../styles/free-tools.css";
+import FeatureMarquee from "../../components/FeatureMarquee";
 
 const tools = [
   { name: "Email Deliverability Test", slug: "email-deliverability-test", category: "Deliverability", description: "Audit inbox readiness, authentication, reputation signals, and content risk before you send.", icon: DeliverabilityIcon, accent: "#c084fc", image: "https://images.unsplash.com/photo-1557200134-90327ee9fafa?auto=format&fit=crop&w=800&q=80" },
@@ -34,53 +33,54 @@ export default function FreeToolsPage() {
   ), [query]);
 
   return (
-    <div className="ft-site">
-      <Navbar activeTab="free-tools" />
+    <>
       <main>
         <section className="ft-hero">
-          <div className="ft-orb ft-orb-one" />
-          <div className="ft-orb ft-orb-two" />
           <div className="ft-hero-content">
-            <h1 className="ft-outfit-heading" style={{ fontSize: '64px', marginBottom: '24px', letterSpacing: '-0.02em', color: '#0F172A', lineHeight: 1.1 }}>
-              Free tools for teams that take <span style={{ fontWeight: 600 }}>outbound seriously.</span>
+            <div className="ft-hero-badge">Free toolkit</div>
+            <h1 className="ft-hero-title">
+              Free tools for teams that take <span>outbound seriously.</span>
             </h1>
-            <p>
+            <p className="ft-hero-copy">
               Plan infrastructure, protect deliverability, and produce sharper email campaigns with a practical toolkit built for modern revenue teams.
             </p>
+            <div className="ft-hero-pill-row">
+              <span>Deliverability-first</span>
+              <span>Infrastructure-safe</span>
+              <span>Built for scale</span>
+            </div>
           </div>
         </section>
 
-        <section className="ft-grid-section">
+
+        <section className="ft-grid-section scene-light">
           <div className="ft-container">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '40px', flexWrap: 'wrap', gap: '24px' }}>
-              <h2 style={{ fontSize: '36px' }}>The Operator Library</h2>
-              <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
-                <div style={{ position: 'relative', width: '300px' }}>
-                  <Search size={18} style={{ position: 'absolute', left: '16px', top: '50%', transform: 'translateY(-50%)', color: '#9CA3AF', pointerEvents: 'none' }} />
+            <div className="ft-tools-header">
+              <div className="ft-tools-heading">
+                <p className="ft-tools-label">Operator library</p>
+                <h2>The most useful outbound workflow tools, ready instantly.</h2>
+              </div>
+              <div className="ft-search-group">
+                <div className="ft-search-field">
+                  <Search size={18} className="ft-search-icon" />
                   <input 
                     value={query} 
                     onChange={(e) => setQuery(e.target.value)} 
                     placeholder="Search free tools..." 
-                    style={{ width: '100%', padding: '12px 16px 12px 42px', borderRadius: '100px', border: '1px solid #E5E7EB', outline: 'none', fontFamily: '"DM Sans", sans-serif', fontSize: '14px' }}
+                    className="ft-search-input"
                   />
                 </div>
-                <button 
-                  style={{ padding: '12px 24px', borderRadius: '100px', backgroundColor: '#111827', color: '#fff', border: 'none', cursor: 'pointer', fontFamily: '"DM Sans", sans-serif', fontWeight: 600, transition: 'background 0.2s' }}
-                  onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#374151'}
-                  onMouseLeave={(e) => e.currentTarget.style.backgroundColor = '#111827'}
-                >
-                  Search
-                </button>
+                <button className="ft-search-button">Search</button>
               </div>
             </div>
-            
+
             <div className="ft-grid">
               {filtered.map((tool) => {
                 return (
-                  <Link href={`/free-tools/${tool.slug}`} className="ft-card-modern" key={tool.slug} style={{ "--accent": tool.accent } as React.CSSProperties}>
-                    <div className="ft-card-visual" style={{ backgroundColor: `${tool.accent}15`, padding: 0 }}>
-                      <img src={tool.image} alt={tool.name} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s ease' }} className="ft-card-img" />
-                      <div style={{ position: 'absolute', top: '16px', right: '16px', backgroundColor: 'rgba(255,255,255,0.9)', borderRadius: '12px', padding: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: '0 4px 6px rgba(0,0,0,0.1)' }}>
+                  <Link href={`/free-tools/${tool.slug}`} className={`ft-card-modern accent-${tool.slug}`} key={tool.slug}>
+                    <div className="ft-card-visual">
+                      <img src={tool.image} alt={tool.name} className="ft-card-img" />
+                      <div className="ft-card-icon-container">
                         <tool.icon size={24} color={tool.accent} />
                       </div>
                     </div>
@@ -89,7 +89,7 @@ export default function FreeToolsPage() {
                       <h3 className="ft-card-title">{tool.name}</h3>
                       <p className="ft-card-desc">{tool.description}</p>
                       <div className="ft-card-footer">
-                        <span className="ft-card-read-more" style={{ color: tool.accent }}>Open Tool <ArrowRight size={16} /></span>
+                        <span className="ft-card-read-more">Open Tool <ArrowRight size={16} /></span>
                       </div>
                     </div>
                   </Link>
@@ -98,8 +98,23 @@ export default function FreeToolsPage() {
             </div>
           </div>
         </section>
+
+        {/* Final CTA / Autopilot Section */}
+        <section className="cs-cta-modern">
+          <div className="cs-cta-bg">
+            <div className="cs-cta-pattern"></div>
+          </div>
+          <div className="cs-cta-content" style={{ width: '100%' }}>
+            <h2>Put multichannel outbound on autopilot<br/>with 360Airo</h2>
+            <div className="cs-cta-buttons">
+              <button className="btn-primary-purple" onClick={() => window.location.href = '#'}>Start free &rarr;</button>
+              <button className="btn-secondary-white" onClick={() => window.location.href = '#'}>Book a demo &rarr;</button>
+            </div>
+            
+            <FeatureMarquee />
+          </div>
+        </section>
       </main>
-      <Footer />
-    </div>
+    </>
   );
 }

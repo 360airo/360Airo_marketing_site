@@ -74,33 +74,122 @@ export default function SequenceBuilderPage() {
 
   const sections = [
     {
-      title: "Why Use An AI Sequence Builder?",
-      content: "Writing follow-up emails takes time. Worse, most sales reps use generic templates that prospects ignore. Our AI Sequence Builder analyzes your audience and offer to generate multi-touch sequences that feel personal, relevant, and human.",
+      title: "Why Use an Email Sequence Builder?",
+      content: "Most prospects don't reply to the first email. The majority of meetings happen after multiple follow-ups, yet most sales reps stop too early. A structured email sequence keeps conversations moving without requiring hours of manual writing.",
       list: [
+        ". Save Hours of Writing",
+        ". Create Consistent Follow-Ups",
+        ". Improve Reply Rates",
         ". Scale Outreach Faster",
         ". Reduce Manual Work",
         ". Launch Campaigns Faster"
       ]
     },
-    // Truncated for brevity...
+    {
+      title: "What Does The AI Sequence Builder Create?",
+      content: "Building a complete outreach sequence requires more than one email. The tool generates a full sequence with logical progression, messaging flow, and follow-up timing recommendations designed for outbound campaigns.",
+      list: [
+        ". Introduction Email",
+        ". Follow-Up #1",
+        ". Follow-Up #2",
+        ". Value-Based Follow-Up",
+        ". Breakup Email",
+        ". Subject Line Suggestions"
+      ]
+    },
+    {
+      title: "Generate Sequences For Any Use Case",
+      content: "Different audiences require different messaging. Whether you're targeting founders, marketers, sales leaders, or agencies, the sequence builder adapts to your outreach goals.",
+      list: [
+        ". Cold Outreach",
+        ". Lead Generation",
+        ". Demo Booking",
+        ". Partnership Outreach",
+        ". Agency Prospecting",
+        ". Customer Reactivation",
+        ". LinkedIn Follow-Ups",
+        ". Multichannel Campaigns"
+      ]
+    },
+    {
+      title: "Built For Sales Teams That Want More Replies",
+      content: "The best sequences combine personalization, timing, and relevance. Instead of relying on templates copied from the internet, generate outreach tailored to your audience and offer. Modern sequence tools are increasingly focused on personalization and structured follow-up logic.",
+      list: [
+        ". Personalized Messaging",
+        ". AI-Powered Copy",
+        ". Follow-Up Logic",
+        ". Better Conversation Starters",
+        ". Faster Campaign Creation"
+      ]
+    },
+    {
+      title: "What Makes A Good Email Sequence?",
+      content: "Successful outreach isn't about sending more emails. It's about creating a sequence that builds interest over time. Each touchpoint should provide context, value, and a reason to continue the conversation.",
+      list: [
+        ". Strong Opening Email",
+        ". Clear Value Proposition",
+        ". Relevant Follow-Ups",
+        ". Consistent Tone",
+        ". Strategic Timing",
+        ". Clear Call-To-Action"
+      ]
+    },
+    {
+      title: "Who Is This Tool For?",
+      content: "Whether you're sending 50 emails a week or 50,000 emails a month, a strong sequence can dramatically improve outreach performance. This tool is built for teams that rely on conversations to generate revenue.",
+      list: [
+        ". Founders",
+        ". SDR Teams",
+        ". BDR Teams",
+        ". Sales Leaders",
+        ". Agencies",
+        ". Consultants",
+        ". RevOps Teams",
+        ". Growth Teams"
+      ]
+    }
   ];
 
   const faqs = [
     {
       q: "What is an email sequence builder?",
-      a: "An email sequence builder helps create a structured series of emails and follow-ups that are sent over time to prospects."
+      a: "An email sequence builder helps create a structured series of emails and follow-ups that are sent over time to prospects. It removes the need to manually write every touchpoint and helps maintain consistency across outreach campaigns."
+    },
+    {
+      q: "How many emails should be in a cold email sequence?",
+      a: "Most successful cold email campaigns include between 4 and 7 touchpoints. The exact number depends on your audience, offer, and sales cycle."
+    },
+    {
+      q: "Can AI write effective cold email sequences?",
+      a: "AI can generate structured email sequences, subject lines, and follow-up messages based on your target audience and campaign goals. Most teams use AI to create first drafts and then customize them before launching."
+    },
+    {
+      q: "Does the sequence builder create follow-up emails?",
+      a: "Yes. The tool generates complete follow-up sequences, including reminder emails, value-driven follow-ups, and breakup emails."
+    },
+    {
+      q: "Is this tool free?",
+      a: "Yes. The 360 AIRO Sequence Builder is available free of charge and can be used to create outreach sequences instantly."
+    },
+    {
+      q: "Can I use the sequences in my outreach platform?",
+      a: "Yes. Generated sequences can be copied and used in your preferred sales engagement, cold email, or CRM platform."
+    },
+    {
+      q: "Will this improve reply rates?",
+      a: "A well-structured sequence helps ensure consistent follow-up and more relevant messaging, which can contribute to better engagement and response rates over time."
     }
   ];
 
   return (
     <FreeToolTemplate
       title="Free AI Email Sequence Builder"
-      subtitle="Instantly Create Personalized Cold Email Sequences"
-      description="Writing effective cold emails is hard. Following up is even harder. Use the 360 AIRO Email Sequence Builder to instantly generate multi-touch outreach sequences designed to start conversations and book more meetings."
+      subtitle="Stop Ghosting Your Pipeline. Generate Cold Email Sequences That Actually Get Replies in Seconds."
+      description="Writing cold emails is hard. Writing 5 follow-ups that actually get replies is even harder. Use the 360 AIRO AI Sequence Builder to instantly create personalized cold email sequences designed to start conversations and book more meetings."
       sections={sections}
       faqs={faqs}
       ctaTitle="Still Writing Every Follow-Up Manually?"
-      ctaSubtitle="Your Competitors Are Launching Campaigns While You're Still Drafting Email #2. Generate personalized cold email sequences in seconds."
+      ctaSubtitle="Your Competitors Are Launching Campaigns While You're Still Drafting Email #2. Generate personalized cold email sequences in seconds and spend more time closing deals instead of writing follow-ups. No Signup Required • Instant Results • Ready to Send"
       ctaButtonText="Generate My Free Email Sequence"
       calculator={
         <div style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>

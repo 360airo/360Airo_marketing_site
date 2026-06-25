@@ -87,10 +87,86 @@ export default function SignatureBuilderPage() {
         ". Increase Trust & Credibility",
         ". Strengthen Personal Branding",
         ". Improve Response Rates",
-        ". Showcase Social Profiles"
+        ". Showcase Social Profiles",
+        ". Promote Your Company",
+        ". Look More Professional"
       ]
     },
-    // ... keep the rest brief for succinctness in the prompt
+    {
+      title: "Build a Professional Email Signature in Minutes",
+      content: "Creating a professional signature shouldn't require design skills or HTML knowledge. Simply enter your information, choose a layout, and generate a signature that's ready to use across Gmail, Outlook, Apple Mail, and more.",
+      list: [
+        ". Name & Title",
+        ". Company Information",
+        ". Social Media Links",
+        ". Company Logo",
+        ". Profile Picture",
+        ". Call-To-Action Buttons"
+      ]
+    },
+    {
+      title: "Stop Sending Emails That Look Generic",
+      content: "A plain-text signature can make even great outreach feel incomplete. A professional signature helps establish authority and creates a stronger first impression every time you hit send.",
+      list: [
+        ". Professional Appearance",
+        ". Consistent Branding",
+        ". Better Email Experience",
+        ". Increased Credibility",
+        ". More Professional Conversations"
+      ]
+    },
+    {
+      title: "What Can You Include In Your Signature?",
+      content: "Your signature is more than just a name and phone number. Use it as a mini landing page that highlights your expertise, company, and preferred next steps.",
+      list: [
+        ". Full Name",
+        ". Job Title",
+        ". Company Name",
+        ". Phone Number",
+        ". Website URL",
+        ". Social Profiles",
+        ". Meeting Booking Link",
+        ". Custom CTA Button"
+      ]
+    },
+    {
+      title: "Designed For Modern Revenue Teams",
+      content: "Whether you're sending cold outreach, customer emails, or partnership requests, a professional signature helps reinforce trust and credibility at every touchpoint.",
+      list: [
+        ". Founders",
+        ". SDR Teams",
+        ". Sales Leaders",
+        ". Consultants",
+        ". Agencies",
+        ". Recruiters",
+        ". Customer Success Teams",
+        ". Marketing Professionals"
+      ]
+    },
+    {
+      title: "Why Use a Signature Builder Instead of Templates?",
+      content: "Copying random HTML templates often leads to formatting issues across devices and email providers. A dedicated signature builder creates responsive signatures designed to look professional everywhere.",
+      list: [
+        ". Works Across Devices",
+        ". Consistent Formatting",
+        ". Easy Updates",
+        ". Brand Control",
+        ". Faster Setup",
+        ". Professional Design"
+      ]
+    },
+    {
+      title: "Signature Best Practices",
+      content: "The best email signatures are clean, simple, and easy to read. Too much information creates distractions, while too little information can reduce credibility.",
+      list: [
+        ". Keep It Professional",
+        ". Add a Professional Photo",
+        ". Include Relevant Links",
+        ". Use Brand Colors",
+        ". Add a Booking Link",
+        ". Avoid Clutter"
+      ]
+    }
   ];
 
   const faqs = [
@@ -101,18 +177,38 @@ export default function SignatureBuilderPage() {
     {
       q: "Is the email signature builder free?",
       a: "Yes. The 360 AIRO Email Signature Builder is completely free to use."
+    },
+    {
+      q: "Can I use my company logo?",
+      a: "Absolutely. You can upload your logo, profile image, and branding assets to create a signature that matches your company identity."
+    },
+    {
+      q: "Does it work with Gmail and Outlook?",
+      a: "Yes. The generated signature is compatible with Gmail, Outlook, Microsoft 365, Apple Mail, and most major email providers."
+    },
+    {
+      q: "Can I add social media links?",
+      a: "Yes. You can include LinkedIn, Twitter/X, Facebook, Instagram, Calendly, website links, and more."
+    },
+    {
+      q: "Will my signature work on mobile devices?",
+      a: "Yes. Signatures are designed to display correctly across desktop and mobile email clients."
+    },
+    {
+      q: "Can I edit my signature later?",
+      a: "Yes. You can update your information and generate a new signature anytime."
     }
   ];
 
   return (
     <FreeToolTemplate
       title="Free Email Signature Builder"
-      subtitle="Every Email You Send Is Judged in Seconds"
+      subtitle="Every Email You Send Is Judged in Seconds; A Professional Email Signature Makes the Difference"
       description="You spend hours crafting the perfect email, but prospects still judge your credibility in seconds. Create a professional email signature that builds trust, reinforces your brand, and makes every email look polished and professional."
       sections={sections}
       faqs={faqs}
       ctaTitle="Still Using a Plain Text Signature?"
-      ctaSubtitle="First Impressions Happen Before Prospects Read Your Email. Create a professional email signature that builds trust, strengthens your brand, and helps every email look more credible."
+      ctaSubtitle="First Impressions Happen Before Prospects Read Your Email. Create a professional email signature that builds trust, strengthens your brand, and helps every email look more credible. No Design Skills Required • Ready in Minutes • Free Forever"
       ctaButtonText="Create My Free Email Signature"
       calculator={
         <div style={{ padding: '24px', maxWidth: '1000px', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px' }}>

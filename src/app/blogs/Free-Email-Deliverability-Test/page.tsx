@@ -27,6 +27,11 @@ const blogCategories = [
 
 const tocItems: TocItem[] = [
   { id: 'toc-main', label: 'Introduction', arrow: false },
+  { id: 'free-email-deliverability-tool', label: 'Free Email Deliverability Tool', arrow: true },
+  { id: 'why-test-email-deliverability', label: 'Why Test Email Deliverability?', arrow: true },
+  { id: 'deliverability-test-checks', label: 'What Does the Deliverability Test Check?', arrow: true },
+  { id: 'deliverability-issues', label: 'Common Deliverability Issues We Detect', arrow: true },
+  { id: 'who-should-use-this-tool', label: 'Who Should Use This Tool?', arrow: true },
   { id: 'what-is-an-email-deliverability-test', label: 'What Is an Email Deliverability Test?', arrow: true },
   { id: 'why-use-a-free-email-deliverability-test', label: 'Why Use a Free Email Deliverability Test?', arrow: true },
   { id: 'email-deliverability-test-tools', label: 'Email Deliverability Test Tools', arrow: true },
@@ -38,10 +43,15 @@ const tocItems: TocItem[] = [
 
 const faqs = [
   'What is an email deliverability test?',
-  'Why should I use a free email deliverability test?',
-  'Do Gmail accounts need deliverability testing?',
-  'How can I improve my email deliverability?',
-  'Which email service has the best deliverability?',
+  'How does the Email Deliverability Test work?',
+  'What does my deliverability score mean?',
+  'Can this tool tell me why my emails go to spam?',
+  'Does the test check SPF, DKIM, and DMARC?',
+  'How accurate are the results?',
+  'Will testing affect my sender reputation?',
+  'How often should I run an email deliverability test?',
+  'What should I do if my deliverability score is low?',
+  'What is the difference between an Email Deliverability Test and Email Warmup?',
 ];
 
 const sectionImages: Record<
@@ -240,11 +250,16 @@ function Accordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const answers: string[] = [
-    'An email deliverability test measures the likelihood of your emails reaching the inbox instead of spam or promotions folders.',
-    'A free email deliverability test helps identify authentication issues, spam triggers, and reputation problems before campaigns go live.',
-    'Yes. Gmail has strict filtering, so testing Gmail deliverability is important for cold outreach and bulk email performance.',
-    'You can improve deliverability by setting up SPF, DKIM, and DMARC, cleaning your list, avoiding spam triggers, and testing every campaign.',
-    'The best deliverability depends on setup and behavior, but Gmail often performs well for properly authenticated and engaged senders.',
+    'The test checks whether your emails reach the inbox, promotions tab, or spam folder, and highlights why delivery success may differ from reported delivery status.',
+    'You simply send a test email to the address provided by the tool. The system evaluates inbox placement, authentication records, spam risk signals, and provider-specific delivery behavior.',
+    'Your score reflects the likelihood of inbox placement based on sender reputation, authentication status, content risk, and spam filter signals.',
+    'Yes. The report identifies why emails go to spam by flagging missing authentication, reputation issues, blacklist status, and content-related spam triggers.',
+    'Yes. The tool verifies SPF, DKIM, and DMARC records to make sure authentication is configured correctly and helping establish trust with mailbox providers.',
+    'The test simulates real-world inbox placement and checks the same signals mailbox providers use, so results provide a strong indication of current deliverability health.',
+    'No. Running a deliverability test does not negatively impact your sender reputation. It safely evaluates placement and authentication without affecting domain health.',
+    'It is best to test before new campaigns, after domain changes, when warming up new mailboxes, or whenever you see declining open or reply rates.',
+    'Review authentication records, sender reputation, spam complaints, bounce rates, and domain health. Fix the identified issues, then retest to improve placement.',
+    'A deliverability test shows where emails currently land and identifies issues. Email warmup builds sender reputation over time by generating positive engagement signals.',
   ];
 
   return (
@@ -292,6 +307,36 @@ export default function BlogColdEmailPage() {
       title: 'Introduction',
       content:
         'Email marketing success depends on inbox placement, sender reputation, and regular deliverability testing before campaigns.',
+    },
+    {
+      id: 'free-email-deliverability-tool',
+      title: 'Free Email Deliverability Tool',
+      content:
+        'Use the 360 AIRO Email Deliverability Test to check inbox placement, sender reputation, authentication health, and spam risk before launching campaigns.',
+    },
+    {
+      id: 'why-test-email-deliverability',
+      title: 'Why Test Email Deliverability?',
+      content:
+        'Most teams focus on opens, clicks, and replies. If emails land in spam, those metrics no longer matter.',
+    },
+    {
+      id: 'deliverability-test-checks',
+      title: 'What Does the Deliverability Test Check?',
+      content:
+        'The test analyzes inbox placement rate, sender reputation, domain reputation, spam score, authentication status, and email content.',
+    },
+    {
+      id: 'deliverability-issues',
+      title: 'Common Deliverability Issues We Detect',
+      content:
+        'Poor deliverability often starts with missing SPF, invalid DKIM, DMARC misconfiguration, blacklists, and low sender reputation.',
+    },
+    {
+      id: 'who-should-use-this-tool',
+      title: 'Who Should Use This Tool?',
+      content:
+        'This tool is built for SDR teams, BDR teams, sales leaders, marketing teams, founders, agencies, RevOps, and email marketers.',
     },
     {
       id: 'what-is-an-email-deliverability-test',
@@ -606,6 +651,156 @@ export default function BlogColdEmailPage() {
                 }}
                 blocks={[]}
               />
+
+              <ArticleSection
+                id="free-email-deliverability-tool"
+                title="Free Email Deliverability Tool"
+                showImage={false}
+                intro={[
+                  'Find out if your emails reach the inbox, promotions tab, or spam folder.',
+                  'Your emails may show as "Delivered" but still never reach your prospects.',
+                  'Use the 360 AIRO Email Deliverability Test to check inbox placement, sender reputation, authentication health, and spam risk before launching campaigns.',
+                  'Get actionable insights to improve deliverability and generate more replies.',
+                ]}
+                infographic={{
+                  title: 'Free deliverability calculator',
+                  paragraphs: [
+                    'Run the calculator to see exactly where your emails land and why.',
+                  ],
+                  bullets: [
+                    'Inbox placement detection',
+                    'Sender reputation review',
+                    'Authentication health check',
+                    'Spam risk assessment',
+                  ],
+                }}
+                blocks={[
+                  {
+                    subtitle: 'Calculator',
+                    paragraphs: [
+                      'Use the free deliverability calculator to check your email placement across major providers before your next campaign.',
+                    ],
+                  },
+                ]}
+              />
+
+              <ArticleSection
+                id="why-test-email-deliverability"
+                title="Why Test Email Deliverability?"
+                showImage={false}
+                intro={[
+                  'Most teams focus on opens, clicks, and reply rates.',
+                  'But if your emails land in spam folders, none of those metrics matter.',
+                  'An email deliverability test helps identify hidden issues before they impact revenue and outreach performance.',
+                ]}
+                infographic={{
+                  title: 'Why this matters',
+                  paragraphs: [
+                    'A quick deliverability check protects campaign performance and saves time by catching problems before launch.',
+                  ],
+                  bullets: [
+                    'Check Inbox Placement',
+                    'Identify Spam Risks',
+                    'Verify Authentication Records',
+                    'Improve Sender Reputation',
+                    'Increase Reply Rates',
+                    'Protect Domain Health',
+                  ],
+                }}
+                blocks={[]}
+              />
+
+              <ArticleSection
+                id="deliverability-test-checks"
+                title="What Does The Deliverability Test Check?"
+                showImage={false}
+                intro={[
+                  'Email deliverability depends on multiple factors working together.',
+                  'Our testing engine analyzes the signals mailbox providers use to decide whether your emails belong in the inbox or spam folder.',
+                  'The report highlights critical issues affecting performance.',
+                ]}
+                infographic={{
+                  title: 'Deliverability signals analyzed',
+                  paragraphs: [
+                    'The test looks at the same trust signals used by Gmail, Outlook, and other providers.',
+                  ],
+                  bullets: [
+                    'Inbox Placement Rate',
+                    'Sender Reputation',
+                    'Domain Reputation',
+                    'Spam Score',
+                    'Authentication Status',
+                    'Email Content Analysis',
+                    'Blacklist Monitoring',
+                    'Provider-Specific Results',
+                  ],
+                }}
+                blocks={[]}
+              />
+
+              <ArticleSection
+                id="deliverability-issues"
+                title="Common Deliverability Issues We Detect"
+                showImage={false}
+                intro={[
+                  'Poor deliverability often starts with small configuration errors that go unnoticed.',
+                  'Identifying these issues early helps prevent reputation damage and lost opportunities.',
+                  'Our test highlights the most common problems affecting inbox placement.',
+                ]}
+                infographic={{
+                  title: 'Issues we surface',
+                  paragraphs: [
+                    'Fixing these common problems can dramatically improve inbox placement before sending campaigns.',
+                  ],
+                  bullets: [
+                    'Missing SPF Records',
+                    'Invalid DKIM Configuration',
+                    'DMARC Misconfiguration',
+                    'High Spam Risk Content',
+                    'Blacklisted Domains',
+                    'Low Sender Reputation',
+                    'Domain Trust Issues',
+                    'Engagement Problems',
+                  ],
+                }}
+                blocks={[]}
+              />
+
+              <ArticleSection
+                id="who-should-use-this-tool"
+                title="Who Should Use This Tool?"
+                showImage={false}
+                intro={[
+                  'Whether you are sending cold emails, marketing campaigns, or transactional messages, inbox placement matters.',
+                  'This tool is designed for teams that depend on email to generate revenue and customer engagement.',
+                ]}
+                infographic={{
+                  title: 'Designed for revenue teams',
+                  paragraphs: [
+                    'Any team that relies on email outreach should test deliverability before sending campaigns.',
+                  ],
+                  bullets: [
+                    'SDR Teams',
+                    'BDR Teams',
+                    'Sales Leaders',
+                    'Marketing Teams',
+                    'Founders',
+                    'Agencies',
+                    'RevOps Teams',
+                    'Email Marketers',
+                  ],
+                }}
+                blocks={[]}
+              />
+
+              <section id="frequently-asked-questions" className="scroll-mt-28">
+                <h2 className="text-[28px] md:text-[34px] font-bold text-[#111827] mb-5">
+                  Frequently Asked Questions
+                </h2>
+                <div className="space-y-6">
+                  <Accordion />
+                </div>
+              </section>
 
               <ArticleSection
                 id="what-is-an-email-deliverability-test"
