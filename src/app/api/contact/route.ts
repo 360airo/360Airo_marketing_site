@@ -53,8 +53,13 @@ export async function POST(request: Request) {
           name,
           email,
           phone: phone || '',
+          phone_number: phone || '',
+          phoneNumber: phone || '',
           interestedIn: interestedIn || '',
+          interested_in: interestedIn || '',
           message: message || '',
+          how_can_we_help: message || '',
+          howCanWeHelp: message || '',
           submittedAt: new Date().toISOString()
         }),
       });
