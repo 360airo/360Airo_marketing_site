@@ -205,7 +205,17 @@ function renderLight(){
   });
 }
 
-function loop(){t+=.016;updateZones();renderDark();renderLight();requestAnimationFrame(loop)}
+function loop(){
+  if (window.innerWidth <= 900) {
+    requestAnimationFrame(loop);
+    return;
+  }
+  t+=.016;
+  updateZones();
+  renderDark();
+  renderLight();
+  requestAnimationFrame(loop);
+}
 setSize();seedStars();loop();
 })();
 
@@ -243,7 +253,7 @@ const E=t=>t===1?1:1-Math.pow(2,-10*t);
 document.querySelectorAll('#section-phone .headline-inner').forEach(i=>{const d=parseInt(i.getAttribute('data-headline-delay'))||500;setTimeout(()=>i.classList.add('revealed'),d)});
 document.querySelectorAll('#section-phone [data-reveal]').forEach(e=>{const d=parseInt(e.getAttribute('data-delay'))||0;setTimeout(()=>e.classList.add('revealed'),d)});
 const pd=1400;
-function ac(el,dl){const tg=parseInt(el.getAttribute('data-target')),sf=el.getAttribute('data-suffix')||'',du=2200;setTimeout(()=>{const st=performance.now();function tk(n){const p=Math.min((n-st)/du,1);el.textContent=Math.round(E(p)*tg).toLocaleString()+sf;if(p<1)requestAnimationFrame(tk)}requestAnimationFrame(tk)},dl)}
+function ac(el,dl){const tg=parseFloat(el.getAttribute('data-target')),sf=el.getAttribute('data-suffix')||'',du=2200;setTimeout(()=>{const st=performance.now();function tk(n){const p=Math.min((n-st)/du,1);const val=(E(p)*tg);el.textContent=(el.getAttribute('data-decimals')==='1'?val.toFixed(1):Math.round(val).toLocaleString())+sf;if(p<1)requestAnimationFrame(tk)}requestAnimationFrame(tk)},dl)}
 document.querySelectorAll('#section-phone [data-target]').forEach((e,i)=>ac(e,pd+i*120));
 document.querySelectorAll('#section-phone .chart-line').forEach(l=>{const d=parseInt(l.getAttribute('data-line-delay'))||1200;setTimeout(()=>l.classList.add('animate'),pd+d)});
 document.querySelectorAll('#section-phone .chart-area').forEach(a=>{const d=parseInt(a.getAttribute('data-area-delay'))||2000;setTimeout(()=>a.classList.add('animate'),pd+d)});
@@ -340,23 +350,46 @@ updateNavProgress()
 
 
 
-const nav = document.getElementById("main-nav")
+  const nav = document.getElementById("main-nav");
+  if (nav) {
+    const isInitiallyLight = nav.classList.contains("nav-light");
 
-window.addEventListener("scroll", () => {
-  if (window.location.pathname === "/features" || window.location.pathname === "/features/") {
-    nav.classList.add("nav-dark");
-    nav.classList.remove("nav-light");
-    return;
-  }
+    window.addEventListener("scroll", () => {
+      const currentNav = document.getElementById("main-nav");
+      if (!currentNav) return;
 
-  if(window.scrollY > 450){
-    nav.classList.add("nav-light")
-    nav.classList.remove("nav-dark")
-  }else{
-    nav.classList.add("nav-dark")
-    nav.classList.remove("nav-light")
+      if (isInitiallyLight) {
+        currentNav.classList.add("nav-light");
+        currentNav.classList.remove("nav-dark");
+        return;
+      }
+
+      if (window.location.pathname === "/features" || window.location.pathname === "/features/") {
+        currentNav.classList.add("nav-dark");
+        currentNav.classList.remove("nav-light");
+        return;
+      }
+
+      const heroSection = document.getElementById('section-home');
+      const heroStage = heroSection || document.querySelector('.hero-stitch-stage');
+      const threshold = heroStage ? heroStage.offsetHeight - 80 : 450;
+
+      if (window.innerWidth <= 900) {
+        const startTransition = threshold - 150;
+        const endTransition = threshold;
+        const progress = (window.scrollY - startTransition) / (endTransition - startTransition);
+        window._lightProg = Math.max(0, Math.min(1, progress));
+      }
+
+      if (window.scrollY > threshold) {
+        currentNav.classList.add("nav-light");
+        currentNav.classList.remove("nav-dark");
+      } else {
+        currentNav.classList.add("nav-dark");
+        currentNav.classList.remove("nav-light");
+      }
+    });
   }
-})
 
 
 
