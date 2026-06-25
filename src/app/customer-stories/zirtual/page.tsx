@@ -490,7 +490,7 @@ export default function ZirtualCaseStudy() {
             boxShadow: '0 8px 20px rgba(12, 22, 44, 0.25)'
           }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '10px' }}>
-              <img src="/logo.png" alt="360Airo Logo" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
+              <img src="/FinalLogo_icon_transparent.png" alt="360Airo Logo" style={{ width: '24px', height: '24px', objectFit: 'contain' }} />
               <div style={{ fontWeight: 700, fontSize: '15px', color: 'white', fontFamily: '"Outfit", sans-serif' }}>360Airo</div>
             </div>
             <h4 style={{ fontSize: '13px', fontWeight: 600, margin: '0 0 4px 0', lineHeight: 1.3, color: 'white' }}>Put outbound on autopilot</h4>
