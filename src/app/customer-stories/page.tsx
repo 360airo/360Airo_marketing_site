@@ -114,7 +114,7 @@ export default function CustomerStories() {
           <div className="cs-cta-pattern"></div>
         </div>
         <div className="cs-cta-content" style={{width: '100%'}}>
-          <h2>Put outbound on autopilot<br/>with 360Airo</h2>
+          <h2>Put multichannel outbound on autopilot<br/>with 360Airo</h2>
           <div className="cs-cta-buttons">
             <button className="btn-primary-purple">Start free &rarr;</button>
             <button className="btn-secondary-white">Book a demo &rarr;</button>
