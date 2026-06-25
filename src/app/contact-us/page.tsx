@@ -13,10 +13,40 @@ export default function ContactUsPage() {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setIsSubmitting(true);
+    setSubmitError('');
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          phone: formData.phone,
+          interestedIn: formData.interestedIn,
+          message: formData.message
+        })
+      });
+
+      const resData = await response.json();
+      if (!response.ok) {
+        throw new Error(resData.error || 'Failed to submit form data');
+      }
+
+      setSubmitted(true);
+    } catch (err: any) {
+      console.error(err);
+      setSubmitError(err.message || 'Something went wrong while sending. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -274,6 +304,7 @@ export default function ContactUsPage() {
                       onChange={(e) => setFormData({ ...formData, interestedIn: e.target.value })}
                     >
                       <option value="AI SDR Agent">AI SDR Agent</option>
+                      <option value="Email Campaign">Email Campaign</option>
                       <option value="Outbound Infrastructure">Outbound Infrastructure</option>
                       <option value="Multichannel Sequencing">Multichannel Sequencing</option>
                       <option value="Pricing / Enterprise">Pricing / Enterprise</option>
@@ -284,12 +315,18 @@ export default function ContactUsPage() {
 
                 {/* Row 3: Message */}
                 <div>
-                  <label htmlFor="contact-message" style={{ display: 'block', fontSize: '13px', color: '#475569', marginBottom: '8px', fontWeight: 600 }}>How can we help?</label>
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                    <label htmlFor="contact-message" style={{ fontSize: '13px', color: '#475569', fontWeight: 600, margin: 0 }}>How can we help?</label>
+                    <span style={{ fontSize: '11px', color: formData.message.length >= 200 ? '#EF4444' : '#64748B', fontWeight: 500 }}>
+                      {formData.message.length}/200
+                    </span>
+                  </div>
                   <textarea
                     id="contact-message"
                     required
                     rows={4}
-                    placeholder="How can we help?"
+                    maxLength={200}
+                    placeholder="How can we help? (maximum 200 characters)"
                     style={{
                       width: '100%',
                       padding: '14px 16px',
@@ -316,29 +353,42 @@ export default function ContactUsPage() {
                 </div>
 
                 {/* Submit button and disclaimer */}
+                {submitError && (
+                  <p style={{ color: '#EF4444', fontSize: '13px', margin: '4px 0 16px', textAlign: 'center', fontWeight: 500 }}>
+                    ⚠️ {submitError}
+                  </p>
+                )}
                 <div style={{ textAlign: 'center', marginTop: '10px' }}>
-                  <button type="submit" style={{
-                    background: '#0052FF',
-                    borderRadius: '24px',
-                    padding: '14px 44px',
-                    color: '#fff',
-                    fontSize: '15px',
-                    fontWeight: 600,
-                    border: 'none',
-                    cursor: 'pointer',
-                    boxShadow: '0 4px 14px rgba(0, 82, 255, 0.25)',
-                    transition: 'transform 0.2s, box-shadow 0.2s',
-                    display: 'inline-block'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                    e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 82, 255, 0.4)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.transform = 'translateY(0)';
-                    e.currentTarget.style.boxShadow = '0 4px 14px rgba(0, 82, 255, 0.25)';
-                  }}>
-                    Send your message
+                  <button 
+                    type="submit" 
+                    disabled={isSubmitting}
+                    style={{
+                      background: isSubmitting ? '#94A3B8' : '#0052FF',
+                      borderRadius: '24px',
+                      padding: '14px 44px',
+                      color: '#fff',
+                      fontSize: '15px',
+                      fontWeight: 600,
+                      border: 'none',
+                      cursor: isSubmitting ? 'not-allowed' : 'pointer',
+                      boxShadow: isSubmitting ? 'none' : '0 4px 14px rgba(0, 82, 255, 0.25)',
+                      transition: 'transform 0.2s, box-shadow 0.2s',
+                      display: 'inline-block'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (!isSubmitting) {
+                        e.currentTarget.style.transform = 'translateY(-2px)';
+                        e.currentTarget.style.boxShadow = '0 6px 20px rgba(0, 82, 255, 0.4)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (!isSubmitting) {
+                        e.currentTarget.style.transform = 'translateY(0)';
+                        e.currentTarget.style.boxShadow = '0 4px 14px rgba(0, 82, 255, 0.25)';
+                      }
+                    }}
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send your message'}
                   </button>
                   <p style={{
                     fontSize: '12px',
