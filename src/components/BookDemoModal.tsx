@@ -97,6 +97,7 @@ export default function BookDemoModal({ isOpen, onClose }: BookDemoModalProps) {
   // Validation messages
   const [emailError, setEmailError] = useState('');
   const [formError, setFormError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Dropdown ref click listener to close search list
   useEffect(() => {
@@ -179,6 +180,44 @@ export default function BookDemoModal({ isOpen, onClose }: BookDemoModalProps) {
     const val = e.target.value;
     setEmail(val);
     validateEmailAddress(val, teamType);
+  };
+
+  const handleBookDemoSubmit = async () => {
+    if (!selectedDate || !selectedTime) return;
+    setIsSubmitting(true);
+    setFormError('');
+    try {
+      const response = await fetch('/api/book-demo', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          phone,
+          countryCode: selectedCountry.dialCode,
+          employeeSize,
+          demoDate: selectedDate.toISOString(),
+          demoTime: selectedTime,
+          timezone,
+          teamType
+        })
+      });
+
+      const resData = await response.json();
+      if (!response.ok) {
+        throw new Error(resData.error || 'Failed to schedule demo');
+      }
+
+      setStep(3);
+    } catch (err: any) {
+      console.error(err);
+      setFormError(err.message || 'Something went wrong while booking. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   // Next steps
@@ -982,40 +1021,46 @@ export default function BookDemoModal({ isOpen, onClose }: BookDemoModalProps) {
                   )}
                 </div>
 
+                {formError && (
+                  <div style={{ color: '#FF4A4A', fontSize: '12px', marginTop: '8px', marginBottom: '8px', textAlign: 'center', width: '100%' }}>
+                    ⚠️ {formError}
+                  </div>
+                )}
+
                 {/* Submit Button */}
                 <button
                   type="button"
-                  disabled={!selectedDate || !selectedTime}
-                  onClick={() => setStep(3)}
+                  disabled={!selectedDate || !selectedTime || isSubmitting}
+                  onClick={handleBookDemoSubmit}
                   style={{
-                    background: (!selectedDate || !selectedTime) 
+                    background: (!selectedDate || !selectedTime || isSubmitting) 
                       ? 'rgba(255, 255, 255, 0.05)' 
                       : 'linear-gradient(135deg, #0EB5BB, #3B82F6)',
                     borderRadius: '8px',
                     padding: '12px',
-                    color: (!selectedDate || !selectedTime) ? 'rgba(255, 255, 255, 0.25)' : '#fff',
+                    color: (!selectedDate || !selectedTime || isSubmitting) ? 'rgba(255, 255, 255, 0.25)' : '#fff',
                     fontSize: '14px',
                     fontWeight: 600,
                     border: 'none',
-                    cursor: (!selectedDate || !selectedTime) ? 'default' : 'pointer',
-                    boxShadow: (!selectedDate || !selectedTime) ? 'none' : '0 4px 16px rgba(14, 181, 187, 0.25)',
+                    cursor: (!selectedDate || !selectedTime || isSubmitting) ? 'default' : 'pointer',
+                    boxShadow: (!selectedDate || !selectedTime || isSubmitting) ? 'none' : '0 4px 16px rgba(14, 181, 187, 0.25)',
                     marginTop: '4px',
                     transition: 'transform 0.2s, box-shadow 0.2s'
                   }}
                   onMouseEnter={(e) => {
-                    if (selectedDate && selectedTime) {
+                    if (selectedDate && selectedTime && !isSubmitting) {
                       e.currentTarget.style.transform = 'translateY(-1px)';
                       e.currentTarget.style.boxShadow = '0 6px 20px rgba(14, 181, 187, 0.4)';
                     }
                   }}
                   onMouseLeave={(e) => {
-                    if (selectedDate && selectedTime) {
+                    if (selectedDate && selectedTime && !isSubmitting) {
                       e.currentTarget.style.transform = 'translateY(0)';
                       e.currentTarget.style.boxShadow = '0 4px 16px rgba(14, 181, 187, 0.25)';
                     }
                   }}
                 >
-                  Confirm Booking
+                  {isSubmitting ? 'Confirming...' : 'Confirm Booking'}
                 </button>
 
               </div>
