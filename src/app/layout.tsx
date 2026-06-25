@@ -3,6 +3,8 @@ import "../index.css";
 import "../styles/globals.css";
 import "../styles/all.css";
 import "../styles/hero-bg.css";
+import "../styles/chatbot.css";
+import ChatBot from "../components/ChatBot";
 
 export const metadata: Metadata = {
   title: "360 Airo - AI SDR Built for High-Growth B2B Teams",
@@ -31,7 +33,10 @@ export default function RootLayout({
           rel="stylesheet"
         />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <ChatBot />
+      </body>
     </html>
   );
 }
