@@ -108,19 +108,25 @@ export default function ChatBot() {
   };
 
   const getChatUser = async () => {
-    const { data: sessionData } = await supabase.auth.getSession();
-
-    if (sessionData.session?.user) {
-      return sessionData.session.user;
+    try {
+      const { data: sessionData } = await supabase.auth.getSession();
+      if (sessionData.session?.user) {
+        return sessionData.session.user;
+      }
+      const { data: signInData, error: signInError } = await supabase.auth.signInAnonymously();
+      if (!signInError && signInData.user) {
+        return signInData.user;
+      }
+    } catch (e) {
+      console.warn("Supabase auth failed, using localStorage fallback:", e);
     }
 
-    const { data: signInData, error: signInError } = await supabase.auth.signInAnonymously();
-
-    if (signInError || !signInData.user) {
-      throw signInError || new Error("Could not start a Supabase chat session.");
+    let localUserId = typeof window !== 'undefined' ? localStorage.getItem("chat_local_user_id") : null;
+    if (!localUserId && typeof window !== 'undefined') {
+      localUserId = `local-${Math.random().toString(36).substring(2, 15)}-${Date.now()}`;
+      localStorage.setItem("chat_local_user_id", localUserId);
     }
-
-    return signInData.user;
+    return { id: localUserId || "local-user" } as any;
   };
 
   const getOrCreateThread = async (title: string) => {
@@ -128,31 +134,68 @@ export default function ChatBot() {
       return threadId;
     }
 
-    const user = await getChatUser();
-    const { data, error } = await supabase
-      .from("chat_threads")
-      .insert({
-        user_id: user.id,
-        title: title.slice(0, 80),
-      })
-      .select("id")
-      .single();
-
-    if (error || !data?.id) {
-      throw error || new Error("Could not create chat thread.");
+    let user;
+    try {
+      user = await getChatUser();
+    } catch (e) {
+      user = { id: 'local-user' };
     }
 
-    setThreadId(data.id);
-    setChatThreads((current) => [
-      {
-        id: data.id,
-        title: title.slice(0, 80),
-        preview: contentPreview(title),
-        updatedAt: new Date().toISOString(),
-      },
-      ...current,
-    ]);
-    return data.id as string;
+    const isLocalUser = !user?.id || user.id.startsWith("local-");
+
+    if (!isLocalUser) {
+      try {
+        const { data, error } = await supabase
+          .from("chat_threads")
+          .insert({
+            user_id: user.id,
+            title: title.slice(0, 80),
+          })
+          .select("id")
+          .single();
+
+        if (!error && data?.id) {
+          setThreadId(data.id);
+          setChatThreads((current) => [
+            {
+              id: data.id,
+              title: title.slice(0, 80),
+              preview: contentPreview(title),
+              updatedAt: new Date().toISOString(),
+            },
+            ...current,
+          ]);
+          return data.id as string;
+        }
+      } catch (err) {
+        console.warn("Failed to create thread in Supabase, falling back to local storage:", err);
+      }
+    }
+
+    const localThreadId = `thread-${Math.random().toString(36).substring(2, 15)}-${Date.now()}`;
+    const newThread = {
+      id: localThreadId,
+      title: title.slice(0, 80),
+      preview: contentPreview(title),
+      updatedAt: new Date().toISOString(),
+      messages: [] as ChatMessage[]
+    };
+    
+    if (typeof window !== 'undefined') {
+      const localThreads = JSON.parse(localStorage.getItem("chat_local_threads") || "[]");
+      localThreads.unshift(newThread);
+      localStorage.setItem("chat_local_threads", JSON.stringify(localThreads));
+      
+      setThreadId(localThreadId);
+      setChatThreads(localThreads.map((t: any) => ({
+        id: t.id,
+        title: t.title,
+        preview: t.preview,
+        updatedAt: t.updatedAt
+      })));
+    }
+
+    return localThreadId;
   };
 
   const contentPreview = (content: string) => {
@@ -165,64 +208,113 @@ export default function ChatBot() {
     role: ChatMessage["role"],
     content: string,
   ) => {
-    const { error } = await supabase.from("chat_messages").insert([
-      {
-        thread_id: currentThreadId,
-        role,
-        content,
-      },
-    ]);
+    const isLocalThread = currentThreadId.startsWith("thread-");
 
-    if (error) {
-      throw error;
+    if (!isLocalThread) {
+      try {
+        const { error } = await supabase.from("chat_messages").insert([
+          {
+            thread_id: currentThreadId,
+            role,
+            content,
+          },
+        ]);
+
+        if (!error) {
+          const updatedAt = new Date().toISOString();
+          await supabase.from("chat_threads").update({ updated_at: updatedAt }).eq("id", currentThreadId);
+          setChatThreads((current) =>
+            current
+              .map((thread) =>
+                thread.id === currentThreadId
+                  ? {
+                      ...thread,
+                      preview: contentPreview(content),
+                      updatedAt,
+                    }
+                  : thread,
+              )
+              .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()),
+          );
+          return;
+        }
+      } catch (err) {
+        console.warn("Failed to save message in Supabase, falling back to local storage:", err);
+      }
     }
 
-    const updatedAt = new Date().toISOString();
-    await supabase.from("chat_threads").update({ updated_at: updatedAt }).eq("id", currentThreadId);
-    setChatThreads((current) =>
-      current
-        .map((thread) =>
-          thread.id === currentThreadId
-            ? {
-                ...thread,
-                preview: contentPreview(content),
-                updatedAt,
-              }
-            : thread,
-        )
-        .sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()),
-    );
+    if (typeof window !== 'undefined') {
+      const localThreads = JSON.parse(localStorage.getItem("chat_local_threads") || "[]");
+      const threadIndex = localThreads.findIndex((t: any) => t.id === currentThreadId);
+      const updatedAt = new Date().toISOString();
+      
+      if (threadIndex !== -1) {
+        if (!localThreads[threadIndex].messages) {
+          localThreads[threadIndex].messages = [];
+        }
+        localThreads[threadIndex].messages.push({ role, content });
+        localThreads[threadIndex].preview = contentPreview(content);
+        localThreads[threadIndex].updatedAt = updatedAt;
+        
+        const updatedThread = localThreads.splice(threadIndex, 1)[0];
+        localThreads.unshift(updatedThread);
+        localStorage.setItem("chat_local_threads", JSON.stringify(localThreads));
+      }
+
+      setChatThreads(localThreads.map((t: any) => ({
+        id: t.id,
+        title: t.title,
+        preview: t.preview,
+        updatedAt: t.updatedAt
+      })));
+    }
   };
 
   const loadChatThreads = async () => {
+    let localThreads = [];
+    if (typeof window !== 'undefined') {
+      localThreads = JSON.parse(localStorage.getItem("chat_local_threads") || "[]");
+      const initialThreads = localThreads.map((t: any) => ({
+        id: t.id,
+        title: t.title,
+        preview: t.preview,
+        updatedAt: t.updatedAt
+      }));
+      setChatThreads(initialThreads);
+    }
+
     try {
-      await getChatUser();
-
-      const { data: threads, error: threadsError } = await supabase
-        .from("chat_threads")
-        .select("id,title,updated_at")
-        .order("updated_at", { ascending: false })
-        .limit(10);
-
-      if (threadsError || !threads?.length) {
-        if (threadsError) console.error("Supabase chat threads error:", threadsError);
-        setChatThreads([]);
+      let user;
+      try {
+        user = await getChatUser();
+      } catch (e) {
         return;
       }
 
-      const threadIds = threads.map((thread) => thread.id);
-      const { data: threadMessages, error: messagesError } = await supabase
-        .from("chat_messages")
-        .select("thread_id,content,created_at")
-        .in("thread_id", threadIds)
-        .order("created_at", { ascending: false });
+      if (user && !user.id.startsWith("local-")) {
+        const { data: threads, error: threadsError } = await supabase
+          .from("chat_threads")
+          .select("id,title,updated_at")
+          .order("updated_at", { ascending: false })
+          .limit(10);
 
-      if (messagesError) {
-        console.error("Supabase chat messages error:", messagesError);
-      }
+        if (threadsError || !threads?.length) {
+          if (threadsError) console.error("Supabase chat threads error:", threadsError);
+          return;
+        }
 
-      setChatThreads(
-        threads.map((thread) => {
+        const threadIds = threads.map((thread) => thread.id);
+        const { data: threadMessages, error: messagesError } = await supabase
+          .from("chat_messages")
+          .select("thread_id,content,created_at")
+          .in("thread_id", threadIds)
+          .order("created_at", { ascending: false });
+
+        if (messagesError) {
+          console.error("Supabase chat messages error:", messagesError);
+        }
+
+        const supabaseThreads = threads.map((thread) => {
           const latestMessage = threadMessages?.find((message) => message.thread_id === thread.id);
 
           return {
@@ -231,37 +323,70 @@ export default function ChatBot() {
             preview: latestMessage?.content ? contentPreview(latestMessage.content) : "No messages yet",
             updatedAt: latestMessage?.created_at || thread.updated_at,
           };
-        }),
-      );
+        });
+
+        const combined = [...supabaseThreads];
+        localThreads.forEach((lt: any) => {
+          if (!combined.some(st => st.id === lt.id)) {
+            combined.push({
+              id: lt.id,
+              title: lt.title,
+              preview: lt.preview,
+              updatedAt: lt.updatedAt
+            });
+          }
+        });
+
+        setChatThreads(combined.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()));
+      }
     } catch (error) {
       console.error("Supabase chat history load error:", error);
     }
   };
 
   const openThread = async (selectedThreadId: string) => {
-    const { data, error } = await supabase
-      .from("chat_messages")
-      .select("role,content")
-      .eq("thread_id", selectedThreadId)
-      .order("created_at", { ascending: true });
+    const isLocalThread = selectedThreadId.startsWith("thread-");
 
-    if (error) {
-      console.error("Supabase chat messages error:", error);
-      return;
+    if (!isLocalThread) {
+      try {
+        const { data, error } = await supabase
+          .from("chat_messages")
+          .select("role,content")
+          .eq("thread_id", selectedThreadId)
+          .order("created_at", { ascending: true });
+
+        if (!error && data) {
+          setThreadId(selectedThreadId);
+          setMessages(
+            data
+              .filter((message) => message.role === "assistant" || message.role === "user")
+              .map((message) => ({
+                role: message.role as ChatMessage["role"],
+                content: message.content,
+              })),
+          );
+          setHasStartedConversation(true);
+          setActiveTab("messages");
+          window.setTimeout(() => inputRef.current?.focus(), 0);
+          return;
+        }
+      } catch (err) {
+        console.warn("Failed to load thread from Supabase, looking in local storage:", err);
+      }
     }
 
-    setThreadId(selectedThreadId);
-    setMessages(
-      (data || [])
-        .filter((message) => message.role === "assistant" || message.role === "user")
-        .map((message) => ({
-          role: message.role as ChatMessage["role"],
-          content: message.content,
-        })),
-    );
-    setHasStartedConversation(true);
-    setActiveTab("messages");
-    window.setTimeout(() => inputRef.current?.focus(), 0);
+    if (typeof window !== 'undefined') {
+      const localThreads = JSON.parse(localStorage.getItem("chat_local_threads") || "[]");
+      const thread = localThreads.find((t: any) => t.id === selectedThreadId);
+      
+      if (thread) {
+        setThreadId(selectedThreadId);
+        setMessages(thread.messages || []);
+        setHasStartedConversation(true);
+        setActiveTab("messages");
+        window.setTimeout(() => inputRef.current?.focus(), 0);
+      }
+    }
   };
 
   const renderThreadList = (threads: ChatThreadSummary[], compact = false) => (
