@@ -60,7 +60,16 @@ export default function EmailDeliverabilityTestPage() {
       if (placementResult.dns.spf.status !== 'valid') calculatedScore -= 20;
       if (placementResult.dns.dkim.status !== 'valid') calculatedScore -= 30;
       if (placementResult.dns.dmarc.status !== 'valid') calculatedScore -= 20;
-      if (placementResult.folder.includes('Spam')) calculatedScore -= 20;
+      
+      const folderLower = placementResult.folder.toLowerCase();
+      if (folderLower.includes('spam')) {
+        calculatedScore -= 30;
+      } else if (folderLower.includes('promotions')) {
+        calculatedScore -= 10;
+      } else if (folderLower.includes('updates') || folderLower.includes('social') || folderLower.includes('forums')) {
+        calculatedScore -= 15;
+      }
+      
       if (calculatedScore < 10) calculatedScore = 10;
 
       const emailMatch = placementResult.from.match(/<([^>]+)>/) || placementResult.from.match(/([a-zA-Z0-9._-]+@[a-zA-Z0-9._-]+\.[a-zA-Z0-9_-]+)/);
@@ -69,9 +78,13 @@ export default function EmailDeliverabilityTestPage() {
       setResult({
         email: senderEmailAddress,
         score: calculatedScore,
+        folderName: placementResult.folder,
         placement: {
-          inbox: placementResult.folder === 'INBOX' ? 100 : 0,
-          spam: placementResult.folder.includes('Spam') ? 100 : 0,
+          inbox: folderLower.includes('inbox') ? 100 : 0,
+          spam: folderLower.includes('spam') ? 100 : 0,
+          promotions: folderLower.includes('promotions') ? 100 : 0,
+          updates: folderLower.includes('updates') ? 100 : 0,
+          social: folderLower.includes('social') ? 100 : 0,
         },
         dns: {
           spf: placementResult.dns.spf,
@@ -80,7 +93,7 @@ export default function EmailDeliverabilityTestPage() {
         },
         reputation: {
           domainReputation: calculatedScore >= 80 ? 'Good' : (calculatedScore >= 50 ? 'Fair' : 'Poor'),
-          blacklists: { listed: placementResult.folder.includes('Spam') }
+          blacklists: { listed: folderLower.includes('spam') }
         },
         contentAnalysis: placementResult.contentAnalysis
       });
@@ -302,8 +315,24 @@ export default function EmailDeliverabilityTestPage() {
                 </div>
                 <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0', textAlign: 'center', boxShadow: '0 1px 3px rgba(0,0,0,0.01)' }}>
                   <p style={{ fontSize: '12px', fontWeight: 700, color: '#64748B', textTransform: 'uppercase', marginBottom: '8px', fontFamily: '"DM Sans", sans-serif' }}>Inbox Placement</p>
-                  <p style={{ fontSize: '22px', fontFamily: '"Outfit", sans-serif', fontWeight: 700, color: result.placement.inbox > 0 ? '#10B981' : '#DC2626', marginTop: '12px' }}>
-                    {result.placement.inbox > 0 ? 'Primary Inbox' : 'Spam Folder'}
+                  <p style={{ 
+                    fontSize: '22px', 
+                    fontFamily: '"Outfit", sans-serif', 
+                    fontWeight: 700, 
+                    color: result.folderName === 'Inbox (Primary)' || result.folderName === 'INBOX'
+                      ? '#10B981'
+                      : result.folderName === 'Promotions'
+                        ? '#4F46E5'
+                        : result.folderName === 'Updates'
+                          ? '#06B6D4'
+                          : result.folderName === 'Social'
+                            ? '#EC4899'
+                            : result.folderName === 'Spam'
+                              ? '#DC2626'
+                              : '#F59E0B',
+                    marginTop: '12px' 
+                  }}>
+                    {result.folderName || 'Spam Folder'}
                   </p>
                 </div>
                 <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0', textAlign: 'center', boxShadow: '0 1px 3px rgba(0,0,0,0.01)' }}>

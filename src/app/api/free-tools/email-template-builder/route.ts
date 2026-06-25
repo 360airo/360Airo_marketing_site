@@ -60,7 +60,7 @@ Start with <!DOCTYPE html> and end with </html>`;
         'Authorization': `Bearer ${openaiKey}`,
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-4o-mini',
         messages: [
           {
             role: 'user',
