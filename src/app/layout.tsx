@@ -4,6 +4,7 @@ import "../styles/globals.css";
 import "../styles/all.css";
 import "../styles/hero-bg.css";
 import SmoothScroller from "../components/SmoothScroller";
+import BookDemoModalWrapper from "../components/BookDemoModalWrapper";
 
 export const metadata: Metadata = {
   title: "360 Airo - AI SDR Built for High-Growth B2B Teams",
@@ -36,6 +37,7 @@ export default function RootLayout({
         <SmoothScroller>
           {children}
         </SmoothScroller>
+        <BookDemoModalWrapper />
       </body>
     </html>
   );

@@ -15,6 +15,7 @@ export default function SmoothScroller({ children }: { children: React.ReactNode
       touchMultiplier: 1.2,
       lerp: 0.08,
     });
+    (window as any).lenis = lenis;
 
     const update = (time: number) => {
       lenis.raf(time * 1000);
