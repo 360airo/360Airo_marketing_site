@@ -157,12 +157,18 @@ body {
 }
 
 @media (max-width: 900px) {
+  .hero-stitch-stage {
+    height: auto;
+    min-height: 100vh;
+  }
+  
   .hero-stitch-stage .hero {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
     padding-top: 120px;
+    padding-bottom: 60px;
   }
   
   .hero-copy {
@@ -177,11 +183,12 @@ body {
   }
 
   .tablet-motion-shell {
+    position: relative;
     top: auto;
-    bottom: 5%;
-    right: 50%;
+    bottom: auto;
+    right: auto;
     width: min(100% - 32px, 600px);
-    transform: translate(50%, 0) !important;
+    margin: 40px auto 0;
   }
 }
 
