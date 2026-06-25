@@ -96,22 +96,101 @@ export default function EmailDeliverabilityTestPage() {
 
   const sections = [
     {
-      title: "Why Does Email Deliverability Matter?",
-      content: "If your emails aren't reaching the primary inbox, your outreach is invisible. Poor deliverability leads to wasted leads, low reply rates, and damaged domain reputation. A deliverability test helps you identify and fix issues before you burn through your prospect list.",
+      title: "Why Test Email Deliverability?",
+      content: "Most teams focus on opens, clicks, and reply rates. But if your emails land in spam folders, none of those metrics matter. An email deliverability test helps identify hidden issues before they impact revenue and outreach performance.",
       list: [
-        ". Avoid the Spam Folder",
-        ". Protect Sender Reputation",
-        ". Increase Open Rates",
-        ". Maximize Outreach ROI"
+        "Check Inbox Placement",
+        "Identify Spam Risks",
+        "Verify Authentication Records",
+        "Improve Sender Reputation",
+        "Increase Reply Rates",
+        "Protect Domain Health"
       ]
     },
-    // Truncated for brevity...
+    {
+      title: "What Does The Deliverability Test Check?",
+      content: "Email deliverability depends on multiple factors working together. Our testing engine analyzes the signals mailbox providers use to decide whether your emails belong in the inbox or spam folder. The report highlights critical issues affecting performance.",
+      list: [
+        "Inbox Placement Rate",
+        "Sender Reputation",
+        "Domain Reputation",
+        "Spam Score",
+        "Authentication Status",
+        "Email Content Analysis",
+        "Blacklist Monitoring",
+        "Provider-Specific Results"
+      ]
+    },
+    {
+      title: "Common Deliverability Issues We Detect",
+      content: "Poor deliverability often starts with small configuration errors that go unnoticed. Identifying these issues early helps prevent reputation damage and lost opportunities. Our test highlights the most common problems affecting inbox placement.",
+      list: [
+        "Missing SPF Records",
+        "Invalid DKIM Configuration",
+        "DMARC Misconfiguration",
+        "High Spam Risk Content",
+        "Blacklisted Domains",
+        "Low Sender Reputation",
+        "Domain Trust Issues",
+        "Engagement Problems"
+      ]
+    },
+    {
+      title: "Who Should Use This Tool?",
+      content: "Whether you're sending cold emails, marketing campaigns, or transactional messages, inbox placement matters. This tool is designed for teams that depend on email to generate revenue and customer engagement.",
+      list: [
+        "SDR Teams",
+        "BDR Teams",
+        "Sales Leaders",
+        "Marketing Teams",
+        "Founders",
+        "Agencies",
+        "RevOps Teams",
+        "Email Marketers"
+      ]
+    }
   ];
 
   const faqs = [
     {
       q: "What is an email deliverability test?",
-      a: "An email deliverability test analyzes your email setup, domain reputation, and content to predict whether your emails will land in the primary inbox, the promotions tab, or the spam folder."
+      a: "An email deliverability test checks whether your emails reach the inbox, promotions tab, or spam folder. It helps identify issues that may affect inbox placement and sender reputation."
+    },
+    {
+      q: "How does the Email Deliverability Test work?",
+      a: "Simply send a test email to the address provided by the tool. We analyze inbox placement, authentication records, spam risk signals, and other factors that influence deliverability."
+    },
+    {
+      q: "What does my deliverability score mean?",
+      a: "Your deliverability score indicates the likelihood of your emails reaching the inbox. It considers factors such as sender reputation, inbox placement, authentication status, and spam risk indicators."
+    },
+    {
+      q: "Can this tool tell me why my emails go to spam?",
+      a: "Yes. The report highlights common issues such as missing SPF, DKIM, or DMARC records, poor sender reputation, blacklist listings, and content-related risks that can affect inbox placement."
+    },
+    {
+      q: "Does the test check SPF, DKIM, and DMARC?",
+      a: "Yes. Email authentication plays a critical role in deliverability. The tool verifies whether your SPF, DKIM, and DMARC records are properly configured and helping establish trust with mailbox providers."
+    },
+    {
+      q: "How accurate are the results?",
+      a: "The tool simulates real-world inbox placement testing and evaluates the same trust signals mailbox providers use when filtering emails. Results provide a strong indication of your current deliverability health."
+    },
+    {
+      q: "Will testing affect my sender reputation?",
+      a: "No. Running a deliverability test does not negatively impact your sender reputation. It is designed to safely evaluate email placement and authentication without affecting domain health."
+    },
+    {
+      q: "How often should I run an email deliverability test?",
+      a: "It's recommended to test before launching new campaigns, after domain changes, when warming up new mailboxes, or anytime you notice declining open or reply rates."
+    },
+    {
+      q: "What should I do if my deliverability score is low?",
+      a: "Start by reviewing authentication records, sender reputation, spam complaints, bounce rates, and domain health. Addressing these issues can significantly improve inbox placement over time."
+    },
+    {
+      q: "What's the difference between an Email Deliverability Test and Email Warmup?",
+      a: "An Email Deliverability Test shows where your emails currently land and identifies issues affecting inbox placement. Email Warmup helps build sender reputation over time through positive engagement signals. Most successful outreach programs use both together."
     }
   ];
 
@@ -126,15 +205,15 @@ export default function EmailDeliverabilityTestPage() {
     ];
     
     return (
-      <div style={{ backgroundColor: '#F9FAFB', padding: '32px', borderRadius: '16px', border: '1px solid #E5E7EB', textAlign: 'center' }}>
-        <RefreshCw size={32} color="#3B82F6" className="spin-animation" style={{ margin: '0 auto 16px' }} />
-        <h4 style={{ fontFamily: '"Barlow Condensed", sans-serif', fontSize: '24px', color: '#111827', marginBottom: '16px' }}>Running Diagnostics</h4>
+      <div style={{ backgroundColor: '#F8FAFC', padding: '32px', borderRadius: '16px', border: '1px solid #E2E8F0', textAlign: 'center' }}>
+        <RefreshCw size={32} color="#4F46E5" className="spin-animation" style={{ margin: '0 auto 16px' }} />
+        <h4 style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 700, fontSize: '24px', color: '#0F172A', marginBottom: '16px' }}>Running Diagnostics</h4>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', maxWidth: '400px', margin: '0 auto', textAlign: 'left' }}>
           {steps.map(s => {
             const isActive = step === s.id;
             const isPassed = steps.findIndex(x => x.id === step) > steps.findIndex(x => x.id === s.id);
             return (
-              <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: '12px', color: isActive ? '#3B82F6' : (isPassed ? '#10B981' : '#9CA3AF'), fontFamily: '"DM Sans", sans-serif', fontSize: '14px', fontWeight: isActive ? 600 : 400 }}>
+              <div key={s.id} style={{ display: 'flex', alignItems: 'center', gap: '12px', color: isActive ? '#4F46E5' : (isPassed ? '#10B981' : '#94A3B8'), fontFamily: '"DM Sans", sans-serif', fontSize: '14px', fontWeight: isActive ? 600 : 400 }}>
                 {isPassed ? <CheckCircle size={16} /> : (isActive ? <RefreshCw size={16} className="spin-animation" /> : <div style={{ width: '16px', height: '16px', borderRadius: '50%', border: '2px solid currentColor' }} />)}
                 {s.label}
               </div>
@@ -147,59 +226,60 @@ export default function EmailDeliverabilityTestPage() {
 
   return (
     <FreeToolTemplate
-      title="Test Email Deliverability"
-      subtitle="Find Out If Your Emails Reach the Inbox or Spam Folder"
-      description="Your emails may show as 'Delivered' but still never reach your prospects. Check inbox placement, sender reputation, authentication health, and spam risk before launching campaigns."
+      title="Free Email deliverability Tool"
+      subtitle="Find Out If Your Emails Reach the Inbox, Promotions Tab, or Spam Folder"
+      description='Your emails may show as "Delivered" but still never reach your prospects. Use the 360 AIRO Email Deliverability Test to check inbox placement, sender reputation, authentication health, and spam risk before launching campaigns. Get actionable insights to improve deliverability and generate more replies.'
+      highlightText="Warm Up Unlimited Mailboxes (Never Pay Per inbox)"
       sections={sections}
       faqs={faqs}
-      ctaTitle="Still Guessing About Your Inbox Placement?"
-      ctaSubtitle="Test your email setup instantly and start booking more meetings today."
-      ctaButtonText="Test My Deliverability for Free"
+      ctaTitle="Your Next Customer Might Be Sitting in Spam Right Now"
+      ctaSubtitle="Before you blame your copy, check your deliverability. See exactly where your emails land across Gmail, Outlook, and other providers before another campaign burns opportunities. Inbox placement testing helps reveal whether emails reach inboxes or spam folders before real sends."
+      ctaButtonText="Test My Deliverability Now"
       calculator={
-        <div style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
+        <div style={{ padding: '32px', maxWidth: '800px', margin: '0 auto' }}>
           
           {!result && !loading && (
-            <div style={{ backgroundColor: '#FFFFFF', padding: '32px', borderRadius: '16px', border: '1px solid #E5E7EB', boxShadow: '0 4px 6px -1px rgba(0,0,0,0.05)' }}>
-              <h3 style={{ fontFamily: '"Barlow Condensed", sans-serif', fontSize: '28px', marginBottom: '8px', color: '#111827', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <Shield size={24} color="#3B82F6" /> Advanced Spam Diagnostic Engine
+            <div style={{ backgroundColor: '#FFFFFF', padding: '32px', borderRadius: '16px', border: '1px solid #E2E8F0', boxShadow: '0 4px 20px -2px rgba(0,0,0,0.02)' }}>
+              <h3 style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 700, fontSize: '26px', marginBottom: '8px', color: '#0F172A', display: 'flex', alignItems: 'center', gap: '10px' }}>
+                <Shield size={24} color="#4F46E5" /> Advanced Spam Diagnostic Engine
               </h3>
-              <p style={{ fontFamily: '"DM Sans", sans-serif', fontSize: '15px', color: '#6B7280', marginBottom: '32px' }}>Follow the steps below to test your sending infrastructure.</p>
+              <p style={{ fontFamily: '"DM Sans", sans-serif', fontSize: '15px', color: '#64748B', marginBottom: '32px' }}>Follow the steps below to test your sending infrastructure.</p>
               
               {error && <div style={{ padding: '16px', backgroundColor: '#FEF2F2', border: '1px solid #FEE2E2', color: '#DC2626', borderRadius: '8px', marginBottom: '24px', fontSize: '14px', fontFamily: '"DM Sans", sans-serif', display: 'flex', alignItems: 'flex-start', gap: '8px' }}>
                 <AlertTriangle size={18} style={{ flexShrink: 0, marginTop: '2px' }} /> {error}
               </div>}
               
               <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginBottom: '32px' }}>
-                <div style={{ backgroundColor: '#F9FAFB', padding: '20px', borderRadius: '12px', border: '1px solid #E5E7EB' }}>
+                <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                    <span style={{ fontSize: '12px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', fontFamily: '"DM Sans", sans-serif' }}>Step 1: Send to Seed Inbox</span>
-                    <button onClick={() => copyToClipboard(seedEmails.join(', '), setCopiedSeed)} style={{ backgroundColor: 'transparent', border: '1px solid #D1D5DB', padding: '6px 12px', borderRadius: '6px', fontSize: '12px', fontWeight: 600, color: '#374151', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 700, color: '#64748B', textTransform: 'uppercase', fontFamily: '"DM Sans", sans-serif' }}>Step 1: Send to Seed Inbox</span>
+                    <button onClick={() => copyToClipboard(seedEmails.join(', '), setCopiedSeed)} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '6px 12px', borderRadius: '6px', fontSize: '12px', fontWeight: 600, color: '#374151', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', boxShadow: '0 1px 2px rgba(0,0,0,0.02)' }}>
                       {copiedSeed ? <Check size={14} color="#10B981" /> : <Copy size={14} />} {copiedSeed ? 'Copied' : 'Copy Email'}
                     </button>
                   </div>
-                  <div style={{ padding: '12px', backgroundColor: '#FFFFFF', border: '1px solid #D1D5DB', borderRadius: '8px', fontFamily: 'monospace', fontSize: '14px', color: '#111827' }}>
+                  <div style={{ padding: '12px', backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '8px', fontFamily: 'monospace', fontSize: '14px', color: '#0F172A' }}>
                     {seedEmails.join(', ')}
                   </div>
-                  <p style={{ fontSize: '13px', color: '#6B7280', marginTop: '12px', fontFamily: '"DM Sans", sans-serif' }}>Send a realistic test email from your sending domain to the address above.</p>
+                  <p style={{ fontSize: '13px', color: '#64748B', marginTop: '12px', fontFamily: '"DM Sans", sans-serif' }}>Send a realistic test email from your sending domain to the address above.</p>
                 </div>
 
-                <div style={{ backgroundColor: '#F9FAFB', padding: '20px', borderRadius: '12px', border: '1px solid #E5E7EB' }}>
+                <div style={{ backgroundColor: '#F8FAFC', padding: '20px', borderRadius: '12px', border: '1px solid #E2E8F0' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-                    <span style={{ fontSize: '12px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', fontFamily: '"DM Sans", sans-serif' }}>Step 2: Include Subject Code</span>
-                    <button onClick={() => copyToClipboard(testRefId, setCopiedSubject)} style={{ backgroundColor: 'transparent', border: '1px solid #D1D5DB', padding: '6px 12px', borderRadius: '6px', fontSize: '12px', fontWeight: 600, color: '#374151', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                    <span style={{ fontSize: '12px', fontWeight: 700, color: '#64748B', textTransform: 'uppercase', fontFamily: '"DM Sans", sans-serif' }}>Step 2: Include Subject Code</span>
+                    <button onClick={() => copyToClipboard(testRefId, setCopiedSubject)} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '6px 12px', borderRadius: '6px', fontSize: '12px', fontWeight: 600, color: '#374151', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', boxShadow: '0 1px 2px rgba(0,0,0,0.02)' }}>
                       {copiedSubject ? <Check size={14} color="#10B981" /> : <Copy size={14} />} {copiedSubject ? 'Copied' : 'Copy Code'}
                     </button>
                   </div>
-                  <div style={{ padding: '12px', backgroundColor: '#EFF6FF', border: '1px solid #BFDBFE', borderRadius: '8px', fontFamily: 'monospace', fontSize: '16px', fontWeight: 700, color: '#1D4ED8', textAlign: 'center' }}>
+                  <div style={{ padding: '12px', backgroundColor: '#EEF2FF', border: '1px solid #C7D2FE', borderRadius: '8px', fontFamily: 'monospace', fontSize: '16px', fontWeight: 700, color: '#4F46E5', textAlign: 'center' }}>
                     {testRefId}
                   </div>
-                  <p style={{ fontSize: '13px', color: '#6B7280', marginTop: '12px', fontFamily: '"DM Sans", sans-serif' }}>You MUST include this exact code anywhere in the subject line of your test email so we can identify it.</p>
+                  <p style={{ fontSize: '13px', color: '#64748B', marginTop: '12px', fontFamily: '"DM Sans", sans-serif' }}>You MUST include this exact code anywhere in the subject line of your test email so we can identify it.</p>
                 </div>
               </div>
 
               <button 
                 onClick={handleStartTest} 
-                style={{ width: '100%', backgroundColor: '#111827', color: 'white', border: 'none', padding: '16px', borderRadius: '100px', cursor: 'pointer', fontFamily: '"DM Sans", sans-serif', fontWeight: 600, fontSize: '16px', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
+                style={{ width: '100%', background: 'linear-gradient(135deg, #4f46e5, #2563eb)', color: 'white', border: 'none', padding: '16px', borderRadius: '100px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', fontWeight: 700, fontSize: '16px', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: '0 4px 14px rgba(79, 70, 229, 0.25)' }}
               >
                 <Mail size={18} /> I've Sent The Email - Check Deliverability
               </button>
@@ -211,31 +291,31 @@ export default function EmailDeliverabilityTestPage() {
           {result && !loading && (
             <div style={{ animation: 'fadeIn 0.5s ease-in-out' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
-                <h3 style={{ fontFamily: '"Barlow Condensed", sans-serif', fontSize: '32px', color: '#111827' }}>Diagnostic Report</h3>
-                <button onClick={() => setResult(null)} style={{ backgroundColor: '#F3F4F6', border: '1px solid #D1D5DB', padding: '8px 16px', borderRadius: '100px', cursor: 'pointer', fontFamily: '"DM Sans", sans-serif', fontWeight: 600, color: '#374151' }}>Test Again</button>
+                <h3 style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 700, fontSize: '28px', color: '#0F172A' }}>Diagnostic Report</h3>
+                <button onClick={() => setResult(null)} style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', padding: '8px 16px', borderRadius: '100px', cursor: 'pointer', fontFamily: '"DM Sans", sans-serif', fontWeight: 600, color: '#374151', boxShadow: '0 1px 2px rgba(0,0,0,0.02)' }}>Test Again</button>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px', marginBottom: '24px' }}>
-                <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', border: '1px solid #E5E7EB', textAlign: 'center' }}>
-                  <p style={{ fontSize: '13px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px', fontFamily: '"DM Sans", sans-serif' }}>Deliverability Score</p>
+                <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0', textAlign: 'center', boxShadow: '0 1px 3px rgba(0,0,0,0.01)' }}>
+                  <p style={{ fontSize: '12px', fontWeight: 700, color: '#64748B', textTransform: 'uppercase', marginBottom: '8px', fontFamily: '"DM Sans", sans-serif' }}>Deliverability Score</p>
                   <p style={{ fontSize: '48px', fontFamily: '"Outfit", sans-serif', fontWeight: 800, color: result.score >= 80 ? '#10B981' : (result.score >= 50 ? '#F59E0B' : '#DC2626') }}>{result.score}/100</p>
                 </div>
-                <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', border: '1px solid #E5E7EB', textAlign: 'center' }}>
-                  <p style={{ fontSize: '13px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px', fontFamily: '"DM Sans", sans-serif' }}>Inbox Placement</p>
-                  <p style={{ fontSize: '24px', fontFamily: '"Outfit", sans-serif', fontWeight: 700, color: result.placement.inbox > 0 ? '#10B981' : '#DC2626', marginTop: '12px' }}>
+                <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0', textAlign: 'center', boxShadow: '0 1px 3px rgba(0,0,0,0.01)' }}>
+                  <p style={{ fontSize: '12px', fontWeight: 700, color: '#64748B', textTransform: 'uppercase', marginBottom: '8px', fontFamily: '"DM Sans", sans-serif' }}>Inbox Placement</p>
+                  <p style={{ fontSize: '22px', fontFamily: '"Outfit", sans-serif', fontWeight: 700, color: result.placement.inbox > 0 ? '#10B981' : '#DC2626', marginTop: '12px' }}>
                     {result.placement.inbox > 0 ? 'Primary Inbox' : 'Spam Folder'}
                   </p>
                 </div>
-                <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', border: '1px solid #E5E7EB', textAlign: 'center' }}>
-                  <p style={{ fontSize: '13px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', marginBottom: '8px', fontFamily: '"DM Sans", sans-serif' }}>Blacklist Status</p>
-                  <p style={{ fontSize: '24px', fontFamily: '"Outfit", sans-serif', fontWeight: 700, color: result.reputation.blacklists.listed ? '#DC2626' : '#10B981', marginTop: '12px' }}>
+                <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0', textAlign: 'center', boxShadow: '0 1px 3px rgba(0,0,0,0.01)' }}>
+                  <p style={{ fontSize: '12px', fontWeight: 700, color: '#64748B', textTransform: 'uppercase', marginBottom: '8px', fontFamily: '"DM Sans", sans-serif' }}>Blacklist Status</p>
+                  <p style={{ fontSize: '22px', fontFamily: '"Outfit", sans-serif', fontWeight: 700, color: result.reputation.blacklists.listed ? '#DC2626' : '#10B981', marginTop: '12px' }}>
                     {result.reputation.blacklists.listed ? 'Listed' : 'Clean'}
                   </p>
                 </div>
               </div>
 
-              <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', border: '1px solid #E5E7EB' }}>
-                <h4 style={{ fontFamily: '"Barlow Condensed", sans-serif', fontSize: '20px', color: '#111827', marginBottom: '16px' }}>Authentication (DNS)</h4>
+              <div style={{ backgroundColor: '#FFFFFF', padding: '24px', borderRadius: '12px', border: '1px solid #E2E8F0', boxShadow: '0 1px 3px rgba(0,0,0,0.01)' }}>
+                <h4 style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 700, fontSize: '20px', color: '#0F172A', marginBottom: '16px' }}>Authentication (DNS)</h4>
                 <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '16px' }}>
                   {['spf', 'dkim', 'dmarc'].map(type => {
                     const status = result.dns[type].status;
@@ -243,7 +323,7 @@ export default function EmailDeliverabilityTestPage() {
                       <div key={type} style={{ padding: '16px', backgroundColor: status === 'valid' ? '#F0FDF4' : '#FEF2F2', border: `1px solid ${status === 'valid' ? '#DCFCE7' : '#FEE2E2'}`, borderRadius: '8px', display: 'flex', alignItems: 'center', gap: '12px' }}>
                         {status === 'valid' ? <CheckCircle color="#10B981" /> : <XCircle color="#DC2626" />}
                         <div>
-                          <p style={{ textTransform: 'uppercase', fontWeight: 700, fontSize: '14px', color: '#111827', fontFamily: '"DM Sans", sans-serif' }}>{type}</p>
+                          <p style={{ textTransform: 'uppercase', fontWeight: 700, fontSize: '14px', color: '#0F172A', fontFamily: '"DM Sans", sans-serif' }}>{type}</p>
                           <p style={{ fontSize: '13px', color: status === 'valid' ? '#15803D' : '#B91C1C', fontFamily: '"DM Sans", sans-serif', marginTop: '2px' }}>{status === 'valid' ? 'Passed' : 'Action Required'}</p>
                         </div>
                       </div>

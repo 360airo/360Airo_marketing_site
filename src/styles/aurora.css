@@ -1,0 +1,78 @@
+/* ═══════════════════════════════════════
+   AURORA CANVAS — fixed full-screen
+═══════════════════════════════════════ */
+#aurora-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* ═══════════════════════════════════════
+   SCROLL-DRIVEN LIGHT SECTION SYSTEM
+═══════════════════════════════════════ */
+.scene-light {
+  position: relative;
+  z-index: 2;
+}
+
+.scene-light::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(238, 242, 255, 0.00) 0%,
+    rgba(238, 242, 255, 0.07) 3%,
+    rgba(238, 242, 255, 0.18) 7%,
+    rgba(238, 242, 255, 0.38) 13%,
+    rgba(238, 242, 255, 0.60) 20%,
+    rgba(238, 242, 255, 0.76) 27%,
+    rgba(245, 243, 255, 0.82) 32%,
+    rgba(239, 246, 255, 0.86) 38%,
+    rgba(239, 246, 255, 0.86) 62%,
+    rgba(245, 243, 255, 0.82) 68%,
+    rgba(238, 242, 255, 0.76) 73%,
+    rgba(238, 242, 255, 0.60) 80%,
+    rgba(238, 242, 255, 0.38) 87%,
+    rgba(238, 242, 255, 0.18) 93%,
+    rgba(238, 242, 255, 0.07) 97%,
+    rgba(238, 242, 255, 0.00) 100%
+  );
+  opacity: var(--bg-prog, 0);
+  z-index: 0;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.scene-light > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Section heading colours transition white → dark */
+.scene-light h1,
+.scene-light h2,
+.scene-light h3,
+.scene-light h4,
+.scene-light h5,
+.scene-light h6 {
+  color: rgb(
+    calc(255 - var(--bg-prog, 0) * 240),
+    calc(255 - var(--bg-prog, 0) * 232),
+    calc(255 - var(--bg-prog, 0) * 213)
+  );
+}
+
+.scene-light p,
+.scene-light span {
+  color: rgba(
+    calc(255 - var(--bg-prog, 0) * 155),
+    calc(255 - var(--bg-prog, 0) * 139),
+    calc(255 - var(--bg-prog, 0) * 116),
+    calc(0.65 + var(--bg-prog, 0) * 0.35)
+  );
+}

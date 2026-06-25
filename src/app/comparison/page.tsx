@@ -54,7 +54,7 @@ export default function ComparisonPage() {
   ];
 
   return (
-    <div className="cs-page">
+    <div className="cs-page comparison-page">
       <Navbar />
       {/* Hero Section */}
       <section className="w-full relative overflow-hidden text-white" style={{ background: 'linear-gradient(135deg, #070b17 0%, #0c162c 40%, #1a244d 100%)', borderBottomLeftRadius: '40px', borderBottomRightRadius: '40px' }}>

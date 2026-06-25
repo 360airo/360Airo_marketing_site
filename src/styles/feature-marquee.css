@@ -85,9 +85,10 @@
   box-shadow: 0 8px 24px rgba(0,0,0,0.06);
 }
 
-/* Fallback for deep purple card */
+/* Fallback for deep purple/dark gradient card */
 .cs-marquee-card[style*="background: linear-gradient(145deg, rgb(76, 29, 149) 0%, rgb(49, 46, 129) 100%)"] .cs-marquee-ui-mock,
-.cs-marquee-card[style*="#4C1D95"] .cs-marquee-ui-mock {
+.cs-marquee-card[style*="#4C1D95"] .cs-marquee-ui-mock,
+.cs-marquee-card[style*="rgb(7, 11, 23)"] .cs-marquee-ui-mock {
   background: rgba(255, 255, 255, 0.1);
   box-shadow: none;
   border: 1px solid rgba(255, 255, 255, 0.2);
@@ -103,7 +104,8 @@
   color: #1A1E26;
 }
 
-.cs-marquee-card[style*="#4C1D95"] .cs-marquee-ui-row {
+.cs-marquee-card[style*="#4C1D95"] .cs-marquee-ui-row,
+.cs-marquee-card[style*="rgb(7, 11, 23)"] .cs-marquee-ui-row {
   color: #FFFFFF;
 }
 
