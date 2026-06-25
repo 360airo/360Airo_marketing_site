@@ -32,7 +32,7 @@ export default function PricingPage() {
         <section className="pricing-hero pp-animate-reveal">
           <div className="pricing-eyebrow">360Airo Pricing</div>
           <h1 className="pricing-hero-heading">
-            Find the Perfect Plan for Your Outreach Goals
+            Find the <span className="pp-hero-gradient">Perfect Plan</span> for Your Outreach Goals
           </h1>
           <p className="pricing-hero-desc">
             Each 360Airo plan comes with built-in access to our full suite of AI-powered tools — including email warmup, AI automation, LinkedIn outreach, prospect CRM, and reports & analytics.
@@ -241,69 +241,6 @@ export default function PricingPage() {
           </div>
         </section>
 
-        {/* WHAT'S INCLUDED (Deep Navy Option A) */}
-        <section className="pp-included-section">
-          <div className="pp-section-header">
-            <h2 className="pp-section-heading">What's Included in Every Plan</h2>
-            <p className="pp-section-subtext">No matter which plan you choose, every user gets access to the complete suite of 360Airo outreach tools to scale your revenue.</p>
-          </div>
-          
-          <div className="pp-features-grid">
-            <div className="pp-feature-card">
-              <div className="pp-fc-icon">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
-              </div>
-              <h4 className="pp-fc-title">Full Dashboard Access</h4>
-              <p className="pp-fc-desc">Manage campaigns, audiences, lead analytics, and account security from one unified dashboard.</p>
-            </div>
-            
-            <div className="pp-feature-card">
-              <div className="pp-fc-icon" style={{color: 'var(--pp-cyan)', backgroundColor: 'rgba(14, 181, 187, 0.1)', borderColor: 'rgba(14, 181, 187, 0.2)'}}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              </div>
-              <h4 className="pp-fc-title">Deliverability Monitoring</h4>
-              <p className="pp-fc-desc">Monitor sender health, warmup activity, inbox placement, and deliverability performance.</p>
-            </div>
-            
-            <div className="pp-feature-card">
-              <div className="pp-fc-icon" style={{color: 'var(--pp-purple)', backgroundColor: 'rgba(193, 90, 230, 0.1)', borderColor: 'rgba(193, 90, 230, 0.2)'}}>
-                <AIStarIcon />
-              </div>
-              <h4 className="pp-fc-title">AI Content Generation</h4>
-              <p className="pp-fc-desc">Create dynamic email sequences, multiple A/B/C/D steps, and semantic AI variables instantly.</p>
-            </div>
-            
-            <div className="pp-feature-card">
-              <div className="pp-fc-icon" style={{color: 'var(--pp-primary)'}}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
-              </div>
-              <h4 className="pp-fc-title">Performance Analytics</h4>
-              <p className="pp-fc-desc">Track open rates, replies, bounces, appointments booked, and revenue generated in real time.</p>
-            </div>
-            
-            <div className="pp-feature-card">
-              <div className="pp-fc-icon" style={{color: 'var(--pp-soft-blue)'}}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-              </div>
-              <h4 className="pp-fc-title">Domain Management</h4>
-              <p className="pp-fc-desc">Connect multiple inboxes, buy new domains, and easily configure DNS records directly from the platform.</p>
-            </div>
-            
-            <div className="pp-feature-card">
-              <div className="pp-fc-icon" style={{color: 'var(--pp-light-blue)'}}>
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-              </div>
-              <h4 className="pp-fc-title">Team Collaboration</h4>
-              <p className="pp-fc-desc">Add team members, share audiences, segment activity, and manage multiple company workspaces.</p>
-            </div>
-          </div>
-          
-          <div className="pp-included-footer">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
-            Built to scale with you. Connect a CRM to keep your data perfectly in sync.
-          </div>
-        </section>
-
         {/* COMPARE PLANS */}
         <section className="pp-compare-section">
           <div className="pp-section-header">
@@ -370,16 +307,82 @@ export default function PricingPage() {
           </div>
         </section>
 
+        {/* WHAT'S INCLUDED (Deep Navy Option A) */}
+        <section className="pp-included-section">
+          <div className="pp-section-header">
+            <h2 className="pp-section-heading">What's Included in Every Plan</h2>
+            <p className="pp-section-subtext">No matter which plan you choose, every user gets access to the complete suite of 360Airo outreach tools to scale your revenue.</p>
+          </div>
+          
+          <div className="pp-features-grid">
+            <div className="pp-feature-card">
+              <div className="pp-fc-icon">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+              </div>
+              <h4 className="pp-fc-title">Full Dashboard Access</h4>
+              <p className="pp-fc-desc">Manage campaigns, audiences, lead analytics, and account security from one unified dashboard.</p>
+            </div>
+            
+            <div className="pp-feature-card">
+              <div className="pp-fc-icon" style={{color: 'var(--pp-cyan)', backgroundColor: 'rgba(14, 181, 187, 0.1)', borderColor: 'rgba(14, 181, 187, 0.2)'}}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+              </div>
+              <h4 className="pp-fc-title">Deliverability Monitoring</h4>
+              <p className="pp-fc-desc">Monitor sender health, warmup activity, inbox placement, and deliverability performance.</p>
+            </div>
+            
+            <div className="pp-feature-card">
+              <div className="pp-fc-icon" style={{color: 'var(--pp-purple)', backgroundColor: 'rgba(193, 90, 230, 0.1)', borderColor: 'rgba(193, 90, 230, 0.2)'}}>
+                <AIStarIcon />
+              </div>
+              <h4 className="pp-fc-title">AI Content Generation</h4>
+              <p className="pp-fc-desc">Create dynamic email sequences, multiple A/B/C/D steps, and semantic AI variables instantly.</p>
+            </div>
+            
+            <div className="pp-feature-card">
+              <div className="pp-fc-icon" style={{color: 'var(--pp-primary)'}}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+              </div>
+              <h4 className="pp-fc-title">Performance Analytics</h4>
+              <p className="pp-fc-desc">Track open rates, replies, bounces, appointments booked, and revenue generated in real time.</p>
+            </div>
+            
+            <div className="pp-feature-card">
+              <div className="pp-fc-icon" style={{color: 'var(--pp-soft-blue)'}}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+              </div>
+              <h4 className="pp-fc-title">Domain Management</h4>
+              <p className="pp-fc-desc">Connect multiple inboxes, buy new domains, and easily configure DNS records directly from the platform.</p>
+            </div>
+            
+            <div className="pp-feature-card">
+              <div className="pp-fc-icon" style={{color: 'var(--pp-light-blue)'}}>
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              </div>
+              <h4 className="pp-fc-title">Team Collaboration</h4>
+              <p className="pp-fc-desc">Add team members, share audiences, segment activity, and manage multiple company workspaces.</p>
+            </div>
+          </div>
+          
+          <div className="pp-included-footer">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+            Built to scale with you. Connect a CRM to keep your data perfectly in sync.
+          </div>
+        </section>
+
         {/* FINAL CTA */}
         <section className="pp-final-cta">
-          <h2 className="pp-cta-heading">Start building better outbound campaigns today.</h2>
-          <p className="pp-cta-desc">Create your first campaign, connect an inbox, and explore AI-powered outreach in minutes. No credit card required.</p>
-          <a href="#" className="pp-btn pp-btn-solid" style={{display: 'inline-flex', width: 'auto', padding: '0 32px', fontSize: '16px'}}>Start Free Trial &rarr;</a>
-          
-          <div className="pp-cta-trust">
-            <span><CheckIcon /> No credit card required</span>
-            <span><CheckIcon /> Cancel anytime</span>
-            <span><CheckIcon /> Setup in minutes</span>
+          <div className="pp-cta-panel">
+            <div className="pp-cta-eyebrow">START YOUR OUTREACH ENGINE</div>
+            <h2 className="pp-cta-heading">Start building better outbound campaigns today.</h2>
+            <p className="pp-cta-desc">Create your first campaign, connect an inbox, and explore AI-powered outreach in minutes. No credit card required.</p>
+            <a href="#" className="pp-btn pp-btn-solid">Start Free Trial <span className="pp-cta-arrow">&rarr;</span></a>
+            
+            <div className="pp-cta-trust">
+              <span><CheckIcon /> No credit card required</span>
+              <span><CheckIcon /> Cancel anytime</span>
+              <span><CheckIcon /> Setup in minutes</span>
+            </div>
           </div>
         </section>
 
