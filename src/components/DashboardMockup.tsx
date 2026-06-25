@@ -42,7 +42,7 @@ export default function DashboardMockup() {
         src="/dashboard-mockup.html"
         style={{
           width: '1600px',
-          height: '1081px',
+          height: `calc(100% / ${scale})`,
           border: 'none',
           position: 'absolute',
           top: '0',
