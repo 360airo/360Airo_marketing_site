@@ -1,13 +1,55 @@
 /* global styles */
-
-/* GSAP Transition Styles */
-html,
-body {
-  overflow-x: hidden;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
 
+html,
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  min-width: 320px;
+}
 
+.page-container {
+  width: min(100% - 40px, 1280px);
+  margin-inline: auto;
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    width: min(100% - 32px, 1280px);
+  }
+}
+
+@media (max-width: 480px) {
+  .page-container {
+    width: min(100% - 24px, 1280px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* GSAP Transition Styles */
 .hero-scene {
   position: absolute;
   inset: 0;
@@ -112,6 +154,35 @@ body {
   will-change: auto;
   transition: none !important;
   pointer-events: auto;
+}
+
+@media (max-width: 900px) {
+  .hero-stitch-stage .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 120px;
+  }
+  
+  .hero-copy {
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-metrics {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .tablet-motion-shell {
+    top: auto;
+    bottom: 5%;
+    right: 50%;
+    width: min(100% - 32px, 600px);
+    transform: translate(50%, 0) !important;
+  }
 }
 
 /* Keep device visual intact */
