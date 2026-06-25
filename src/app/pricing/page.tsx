@@ -24,7 +24,7 @@ export default function PricingPage() {
 
   return (
     <div className="pricing-page-wrapper">
-      <Navbar />
+      <Navbar activeTab="pricing" />
 
       <main className="pricing-page-container">
         
