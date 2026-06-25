@@ -9,6 +9,7 @@ import { initAnimations } from '../../animations';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 import FeaturesDashboardMockup from '../../components/FeaturesDashboardMockup';
+import '../../styles/blogs.css';
 import { featuresIndex, FeatureItem } from '../data/featuresIndex';
 import { 
   BarChart3, 
@@ -31,6 +32,41 @@ import {
 } from 'lucide-react';
 
 const featuresList = [
+  {
+    id: 'ai-workflow-builder',
+    badge: 'AI AUTOMATION',
+    title: 'AI SDR Agents & Workflow Automation',
+    description: 'Orchestrate multi-step outreach flows with conditional routing, customizable delays, and automated LinkedIn actions. Let autonomous AI SDRs personalize cold messages, verify signals, and optimize send paths on the fly.',
+    icon: Cpu,
+    color: '#8B5CF6',
+    mockup: (
+      <div className="rounded-2xl border border-white/10 bg-[#0B1528]/80 p-5 shadow-lg overflow-hidden relative">
+        <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl" />
+        <div className="space-y-3 font-mono text-[10px]">
+          <div className="flex items-center gap-2 p-2 rounded-lg bg-white/5 border border-white/5">
+            <span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 font-semibold uppercase text-[8px]">TRIGGER</span>
+            <span className="text-white/70">Lead Joined: "VP Sales"</span>
+          </div>
+          <div className="w-0.5 h-3 bg-white/15 mx-auto" />
+          <div className="flex items-center gap-2 p-2 rounded-lg bg-white/5 border border-white/5">
+            <span className="px-2 py-0.5 rounded bg-purple-500/20 text-purple-400 font-semibold uppercase text-[8px]">ACTION</span>
+            <span className="text-white/70">AI Personalization (Icebreaker)</span>
+          </div>
+          <div className="w-0.5 h-3 bg-white/15 mx-auto" />
+          <div className="flex items-center gap-2 p-2 rounded-lg bg-white/5 border border-white/5 justify-between">
+            <div className="flex items-center gap-2">
+              <span className="px-2 py-0.5 rounded bg-yellow-500/20 text-yellow-400 font-semibold uppercase text-[8px]">BRANCH</span>
+              <span className="text-white/70">LinkedIn accepted?</span>
+            </div>
+            <div className="flex gap-2">
+              <span className="text-green-400 text-[8px] bg-green-500/10 border border-green-500/25 px-1.5 py-0.5 rounded">YES</span>
+              <span className="text-red-400 text-[8px] bg-red-500/10 border border-red-500/25 px-1.5 py-0.5 rounded">NO</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  },
   {
     id: 'overview-dashboard',
     badge: 'ANALYTICS & KPI',
@@ -71,36 +107,22 @@ const featuresList = [
     )
   },
   {
-    id: 'ai-workflow-builder',
-    badge: 'AI AUTOMATION',
-    title: 'AI SDR Agents & Workflow Automation',
-    description: 'Orchestrate multi-step outreach flows with conditional routing, customizable delays, and automated LinkedIn actions. Let autonomous AI SDRs personalize cold messages, verify signals, and optimize send paths on the fly.',
-    icon: Cpu,
-    color: '#8B5CF6',
+    id: 'ai-template-library',
+    badge: 'PERSONALIZATION',
+    title: 'AI-Personalized Template Library',
+    description: 'Write high-converting templates with dynamic tags and custom variables. Our system uses localized signals to craft personalized openers, value propositions, and calls to action for every prospect, using verified contact and post-built data powered by 360marco.com with 90% accuracy.',
+    icon: GitFork,
+    color: '#0EB5BB',
     mockup: (
-      <div className="rounded-2xl border border-white/10 bg-[#0B1528]/80 p-5 shadow-lg overflow-hidden relative">
-        <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-500/10 rounded-full blur-2xl" />
-        <div className="space-y-3 font-mono text-[10px]">
-          <div className="flex items-center gap-2 p-2 rounded-lg bg-white/5 border border-white/5">
-            <span className="px-2 py-0.5 rounded bg-blue-500/20 text-blue-400 font-semibold uppercase text-[8px]">TRIGGER</span>
-            <span className="text-white/70">Lead Joined: "VP Sales"</span>
-          </div>
-          <div className="w-0.5 h-3 bg-white/15 mx-auto" />
-          <div className="flex items-center gap-2 p-2 rounded-lg bg-white/5 border border-white/5">
-            <span className="px-2 py-0.5 rounded bg-purple-500/20 text-purple-400 font-semibold uppercase text-[8px]">ACTION</span>
-            <span className="text-white/70">AI Personalization (Icebreaker)</span>
-          </div>
-          <div className="w-0.5 h-3 bg-white/15 mx-auto" />
-          <div className="flex items-center gap-2 p-2 rounded-lg bg-white/5 border border-white/5 justify-between">
-            <div className="flex items-center gap-2">
-              <span className="px-2 py-0.5 rounded bg-yellow-500/20 text-yellow-400 font-semibold uppercase text-[8px]">BRANCH</span>
-              <span className="text-white/70">LinkedIn accepted?</span>
-            </div>
-            <div className="flex gap-2">
-              <span className="text-green-400 text-[8px] bg-green-500/10 border border-green-500/25 px-1.5 py-0.5 rounded">YES</span>
-              <span className="text-red-400 text-[8px] bg-red-500/10 border border-red-500/25 px-1.5 py-0.5 rounded">NO</span>
-            </div>
-          </div>
+      <div className="rounded-2xl border border-white/10 bg-[#0B1528]/80 p-4 shadow-lg overflow-hidden relative font-mono text-[10px]">
+        <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl" />
+        <div className="text-white/40 mb-2 border-b border-white/5 pb-2">
+          Subject: <span className="text-white font-medium">Quick question about {"{company_name}"}'s outbound</span>
+        </div>
+        <div className="text-white/60 space-y-1.5">
+          <p>Hi <span className="text-cyan-400 font-semibold">{"{first_name}"}</span>,</p>
+          <p>Noticed that <span className="text-indigo-400 font-semibold">{"{company_name}"}</span> is scaling up hiring for <span className="text-purple-400 font-semibold">{"{hiring_role}"}</span>.</p>
+          <p>I thought you might want to automate outbound sequences to find high-intent candidates...</p>
         </div>
       </div>
     )
@@ -142,10 +164,42 @@ const featuresList = [
     )
   },
   {
+    id: 'deliverability-warmup',
+    badge: 'DELIVERABILITY SAFEGUARDS',
+    title: 'Automated Inbox Warm-up & Deliverability Controls',
+    description: 'Protect your domain reputation with automated sender warm-up. Simulate natural conversations, rescue messages from spam folders, and slowly ramp up daily capacities to build and sustain bulletproof deliverability.',
+    icon: Flame,
+    color: '#10A36F',
+    mockup: (
+      <div className="rounded-2xl border border-white/10 bg-[#0B1528]/80 p-5 shadow-lg overflow-hidden relative">
+        <div className="absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 rounded-full blur-2xl" />
+        <div className="space-y-4">
+          <div className="flex items-center justify-between">
+            <span className="text-xs text-white/70 font-semibold">Health Score</span>
+            <span className="text-xs text-green-400 font-bold">99.4% Healthy</span>
+          </div>
+          <div className="h-2 w-full bg-white/5 border border-white/5 rounded-full overflow-hidden">
+            <div className="bg-green-500 h-full rounded-full" style={{ width: '99.4%' }} />
+          </div>
+          <div className="grid grid-cols-2 gap-2 text-center text-[10px]">
+            <div className="p-2 rounded bg-white/5">
+              <span className="text-white/40 block">Warmed Up</span>
+              <strong className="text-white text-xs block">42 Days</strong>
+            </div>
+            <div className="p-2 rounded bg-white/5">
+              <span className="text-white/40 block">Spam Rescues</span>
+              <strong className="text-green-400 text-xs block">142</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  },
+  {
     id: 'prospect-database-lists',
     badge: 'DATABASE & LEAD VERIFICATION',
     title: 'Enriched Prospect Lists & Contact Verification',
-    description: 'Import lead lists via CSV/Excel and let our schema mapper organize your headers. Every email address is automatically verified with real-time SMTP handshakes to filter out invalid records before you launch.',
+    description: 'Import lead lists via CSV/Excel and let our schema mapper organize your headers. Every email address is automatically verified with real-time SMTP handshakes to filter out invalid records. We provide verified contact and post-built data powered by 360marco.com with 90% accuracy.',
     icon: Users,
     color: '#10A36F',
     mockup: (
@@ -181,7 +235,7 @@ const featuresList = [
     id: 'multichannel-sequences',
     badge: 'CAMPAIGN SEQUENCING',
     title: 'Multichannel Sequences (Email, LinkedIn, SMS)',
-    description: 'Scale outreach across high-deliverability emails, automated LinkedIn actions (like connection requests, profile views, and messages), and direct SMS triggers. Deliver touchpoints where your prospects are active.',
+    description: 'Scale outreach across high-deliverability emails, automated LinkedIn actions (like connection requests, profile views, and messages), and direct SMS triggers. Deliver touchpoints where your prospects are active, utilizing verified contact and post-built data powered by 360marco.com with 90% accuracy.',
     icon: Layers,
     color: '#3B82F6',
     mockup: (
@@ -241,69 +295,42 @@ const featuresList = [
         </div>
       </div>
     )
-  },
-  {
-    id: 'ai-template-library',
-    badge: 'PERSONALIZATION',
-    title: 'AI-Personalized Template Library',
-    description: 'Write high-converting templates with dynamic tags and custom variables. Our system uses localized signals to craft personalized openers, value propositions, and calls to action for every prospect.',
-    icon: GitFork,
-    color: '#0EB5BB',
-    mockup: (
-      <div className="rounded-2xl border border-white/10 bg-[#0B1528]/80 p-4 shadow-lg overflow-hidden relative font-mono text-[10px]">
-        <div className="absolute -top-10 -right-10 w-32 h-32 bg-cyan-500/10 rounded-full blur-2xl" />
-        <div className="text-white/40 mb-2 border-b border-white/5 pb-2">
-          Subject: <span className="text-white font-medium">Quick question about {"{company_name}"}'s outbound</span>
-        </div>
-        <div className="text-white/60 space-y-1.5">
-          <p>Hi <span className="text-cyan-400 font-semibold">{"{first_name}"}</span>,</p>
-          <p>Noticed that <span className="text-indigo-400 font-semibold">{"{company_name}"}</span> is scaling up hiring for <span className="text-purple-400 font-semibold">{"{hiring_role}"}</span>.</p>
-          <p>I thought you might want to automate outbound sequences to find high-intent candidates...</p>
-        </div>
-      </div>
-    )
-  },
-  {
-    id: 'deliverability-warmup',
-    badge: 'DELIVERABILITY SAFEGUARDS',
-    title: 'Automated Inbox Warm-up & Deliverability Controls',
-    description: 'Protect your domain reputation with automated sender warm-up. Simulate natural conversations, rescue messages from spam folders, and slowly ramp up daily capacities to build and sustain bulletproof deliverability.',
-    icon: Flame,
-    color: '#10A36F',
-    mockup: (
-      <div className="rounded-2xl border border-white/10 bg-[#0B1528]/80 p-5 shadow-lg overflow-hidden relative">
-        <div className="absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 rounded-full blur-2xl" />
-        <div className="space-y-4">
-          <div className="flex items-center justify-between">
-            <span className="text-xs text-white/70 font-semibold">Health Score</span>
-            <span className="text-xs text-green-400 font-bold">99.4% Healthy</span>
-          </div>
-          <div className="h-2 w-full bg-white/5 border border-white/5 rounded-full overflow-hidden">
-            <div className="bg-green-500 h-full rounded-full" style={{ width: '99.4%' }} />
-          </div>
-          <div className="grid grid-cols-2 gap-2 text-center text-[10px]">
-            <div className="p-2 rounded bg-white/5">
-              <span className="text-white/40 block">Warmed Up</span>
-              <strong className="text-white text-xs block">42 Days</strong>
-            </div>
-            <div className="p-2 rounded bg-white/5">
-              <span className="text-white/40 block">Spam Rescues</span>
-              <strong className="text-green-400 text-xs block">142</strong>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
   }
 ];
 
 export default function FeaturesPage() {
   const [interactiveMode, setInteractiveMode] = useState(false);
-  const [activeSection, setActiveSection] = useState('overview-dashboard');
+  const [activeSection, setActiveSection] = useState('ai-workflow-builder');
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [selectedStatus, setSelectedStatus] = useState('all');
   const [visibleCount, setVisibleCount] = useState(30);
+
+  const isNavigatingRef = useRef(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+
+  const navigateToSection = (id: string) => {
+    isNavigatingRef.current = true;
+    setActiveSection(id);
+    
+    if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    
+    scrollTimeoutRef.current = setTimeout(() => {
+      isNavigatingRef.current = false;
+    }, 1000);
+  };
+
+  const activeSectionRef = useRef(activeSection);
+  useEffect(() => {
+    activeSectionRef.current = activeSection;
+  }, [activeSection]);
+
+  useEffect(() => {
+    return () => {
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    };
+  }, []);
+
 
   const categories = [
     { value: 'all', label: 'All Capabilities' },
@@ -458,24 +485,102 @@ export default function FeaturesPage() {
   useEffect(() => {
     if (interactiveMode) return;
 
-    const sections = featuresList.map(f => f.id);
+    const sectionGroups = [
+      ['ai-workflow-builder'],
+      ['overview-dashboard', 'ai-template-library'],
+      ['email-sender-infrastructure'],
+      ['deliverability-warmup', 'prospect-database-lists'],
+      ['multichannel-sequences', 'master-unified-inbox']
+    ];
+
     const handleScroll = () => {
+      if (isNavigatingRef.current) return;
+
+      // If we are at the top of the page, always highlight the first item
+      if (window.scrollY < 100) {
+        setActiveSection('ai-workflow-builder');
+        return;
+      }
+
+      // If we are at the bottom of the page, always highlight the last item
+      const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 120;
+      if (isAtBottom) {
+        setActiveSection('master-unified-inbox');
+        return;
+      }
+
       const scrollPos = window.scrollY + 250;
-      for (const id of sections) {
-        const el = document.getElementById(id);
+      
+      for (const group of sectionGroups) {
+        const firstId = group[0];
+        const el = document.getElementById(firstId);
         if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPos >= top && scrollPos < top + height) {
-            setActiveSection(id);
-            break;
+          const rect = el.getBoundingClientRect();
+          const absoluteTop = rect.top + window.scrollY;
+          const height = rect.height;
+          
+          if (scrollPos >= absoluteTop && scrollPos < absoluteTop + height) {
+            // If the current active section is already one of the items in this group, do not change it
+            if (group.includes(activeSectionRef.current)) {
+              return;
+            }
+            // Otherwise, highlight the first item in the group
+            setActiveSection(firstId);
+            return;
           }
         }
       }
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    // Run handleScroll once immediately on load to sync initial scroll state
+    handleScroll();
+
     return () => window.removeEventListener('scroll', handleScroll);
+  }, [interactiveMode]);
+
+  // Handle direct URL hash loading after hydration
+  useEffect(() => {
+    if (interactiveMode) return;
+    
+    const handleHashScroll = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const id = hash.replace('#', '');
+        const el = document.getElementById(id);
+        if (el) {
+          // Temporarily cancel browser scroll locking
+          window.scrollTo({ top: window.scrollY });
+          navigateToSection(id);
+          setTimeout(() => {
+            el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 80);
+        }
+      }
+    };
+
+    const timer = setTimeout(handleHashScroll, 500);
+    return () => clearTimeout(timer);
+  }, [interactiveMode]);
+
+  // Handle URL hash changes (back/forward history navigation)
+  useEffect(() => {
+    if (interactiveMode) return;
+
+    const handleHashChange = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        const id = hash.replace('#', '');
+        const el = document.getElementById(id);
+        if (el) {
+          navigateToSection(id);
+          el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    };
+
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
   }, [interactiveMode]);
 
   return (
@@ -504,7 +609,7 @@ export default function FeaturesPage() {
                   <span className="title-line">Need to <em className="title-accent">Power</em></span>
                   <span className="title-line">Outreach</span>
                 </h1>
-                <p className="hero-desc">Our platform brings together every tool modern B2B growth and marketing teams need to scale prospecting, automate workflows, and bypass spam limits.</p>
+                <p className="hero-desc">Our platform brings together every tool modern B2B growth and marketing teams need to scale prospecting (delivering verified contact and post-built data powered by <a href="https://360marco.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-indigo-400">360marco.com</a> with 90% accuracy), automate workflows, and bypass spam limits.</p>
                 <div className="hero-actions">
                   <button
                     className="transition-all duration-300 transform active:scale-95"
@@ -565,88 +670,430 @@ export default function FeaturesPage() {
             
             {/* Sticky Table of Contents (TOC) */}
             <aside className="sticky top-[100px] self-start hidden lg:block">
-              <h2 className="text-xs font-bold text-white/40 uppercase tracking-widest mb-6">
+              <h2 className="text-xs font-bold text-white/30 uppercase tracking-widest mb-6">
                 Features Guide
               </h2>
-              <nav className="space-y-1 border-l border-white/10 pl-4">
-                {featuresList.map((item) => {
-                  const isActive = activeSection === item.id;
-                  const Icon = item.icon;
+              
+              <nav className="space-y-6">
+                {/* Section 1 */}
+                <div className="space-y-2">
+                  <span className="text-[10px] font-mono tracking-widest text-indigo-400 uppercase font-semibold block px-1">
+                    01 / Autonomous Workflows
+                  </span>
+                  <div className="space-y-1 border-l border-white/10 pl-3">
+                    {featuresList.slice(0, 3).map((item) => {
+                      const isActive = activeSection === item.id;
+                      const Icon = item.icon;
+                      return (
+                        <a
+                          key={item.id}
+                          href={`#${item.id}`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            navigateToSection(item.id);
+                            const el = document.getElementById(item.id);
+                            if (el) {
+                              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                            window.history.pushState(null, '', `#${item.id}`);
+                          }}
+                          className={`relative flex items-center gap-2 rounded-r-lg py-2 px-2 text-[12px] leading-5 transition-all duration-200 ${
+                            isActive
+                              ? 'bg-indigo-500/10 text-white font-semibold'
+                              : 'text-white/50 hover:text-white hover:bg-white/5'
+                          }`}
+                        >
+                          <span
+                            className={`absolute left-[-13px] top-1/2 h-4 w-[2px] -translate-y-1/2 rounded-full transition-all ${
+                              isActive ? 'bg-indigo-500' : 'bg-transparent'
+                            }`}
+                          />
+                          <Icon className="h-3.5 w-3.5 shrink-0" style={{ color: isActive ? '#8B5CF6' : 'currentColor' }} />
+                          <span className="truncate">{item.title.split(' & ')[0]}</span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
 
-                  return (
-                    <a
-                      key={item.id}
-                      href={`#${item.id}`}
-                      className={`relative flex items-center gap-2.5 rounded-r-lg py-2.5 px-3 text-[13px] leading-5 transition-all duration-200 ${
-                        isActive
-                          ? 'bg-indigo-500/10 text-white font-semibold'
-                          : 'text-white/50 hover:text-white hover:bg-white/5'
-                      }`}
-                    >
-                      <span
-                        className={`absolute left-[-17px] top-1/2 h-5 w-[3px] -translate-y-1/2 rounded-full transition-all ${
-                          isActive ? 'bg-indigo-500' : 'bg-transparent'
-                        }`}
-                      />
-                      <Icon className="h-4 w-4 shrink-0" style={{ color: isActive ? '#8B5CF6' : 'currentColor' }} />
-                      <span className="truncate">{item.title.split(' & ')[0]}</span>
-                    </a>
-                  );
-                })}
+                {/* Section 2 */}
+                <div className="space-y-2">
+                  <span className="text-[10px] font-mono tracking-widest text-teal-400 uppercase font-semibold block px-1">
+                    02 / Outbound Infrastructure
+                  </span>
+                  <div className="space-y-1 border-l border-white/10 pl-3">
+                    {featuresList.slice(3, 6).map((item) => {
+                      const isActive = activeSection === item.id;
+                      const Icon = item.icon;
+                      return (
+                        <a
+                          key={item.id}
+                          href={`#${item.id}`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            navigateToSection(item.id);
+                            const el = document.getElementById(item.id);
+                            if (el) {
+                              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                            window.history.pushState(null, '', `#${item.id}`);
+                          }}
+                          className={`relative flex items-center gap-2 rounded-r-lg py-2 px-2 text-[12px] leading-5 transition-all duration-200 ${
+                            isActive
+                              ? 'bg-teal-500/10 text-white font-semibold'
+                              : 'text-white/50 hover:text-white hover:bg-white/5'
+                          }`}
+                        >
+                          <span
+                            className={`absolute left-[-13px] top-1/2 h-4 w-[2px] -translate-y-1/2 rounded-full transition-all ${
+                              isActive ? 'bg-teal-500' : 'bg-transparent'
+                            }`}
+                          />
+                          <Icon className="h-3.5 w-3.5 shrink-0" style={{ color: isActive ? '#10A36F' : 'currentColor' }} />
+                          <span className="truncate">{item.title.split(' & ')[0]}</span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
+
+                {/* Section 3 */}
+                <div className="space-y-2">
+                  <span className="text-[10px] font-mono tracking-widest text-purple-400 uppercase font-semibold block px-1">
+                    03 / Multichannel Engagement
+                  </span>
+                  <div className="space-y-1 border-l border-white/10 pl-3">
+                    {featuresList.slice(6, 8).map((item) => {
+                      const isActive = activeSection === item.id;
+                      const Icon = item.icon;
+                      return (
+                        <a
+                          key={item.id}
+                          href={`#${item.id}`}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            navigateToSection(item.id);
+                            const el = document.getElementById(item.id);
+                            if (el) {
+                              el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            }
+                            window.history.pushState(null, '', `#${item.id}`);
+                          }}
+                          className={`relative flex items-center gap-2 rounded-r-lg py-2 px-2 text-[12px] leading-5 transition-all duration-200 ${
+                            isActive
+                              ? 'bg-purple-500/10 text-white font-semibold'
+                              : 'text-white/50 hover:text-white hover:bg-white/5'
+                          }`}
+                        >
+                          <span
+                            className={`absolute left-[-13px] top-1/2 h-4 w-[2px] -translate-y-1/2 rounded-full transition-all ${
+                              isActive ? 'bg-purple-500' : 'bg-transparent'
+                            }`}
+                          />
+                          <Icon className="h-3.5 w-3.5 shrink-0" style={{ color: isActive ? '#8B5CF6' : 'currentColor' }} />
+                          <span className="truncate">{item.title.split(' & ')[0]}</span>
+                        </a>
+                      );
+                    })}
+                  </div>
+                </div>
               </nav>
             </aside>
 
-            {/* Long-Form Features Content */}
-            <div className="space-y-24 max-w-4xl">
-              {featuresList.map((feature, idx) => {
-                const Icon = feature.icon;
+            {/* Premium Linear-style Grid Layout */}
+            <div className="space-y-24 max-w-5xl">
+              
+              {/* SECTION 1: AUTONOMOUS OPERATIONS */}
+              <div className="space-y-12">
+                <div className="space-y-3">
+                  <span className="text-xs font-mono tracking-widest text-indigo-400 uppercase font-semibold">01 / AUTONOMOUS WORKFLOWS</span>
+                  <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight font-outfit">Self-driving outbound operations</h3>
+                  <p className="text-sm md:text-base text-white/50 max-w-2xl font-light">
+                    Deploy AI SDRs that learn your product, research prospects (backed by verified contact and post-built data powered by <a href="https://360marco.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-indigo-400">360marco.com</a> with 90% accuracy), personalize sequences, and triage replies automatically.
+                  </p>
+                </div>
 
-                return (
-                  <article 
-                    key={feature.id} 
-                    id={feature.id}
-                    className="group scroll-mt-28"
-                  >
-                    <div className="grid md:grid-cols-[1fr_260px] gap-8 items-start p-8 rounded-3xl border border-white/5 bg-[#080E1C]/60 backdrop-blur-md transition-all duration-300 hover:border-white/10 hover:bg-[#0B1528]/80 shadow-xl relative overflow-hidden">
+                <div className="grid gap-8">
+                  {/* AI SDR Agents (Main Banner - Wide Flex Card) */}
+                  <article id="ai-workflow-builder" className="group scroll-mt-28">
+                    <div className="flex flex-col lg:flex-row justify-between items-stretch gap-10 p-8 md:p-12 rounded-3xl border border-white/5 bg-[#080E1C]/40 hover:bg-[#0B1528]/70 hover:border-white/10 transition-all duration-300 shadow-xl relative overflow-hidden">
                       <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-indigo-500 to-transparent opacity-30" />
                       
-                      {/* Left: Content */}
-                      <div className="space-y-4">
-                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] font-mono tracking-wider text-white/60">
-                          <Sparkles className="w-3 h-3 text-indigo-400" />
-                          {feature.badge}
-                        </span>
-                        
-                        <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight flex items-center gap-2">
-                          <Icon className="w-6 h-6 shrink-0" style={{ color: feature.color }} />
-                          {feature.title}
-                        </h2>
-                        
-                        <p className="text-sm md:text-base text-white/70 leading-relaxed max-w-2xl">
-                          {feature.description}
-                        </p>
+                      {/* Left Side: Content */}
+                      <div className="flex flex-col justify-between space-y-6 lg:w-[55%]">
+                        <div className="space-y-4">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] font-mono tracking-wider text-white/60">
+                            <Sparkles className="w-3 h-3 text-indigo-400 animate-pulse" />
+                            AI AUTOMATION
+                          </span>
+                          <h4 className="text-xl md:text-2xl font-bold text-white tracking-tight">
+                            AI SDR Agents & Workflow Automation
+                          </h4>
+                          <p className="text-sm text-white/60 leading-relaxed font-light">
+                            Orchestrate multi-step outreach flows with conditional routing, customizable delays, and automated LinkedIn actions. Let autonomous AI SDRs personalize cold messages, verify signals, and optimize send paths on the fly.
+                          </p>
+                        </div>
 
-                        <div className="pt-2 flex flex-wrap gap-x-6 gap-y-2 text-xs text-white/50">
-                          <div className="flex items-center gap-1.5">
-                            <CheckCircle2 className="w-4 h-4 text-green-500" /> Real-time automation
+                        <div className="flex flex-col gap-2.5 text-xs text-white/40">
+                          <div className="flex items-center gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-green-500" /> Real-time automation & scaling
                           </div>
-                          <div className="flex items-center gap-1.5">
-                            <CheckCircle2 className="w-4 h-4 text-green-500" /> AI enhancement tags
+                          <div className="flex items-center gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-green-500" /> AI personalization icebreakers
                           </div>
-                          <div className="flex items-center gap-1.5">
+                          <div className="flex items-center gap-2">
                             <CheckCircle2 className="w-4 h-4 text-green-500" /> Detailed log metrics
                           </div>
                         </div>
                       </div>
 
-                      {/* Right: Mock UI visual preview */}
-                      <div className="w-full md:w-[260px] shrink-0">
-                        {feature.mockup}
+                      {/* Right Side: Mockup Visual */}
+                      <div className="flex items-center justify-center lg:w-[40%] shrink-0">
+                        <div className="w-full">
+                          {featuresList.find(f => f.id === 'ai-workflow-builder')?.mockup}
+                        </div>
                       </div>
                     </div>
                   </article>
-                );
-              })}
+
+                  {/* Two Columns Below */}
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Overview Dashboard Card */}
+                    <article id="overview-dashboard" className="group scroll-mt-28">
+                      <div className="flex flex-col justify-between p-8 rounded-3xl border border-white/5 bg-[#080E1C]/40 hover:bg-[#0B1528]/70 hover:border-white/10 transition-all duration-300 shadow-xl relative overflow-hidden min-h-[460px]">
+                        <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-blue-500 to-transparent opacity-30" />
+                        
+                        <div className="space-y-4">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] font-mono tracking-wider text-white/60">
+                            <BarChart3 className="w-3 h-3 text-blue-400" />
+                            ANALYTICS & KPI
+                          </span>
+                          <h4 className="text-lg font-bold text-white tracking-tight">
+                            Overview Dashboard & Real-Time Analytics
+                          </h4>
+                          <p className="text-xs text-white/60 leading-relaxed font-light">
+                            Monitor your outbound revenue operations from a single unified workspace. Get instant insights into open rates, reply rates, meeting conversions, and email deliverability stats across all linked sending profiles.
+                          </p>
+                        </div>
+
+                        <div className="mt-8 flex justify-center">
+                          <div className="w-full">
+                            {featuresList.find(f => f.id === 'overview-dashboard')?.mockup}
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+
+                    {/* AI Personalized Template Library Card */}
+                    <article id="ai-template-library" className="group scroll-mt-28">
+                      <div className="flex flex-col justify-between p-8 rounded-3xl border border-white/5 bg-[#080E1C]/40 hover:bg-[#0B1528]/70 hover:border-white/10 transition-all duration-300 shadow-xl relative overflow-hidden min-h-[460px]">
+                        <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-cyan-500 to-transparent opacity-30" />
+                        
+                        <div className="space-y-4">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] font-mono tracking-wider text-white/60">
+                            <GitFork className="w-3 h-3 text-cyan-400" />
+                            PERSONALIZATION
+                          </span>
+                          <h4 className="text-lg font-bold text-white tracking-tight">
+                            AI-Personalized Template Library
+                          </h4>
+                          <p className="text-xs text-white/60 leading-relaxed font-light">
+                            Write high-converting templates with dynamic tags and custom variables. Our system uses localized signals to craft personalized openers, value propositions, and calls to action for every prospect (using verified contact and post-built data powered by <a href="https://360marco.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-cyan-400">360marco.com</a> with 90% accuracy).
+                          </p>
+                        </div>
+
+                        <div className="mt-8 flex justify-center">
+                          <div className="w-full">
+                            {featuresList.find(f => f.id === 'ai-template-library')?.mockup}
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+
+              {/* Horizontal Divider */}
+              <div className="h-[1px] w-full bg-white/5" />
+
+              {/* SECTION 2: HIGH-DELIVERABILITY INFRASTRUCTURE */}
+              <div className="space-y-12">
+                <div className="space-y-3">
+                  <span className="text-xs font-mono tracking-widest text-teal-400 uppercase font-semibold">02 / OUTBOUND INFRASTRUCTURE</span>
+                  <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight font-outfit">Smart sender rotation & scale</h3>
+                  <p className="text-sm md:text-base text-white/50 max-w-2xl font-light">
+                    Deploy rotating mailboxes and custom domain parameters to maintain a 99%+ deliverability profile.
+                  </p>
+                </div>
+
+                <div className="grid gap-8">
+                  {/* Multi-Domain Inbox Rotation (Main Banner - Wide Flex Card) */}
+                  <article id="email-sender-infrastructure" className="group scroll-mt-28">
+                    <div className="flex flex-col lg:flex-row justify-between items-stretch gap-10 p-8 md:p-12 rounded-3xl border border-white/5 bg-[#080E1C]/40 hover:bg-[#0B1528]/70 hover:border-white/10 transition-all duration-300 shadow-xl relative overflow-hidden">
+                      <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-teal-500 to-transparent opacity-30" />
+                      
+                      {/* Left Side: Content */}
+                      <div className="flex flex-col justify-between space-y-6 lg:w-[55%]">
+                        <div className="space-y-4">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] font-mono tracking-wider text-white/60">
+                            <Globe className="w-3 h-3 text-teal-400" />
+                            INFRASTRUCTURE
+                          </span>
+                          <h4 className="text-xl md:text-2xl font-bold text-white tracking-tight">
+                            Multi-Domain Inbox Rotation & Infrastructure
+                          </h4>
+                          <p className="text-sm text-white/60 leading-relaxed font-light">
+                            Connect Google Workspace, Microsoft 365, and SMTP accounts. Safely distribute daily outreach volumes across multiple domains and rotating inboxes to keep bounce rates minimal and bypass restrictive platform limits.
+                          </p>
+                        </div>
+
+                        <div className="flex flex-col gap-2.5 text-xs text-white/40">
+                          <div className="flex items-center gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-green-500" /> Google Workspace & Office 365 native integrations
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-green-500" /> Smart scheduling & sending limits rotation
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <CheckCircle2 className="w-4 h-4 text-green-500" /> Detailed log metrics
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Right Side: Mockup Visual */}
+                      <div className="flex items-center justify-center lg:w-[40%] shrink-0">
+                        <div className="w-full">
+                          {featuresList.find(f => f.id === 'email-sender-infrastructure')?.mockup}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  {/* Two Columns Below */}
+                  <div className="grid md:grid-cols-2 gap-8">
+                    {/* Automated Inbox Warm-up Card */}
+                    <article id="deliverability-warmup" className="group scroll-mt-28">
+                      <div className="flex flex-col justify-between p-8 rounded-3xl border border-white/5 bg-[#080E1C]/40 hover:bg-[#0B1528]/70 hover:border-white/10 transition-all duration-300 shadow-xl relative overflow-hidden min-h-[460px]">
+                        <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-green-500 to-transparent opacity-30" />
+                        
+                        <div className="space-y-4">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] font-mono tracking-wider text-white/60">
+                            <Flame className="w-3 h-3 text-green-400 animate-pulse" />
+                            DELIVERABILITY SAFEGUARDS
+                          </span>
+                          <h4 className="text-lg font-bold text-white tracking-tight">
+                            Automated Inbox Warm-up & Deliverability Controls
+                          </h4>
+                          <p className="text-xs text-white/60 leading-relaxed font-light">
+                            Protect your domain reputation with automated sender warm-up. Simulate natural conversations, rescue messages from spam folders, and slowly ramp up daily capacities to build and sustain bulletproof deliverability.
+                          </p>
+                        </div>
+
+                        <div className="mt-8 flex justify-center">
+                          <div className="w-full">
+                            {featuresList.find(f => f.id === 'deliverability-warmup')?.mockup}
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+
+                    {/* Enriched Prospect Lists & Contact Verification Card */}
+                    <article id="prospect-database-lists" className="group scroll-mt-28">
+                      <div className="flex flex-col justify-between p-8 rounded-3xl border border-white/5 bg-[#080E1C]/40 hover:bg-[#0B1528]/70 hover:border-white/10 transition-all duration-300 shadow-xl relative overflow-hidden min-h-[460px]">
+                        <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-teal-500 to-transparent opacity-30" />
+                        
+                        <div className="space-y-4">
+                          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] font-mono tracking-wider text-white/60">
+                            <Users className="w-3 h-3 text-teal-400" />
+                            DATABASE & LEAD VERIFICATION
+                          </span>
+                          <h4 className="text-lg font-bold text-white tracking-tight">
+                            Enriched Prospect Lists & Contact Verification
+                          </h4>
+                          <p className="text-xs text-white/60 leading-relaxed font-light">
+                            Import lead lists via CSV/Excel and let our schema mapper organize your headers. Every email address is automatically verified with real-time SMTP handshakes to filter out invalid records before you launch. We provide verified contact and post-built data powered by <a href="https://360marco.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-teal-400">360marco.com</a> with 90% accuracy.
+                          </p>
+                        </div>
+
+                        <div className="mt-8 flex justify-center">
+                          <div className="w-full">
+                            {featuresList.find(f => f.id === 'prospect-database-lists')?.mockup}
+                          </div>
+                        </div>
+                      </div>
+                    </article>
+                  </div>
+                </div>
+              </div>
+
+              {/* Horizontal Divider */}
+              <div className="h-[1px] w-full bg-white/5" />
+
+              {/* SECTION 3: ENGAGEMENT & MULTICHANNEL CAMPAIGNS */}
+              <div className="space-y-12">
+                <div className="space-y-3">
+                  <span className="text-xs font-mono tracking-widest text-purple-400 uppercase font-semibold">03 / MULTICHANNEL ENGAGEMENT</span>
+                  <h3 className="text-3xl md:text-4xl font-bold text-white tracking-tight font-outfit">Omnichannel outreach & triage</h3>
+                  <p className="text-sm md:text-base text-white/50 max-w-2xl font-light">
+                    Run campaigns across Email, LinkedIn, and SMS. Classify response sentiment and direct leads to active reps.
+                  </p>
+                </div>
+
+                <div className="grid md:grid-cols-2 gap-8">
+                  {/* Multichannel Sequences Card */}
+                  <article id="multichannel-sequences" className="group scroll-mt-28">
+                    <div className="flex flex-col justify-between p-8 rounded-3xl border border-white/5 bg-[#080E1C]/40 hover:bg-[#0B1528]/70 hover:border-white/10 transition-all duration-300 shadow-xl relative overflow-hidden min-h-[460px]">
+                      <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-blue-500 to-transparent opacity-30" />
+                      
+                      <div className="space-y-4">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] font-mono tracking-wider text-white/60">
+                          <Layers className="w-3 h-3 text-blue-400" />
+                          CAMPAIGN SEQUENCING
+                        </span>
+                        <h4 className="text-lg font-bold text-white tracking-tight">
+                          Multichannel Sequences (Email, LinkedIn, SMS)
+                        </h4>
+                        <p className="text-xs text-white/60 leading-relaxed font-light">
+                          Scale outreach across high-deliverability emails, automated LinkedIn actions (like connection requests, profile views, and messages), and direct SMS triggers. Deliver touchpoints where your prospects are active, utilizing verified contact and post-built data powered by <a href="https://360marco.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-blue-400">360marco.com</a> with 90% accuracy.
+                        </p>
+                      </div>
+
+                      <div className="mt-8 flex justify-center">
+                        <div className="w-full">
+                          {featuresList.find(f => f.id === 'multichannel-sequences')?.mockup}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+
+                  {/* Master Unified Inbox Card */}
+                  <article id="master-unified-inbox" className="group scroll-mt-28">
+                    <div className="flex flex-col justify-between p-8 rounded-3xl border border-white/5 bg-[#080E1C]/40 hover:bg-[#0B1528]/70 hover:border-white/10 transition-all duration-300 shadow-xl relative overflow-hidden min-h-[460px]">
+                      <div className="absolute top-0 left-0 w-2 h-full bg-gradient-to-b from-purple-500 to-transparent opacity-30" />
+                      
+                      <div className="space-y-4">
+                        <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-[9px] font-mono tracking-wider text-white/60">
+                          <Inbox className="w-3 h-3 text-purple-400" />
+                          LEAD TRIAGE
+                        </span>
+                        <h4 className="text-lg font-bold text-white tracking-tight">
+                          Master Unified Inbox & Sentiment Triage
+                        </h4>
+                        <p className="text-xs text-white/60 leading-relaxed font-light">
+                          Consolidate all incoming replies into a single master inbox. Our AI sentiment classifier categorizes replies ("Interested", "OOTO", "Follow-up") and automatically triages them to the right sales reps.
+                        </p>
+                      </div>
+
+                      <div className="mt-8 flex justify-center">
+                        <div className="w-full">
+                          {featuresList.find(f => f.id === 'master-unified-inbox')?.mockup}
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </div>
+              </div>
+
             </div>
 
           </div>

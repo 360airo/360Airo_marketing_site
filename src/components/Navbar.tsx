@@ -3,18 +3,32 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { navLinks } from '../data/navLinks';
+import { BookOpen, Users, HelpCircle, ChevronDown } from 'lucide-react';
 
 interface NavbarProps {
   activeTab?: string;
 }
 
-const dropdownItems = [
-  { label: 'Blogs', icon: '📝', href: '/blogs', active: true },
-  { label: 'Articles', icon: '📄', href: '#', active: false },
-  { label: 'Customer Stories', icon: '👥', href: '/customer-stories', active: true },
-  { label: 'Testimonials', icon: '💬', href: '#', active: false },
-  { label: 'FAQs', icon: '❓', href: '#', active: false },
+const mainResources = [
+  {
+    label: 'Blogs & Articles',
+    description: 'Read our latest insights, outbound playbooks, and email marketing guides.',
+    href: '/blogs',
+    icon: BookOpen
+  },
+  {
+    label: 'Customer Stories',
+    description: 'See how high-growth B2B teams automate and scale their sales outreach.',
+    href: '/customer-stories',
+    icon: Users
+  }
 ];
+
+const footerResource = {
+  label: 'Customer Support',
+  href: '/customer-support',
+  icon: HelpCircle
+};
 
 export function Navbar({ activeTab = 'home' }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -38,7 +52,7 @@ export function Navbar({ activeTab = 'home' }: NavbarProps) {
           </Link>
 
           <ul className="nav-links">
-            {navLinks.map((link) => {
+            {navLinks.filter(link => link !== 'Book a Demo').map((link) => {
               const linkSlug = link.toLowerCase().replace(/\s+/g, '-');
 
               if (linkSlug === 'resources') {
@@ -50,90 +64,48 @@ export function Navbar({ activeTab = 'home' }: NavbarProps) {
                     onMouseLeave={() => setDropdownOpen(false)}
                     style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
                   >
-                    <span style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
                       {link}
-                      <span style={{
-                        fontSize: '9px',
-                        transition: 'transform 0.2s',
-                        transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                        display: 'inline-block',
-                        verticalAlign: 'middle'
-                      }}>▼</span>
+                      <ChevronDown 
+                        size={14} 
+                        style={{
+                          transition: 'transform 0.2s',
+                          transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                          display: 'inline-block'
+                        }}
+                      />
                     </span>
 
                     {dropdownOpen && (
-                      <div style={{
-                        position: 'absolute',
-                        top: '100%',
-                        left: '50%',
-                        transform: 'translateX(-50%)',
-                        marginTop: '10px',
-                        width: '220px',
-                        background: 'rgba(3, 7, 18, 0.25)',
-                        backdropFilter: 'blur(32px) saturate(180%) brightness(110%)',
-                        WebkitBackdropFilter: 'blur(32px) saturate(180%) brightness(110%)',
-                        border: '1px solid rgba(255, 255, 255, 0.09)',
-                        borderRadius: '16px',
-                        boxShadow: '0 12px 40px rgba(0, 0, 0, 0.5)',
-                        padding: '12px',
-                        zIndex: 1000,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        gap: '4px',
-                        textAlign: 'left'
-                      }}>
-                        {dropdownItems.map((item, idx) => {
-                          const isActiveDropdown = activeTab === item.href.substring(1);
-                          return item.active ? (
+                      <div className="nav-dropdown-menu">
+                        {mainResources.map((item, idx) => {
+                          const IconComponent = item.icon;
+                          return (
                             <Link
                               key={idx}
                               href={item.href}
-                              style={{
-                                padding: '10px 14px',
-                                borderRadius: '8px',
-                                color: isActiveDropdown ? '#5078F2' : '#fff',
-                                textDecoration: 'none',
-                                fontSize: '14px',
-                                fontWeight: 500,
-                                background: isActiveDropdown ? 'rgba(80, 120, 242, 0.1)' : 'transparent',
-                                transition: 'background 0.2s',
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'space-between',
-                                cursor: 'pointer'
-                              }}
-                              onMouseEnter={(e) => { if (!isActiveDropdown) e.currentTarget.style.background = 'rgba(255, 255, 255, 0.06)' }}
-                              onMouseLeave={(e) => { if (!isActiveDropdown) e.currentTarget.style.background = 'transparent' }}
+                              className="nav-dropdown-item"
                             >
-                              <span>{item.label}</span>
-                              <span style={{ fontSize: '13px' }}>{item.icon}</span>
+                              <div className="nav-dropdown-icon-box">
+                                <IconComponent size={20} color="#8B5CF6" />
+                              </div>
+                              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <span className="nav-dropdown-title">{item.label}</span>
+                                <span className="nav-dropdown-desc">{item.description}</span>
+                              </div>
                             </Link>
-                          ) : (
-                            <div
-                              key={idx}
-                              style={{
-                                padding: '10px 14px',
-                                borderRadius: '8px',
-                                color: 'rgba(255, 255, 255, 0.4)',
-                                fontSize: '14px',
-                                fontWeight: 500,
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'space-between',
-                                cursor: 'default'
-                              }}
-                            >
-                              <span>{item.label}</span>
-                              <span style={{
-                                fontSize: '9px',
-                                background: 'rgba(255, 255, 255, 0.05)',
-                                padding: '2px 6px',
-                                borderRadius: '6px',
-                                border: '1px solid rgba(255, 255, 255, 0.04)'
-                              }}>Soon</span>
-                            </div>
-                          )
+                          );
                         })}
+
+                        <div className="nav-dropdown-divider" />
+
+                        <Link
+                          href={footerResource.href}
+                          className="nav-dropdown-footer"
+                        >
+                          <HelpCircle size={16} color="rgba(255, 255, 255, 0.5)" />
+                          <span className="nav-dropdown-footer-text">{footerResource.label}</span>
+                        </Link>
                       </div>
                     )}
                   </li>
@@ -155,7 +127,13 @@ export function Navbar({ activeTab = 'home' }: NavbarProps) {
           </ul>
 
           <div className="nav-btns">
-            <button className="btn-nav-login">Log in</button>
+            <Link 
+              href="/book-a-demo" 
+              className="btn-nav-login" 
+              style={{ textDecoration: 'none', display: 'inline-block' }}
+            >
+              Book a Demo
+            </Link>
           </div>
 
           <div className="nav-hamburger" onClick={() => setMobileMenuOpen(true)}>
@@ -202,46 +180,52 @@ export function Navbar({ activeTab = 'home' }: NavbarProps) {
                     flexDirection: 'column', 
                     alignItems: 'center',
                     gap: '12px',
-                    padding: '8px 0',
+                    padding: '12px 0',
                     background: 'rgba(255, 255, 255, 0.02)',
                     borderRadius: '12px',
                     width: '80%',
                     margin: '0 auto'
                   }}>
-                    {dropdownItems.map((item, idx) => {
+                    {mainResources.map((item, idx) => {
+                      const IconComponent = item.icon;
                       const isActiveDropdown = activeTab === item.href.substring(1);
-                      return item.active ? (
+                      return (
                         <Link 
                           key={idx} 
                           href={item.href} 
                           onClick={() => setMobileMenuOpen(false)}
                           style={{
-                            color: isActiveDropdown ? '#5078F2' : '#fff',
+                            color: isActiveDropdown ? '#8B5CF6' : '#fff',
                             fontSize: '18px',
                             fontWeight: 500,
                             textDecoration: 'none',
                             display: 'flex',
                             alignItems: 'center',
-                            gap: '6px'
+                            gap: '8px'
                           }}
                         >
-                          {item.icon} {item.label}
+                          <IconComponent size={18} color={isActiveDropdown ? '#8B5CF6' : 'rgba(255, 255, 255, 0.6)'} />
+                          {item.label}
                         </Link>
-                      ) : (
-                        <span 
-                          key={idx} 
-                          style={{ 
-                            color: 'rgba(255, 255, 255, 0.4)', 
-                            fontSize: '18px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '6px'
-                          }}
-                        >
-                          {item.icon} {item.label} (Soon)
-                        </span>
-                      )
+                      );
                     })}
+                    <div style={{ width: '80%', height: '1px', background: 'rgba(255, 255, 255, 0.08)' }} />
+                    <Link 
+                      href={footerResource.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      style={{
+                        color: activeTab === 'customer-support' ? '#8B5CF6' : '#fff',
+                        fontSize: '16px',
+                        fontWeight: 500,
+                        textDecoration: 'none',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '8px'
+                      }}
+                    >
+                      <HelpCircle size={16} color={activeTab === 'customer-support' ? '#8B5CF6' : 'rgba(255, 255, 255, 0.5)'} />
+                      {footerResource.label}
+                    </Link>
                   </div>
                 )}
               </div>
@@ -249,6 +233,25 @@ export function Navbar({ activeTab = 'home' }: NavbarProps) {
           }
 
           const href = linkSlug === 'home' ? '/' : `/${linkSlug}`;
+          if (linkSlug === 'book-a-demo') {
+            return (
+              <Link 
+                key={link} 
+                href={href} 
+                onClick={() => setMobileMenuOpen(false)}
+                className="btn-nav-login"
+                style={{ 
+                  textDecoration: 'none', 
+                  display: 'inline-block',
+                  marginTop: '12px',
+                  textAlign: 'center'
+                }}
+              >
+                {link}
+              </Link>
+            );
+          }
+
           return (
             <Link key={link} href={href} onClick={() => setMobileMenuOpen(false)}>
               {link}

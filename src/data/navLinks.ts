@@ -1,2 +1,2 @@
 // @ts-nocheck
-export const navLinks = ['Home', 'Features', 'Solutions', 'Resources', 'Pricing', 'Free Tools'];
+export const navLinks = ['Home', 'Features', 'Free Tools', 'Resources', 'Pricing', 'Contact US', 'Book a Demo'];
