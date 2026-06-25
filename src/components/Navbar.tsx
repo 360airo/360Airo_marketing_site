@@ -7,6 +7,7 @@ import { BookOpen, Users, HelpCircle, ChevronDown } from 'lucide-react';
 
 interface NavbarProps {
   activeTab?: string;
+  theme?: 'light' | 'dark';
 }
 
 const mainResources = [
@@ -30,14 +31,14 @@ const footerResource = {
   icon: HelpCircle
 };
 
-export function Navbar({ activeTab = 'home' }: NavbarProps) {
+export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
 
   return (
     <>
-      <nav id="main-nav" className="nav-dark">
+      <nav id="main-nav" className={theme === 'light' ? 'nav-light' : 'nav-dark'}>
         <div className="nav-wrap">
           <Link className="nav-logo" href="/">
             <Image
