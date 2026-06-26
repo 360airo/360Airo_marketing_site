@@ -7,14 +7,14 @@
   width: 100%;
   margin: 0;
   padding: 0;
-  background: #f4f4f2;
+  background: #f4f5f7;
   overflow: hidden;
 }
 
 .trusted-operators-section + .launch-section-wrapper {
   margin-top: 0 !important;
   padding-top: 0 !important;
-  background: #f4f4f2 !important;
+  background: #f4f5f7 !important;
 }
 
 .launch-faster-section {
@@ -22,7 +22,7 @@
   width: 100%;
   margin: 0;
   padding: 96px 0 80px;
-  background: #f4f4f2;
+  background: #f4f5f7;
   border-radius: 56px 56px 0 0;
   overflow: hidden;
   font-family: 'DM Sans', sans-serif;
@@ -34,7 +34,7 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: #f4f4f2;
+  background: #f4f5f7;
   z-index: -1;
 }
 
@@ -46,7 +46,7 @@
   right: -5%;
   width: 800px;
   height: 800px;
-  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(244,244,242,0) 70%);
+  background: radial-gradient(circle, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 70%);
   z-index: 0;
   pointer-events: none;
 }
