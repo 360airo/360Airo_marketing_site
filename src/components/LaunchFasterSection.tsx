@@ -15,11 +15,11 @@ export default function LaunchFasterSection() {
           {/* Left Column Content */}
           <div className="launch-faster-content">
             <h2>
-              Reach out with our<br />
-              <span>all-outcome AI automation.</span>
+              Launch Your Entire Outbound Campaign in <br />
+              <span>Under 9 Minutes</span>
             </h2>
             <p>
-              The 360Airo AI SDR researches prospects, generates highly personalized messages, and automates multi-channel outreach across Email, LinkedIn, and SMS. It automatically classifies lead intent and syncs status updates directly to your CRM.
+              launch multichannel campaigns, automate follow-ups, and book meetings with workflows designed to help Revenue Teams move faster and close more deals.
             </p>
             <button className="cta-button-blue" onClick={() => {
               const sec = document.getElementById('section-engineering');

@@ -115,7 +115,20 @@ export default function EngineeringTeamSection() {
   return (
     <section id="section-engineering" ref={sectionRef}>
       <div className="eng-container">
-        <h2 className="eng-heading">Replace your Engineering Team</h2>
+        <h2 className="eng-heading" style={{ marginBottom: '16px' }}>
+          Scale Your <span className="eng-heading-shine">SDR Team Without Hiring</span>
+        </h2>
+        <p className="eng-subheading" style={{
+          fontFamily: "'DM Sans', sans-serif",
+          fontSize: 'clamp(15px, 2vw, 18px)',
+          color: '#475569',
+          maxWidth: '800px',
+          lineHeight: '1.6',
+          marginBottom: '48px',
+          marginTop: '0'
+        }}>
+          Upload and Enrich qualified prospects, automate outreach, streamline follow-ups, and track pipeline performance from a single outreach platform
+        </p>
 
         <div className="eng-bento">
           {/* ========================================================
@@ -144,8 +157,9 @@ export default function EngineeringTeamSection() {
               </div>
             </div>
             <div className="card-bottom-content">
-              <h3>All-in-One Outreach Solution</h3>
-              <p>Built for modern revenue teams, 360Airo helps you scale outbound effortlessly through AI-powered email, LinkedIn, SMS, and automation workflows—all from a single unified platform.</p>
+              <h3>Multichannel Outreach</h3>
+              <h4 style={{ fontSize: '15px', color: 'rgba(255, 255, 255, 0.7)', fontWeight: 500, margin: '4px 0 12px 0' }}>Be Everywhere Your Buyers Are</h4>
+              <p>Your prospects don't live in one inbox. Reach decision-makers across Email, LinkedIn, and SMS, creating more touchpoints, more conversations, and more opportunities to close.</p>
               <button className="eng-cta-btn" onClick={() => setIsModalOpen(true)}>
                 <div className="btn-icon">
                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -165,8 +179,8 @@ export default function EngineeringTeamSection() {
              ======================================================== */}
           <div className="eng-card eng-card-mid-top theme-light anim-stagger" style={{ animationDelay: '0.1s' }}>
             <div className="card-top-content">
-              <h3>Reach Prospects Everywhere</h3>
-              <p>From inboxes to LinkedIn and SMS, 360Airo automatically reaches out, follows up, and nurtures prospects on your behalf—so no opportunity slips through the cracks.</p>
+              <h3>Pipeline-Accelerating Follow-Ups</h3>
+              <p>Close deals moving forward with automated follow-up workflows designed to generate more responses, meetings, and revenue opportunities.</p>
             </div>
             <div className="donut-visual-container">
               <div className="donut-chart"></div>
@@ -191,7 +205,8 @@ export default function EngineeringTeamSection() {
              ======================================================== */}
           <div className="eng-card eng-card-right-top theme-dark anim-stagger" style={{ animationDelay: '0.2s' }}>
             <div className="card-top-content z-10">
-              <h3>Import Prospects → Launch Campaigns → Generate Revenue</h3>
+              <h3>AI SDR Prospect Intelligence</h3>
+              <p style={{ fontSize: '12.5px', color: 'rgba(255, 255, 255, 0.65)', lineHeight: '1.5', marginTop: '6px' }}>Build highly targeted prospect lists from over 900 million+ verified professionals. Reach decision-makers faster, improve conversion rates, and keep your sales pipeline filled with qualified opportunities.</p>
             </div>
             <div className="map-visual">
               {/* Abstract Map Nodes Container */}
@@ -225,8 +240,8 @@ export default function EngineeringTeamSection() {
              ======================================================== */}
           <div className="eng-card eng-card-mid-bot theme-light anim-stagger" style={{ animationDelay: '0.3s' }}>
             <div className="card-top-content z-10">
-              <h3>Automated Email Warmup</h3>
-              <p>Protect your sender reputation. 360Airo automatically warms up your email accounts by sending and replying to realistic AI-powered conversations, keeping your deliverability at peak performance.</p>
+              <h3>AI-Powered Buyer Discover</h3>
+              <p>Identify high-intent prospects, uncover new opportunities, and engage decision-makers with smart hyper-personalized sequencing that delivers the right message at the right time.</p>
             </div>
 
             <div className="warmup-ui-container" style={{ padding: '0 24px 24px 24px', display: 'flex', flexDirection: 'column', gap: '12px', flex: 1, justifyContent: 'center' }}>
@@ -263,21 +278,72 @@ export default function EngineeringTeamSection() {
           {/* ========================================================
               CARD 5 - RIGHT BOTTOM WHITE
              ======================================================== */}
-          <div className="eng-card eng-card-right-bot theme-light anim-stagger" style={{ animationDelay: '0.4s' }}>
+          <div className="eng-card eng-card-right-bot theme-light anim-stagger" style={{ animationDelay: '0.4s', display: 'flex', flexDirection: 'column' }}>
             <div className="card-top-content z-10">
-              <h3>Components, Dashboards and<br />Everything else</h3>
+              <h3>Sales Insights That Drive Revenue</h3>
+              <p style={{ fontSize: '13px', color: '#64748b', lineHeight: '1.5', marginTop: '8px', marginBottom: '24px' }}>Monitor campaign performance, track pipeline impact, and uncover the opportunities that help your team book more meetings and close more deals.</p>
+              {/* Metric stats */}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-start' }}>
+                <span style={{ fontSize: '26px', fontWeight: 800, color: '#0f172a', fontFamily: 'Outfit, sans-serif', lineHeight: 1 }}>231,856</span>
+                <span style={{ fontSize: '11px', color: '#64748b', fontWeight: 650, marginTop: '2px', textTransform: 'uppercase', letterSpacing: '0.5px' }}>Sessions</span>
+              </div>
             </div>
-            
-            <div className="circuit-visual">
-              <svg className="circuit-lines" viewBox="0 0 300 300">
-                <path d="M0 150 H150 L180 180 H300" className="c-line" />
-                <path d="M0 200 H120 L150 230 H300" className="c-line" />
-                <path d="M50 300 V250 L100 200 H150" className="c-line" />
-                <path d="M250 0 V100 L200 150 H150" className="c-line" />
-                <path d="M300 80 H220 L180 120" className="c-line highlight" />
-                <path d="M0 250 H80 L120 210 H180" className="c-line highlight" />
+            <div className="analytics-graph-visual" style={{ width: '100%', flex: 1, minHeight: '200px', marginTop: '16px', padding: '0 24px 24px 24px', position: 'relative', overflow: 'hidden', display: 'flex', flexDirection: 'column', justifyContent: 'flex-end' }}>
+              
+              <svg viewBox="0 0 320 160" style={{ width: '100%', height: '100%', overflow: 'visible' }} preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <linearGradient id="upwardGradient" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stopColor="#2563eb" stopOpacity="0.3" />
+                    <stop offset="100%" stopColor="#2563eb" stopOpacity="0" />
+                  </linearGradient>
+                  <linearGradient id="upwardGradientLight" x1="0" x2="0" y1="0" y2="1">
+                    <stop offset="0%" stopColor="#38bdf8" stopOpacity="0.2" />
+                    <stop offset="100%" stopColor="#38bdf8" stopOpacity="0" />
+                  </linearGradient>
+                </defs>
+
+                {/* Horizontal Grid lines */}
+                <line x1="25" y1="20" x2="310" y2="20" stroke="#f1f5f9" strokeWidth="1" />
+                <line x1="25" y1="50" x2="310" y2="50" stroke="#f1f5f9" strokeWidth="1" />
+                <line x1="25" y1="80" x2="310" y2="80" stroke="#f1f5f9" strokeWidth="1" />
+                <line x1="25" y1="110" x2="310" y2="110" stroke="#f1f5f9" strokeWidth="1" />
+                <line x1="25" y1="140" x2="310" y2="140" stroke="#cbd5e1" strokeWidth="1.2" />
+
+                {/* Y-Axis Labels */}
+                <text x="18" y="24" fill="#94a3b8" fontSize="9" textAnchor="end" fontFamily="Outfit, sans-serif">20k</text>
+                <text x="18" y="54" fill="#94a3b8" fontSize="9" textAnchor="end" fontFamily="Outfit, sans-serif">10k</text>
+                <text x="18" y="84" fill="#94a3b8" fontSize="9" textAnchor="end" fontFamily="Outfit, sans-serif">5k</text>
+                <text x="18" y="114" fill="#94a3b8" fontSize="9" textAnchor="end" fontFamily="Outfit, sans-serif">2k</text>
+                <text x="18" y="144" fill="#94a3b8" fontSize="9" textAnchor="end" fontFamily="Outfit, sans-serif">0</text>
+
+                {/* Area Fills */}
+                <path d="M 25 140 L 50.9 135 L 76.8 140 L 102.7 125 L 128.6 130 L 154.5 110 L 180.4 120 L 206.3 100 L 232.2 105 L 258.1 80 L 284 55 L 310 40 L 310 140 Z" fill="url(#upwardGradientLight)" />
+                <path d="M 25 140 L 50.9 125 L 76.8 135 L 102.7 105 L 128.6 110 L 154.5 85 L 180.4 90 L 206.3 65 L 232.2 70 L 258.1 40 L 284 20 L 310 10 L 310 140 Z" fill="url(#upwardGradient)" />
+
+                {/* Line 2 (Light Blue - Secondary upward trend) */}
+                <path d="M 25 140 L 50.9 135 L 76.8 140 L 102.7 125 L 128.6 130 L 154.5 110 L 180.4 120 L 206.3 100 L 232.2 105 L 258.1 80 L 284 55 L 310 40" 
+                      fill="none" stroke="#38bdf8" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                      className="animated-graph-line-secondary" />
+
+                {/* Line 1 (Dark Blue - Primary upward trend) */}
+                <path d="M 25 140 L 50.9 125 L 76.8 135 L 102.7 105 L 128.6 110 L 154.5 85 L 180.4 90 L 206.3 65 L 232.2 70 L 258.1 40 L 284 20 L 310 10" 
+                      fill="none" stroke="#2563eb" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"
+                      className="animated-graph-line" />
+
+                {/* X-Axis Labels */}
+                <text x="25" y="156" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="Outfit, sans-serif">Jan</text>
+                <text x="50.9" y="156" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="Outfit, sans-serif">Feb</text>
+                <text x="76.8" y="156" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="Outfit, sans-serif">Mar</text>
+                <text x="102.7" y="156" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="Outfit, sans-serif">Apr</text>
+                <text x="128.6" y="156" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="Outfit, sans-serif">May</text>
+                <text x="154.5" y="156" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="Outfit, sans-serif">Jun</text>
+                <text x="180.4" y="156" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="Outfit, sans-serif">Jul</text>
+                <text x="206.3" y="156" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="Outfit, sans-serif">Aug</text>
+                <text x="232.2" y="156" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="Outfit, sans-serif">Sep</text>
+                <text x="258.1" y="156" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="Outfit, sans-serif">Oct</text>
+                <text x="284" y="156" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="Outfit, sans-serif">Nov</text>
+                <text x="310" y="156" fill="#94a3b8" fontSize="9" textAnchor="middle" fontFamily="Outfit, sans-serif">Dec</text>
               </svg>
-              <div className="orange-chip"></div>
             </div>
           </div>
 
