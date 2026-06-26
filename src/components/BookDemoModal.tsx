@@ -308,6 +308,7 @@ export default function BookDemoModal({ isOpen, onClose }: BookDemoModalProps) {
 
   return (
     <div 
+      data-lenis-prevent
       style={{
         position: 'fixed',
         top: 0,
@@ -324,9 +325,11 @@ export default function BookDemoModal({ isOpen, onClose }: BookDemoModalProps) {
         padding: '24px'
       }} 
       onClick={onClose}
+      className="booking-modal-overlay"
     >
       {/* Modal Window Container */}
       <div 
+        data-lenis-prevent
         onClick={(e) => e.stopPropagation()}
         style={{
           maxWidth: step === 2 ? '780px' : '500px',
@@ -342,6 +345,7 @@ export default function BookDemoModal({ isOpen, onClose }: BookDemoModalProps) {
           position: 'relative',
           overflow: 'visible'
         }}
+        className="booking-card booking-modal-card"
       >
         {/* Absolute Close Button */}
         <button 
@@ -481,7 +485,7 @@ export default function BookDemoModal({ isOpen, onClose }: BookDemoModalProps) {
             <form onSubmit={handleNextToCalendar} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
               
               {/* First and Last Name */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }} className="contact-form-row">
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }} className="booking-form-row contact-form-row">
                 <div>
                   <label htmlFor="booking-fname-modal" style={{ display: 'block', fontSize: '11px', color: 'rgba(255, 255, 255, 0.4)', marginBottom: '5px', fontWeight: 600 }}>First Name *</label>
                   <input 
@@ -566,7 +570,7 @@ export default function BookDemoModal({ isOpen, onClose }: BookDemoModalProps) {
               </div>
 
               {/* Phone Extension with Real-time Search Dropdown & Phone Number */}
-              <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1.5fr', gap: '12px' }} className="contact-form-row">
+              <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1.5fr', gap: '12px' }} className="booking-form-row contact-form-row">
                 
                 {/* Phone Extension Selector with Search */}
                 <div className="country-dropdown-container">
@@ -635,7 +639,7 @@ export default function BookDemoModal({ isOpen, onClose }: BookDemoModalProps) {
                           autoFocus
                         />
                         {/* List of Countries */}
-                        <div style={{ maxHeight: '140px', overflowY: 'auto' }}>
+                        <div data-lenis-prevent style={{ maxHeight: '140px', overflowY: 'auto' }}>
                           {filteredCountries.map((c) => (
                             <div 
                               key={c.code}
@@ -810,7 +814,7 @@ export default function BookDemoModal({ isOpen, onClose }: BookDemoModalProps) {
               gridTemplateColumns: '1.2fr 1fr',
               gap: '24px',
               alignItems: 'start'
-            }} className="contact-form-row">
+            }} className="booking-schedule-row contact-form-row">
               
               {/* Column A: Interactive Calendar */}
               <div style={{
@@ -985,7 +989,7 @@ export default function BookDemoModal({ isOpen, onClose }: BookDemoModalProps) {
                       Select calendar date first
                     </div>
                   ) : (
-                    <div style={{
+                    <div data-lenis-prevent style={{
                       display: 'grid',
                       gridTemplateColumns: '1fr 1fr',
                       gap: '6px',

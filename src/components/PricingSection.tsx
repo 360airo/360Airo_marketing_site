@@ -1,13 +1,8 @@
 "use client";
-import React, { useState } from 'react';
+import React from 'react';
 import '../styles/PricingSection.css';
 
 export default function PricingSection() {
-  const [isYearly, setIsYearly] = useState(true);
-
-  // Toggle function
-  const handleToggle = () => setIsYearly(!isYearly);
-
   return (
     <section className="hp-pricing-section">
       
@@ -54,98 +49,63 @@ export default function PricingSection() {
           </p>
         </div>
 
-        <div className="hp-billing-toggle pp-animate-reveal" style={{ animationDelay: '50ms' }}>
-          <span 
-            className={`hp-toggle-label ${!isYearly ? 'active' : ''}`}
-            onClick={() => setIsYearly(false)}
-          >
-            Monthly
-          </span>
-          <div 
-            className="hp-toggle-switch" 
-            data-yearly={isYearly}
-            onClick={handleToggle}
-          >
-            <div className="hp-toggle-thumb"></div>
-            <div className="hp-yearly-badge">Save up to 20%</div>
-          </div>
-          <span 
-            className={`hp-toggle-label ${isYearly ? 'active' : ''}`}
-            onClick={() => setIsYearly(true)}
-          >
-            Yearly
-          </span>
-        </div>
-
         <div className="hp-pricing-grid pp-animate-reveal" style={{ animationDelay: '100ms' }}>
           
           {/* Free */}
           <div className="hp-card">
             <div className="hp-card-header">
               <h3 className="hp-card-name">Free</h3>
-              <p className="hp-card-desc">Perfect to explore the platform.</p>
+              <p className="hp-card-desc">For individuals starting with outbound email</p>
             </div>
             <div className="hp-card-price-wrap">
               <div className="hp-card-price">
                 $0
               </div>
-              <div className="hp-card-price-period">Free forever</div>
+              <div className="hp-card-price-period">/month</div>
             </div>
             <ul className="hp-feature-list">
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                1 User Seat
-              </li>
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                Connect up to 2 email accounts
-              </li>
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                500 emails/month
-              </li>
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                Basic personalization tags
-              </li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Unlimited email sending</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>1,000 email contacts</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>1 mailbox</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>1 user</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>500 AI personalization credits</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Email campaigns</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Limited integrations</li>
             </ul>
-            <button className="hp-btn hp-btn-free">Get Started</button>
+            <button className="hp-btn hp-btn-free">Downgrade Plan</button>
           </div>
 
           {/* Starter */}
           <div className="hp-card">
             <div className="hp-card-header">
               <h3 className="hp-card-name">Starter</h3>
-              <p className="hp-card-desc">Best for individuals and small teams.</p>
+              <p className="hp-card-desc">For small outbound teams that need shared tools</p>
             </div>
             <div className="hp-card-price-wrap">
               <div className="hp-card-price">
-                ${isYearly ? '39' : '49'}
-                <span className="hp-card-price-period">/mo</span>
+                $99
               </div>
-              <div className="hp-card-price-period">
-                {isYearly ? 'Billed annually ($468/yr)' : 'Billed monthly'}
-              </div>
+              <div className="hp-card-price-period">/month</div>
             </div>
             <ul className="hp-feature-list">
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                Up to 3 User Seats
-              </li>
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                Connect up to 10 email accounts
-              </li>
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                5,000 emails/month
-              </li>
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                AI email writer
-              </li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Unlimited email sending</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>5,000 email contacts</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>8 mailboxes</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Up to 3 users</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>3,000 AI personalization credits/month</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>3 LinkedIn seats</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>3,000 email verification credits/month</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Unified inbox</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Smart scheduler</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Email warmup</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Inbox rotation</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Basic AI automation</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Campaign automation</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Basic integrations</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Basic analytics</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>2 hours/month support</li>
             </ul>
-            <button className="hp-btn hp-btn-starter">Start Trial</button>
+            <button className="hp-btn hp-btn-starter">Current Plan</button>
           </div>
 
           {/* Pro */}
@@ -153,69 +113,30 @@ export default function PricingSection() {
             <div className="hp-most-popular">Most Popular</div>
             <div className="hp-card-header">
               <h3 className="hp-card-name">Pro</h3>
-              <p className="hp-card-desc">Perfect for growing teams scaling outbound.</p>
+              <p className="hp-card-desc">For growing teams running advanced outbound workflows</p>
             </div>
             <div className="hp-card-price-wrap">
               <div className="hp-card-price">
-                ${isYearly ? '119' : '149'}
-                <span className="hp-card-price-period">/mo</span>
+                $299
               </div>
-              <div className="hp-card-price-period">
-                {isYearly ? 'Billed annually ($1,428/yr)' : 'Billed monthly'}
-              </div>
+              <div className="hp-card-price-period">/month</div>
             </div>
             <ul className="hp-feature-list">
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                Unlimited User Seats
-              </li>
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                Connect up to 50 email accounts
-              </li>
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                Unlimited emails/month
-              </li>
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                Advanced AI intent scoring
-              </li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Unlimited email sending</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>25,000 email contacts</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>20 mailboxes</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Up to 5 users</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>10,000 AI personalization credits/month</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>5 LinkedIn seats</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>10,000 email verification credits/month</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Unified inbox</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Smart scheduler</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Email warmup</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Advanced AI automation</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Priority support</li>
+              <li className="hp-feature-item"><span className="hp-feature-icon">✓</span>Custom onboarding</li>
             </ul>
-            <button className="hp-btn hp-btn-pro">Get Pro Plan</button>
-          </div>
-
-          {/* Enterprise */}
-          <div className="hp-card">
-            <div className="hp-card-header">
-              <h3 className="hp-card-name">Enterprise</h3>
-              <p className="hp-card-desc">Perfect for large organizations and agencies.</p>
-            </div>
-            <div className="hp-card-price-wrap">
-              <div className="hp-card-price" style={{ fontSize: '32px' }}>
-                Contact Us
-              </div>
-              <div className="hp-card-price-period">Custom volume & limits</div>
-            </div>
-            <ul className="hp-feature-list">
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                Custom infrastructure
-              </li>
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                Dedicated deliverability IP
-              </li>
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                White-labeling for agencies
-              </li>
-              <li className="hp-feature-item">
-                <span className="hp-feature-icon">✓</span>
-                SAML & SSO integrations
-              </li>
-            </ul>
-            <button className="hp-btn hp-btn-enterprise">Talk to Sales</button>
+            <button className="hp-btn hp-btn-pro">Current Plan</button>
           </div>
 
         </div>

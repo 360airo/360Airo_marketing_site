@@ -152,7 +152,7 @@ export default function ContactUsPage() {
 
           {/* Form Card */}
           <div 
-            className="animate-fade-in-up delay-3"
+            className="contact-form-card animate-fade-in-up delay-3"
             style={{
               maxWidth: '680px',
               width: '100%',
@@ -497,15 +497,18 @@ export default function ContactUsPage() {
           >
             
             {/* Clean Styled Map Card */}
-            <div style={{
-              borderRadius: '24px',
-              border: '1px solid #E2E8F0',
-              overflow: 'hidden',
-              background: '#F8FAFC',
-              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.03)',
-              position: 'relative',
-              height: '350px'
-            }}>
+            <div 
+              className="contact-map-card"
+              style={{
+                borderRadius: '24px',
+                border: '1px solid #E2E8F0',
+                overflow: 'hidden',
+                background: '#F8FAFC',
+                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.03)',
+                position: 'relative',
+                height: '350px'
+              }}
+            >
               <iframe 
                 src="https://maps.google.com/maps?q=9314%20Forest%20Hill%20Blvd,%20Wellington,%20FL%2033411&t=&z=14&ie=UTF8&iwloc=&output=embed" 
                 width="100%" 
@@ -521,17 +524,20 @@ export default function ContactUsPage() {
             </div>
 
             {/* Address Information Card */}
-            <div style={{
-              background: '#F5F2EB',
-              border: 'none',
-              borderRadius: '24px',
-              padding: '36px',
-              boxShadow: '0 8px 30px rgba(0, 0, 0, 0.02)',
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'space-between',
-              height: '350px'
-            }}>
+            <div 
+              className="contact-address-card"
+              style={{
+                background: '#F5F2EB',
+                border: 'none',
+                borderRadius: '24px',
+                padding: '36px',
+                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.02)',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                height: '350px'
+              }}
+            >
               <div>
                 <span style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#64748B', display: 'block', marginBottom: '6px' }}>Address</span>
                 <p style={{ fontSize: '16px', fontWeight: 600, color: '#0F172A', lineHeight: '1.4', marginBottom: '20px' }}>

@@ -155,38 +155,19 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
               <div key={link} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <div 
                   onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
-                  style={{ 
-                    cursor: 'pointer', 
-                    display: 'flex', 
-                    alignItems: 'center', 
-                    justifyContent: 'center',
-                    gap: '6px',
-                    color: '#fff',
-                    fontSize: '24px',
-                    fontWeight: 600,
-                    padding: '12px 0'
-                  }}
+                  className="mobile-resources-toggle"
                 >
                   {link}
-                  <span style={{ 
-                    fontSize: '14px', 
-                    transform: mobileResourcesOpen ? 'rotate(180deg)' : 'rotate(0deg)', 
-                    transition: 'transform 0.2s',
-                    display: 'inline-block'
-                  }}>▼</span>
+                  <span 
+                    className="mobile-resources-arrow"
+                    style={{ 
+                      transform: mobileResourcesOpen ? 'rotate(180deg)' : 'rotate(0deg)', 
+                      display: 'inline-block'
+                    }}
+                  >▼</span>
                 </div>
                 {mobileResourcesOpen && (
-                  <div style={{ 
-                    display: 'flex', 
-                    flexDirection: 'column', 
-                    alignItems: 'center',
-                    gap: '12px',
-                    padding: '12px 0',
-                    background: 'rgba(255, 255, 255, 0.02)',
-                    borderRadius: '12px',
-                    width: '80%',
-                    margin: '0 auto'
-                  }}>
+                  <div className="mobile-submenu">
                     {mainResources.map((item, idx) => {
                       const IconComponent = item.icon;
                       const isActiveDropdown = activeTab === item.href.substring(1);
@@ -195,36 +176,26 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
                           key={idx} 
                           href={item.href} 
                           onClick={() => setMobileMenuOpen(false)}
+                          className="mobile-submenu-link"
                           style={{
-                            color: isActiveDropdown ? '#8B5CF6' : '#fff',
-                            fontSize: '18px',
-                            fontWeight: 500,
-                            textDecoration: 'none',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '8px'
+                            color: isActiveDropdown ? '#0EB5BB' : undefined
                           }}
                         >
-                          <IconComponent size={18} color={isActiveDropdown ? '#8B5CF6' : 'rgba(255, 255, 255, 0.6)'} />
+                          <IconComponent size={16} color={isActiveDropdown ? '#0EB5BB' : 'rgba(255, 255, 255, 0.4)'} />
                           {item.label}
                         </Link>
                       );
                     })}
-                    <div style={{ width: '80%', height: '1px', background: 'rgba(255, 255, 255, 0.08)' }} />
+                    <div style={{ width: '80%', height: '1px', background: 'rgba(255, 255, 255, 0.05)' }} />
                     <Link 
                       href={footerResource.href}
                       onClick={() => setMobileMenuOpen(false)}
+                      className="mobile-submenu-link"
                       style={{
-                        color: activeTab === 'customer-support' ? '#8B5CF6' : '#fff',
-                        fontSize: '16px',
-                        fontWeight: 500,
-                        textDecoration: 'none',
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '8px'
+                        color: activeTab === 'customer-support' ? '#0EB5BB' : undefined
                       }}
                     >
-                      <HelpCircle size={16} color={activeTab === 'customer-support' ? '#8B5CF6' : 'rgba(255, 255, 255, 0.5)'} />
+                      <HelpCircle size={15} color={activeTab === 'customer-support' ? '#0EB5BB' : 'rgba(255, 255, 255, 0.4)'} />
                       {footerResource.label}
                     </Link>
                   </div>
@@ -240,13 +211,8 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
                 key={link} 
                 href={href} 
                 onClick={() => setMobileMenuOpen(false)}
-                className="btn-nav-login"
-                style={{ 
-                  textDecoration: 'none', 
-                  display: 'inline-block',
-                  marginTop: '12px',
-                  textAlign: 'center'
-                }}
+                className="btn-nav-login mobile-book-btn"
+                style={{ textDecoration: 'none' }}
               >
                 {link}
               </Link>
@@ -254,7 +220,12 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
           }
 
           return (
-            <Link key={link} href={href} onClick={() => setMobileMenuOpen(false)}>
+            <Link 
+              key={link} 
+              href={href} 
+              onClick={() => setMobileMenuOpen(false)}
+              className="mobile-nav-link"
+            >
               {link}
             </Link>
           );

@@ -115,3 +115,33 @@
   border-radius: 50%;
   opacity: 0.5;
 }
+
+@media (max-width: 768px) {
+  .cs-marquee-wrapper {
+    margin-top: 40px;
+    padding: 10px 0;
+  }
+  .cs-marquee-track {
+    animation: marquee-scroll 25s linear infinite !important;
+  }
+  .cs-marquee-card {
+    width: 270px;
+    height: 300px;
+    border-radius: 12px;
+  }
+  .cs-marquee-title {
+    font-size: 16px;
+    padding: 20px 20px 0 20px;
+  }
+  .cs-marquee-ui-mock {
+    margin: 0 16px 16px 16px;
+    padding: 12px;
+    gap: 8px;
+    border-radius: 8px;
+  }
+  .cs-marquee-ui-row {
+    font-size: 11px;
+    gap: 8px;
+  }
+}
+

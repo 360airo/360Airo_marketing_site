@@ -626,9 +626,9 @@ export default function FeaturesPage() {
                   <span className="title-line">Outreach</span>
                 </h1>
                 <p className="hero-desc">Our platform brings together every tool modern B2B growth and marketing teams need to scale prospecting (delivering verified contact and post-built data powered by <a href="https://360marco.com/" target="_blank" rel="noopener noreferrer" className="underline hover:text-indigo-400">360marco.com</a> with 90% accuracy), automate workflows, and bypass spam limits.</p>
-                <div className="hero-actions">
+                <div className="hero-actions hidden md:flex">
                   <button
-                    className="transition-all duration-300 transform active:scale-95"
+                    className="hero-btn-primary transition-all duration-300 transform active:scale-95"
                     style={{
                       display: 'inline-flex',
                       alignItems: 'center',
@@ -661,7 +661,7 @@ export default function FeaturesPage() {
             </section>
 
             {/* Always render the tablet mockup layer so it displays on page load in both modes */}
-            <div className="future-transition-layer">
+            <div className="future-transition-layer hidden md:block">
               <div ref={tabletMotionRef} className="tablet-motion-shell">
                 <div ref={heroTabletRef} className="hero-dashboard-tablet">
                   <div className="tablet-camera" />
