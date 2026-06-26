@@ -45,8 +45,8 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
               id="nav-logo-icon"
               src="/logo.svg"
               alt="360Airo Logo"
-              width={274}
-              height={78}
+              width={135}
+              height={38}
               priority
               unoptimized
             />

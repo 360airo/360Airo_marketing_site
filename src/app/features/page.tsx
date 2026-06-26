@@ -419,11 +419,11 @@ export default function FeaturesPage() {
             }, "heroExit")
             .addLabel("tabletMorph", "heroExit+=0.2")
             .to(shell, {
-              top: "86px",
+              top: "48px",
               right: "0%",
               yPercent: 0,
               width: "100vw",
-              height: "calc(100vh - 86px)",
+              height: "calc(100vh - 48px)",
               duration: 2.8,
               ease: "none",
             }, "tabletMorph")
