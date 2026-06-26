@@ -59,10 +59,10 @@ export default function CustomerStories() {
       {/* Hero Section */}
       <section className="cs-hero" style={{ background: '#FAF9FB' }}>
         <div className="cs-hero-content">
-          <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: '64px', fontWeight: '400', color: '#111827', marginBottom: '16px' }}>
+          <h1 style={{ fontFamily: '"Playfair Display", serif', fontSize: 'clamp(2.5rem, 8vw, 4rem)', fontWeight: '400', color: '#111827', marginBottom: '16px', lineHeight: '1.2' }}>
             Customer stories
           </h1>
-          <p style={{ fontSize: '22px', lineHeight: '1.6', color: '#475569', maxWidth: '650px', margin: '0 auto', letterSpacing: '-0.01em' }}>
+          <p style={{ fontSize: 'clamp(1rem, 3vw, 1.375rem)', lineHeight: '1.6', color: '#475569', maxWidth: '650px', margin: '0 auto', letterSpacing: '-0.01em' }}>
             See how leading startups and businesses across all sectors are growing faster via outbound powered by 360Airo.
           </p>
         </div>
