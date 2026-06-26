@@ -703,4 +703,29 @@
   font-weight: 600;
 }
 
+@media (max-width: 768px) {
+  .cs-cta-modern {
+    padding: 60px 16px 40px;
+  }
+  .cs-cta-content h2 {
+    font-size: 26px !important;
+    margin-bottom: 24px;
+    padding: 0 12px;
+  }
+  .cs-cta-buttons {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    max-width: 290px;
+    margin: 0 auto 32px;
+  }
+  .cs-cta-buttons button {
+    width: 100%;
+    justify-content: center;
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
 

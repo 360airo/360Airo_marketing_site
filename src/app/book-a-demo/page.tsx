@@ -322,7 +322,7 @@ export default function BookADemoPage() {
           transition: 'max-width 0.3s cubic-bezier(0.16, 1, 0.3, 1)',
           position: 'relative',
           overflow: 'visible'
-        }} className="animate-fade-in-up">
+        }} className="booking-card animate-fade-in-up">
           
           {/* Header Step Indicators (Except success step) */}
           {step < 3 && (
@@ -428,7 +428,7 @@ export default function BookADemoPage() {
               <form onSubmit={handleNextToCalendar} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
                 
                 {/* First and Last Name */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }} className="contact-form-row">
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }} className="booking-form-row contact-form-row">
                   <div>
                     <label htmlFor="booking-fname-page" style={{ display: 'block', fontSize: '11px', color: 'rgba(255, 255, 255, 0.4)', marginBottom: '5px', fontWeight: 600 }}>First Name *</label>
                     <input 
@@ -513,7 +513,7 @@ export default function BookADemoPage() {
                 </div>
 
                 {/* Phone Extension with Real-time Search Dropdown & Phone Number */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1.5fr', gap: '12px' }} className="contact-form-row">
+                <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1.5fr', gap: '12px' }} className="booking-form-row contact-form-row">
                   
                   {/* Phone Extension Selector with Search */}
                   <div className="country-dropdown-container">
@@ -582,7 +582,7 @@ export default function BookADemoPage() {
                             autoFocus
                           />
                           {/* List of Countries */}
-                          <div style={{ maxHeight: '140px', overflowY: 'auto' }}>
+                          <div data-lenis-prevent style={{ maxHeight: '140px', overflowY: 'auto' }}>
                             {filteredCountries.map((c) => (
                               <div 
                                 key={c.code}
@@ -757,7 +757,7 @@ export default function BookADemoPage() {
                 gridTemplateColumns: '1.2fr 1fr',
                 gap: '24px',
                 alignItems: 'start'
-              }} className="contact-form-row">
+              }} className="booking-schedule-row contact-form-row">
                 
                 {/* Column A: Interactive Calendar */}
                 <div style={{
@@ -932,7 +932,7 @@ export default function BookADemoPage() {
                         Select calendar date first
                       </div>
                     ) : (
-                      <div style={{
+                      <div data-lenis-prevent style={{
                         display: 'grid',
                         gridTemplateColumns: '1fr 1fr',
                         gap: '6px',
