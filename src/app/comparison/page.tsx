@@ -69,7 +69,7 @@ export default function ComparisonPage() {
         </div>
 
         <div className="w-full max-w-7xl text-white mx-auto flex flex-col items-center py-28 px-4 gap-6 h-full justify-center relative z-10">
-          <h1 className="heading-mobile-xxlarge sm:heading-tablet-xxlarge lg:desktop-heading-xxlarge text-center" style={{ opacity: 1, transform: 'none', color: '#ffffff' }}>
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-center" style={{ opacity: 1, transform: 'none', color: '#ffffff' }}>
             360Airo Comparison
           </h1>
           <p className="text-lg lg:text-xl max-w-[560px] text-center" style={{ opacity: 1, transform: 'none', color: 'rgba(255, 255, 255, 0.7)', lineHeight: '1.6' }}>

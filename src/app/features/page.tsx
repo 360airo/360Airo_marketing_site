@@ -371,7 +371,9 @@ export default function FeaturesPage() {
 
       ctx = gsap.context(() => {
         const mm = gsap.matchMedia();
-        mm.add("(prefers-reduced-motion: no-preference)", () => {
+        
+        // --- DESKTOP ANIMATION ---
+        mm.add("(min-width: 901px) and (prefers-reduced-motion: no-preference)", () => {
           const shell = tabletMotionRef.current;
           if (!shell) return;
 
@@ -454,6 +456,20 @@ export default function FeaturesPage() {
             iframe.style.pointerEvents = progress >= 0.98 ? 'auto' : 'none';
             iframe.style.setProperty('--iframe-scale', String(startScale + progress * (1 - startScale)));
           });
+        });
+
+        // --- MOBILE ANIMATION ---
+        mm.add("(max-width: 900px) and (prefers-reduced-motion: no-preference)", () => {
+          if (tabletMotionRef.current) {
+            gsap.set(tabletMotionRef.current, {
+              xPercent: 0,
+              yPercent: 0,
+              x: 0,
+              y: 0,
+              scale: 1,
+              transformOrigin: "center center"
+            });
+          }
         });
       });
     };
