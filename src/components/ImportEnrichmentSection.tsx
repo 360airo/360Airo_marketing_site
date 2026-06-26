@@ -5,7 +5,16 @@ import '../styles/ImportEnrichmentSection.css';
 
 export default function ImportEnrichmentSection() {
   return (
-    <div className="import-enrichment-wrapper">
+    <div className="import-enrichment-wrapper" style={{ backgroundColor: '#fdfdfe' }}>
+      <div className="import-enrichment-header-section">
+        <h3>
+          Automate your pipeline with<br />
+          <span>AI outbound workflows.</span>
+        </h3>
+        <p>
+          Connect your CRM, sync prospects, and let the AI SDR manage data intelligence, intent analysis, and personalized sequencing without manual intervention.
+        </p>
+      </div>
       <div className="import-enrichment-container">
         
         {/* Card 1: Import List */}

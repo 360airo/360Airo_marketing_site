@@ -331,11 +331,11 @@ export default function App() {
     </section>
   </div>
   <ModernOutreachSection />
-  <EngineeringTeamSection />
+  <AiroAgentBuilder />
   <TrustedOperatorsSection />
   <LaunchFasterSection />
   <ImportEnrichmentSection />
-  <AiroAgentBuilder />
+  <EngineeringTeamSection />
   <FunnelStagesSection />
   <OutreachDeploySection />
   <OutreachBentoSection />

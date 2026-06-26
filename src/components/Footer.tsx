@@ -11,7 +11,7 @@ export function Footer() {
             <img 
               src="/logo.svg" 
               alt="360Airo Logo" 
-              style={{ height: 36, marginBottom: 8, filter: 'brightness(0) invert(1)', cursor: 'pointer' }} 
+              style={{ height: 36, marginBottom: 8, cursor: 'pointer' }} 
             />
           </Link>
           <p>AI-powered multichannel sales outreach. Discover prospects, start conversations, close more deals.</p>

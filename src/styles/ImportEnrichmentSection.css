@@ -1,16 +1,47 @@
 .import-enrichment-wrapper {
   width: 100%;
-  background-color: #ffffff; /* White background behind the flexbox */
+  background-color: #fdfdfe; /* White background behind the flexbox */
   padding: 6rem 0;
   position: relative;
   z-index: 10;
+}
+
+.import-enrichment-header-section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 3rem;
+}
+
+.import-enrichment-header-section h3 {
+  font-family: 'Outfit', sans-serif;
+  font-size: 38px;
+  font-weight: 800;
+  color: #000000;
+  line-height: 1.05;
+  letter-spacing: -1px;
+  margin: 0;
+}
+
+.import-enrichment-header-section h3 span {
+  display: block;
+}
+
+.import-enrichment-header-section p {
+  font-size: 16px;
+  color: #6D6D6D;
+  line-height: 1.55;
+  max-width: 540px;
+  margin: 0;
 }
 
 .import-enrichment-container {
   max-width: 1300px;
   width: calc(100% - 4rem);
   margin: 0 auto;
-  background: #132c54; /* Solid navy background */
+  background: #000000; /* Solid black background */
   border-radius: 32px;
   padding: 3rem;
   display: flex;

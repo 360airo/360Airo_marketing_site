@@ -5,8 +5,8 @@ import '../styles/LaunchFasterSection.css';
 
 export default function LaunchFasterSection() {
   return (
-    <div className="launch-section-wrapper">
-      <section className="launch-faster-section">
+    <div className="launch-section-wrapper" style={{ backgroundColor: '#f4f5f7' }}>
+      <section className="launch-faster-section" style={{ backgroundColor: '#f4f5f7' }}>
         <div className="launch-faster-container">
         
         {/* TOP AREA */}
@@ -121,16 +121,7 @@ export default function LaunchFasterSection() {
           </div>
         </div>
 
-        {/* BOTTOM CENTER AREA */}
-        <div className="launch-faster-bottom">
-          <h3>
-            Automate your pipeline with<br />
-            <span>AI outbound workflows.</span>
-          </h3>
-          <p>
-            Connect your CRM, sync prospects, and let the AI SDR manage data intelligence, intent analysis, and personalized sequencing without manual intervention.
-          </p>
-        </div>
+
 
       </div>
     </section>
