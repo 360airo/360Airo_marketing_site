@@ -1,0 +1,29 @@
+151:               { sender: 'agent', text: "Outreach campaign running successfully! ≡ƒÜÇ Sequences active, Pipedrive CRM integrated, replies and messages will stream in real time." }
+184:           Γ£¿ Let AI handle it
+190:           ≡ƒöì Get verified data
+197:           Γ£ë∩╕Å Engage on multi-channels
+221:             <span>≡ƒÆ╗ Preview</span>
+262:                         {"If replied ΓåÆ Pipedrive CRM, else ΓåÆ LinkedIn invite with personalized note"}
+270:                         {"If replied ΓåÆ Msg about email, else ΓåÆ SMS follow-up"}
+278:                         Γ£ô Launch campaign
+303:                     <button className="chat-send-btn">Γ₧ö</button>
+315:                     {/* Start ΓåÆ Email */}
+317:                     {/* Email ΓåÆ Decision1 */}
+319:                     {/* Decision1 ΓåÆ CRM (Yes left) */}
+321:                     {/* Decision1 ΓåÆ LinkedIn (No right) */}
+323:                     {/* LinkedIn ΓåÆ Decision2 */}
+325:                     {/* Decision2 ΓåÆ LinkedIn Msg (Yes left) */}
+327:                     {/* Decision2 ΓåÆ SMS (No right) */}
+347:                         Email 1 ΓÇô Send outreach
+354:                       <span style={{ fontSize: '0.8rem' }}>ΓÅ▒</span> Replied in 2 days?
+359:                     {/* LEFT BRANCH (Yes) ΓÇö Node 4: Pipedrive CRM */}
+371:                     {/* RIGHT BRANCH (No) ΓÇö Node 5: LinkedIn Invite */}
+386:                       <span style={{ fontSize: '0.8rem' }}>≡ƒöù</span> Accepted &amp; Replied?
+430:                     <span className="filter-icon">ΓÜí</span>
+567:                   {/* Email ΓåÆ Hub */}
+578:                   {/* Leads ΓåÆ Hub */}
+589:                   {/* CRM ΓåÆ Hub */}
+601:                   {/* ΓòÉΓòÉ LEFT INPUT NODES ΓòÉΓòÉ */}
+645:                   {/* ΓòÉΓòÉ CENTER HUB ΓÇö 360Airo ΓòÉΓòÉ */}
+659:                   {/* ΓòÉΓòÉ RIGHT OUTPUT NODES ΓòÉΓòÉ */}
+681:                   {/* ΓòÉΓòÉ FAR RIGHT: AI Reply Detection ΓòÉΓòÉ */}

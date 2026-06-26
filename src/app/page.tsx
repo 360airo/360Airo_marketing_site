@@ -306,33 +306,56 @@ export default function App() {
     </section>
   </div>
 
+  <TrustedOperatorsSection />
+  <ModernOutreachSection />
+  <AiroAgentBuilder />
   <div id="section-trusted-startups">
     <section className="trusted-startups-inner">
       <div className="trusted-startups-eyebrow" data-anim="up">TRUSTED BY FAST-GROWING STARTUPS</div>
-      <div className="startup-logo-grid">
-        <div className="startup-logo logo-heavy" style={{animationDelay: '100ms'}}><svg viewBox="0 0 24 24"><path d="M4 12 L12 4 L20 12 L12 20 Z" fill="currentColor" /></svg>manyreach</div>
-        <div className="startup-logo logo-wide" style={{animationDelay: '150ms'}}><svg viewBox="0 0 24 24"><rect x={4} y={4} width={16} height={16} rx={2} stroke="currentColor" strokeWidth={2} fill="none" /><path d="M9 12 L15 12 M12 9 L12 15" stroke="currentColor" strokeWidth={2} /></svg>PERFORMANCE<br />MARKETING</div>
-        <div className="startup-logo" style={{animationDelay: '200ms'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={8} fill="currentColor" /><circle cx={12} cy={12} r={3} fill="#F7F7F5" /></svg>Content Brew</div>
-        <div className="startup-logo logo-light" style={{animationDelay: '250ms'}}><svg viewBox="0 0 24 24"><path d="M6 6 L6 18 L10 18 M14 18 L18 18 L18 6" stroke="currentColor" strokeWidth="2.5" fill="none" /></svg>Avant Page</div>
-        <div className="startup-logo logo-heavy" style={{animationDelay: '300ms'}}><svg viewBox="0 0 24 24"><path d="M4 12 h16 M4 6 h12 M4 18 h12" stroke="currentColor" strokeWidth={3} fill="none" /></svg>BTR.fi</div>
-        <div className="startup-logo logo-light" style={{animationDelay: '350ms'}}>Loopback</div>
-        <div className="startup-logo logo-light logo-wide" style={{animationDelay: '400ms'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={9} stroke="currentColor" strokeWidth="1.5" fill="none" strokeDasharray="2 3" /></svg>Joyhealth<br />CURSOR</div>
-        <div className="startup-logo" style={{animationDelay: '450ms'}}><svg viewBox="0 0 24 24"><path d="M4 12 Q12 4 20 12" stroke="currentColor" strokeWidth={3} fill="none" strokeLinecap="round" /></svg>SapientWealth</div>
-        <div className="startup-logo logo-heavy" style={{animationDelay: '500ms'}}><svg viewBox="0 0 24 24"><path d="M12 2 L22 12 L12 22 L2 12 Z" fill="none" stroke="currentColor" strokeWidth={3} /></svg>scale.jobs</div>
-        <div className="startup-logo logo-wide" style={{animationDelay: '550ms'}}><svg viewBox="0 0 24 24"><rect x={3} y={8} width={12} height={8} fill="currentColor" /><polygon points="15,12 21,8 21,16" fill="currentColor" /></svg>Moonbeam</div>
-        <div className="startup-logo logo-light logo-serif" style={{animationDelay: '600ms'}}>KEARNEY</div>
-        <div className="startup-logo logo-large" style={{animationDelay: '650ms'}}>webstone</div>
-      </div>
-      <div className="startup-logo-grid-bottom">
-        <div className="startup-logo logo-serif logo-large" style={{animationDelay: '700ms'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={9} fill="currentColor" /><circle cx={16} cy={8} r={4} fill="#F7F7F5" /></svg>Procol</div>
-        <div className="startup-logo" style={{animationDelay: '750ms'}}><svg viewBox="0 0 24 24"><path d="M6 6 L6 18 M18 6 L18 18 M6 12 L18 12" stroke="currentColor" strokeWidth={4} /></svg>Helium</div>
-        <div className="startup-logo logo-heavy" style={{animationDelay: '800ms'}}><svg viewBox="0 0 24 24"><path d="M4 10 Q12 2 20 10 L20 14 Q12 22 4 14 Z" fill="currentColor" /></svg>Spot</div>
+      <div className="logo-marquee-container" style={{ marginTop: '20px', paddingBottom: '60px' }}>
+        <div className="logo-marquee-track" style={{ animationDuration: '50s' }}>
+          {/* Set 1 */}
+          <div className="startup-logo logo-heavy" style={{opacity: 1, transform: 'none', animation: 'none', color: '#FF5A5F', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M4 12 L12 4 L20 12 L12 20 Z" fill="currentColor" /></svg>softr</div>
+          <div className="startup-logo logo-wide" style={{opacity: 1, transform: 'none', animation: 'none', color: '#00A699', filter: 'none'}}><svg viewBox="0 0 24 24"><rect x={4} y={4} width={16} height={16} rx={2} stroke="currentColor" strokeWidth={2} fill="none" /><path d="M9 12 L15 12 M12 9 L12 15" stroke="currentColor" strokeWidth={2} /></svg>Get hired</div>
+          <div className="startup-logo" style={{opacity: 1, transform: 'none', animation: 'none', color: '#FC642D', filter: 'none'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={8} fill="currentColor" /><circle cx={12} cy={12} r={3} fill="#F7F7F5" /></svg>Alice. Tech</div>
+          <div className="startup-logo logo-light" style={{opacity: 1, transform: 'none', animation: 'none', color: '#29B6F6', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M6 6 L6 18 L10 18 M14 18 L18 18 L18 6" stroke="currentColor" strokeWidth="2.5" fill="none" /></svg>rtackradar</div>
+          <div className="startup-logo logo-heavy" style={{opacity: 1, transform: 'none', animation: 'none', color: '#AB47BC', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M4 12 h16 M4 6 h12 M4 18 h12" stroke="currentColor" strokeWidth={3} fill="none" /></svg>firma.dev</div>
+          <div className="startup-logo logo-light" style={{opacity: 1, transform: 'none', animation: 'none', color: '#EF5350', filter: 'none'}}>Pond</div>
+          <div className="startup-logo logo-light logo-wide" style={{opacity: 1, transform: 'none', animation: 'none', color: '#FFA726', filter: 'none'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={9} stroke="currentColor" strokeWidth="1.5" fill="none" strokeDasharray="2 3" /></svg>Lofty</div>
+          <div className="startup-logo" style={{opacity: 1, transform: 'none', animation: 'none', color: '#66BB6A', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M4 12 Q12 4 20 12" stroke="currentColor" strokeWidth={3} fill="none" strokeLinecap="round" /></svg>Tap Hero</div>
+          <div className="startup-logo logo-heavy" style={{opacity: 1, transform: 'none', animation: 'none', color: '#5C6BC0', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M12 2 L22 12 L12 22 L2 12 Z" fill="none" stroke="currentColor" strokeWidth={3} /></svg>Exposr</div>
+          <div className="startup-logo logo-wide" style={{opacity: 1, transform: 'none', animation: 'none', color: '#EC407A', filter: 'none'}}><svg viewBox="0 0 24 24"><rect x={3} y={8} width={12} height={8} fill="currentColor" /><polygon points="15,12 21,8 21,16" fill="currentColor" /></svg>sendr</div>
+          <div className="startup-logo logo-light logo-serif" style={{opacity: 1, transform: 'none', animation: 'none', color: '#26A69A', filter: 'none'}}>Agent Arena</div>
+          <div className="startup-logo logo-large" style={{opacity: 1, transform: 'none', animation: 'none', color: '#7E57C2', filter: 'none'}}>Nanonets</div>
+          <div className="startup-logo logo-serif logo-large" style={{opacity: 1, transform: 'none', animation: 'none', color: '#42A5F5', filter: 'none'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={9} fill="currentColor" /><circle cx={16} cy={8} r={4} fill="#F7F7F5" /></svg>sleek analytics</div>
+          <div className="startup-logo" style={{opacity: 1, transform: 'none', animation: 'none', color: '#FFCA28', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M6 6 L6 18 M18 6 L18 18 M6 12 L18 12" stroke="currentColor" strokeWidth={4} /></svg>squidhub</div>
+          <div className="startup-logo logo-heavy" style={{opacity: 1, transform: 'none', animation: 'none', color: '#D4E157', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M4 10 Q12 2 20 10 L20 14 Q12 22 4 14 Z" fill="currentColor" /></svg>cubeone</div>
+          <div className="startup-logo logo-light" style={{opacity: 1, transform: 'none', animation: 'none', color: '#008489', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M4 12 h16 M4 6 h12 M4 18 h12" stroke="currentColor" strokeWidth={3} fill="none" /></svg>Browseract</div>
+          <div className="startup-logo logo-wide" style={{opacity: 1, transform: 'none', animation: 'none', color: '#F06292', filter: 'none'}}><svg viewBox="0 0 24 24"><rect x={3} y={8} width={12} height={8} fill="currentColor" /><polygon points="15,12 21,8 21,16" fill="currentColor" /></svg>oxlo.ai</div>
+          <div className="startup-logo logo-serif" style={{opacity: 1, transform: 'none', animation: 'none', color: '#5D4037', filter: 'none'}}>brew</div>
+          {/* Set 2 Duplicate */}
+          <div className="startup-logo logo-heavy" style={{opacity: 1, transform: 'none', animation: 'none', color: '#FF5A5F', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M4 12 L12 4 L20 12 L12 20 Z" fill="currentColor" /></svg>softr</div>
+          <div className="startup-logo logo-wide" style={{opacity: 1, transform: 'none', animation: 'none', color: '#00A699', filter: 'none'}}><svg viewBox="0 0 24 24"><rect x={4} y={4} width={16} height={16} rx={2} stroke="currentColor" strokeWidth={2} fill="none" /><path d="M9 12 L15 12 M12 9 L12 15" stroke="currentColor" strokeWidth={2} /></svg>Get hired</div>
+          <div className="startup-logo" style={{opacity: 1, transform: 'none', animation: 'none', color: '#FC642D', filter: 'none'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={8} fill="currentColor" /><circle cx={12} cy={12} r={3} fill="#F7F7F5" /></svg>Alice. Tech</div>
+          <div className="startup-logo logo-light" style={{opacity: 1, transform: 'none', animation: 'none', color: '#29B6F6', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M6 6 L6 18 L10 18 M14 18 L18 18 L18 6" stroke="currentColor" strokeWidth="2.5" fill="none" /></svg>rtackradar</div>
+          <div className="startup-logo logo-heavy" style={{opacity: 1, transform: 'none', animation: 'none', color: '#AB47BC', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M4 12 h16 M4 6 h12 M4 18 h12" stroke="currentColor" strokeWidth={3} fill="none" /></svg>firma.dev</div>
+          <div className="startup-logo logo-light" style={{opacity: 1, transform: 'none', animation: 'none', color: '#EF5350', filter: 'none'}}>Pond</div>
+          <div className="startup-logo logo-light logo-wide" style={{opacity: 1, transform: 'none', animation: 'none', color: '#FFA726', filter: 'none'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={9} stroke="currentColor" strokeWidth="1.5" fill="none" strokeDasharray="2 3" /></svg>Lofty</div>
+          <div className="startup-logo" style={{opacity: 1, transform: 'none', animation: 'none', color: '#66BB6A', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M4 12 Q12 4 20 12" stroke="currentColor" strokeWidth={3} fill="none" strokeLinecap="round" /></svg>Tap Hero</div>
+          <div className="startup-logo logo-heavy" style={{opacity: 1, transform: 'none', animation: 'none', color: '#5C6BC0', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M12 2 L22 12 L12 22 L2 12 Z" fill="none" stroke="currentColor" strokeWidth={3} /></svg>Exposr</div>
+          <div className="startup-logo logo-wide" style={{opacity: 1, transform: 'none', animation: 'none', color: '#EC407A', filter: 'none'}}><svg viewBox="0 0 24 24"><rect x={3} y={8} width={12} height={8} fill="currentColor" /><polygon points="15,12 21,8 21,16" fill="currentColor" /></svg>sendr</div>
+          <div className="startup-logo logo-light logo-serif" style={{opacity: 1, transform: 'none', animation: 'none', color: '#26A69A', filter: 'none'}}>Agent Arena</div>
+          <div className="startup-logo logo-large" style={{opacity: 1, transform: 'none', animation: 'none', color: '#7E57C2', filter: 'none'}}>Nanonets</div>
+          <div className="startup-logo logo-serif logo-large" style={{opacity: 1, transform: 'none', animation: 'none', color: '#42A5F5', filter: 'none'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={9} fill="currentColor" /><circle cx={16} cy={8} r={4} fill="#F7F7F5" /></svg>sleek analytics</div>
+          <div className="startup-logo" style={{opacity: 1, transform: 'none', animation: 'none', color: '#FFCA28', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M6 6 L6 18 M18 6 L18 18 M6 12 L18 12" stroke="currentColor" strokeWidth={4} /></svg>squidhub</div>
+          <div className="startup-logo logo-heavy" style={{opacity: 1, transform: 'none', animation: 'none', color: '#D4E157', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M4 10 Q12 2 20 10 L20 14 Q12 22 4 14 Z" fill="currentColor" /></svg>cubeone</div>
+          <div className="startup-logo logo-light" style={{opacity: 1, transform: 'none', animation: 'none', color: '#008489', filter: 'none'}}><svg viewBox="0 0 24 24"><path d="M4 12 h16 M4 6 h12 M4 18 h12" stroke="currentColor" strokeWidth={3} fill="none" /></svg>Browseract</div>
+          <div className="startup-logo logo-wide" style={{opacity: 1, transform: 'none', animation: 'none', color: '#F06292', filter: 'none'}}><svg viewBox="0 0 24 24"><rect x={3} y={8} width={12} height={8} fill="currentColor" /><polygon points="15,12 21,8 21,16" fill="currentColor" /></svg>oxlo.ai</div>
+          <div className="startup-logo logo-serif" style={{opacity: 1, transform: 'none', animation: 'none', color: '#5D4037', filter: 'none'}}>brew</div>
+        </div>
       </div>
     </section>
   </div>
-  <ModernOutreachSection />
-  <AiroAgentBuilder />
-  <TrustedOperatorsSection />
   <LaunchFasterSection />
   <ImportEnrichmentSection />
   <EngineeringTeamSection />

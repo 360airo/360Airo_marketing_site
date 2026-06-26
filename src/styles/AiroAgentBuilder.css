@@ -1,7 +1,7 @@
 /* SECTION WRAPPER */
 .agent-builder-section-wrapper {
   width: 100%;
-  background-color: #ffffff;
+  background-color: #fdfdfe;
   position: relative;
   z-index: 10;
 }
@@ -141,7 +141,7 @@
 
 .ab-window-body {
   display: flex;
-  height: 540px;
+  height: 600px;
   background: #ffffff;
   position: relative;
 }
@@ -427,7 +427,8 @@
   stroke: #10b981;
   stroke-width: 3.5;
   stroke-dasharray: 8 10;
-  animation: lineFlowPulse 0.9s linear infinite;
+  animation: lineFlowPulse 0.6s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.7));
 }
 
 @keyframes lineFlowPulse {

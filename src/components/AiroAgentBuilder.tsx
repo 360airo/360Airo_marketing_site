@@ -168,7 +168,7 @@ export default function AiroAgentBuilder() {
   };
 
   return (
-    <div className="agent-builder-section-wrapper" ref={sectionRef}>
+    <div className="agent-builder-section-wrapper" ref={sectionRef} style={{ backgroundColor: '#fdfdfe' }}>
       <div className="agent-builder-section">
         <div className="agent-builder-header">
           <h2>Build the outbound campaigns <br /><span>your team actually needs</span></h2>
@@ -311,21 +311,21 @@ export default function AiroAgentBuilder() {
                   <div className="sequence-label">Sequence Editor</div>
 
                   {/* SVG Connection Lines overlay */}
-                  <svg className="flow-svg-lines" viewBox="0 0 700 560" preserveAspectRatio="xMidYMid meet">
+                  <svg className="flow-svg-lines" viewBox="0 0 700 620" preserveAspectRatio="xMidYMid meet">
                     {/* Start → Email */}
                     <line x1="350" y1="38" x2="350" y2="62" className={`flow-line ${runningNode ? 'active' : ''}`} />
                     {/* Email → Decision1 */}
-                    <line x1="350" y1="106" x2="350" y2="136" className={`flow-line ${runningNode === 'email1' || runningNode === 'decision1' || runningNode === 'crm' || runningNode === 'linkedin-invite' || runningNode === 'decision2' || runningNode === 'linkedin-msg' || runningNode === 'sms' ? 'active' : ''}`} />
+                    <line x1="350" y1="135" x2="350" y2="160" className={`flow-line ${runningNode === 'email1' || runningNode === 'decision1' || runningNode === 'crm' || runningNode === 'linkedin-invite' || runningNode === 'decision2' || runningNode === 'linkedin-msg' || runningNode === 'sms' ? 'active' : ''}`} />
                     {/* Decision1 → CRM (Yes left) */}
-                    <path d="M 280 170 L 160 170 L 160 210" className={`flow-line ${runningNode === 'crm' ? 'active' : ''}`} />
+                    <path d="M 260 175 L 150 175 L 150 240" className={`flow-line ${runningNode === 'crm' ? 'active' : ''}`} />
                     {/* Decision1 → LinkedIn (No right) */}
-                    <path d="M 420 170 L 540 170 L 540 210" className={`flow-line ${runningNode === 'linkedin-invite' || runningNode === 'decision2' || runningNode === 'linkedin-msg' || runningNode === 'sms' ? 'active' : ''}`} />
+                    <path d="M 440 175 L 550 175 L 550 240" className={`flow-line ${runningNode === 'linkedin-invite' || runningNode === 'decision2' || runningNode === 'linkedin-msg' || runningNode === 'sms' ? 'active' : ''}`} />
                     {/* LinkedIn → Decision2 */}
-                    <line x1="540" y1="265" x2="540" y2="300" className={`flow-line ${runningNode === 'decision2' || runningNode === 'linkedin-msg' || runningNode === 'sms' ? 'active' : ''}`} />
+                    <line x1="550" y1="330" x2="550" y2="390" className={`flow-line ${runningNode === 'decision2' || runningNode === 'linkedin-msg' || runningNode === 'sms' ? 'active' : ''}`} />
                     {/* Decision2 → LinkedIn Msg (Yes left) */}
-                    <path d="M 480 335 L 310 335 L 310 370" className={`flow-line ${runningNode === 'linkedin-msg' ? 'active' : ''}`} />
+                    <path d="M 455 405 L 350 405 L 350 470" className={`flow-line ${runningNode === 'linkedin-msg' ? 'active' : ''}`} />
                     {/* Decision2 → SMS (No right) */}
-                    <path d="M 600 335 L 620 335 L 620 370" className={`flow-line ${runningNode === 'sms' ? 'active' : ''}`} />
+                    <path d="M 645 405 L 650 405 L 650 470" className={`flow-line ${runningNode === 'sms' ? 'active' : ''}`} />
                   </svg>
 
                   {/* Flowchart Nodes */}
@@ -350,7 +350,7 @@ export default function AiroAgentBuilder() {
 
                     {/* Node 3: Decision 1 (Replied?) */}
                     <div className={`flow-node node-decision ${currentStep >= 2 ? 'visible' : ''} ${runningNode === 'decision1' ? 'running' : ''} ${(currentStep === 5 || (runningNode !== 'start' && runningNode !== 'email1' && runningNode !== 'decision1' && runningNode !== null)) ? 'active-completed' : ''}`}
-                      style={{ top: 136, left: '50%', transform: 'translateX(-50%)', width: 180 }}>
+                      style={{ top: 160, left: '50%', transform: 'translateX(-50%)', width: 180 }}>
                       <span style={{ fontSize: '0.8rem' }}>⏱</span> Replied in 2 days?
                       <div className="dec-yes">Yes</div>
                       <div className="dec-no">No</div>
@@ -358,7 +358,7 @@ export default function AiroAgentBuilder() {
 
                     {/* LEFT BRANCH (Yes) — Node 4: Pipedrive CRM */}
                     <div className={`flow-node node-action ${currentStep >= 2 ? 'visible' : ''} ${runningNode === 'crm' ? 'running' : ''} ${(runningNode === 'complete' || currentStep === 5) && runningNode !== 'crm' ? 'active-completed' : ''}`}
-                      style={{ top: 210, left: 60, width: 190 }}>
+                      style={{ top: 240, left: 55, width: 190 }}>
                       <div className="node-meta">Action on Reply</div>
                       <div className="node-title">
                         <span className="node-logo node-logo-pipedrive">
@@ -370,7 +370,7 @@ export default function AiroAgentBuilder() {
 
                     {/* RIGHT BRANCH (No) — Node 5: LinkedIn Invite */}
                     <div className={`flow-node node-action ${currentStep >= 2 ? 'visible' : ''} ${runningNode === 'linkedin-invite' ? 'running' : ''} ${(runningNode === 'decision2' || runningNode === 'linkedin-msg' || runningNode === 'sms' || currentStep === 5) && runningNode !== 'linkedin-invite' ? 'active-completed' : ''}`}
-                      style={{ top: 210, right: 60, width: 190 }}>
+                      style={{ top: 240, left: 455, width: 190 }}>
                       <div className="node-meta">Action if No Reply</div>
                       <div className="node-title">
                         <span className="node-logo node-logo-linkedin">
@@ -382,7 +382,7 @@ export default function AiroAgentBuilder() {
 
                     {/* Node 6: Decision 2 (Accepted & Replied?) */}
                     <div className={`flow-node node-decision ${currentStep >= 3 ? 'visible' : ''} ${runningNode === 'decision2' ? 'running' : ''} ${(runningNode === 'linkedin-msg' || runningNode === 'sms' || currentStep === 5) && runningNode !== 'decision2' ? 'active-completed' : ''}`}
-                      style={{ top: 300, right: 60, width: 190 }}>
+                      style={{ top: 390, left: 455, width: 190 }}>
                       <span style={{ fontSize: '0.8rem' }}>🔗</span> Accepted &amp; Replied?
                       <div className="dec-yes">Yes</div>
                       <div className="dec-no">No</div>
@@ -390,7 +390,7 @@ export default function AiroAgentBuilder() {
 
                     {/* Node 7: LinkedIn Message (Yes) */}
                     <div className={`flow-node node-action ${currentStep >= 3 ? 'visible' : ''} ${runningNode === 'linkedin-msg' ? 'running' : ''} ${(runningNode === 'complete' || currentStep === 5) && runningNode !== 'linkedin-msg' ? 'active-completed' : ''}`}
-                      style={{ top: 370, left: '50%', transform: 'translateX(-65%)', width: 210 }}>
+                      style={{ top: 470, left: 245, width: 210 }}>
                       <div className="node-meta">Reach out re: email</div>
                       <div className="node-title">
                         <span className="node-logo node-logo-linkedin">
@@ -402,7 +402,7 @@ export default function AiroAgentBuilder() {
 
                     {/* Node 8: SMS (No) */}
                     <div className={`flow-node node-action ${currentStep >= 3 ? 'visible' : ''} ${runningNode === 'sms' ? 'running' : ''} ${(runningNode === 'complete' || currentStep === 5) && runningNode !== 'sms' ? 'active-completed' : ''}`}
-                      style={{ top: 370, right: 40, width: 160 }}>
+                      style={{ top: 470, left: 570, width: 160 }}>
                       <div className="node-meta">SMS Follow-up</div>
                       <div className="node-title">
                         <span className="node-logo node-logo-sms">
@@ -537,69 +537,36 @@ export default function AiroAgentBuilder() {
                       <stop offset="0%" stopColor="#8b5cf6"/><stop offset="100%" stopColor="#6366f1"/>
                     </linearGradient>
                     {/* Motion paths */}
-                    <path id="ep1" d="M 218 110 L 432 110 L 432 174" fill="none" stroke="none"/>
-                    <path id="ep2" d="M 218 190 L 432 190" fill="none" stroke="none"/>
-                    <path id="ep3" d="M 218 270 L 432 270 L 432 206" fill="none" stroke="none"/>
-                    <path id="ep4" d="M 482 190 L 600 190 L 600 126" fill="none" stroke="none"/>
-                    <path id="ep5" d="M 482 190 L 600 190 L 600 254" fill="none" stroke="none"/>
-                    <path id="ep6" d="M 660 104 L 820 190" fill="none" stroke="none"/>
-                    <path id="ep7" d="M 660 276 L 820 190" fill="none" stroke="none"/>
-                    <path id="ep8" d="M 482 190 L 820 190" fill="none" stroke="none"/>
+                                                                                <path id="ep1" d="M 218 110 L 400 110 L 400 190 L 430 190" fill="none" stroke="none"/>
+                    <path id="ep2" d="M 218 190 L 430 190" fill="none" stroke="none"/>
+                    <path id="ep3" d="M 218 270 L 400 270 L 400 190 L 430 190" fill="none" stroke="none"/>
+                    <path id="ep4" d="M 430 190 L 525 190 L 525 104 L 620 104" fill="none" stroke="none"/>
+                    <path id="ep5" d="M 765 104 L 782 104 L 782 190 L 800 190" fill="none" stroke="none"/>
+                    <path id="ep6" d="M 430 190 L 525 190 L 525 276 L 620 276" fill="none" stroke="none"/>
+                    <path id="ep7" d="M 765 276 L 782 276 L 782 190 L 800 190" fill="none" stroke="none"/>
                   </defs>
 
                   {/* Background */}
                   <rect width="960" height="380" rx="14" fill="#f0f4ff"/>
                   <rect width="960" height="380" rx="14" fill="url(#edg)"/>
 
-                  {/* BASE WIRES */}
-                  <path d="M 218 110 L 432 110 L 432 174" fill="none" stroke="#c7d2fe" strokeWidth="2" strokeDasharray="6 4"/>
-                  <path d="M 218 190 L 432 190" fill="none" stroke="#bfdbfe" strokeWidth="2" strokeDasharray="6 4"/>
-                  <path d="M 218 270 L 432 270 L 432 206" fill="none" stroke="#fde68a" strokeWidth="2" strokeDasharray="6 4"/>
-                  <path d="M 482 190 L 600 190 L 600 126" fill="none" stroke="#bfdbfe" strokeWidth="2" strokeDasharray="6 4"/>
-                  <path d="M 482 190 L 600 190 L 600 254" fill="none" stroke="#a7f3d0" strokeWidth="2" strokeDasharray="6 4"/>
-                  <path d="M 660 104 L 820 190" fill="none" stroke="#c4b5fd" strokeWidth="1.5" strokeDasharray="4 4"/>
-                  <path d="M 660 276 L 820 190" fill="none" stroke="#c4b5fd" strokeWidth="1.5" strokeDasharray="4 4"/>
-                  <path d="M 482 190 L 820 190" fill="none" stroke="#c4b5fd" strokeWidth="1.5" strokeDasharray="4 4"/>
+                                                                        {/* BASE WIRES */}
+                  <path d="M 218 110 L 400 110 L 400 190" fill="none" stroke="#c7d2fe" strokeWidth="2" strokeDasharray="6 4"/>
+                  <path d="M 218 190 L 400 190" fill="none" stroke="#bfdbfe" strokeWidth="2" strokeDasharray="6 4"/>
+                  <path d="M 218 270 L 400 270 L 400 190" fill="none" stroke="#fde68a" strokeWidth="2" strokeDasharray="6 4"/>
+                  <path d="M 400 190 L 430 190" fill="none" stroke="#94a3b8" strokeWidth="2" strokeDasharray="6 4"/>
+                  <path d="M 430 190 L 525 190 L 525 104 L 620 104" fill="none" stroke="#bfdbfe" strokeWidth="2" strokeDasharray="6 4"/>
+                  <path d="M 765 104 L 782 104 L 782 190 L 800 190" fill="none" stroke="#c4b5fd" strokeWidth="2" strokeDasharray="6 4"/>
+                  <path d="M 430 190 L 525 190 L 525 276 L 620 276" fill="none" stroke="#a7f3d0" strokeWidth="2" strokeDasharray="6 4"/>
+                  <path d="M 765 276 L 782 276 L 782 190 L 800 190" fill="none" stroke="#c4b5fd" strokeWidth="2" strokeDasharray="6 4"/>
 
                   {/* Wire connection dots */}
-                  <circle cx="432" cy="110" r="4" fill="#6366f1" opacity="0.4"/>
-                  <circle cx="432" cy="270" r="4" fill="#f59e0b" opacity="0.4"/>
-                  <circle cx="600" cy="190" r="4" fill="#3b82f6" opacity="0.4"/>
+                  <circle cx="400" cy="110" r="4" fill="#6366f1" opacity="0.4"/>
+                  <circle cx="400" cy="270" r="4" fill="#f59e0b" opacity="0.4"/>
+                  <circle cx="400" cy="190" r="5" fill="#94a3b8" opacity="0.8"/>
+                  <circle cx="525" cy="190" r="5" fill="#94a3b8" opacity="0.8"/>
+                  <circle cx="782" cy="190" r="5" fill="#8b5cf6" opacity="0.8"/>
 
-                  {/* ANIMATED PULSES */}
-                  {/* Email → Hub */}
-                  <circle fill="#6366f1" filter="url(#egA)">
-                    <animateMotion dur="2s" repeatCount="indefinite" begin="0s" calcMode="linear"><mpath href="#ep1"/></animateMotion>
-                    <animate attributeName="r" values="3;6;3" dur="0.7s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0;1;1;0;0" dur="4s" repeatCount="indefinite" keyTimes="0;0.05;0.5;0.55;1"/>
-                  </circle>
-                  <circle fill="#6366f1" filter="url(#egB)">
-                    <animateMotion dur="2s" repeatCount="indefinite" begin="0s" calcMode="linear"><mpath href="#ep1"/></animateMotion>
-                    <animate attributeName="r" values="8;16;8" dur="0.7s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0;0.22;0.22;0;0" dur="4s" repeatCount="indefinite" keyTimes="0;0.05;0.5;0.55;1"/>
-                  </circle>
-                  {/* Leads → Hub */}
-                  <circle fill="#3b82f6" filter="url(#egA)">
-                    <animateMotion dur="1.7s" repeatCount="indefinite" begin="0.5s" calcMode="linear"><mpath href="#ep2"/></animateMotion>
-                    <animate attributeName="r" values="3;6;3" dur="0.6s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0;1;1;0;0" dur="3.4s" repeatCount="indefinite" begin="0.5s" keyTimes="0;0.05;0.5;0.55;1"/>
-                  </circle>
-                  <circle fill="#06b6d4" filter="url(#egB)">
-                    <animateMotion dur="1.7s" repeatCount="indefinite" begin="0.5s" calcMode="linear"><mpath href="#ep2"/></animateMotion>
-                    <animate attributeName="r" values="8;16;8" dur="0.6s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0;0.22;0.22;0;0" dur="3.4s" repeatCount="indefinite" begin="0.5s" keyTimes="0;0.05;0.5;0.55;1"/>
-                  </circle>
-                  {/* CRM → Hub */}
-                  <circle fill="#f59e0b" filter="url(#egA)">
-                    <animateMotion dur="2.1s" repeatCount="indefinite" begin="1s" calcMode="linear"><mpath href="#ep3"/></animateMotion>
-                    <animate attributeName="r" values="3;6;3" dur="0.75s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0;1;1;0;0" dur="4.2s" repeatCount="indefinite" begin="1s" keyTimes="0;0.05;0.5;0.55;1"/>
-                  </circle>
-                  <circle fill="#ef4444" filter="url(#egB)">
-                    <animateMotion dur="2.1s" repeatCount="indefinite" begin="1s" calcMode="linear"><mpath href="#ep3"/></animateMotion>
-                    <animate attributeName="r" values="8;16;8" dur="0.75s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0;0.22;0.22;0;0" dur="4.2s" repeatCount="indefinite" begin="1s" keyTimes="0;0.05;0.5;0.55;1"/>
-                  </circle>
                   {/* Hub → LinkedIn */}
                   <circle fill="#0a66c2" filter="url(#egA)">
                     <animateMotion dur="1.6s" repeatCount="indefinite" begin="1.6s" calcMode="linear"><mpath href="#ep4"/></animateMotion>
@@ -611,41 +578,43 @@ export default function AiroAgentBuilder() {
                     <animate attributeName="r" values="8;16;8" dur="0.55s" repeatCount="indefinite"/>
                     <animate attributeName="opacity" values="0;0.22;0.22;0;0" dur="3.2s" repeatCount="indefinite" begin="1.6s" keyTimes="0;0.05;0.5;0.55;1"/>
                   </circle>
+                  
+                  {/* LinkedIn → Book Meeting */}
+                  <circle fill="#8b5cf6" filter="url(#egA)">
+                    <animateMotion dur="1.6s" repeatCount="indefinite" begin="3.2s" calcMode="linear"><mpath href="#ep5"/></animateMotion>
+                    <animate attributeName="r" values="3;6;3" dur="0.55s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0;1;1;0;0" dur="3.2s" repeatCount="indefinite" begin="3.2s" keyTimes="0;0.05;0.5;0.55;1"/>
+                  </circle>
+                  <circle fill="#8b5cf6" filter="url(#egB)">
+                    <animateMotion dur="1.6s" repeatCount="indefinite" begin="3.2s" calcMode="linear"><mpath href="#ep5"/></animateMotion>
+                    <animate attributeName="r" values="8;16;8" dur="0.55s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0;0.22;0.22;0;0" dur="3.2s" repeatCount="indefinite" begin="3.2s" keyTimes="0;0.05;0.5;0.55;1"/>
+                  </circle>
+                  
                   {/* Hub → SMS */}
                   <circle fill="#10b981" filter="url(#egA)">
-                    <animateMotion dur="1.6s" repeatCount="indefinite" begin="2s" calcMode="linear"><mpath href="#ep5"/></animateMotion>
+                    <animateMotion dur="1.6s" repeatCount="indefinite" begin="2s" calcMode="linear"><mpath href="#ep6"/></animateMotion>
                     <animate attributeName="r" values="3;6;3" dur="0.55s" repeatCount="indefinite"/>
                     <animate attributeName="opacity" values="0;1;1;0;0" dur="3.2s" repeatCount="indefinite" begin="2s" keyTimes="0;0.05;0.5;0.55;1"/>
                   </circle>
                   <circle fill="#059669" filter="url(#egB)">
-                    <animateMotion dur="1.6s" repeatCount="indefinite" begin="2s" calcMode="linear"><mpath href="#ep5"/></animateMotion>
+                    <animateMotion dur="1.6s" repeatCount="indefinite" begin="2s" calcMode="linear"><mpath href="#ep6"/></animateMotion>
                     <animate attributeName="r" values="8;16;8" dur="0.55s" repeatCount="indefinite"/>
                     <animate attributeName="opacity" values="0;0.22;0.22;0;0" dur="3.2s" repeatCount="indefinite" begin="2s" keyTimes="0;0.05;0.5;0.55;1"/>
                   </circle>
-                  {/* LinkedIn → AI */}
+                  
+                  {/* SMS → Book Meeting */}
                   <circle fill="#8b5cf6" filter="url(#egA)">
-                    <animateMotion dur="1.5s" repeatCount="indefinite" begin="2.4s" calcMode="linear"><mpath href="#ep6"/></animateMotion>
-                    <animate attributeName="r" values="2.5;5;2.5" dur="0.5s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0;0.9;0.9;0;0" dur="3s" repeatCount="indefinite" begin="2.4s" keyTimes="0;0.05;0.5;0.55;1"/>
-                  </circle>
-                  {/* SMS → AI */}
-                  <circle fill="#8b5cf6" filter="url(#egA)">
-                    <animateMotion dur="1.5s" repeatCount="indefinite" begin="2.8s" calcMode="linear"><mpath href="#ep7"/></animateMotion>
-                    <animate attributeName="r" values="2.5;5;2.5" dur="0.5s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0;0.9;0.9;0;0" dur="3s" repeatCount="indefinite" begin="2.8s" keyTimes="0;0.05;0.5;0.55;1"/>
-                  </circle>
-                  {/* Hub → AI direct */}
-                  <circle fill="#a78bfa" filter="url(#egA)">
-                    <animateMotion dur="2.4s" repeatCount="indefinite" begin="2.2s" calcMode="linear"><mpath href="#ep8"/></animateMotion>
-                    <animate attributeName="r" values="2.5;5;2.5" dur="0.8s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0;0.9;0.9;0;0" dur="4.8s" repeatCount="indefinite" begin="2.2s" keyTimes="0;0.05;0.5;0.55;1"/>
+                    <animateMotion dur="1.6s" repeatCount="indefinite" begin="3.6s" calcMode="linear"><mpath href="#ep7"/></animateMotion>
+                    <animate attributeName="r" values="3;6;3" dur="0.55s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0;1;1;0;0" dur="3.2s" repeatCount="indefinite" begin="3.6s" keyTimes="0;0.05;0.5;0.55;1"/>
                   </circle>
                   <circle fill="#8b5cf6" filter="url(#egB)">
-                    <animateMotion dur="2.4s" repeatCount="indefinite" begin="2.2s" calcMode="linear"><mpath href="#ep8"/></animateMotion>
-                    <animate attributeName="r" values="8;14;8" dur="0.8s" repeatCount="indefinite"/>
-                    <animate attributeName="opacity" values="0;0.18;0.18;0;0" dur="4.8s" repeatCount="indefinite" begin="2.2s" keyTimes="0;0.05;0.5;0.55;1"/>
+                    <animateMotion dur="1.6s" repeatCount="indefinite" begin="3.6s" calcMode="linear"><mpath href="#ep7"/></animateMotion>
+                    <animate attributeName="r" values="8;16;8" dur="0.55s" repeatCount="indefinite"/>
+                    <animate attributeName="opacity" values="0;0.22;0.22;0;0" dur="3.2s" repeatCount="indefinite" begin="3.6s" keyTimes="0;0.05;0.5;0.55;1"/>
                   </circle>
-
+                  
                   {/* ══ LEFT INPUT NODES ══ */}
                   {/* Email Outbound */}
                   <rect x="18" y="82" width="200" height="56" rx="12" fill="white" stroke="#e0e7ff" strokeWidth="1.8"/>
@@ -690,70 +659,61 @@ export default function AiroAgentBuilder() {
                   <rect x="160" y="248" width="50" height="16" rx="8" fill="#fffbeb"/>
                   <text x="185" y="260" fill="#f59e0b" fontSize="8.5" fontFamily="Inter,sans-serif" fontWeight="700" textAnchor="middle">ACTIVE</text>
 
-                  {/* ══ CENTER HUB — 360Airo ══ */}
+                                                      {/* ══ CENTER HUB — 360Airo ══ */}
                   {/* Glow ring */}
-                  <circle cx="457" cy="190" r="44" fill="url(#hubGrad)" opacity="0.12" filter="url(#hubGlow)"/>
-                  <circle cx="457" cy="190" r="36" fill="url(#hubGrad)" opacity="0.18"/>
+                  <circle cx="430" cy="190" r="44" fill="url(#hubGrad)" opacity="0.12" filter="url(#hubGlow)"/>
+                  <circle cx="430" cy="190" r="36" fill="url(#hubGrad)" opacity="0.18"/>
                   {/* Spinning ring */}
-                  <circle cx="457" cy="190" r="34" fill="none" stroke="url(#hubGrad)" strokeWidth="2.5" strokeDasharray="22 8">
-                    <animateTransform attributeName="transform" type="rotate" from="0 457 190" to="360 457 190" dur="6s" repeatCount="indefinite"/>
+                  <circle cx="430" cy="190" r="34" fill="none" stroke="url(#hubGrad)" strokeWidth="2.5" strokeDasharray="22 8">
+                    <animateTransform attributeName="transform" type="rotate" from="0 430 190" to="360 430 190" dur="6s" repeatCount="indefinite"/>
                   </circle>
-                  <circle cx="457" cy="190" r="26" fill="#0f172a"/>
+                  <circle cx="430" cy="190" r="26" fill="#0f172a"/>
                   {/* 360Airo icon */}
-                  <image href="/logo-icon.png" x="439" y="172" width="36" height="36" />
+                  <image href="/logo-icon.png" x="412" y="172" width="36" height="36" />
                   {/* Hub label */}
-                  <text x="457" y="238" fill="#64748b" fontSize="9" fontFamily="Inter,sans-serif" fontWeight="600" textAnchor="middle">360Airo Hub</text>
+                  <text x="430" y="238" fill="#64748b" fontSize="9" fontFamily="Inter,sans-serif" fontWeight="600" textAnchor="middle">360Airo Hub</text>
 
-                  {/* ══ RIGHT OUTPUT NODES ══ */}
+                                                      {/* ══ RIGHT OUTPUT NODES ══ */}
                   {/* LinkedIn */}
-                  <rect x="562" y="76" width="110" height="56" rx="12" fill="#0f172a" stroke="#1d4ed8" strokeWidth="1.5"/>
-                  <rect x="574" y="88" width="32" height="32" rx="8" fill="#1e3a5f"/>
-                  <svg x="578" y="92" width="24" height="24" viewBox="0 0 24 24">
+                  <rect x="620" y="76" width="145" height="56" rx="12" fill="#ffffff" stroke="#1d4ed8" strokeWidth="1.5"/>
+                  <rect x="632" y="88" width="32" height="32" rx="8" fill="#1e3a5f"/>
+                  <svg x="636" y="92" width="24" height="24" viewBox="0 0 24 24">
                     <rect width="24" height="24" rx="5" fill="#0a66c2"/>
                     <path d="M7.4 20h-3.8v-11.4h3.8v11.4zm-1.9-13c-1.2 0-2.2-1-2.2-2.2s1-2.2 2.2-2.2 2.2 1 2.2 2.2-1 2.2-2.2 2.2zm14.9 13h-3.8v-5.6c0-1.3 0-3-1.8-3s-2.1 1.4-2.1 2.9v5.7h-3.8v-11.4h3.6v1.6h.1c.5-.9 1.7-1.9 3.5-1.9 3.7 0 4.4 2.5 4.4 5.7v6z" fill="white"/>
                   </svg>
-                  <text x="613" y="100" fill="#e2e8f0" fontSize="12" fontFamily="Inter,sans-serif" fontWeight="700">LinkedIn</text>
-                  <text x="613" y="116" fill="#64748b" fontSize="9.5" fontFamily="Inter,sans-serif">Connect + Message</text>
+                  <text x="671" y="100" fill="#0f172a" fontSize="12" fontFamily="Inter,sans-serif" fontWeight="700">LinkedIn</text>
+                  <text x="671" y="116" fill="#64748b" fontSize="9.5" fontFamily="Inter,sans-serif">Connect + Message</text>
+
+                  {/* Book Meeting */}
+                  <rect x="800" y="162" width="145" height="56" rx="12" fill="#ffffff" stroke="#8b5cf6" strokeWidth="1.5"/>
+                  <rect x="812" y="174" width="32" height="32" rx="8" fill="#4c1d95"/>
+                  <svg x="816" y="178" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <rect x="3" y="4" width="18" height="16" rx="2" stroke="white" strokeWidth="2"/>
+                    <line x1="8" y1="2" x2="8" y2="6" stroke="white" strokeWidth="2"/>
+                    <line x1="16" y1="2" x2="16" y2="6" stroke="white" strokeWidth="2"/>
+                    <line x1="3" y1="10" x2="21" y2="10" stroke="white" strokeWidth="2"/>
+                  </svg>
+                  <text x="851" y="186" fill="#0f172a" fontSize="12" fontFamily="Inter,sans-serif" fontWeight="700">Book Meeting</text>
+                  <text x="851" y="202" fill="#64748b" fontSize="9.5" fontFamily="Inter,sans-serif">Auto-scheduler</text>
 
                   {/* SMS / Call */}
-                  <rect x="562" y="248" width="110" height="56" rx="12" fill="#0f172a" stroke="#059669" strokeWidth="1.5"/>
-                  <rect x="574" y="260" width="32" height="32" rx="8" fill="#064e3b"/>
-                  <svg x="578" y="264" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                  <rect x="620" y="248" width="145" height="56" rx="12" fill="#ffffff" stroke="#059669" strokeWidth="1.5"/>
+                  <rect x="632" y="260" width="32" height="32" rx="8" fill="#064e3b"/>
+                  <svg x="636" y="264" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <rect x="1" y="4" width="22" height="13" rx="4" fill="#10b981" opacity=".9"/>
                     <path d="M5 9h14M5 13h9" stroke="white" strokeWidth="1.6" strokeLinecap="round"/>
                     <path d="M7 17l-4 4v-4" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round"/>
                   </svg>
-                  <text x="613" y="272" fill="#e2e8f0" fontSize="12" fontFamily="Inter,sans-serif" fontWeight="700">SMS / Call</text>
-                  <text x="613" y="288" fill="#64748b" fontSize="9.5" fontFamily="Inter,sans-serif">Follow-up task</text>
-
-                  {/* ══ FAR RIGHT: AI Reply Detection ══ */}
-                  {/* glow */}
-                  <circle cx="857" cy="190" r="50" fill="#8b5cf6" opacity="0.07"/>
-                  <rect x="808" y="155" width="110" height="70" rx="14" fill="#0f172a" stroke="url(#aiGrad)" strokeWidth="2"/>
-                  {/* spinning outer ring */}
-                  <circle cx="863" cy="190" r="46" fill="none" stroke="#8b5cf6" strokeWidth="1" strokeDasharray="8 14" opacity="0.4">
-                    <animateTransform attributeName="transform" type="rotate" from="0 863 190" to="-360 863 190" dur="10s" repeatCount="indefinite"/>
-                  </circle>
-                  {/* icon */}
-                  <svg x="820" y="163" width="28" height="28" viewBox="0 0 24 24" fill="none">
-                    <polygon points="12,2 22,8 22,16 12,22 2,16 2,8" fill="#8b5cf6" opacity=".3" stroke="#a78bfa" strokeWidth="1.2"/>
-                    <line x1="12" y1="2" x2="12" y2="22" stroke="#a78bfa" strokeWidth="0.8"/>
-                    <line x1="2" y1="8" x2="22" y2="16" stroke="#a78bfa" strokeWidth="0.8"/>
-                    <line x1="2" y1="16" x2="22" y2="8" stroke="#a78bfa" strokeWidth="0.8"/>
-                    <circle cx="12" cy="12" r="3.5" fill="#8b5cf6"/>
-                    <circle cx="12" cy="12" r="1.5" fill="white"/>
-                  </svg>
-                  <text x="854" y="182" fill="#e2e8f0" fontSize="11.5" fontFamily="Inter,sans-serif" fontWeight="700" textAnchor="middle">AI Reply</text>
-                  <text x="854" y="196" fill="#a78bfa" fontSize="10" fontFamily="Inter,sans-serif" fontWeight="600" textAnchor="middle">Detection</text>
-                  <text x="854" y="212" fill="#475569" fontSize="8.5" fontFamily="Inter,sans-serif" textAnchor="middle">powered by 360Airo</text>
+                  <text x="671" y="272" fill="#0f172a" fontSize="12" fontFamily="Inter,sans-serif" fontWeight="700">SMS / Call</text>
+                  <text x="671" y="288" fill="#64748b" fontSize="9.5" fontFamily="Inter,sans-serif">Follow-up task</text>
 
                   {/* Wire labels */}
-                  <rect x="290" y="96" width="52" height="16" rx="8" fill="white" stroke="#e0e7ff" strokeWidth="1"/>
-                  <text x="316" y="108" fill="#6366f1" fontSize="8.5" fontFamily="Inter,sans-serif" fontWeight="600" textAnchor="middle">sequence</text>
-                  <rect x="290" y="182" width="42" height="16" rx="8" fill="white" stroke="#dbeafe" strokeWidth="1"/>
-                  <text x="311" y="194" fill="#3b82f6" fontSize="8.5" fontFamily="Inter,sans-serif" fontWeight="600" textAnchor="middle">enrich</text>
-                  <rect x="290" y="257" width="38" height="16" rx="8" fill="white" stroke="#fef3c7" strokeWidth="1"/>
-                  <text x="309" y="269" fill="#f59e0b" fontSize="8.5" fontFamily="Inter,sans-serif" fontWeight="600" textAnchor="middle">sync</text>
+                  <rect x="320" y="96" width="52" height="16" rx="8" fill="white" stroke="#e0e7ff" strokeWidth="1"/>
+                  <text x="346" y="108" fill="#6366f1" fontSize="8.5" fontFamily="Inter,sans-serif" fontWeight="600" textAnchor="middle">sequence</text>
+                  <rect x="320" y="182" width="42" height="16" rx="8" fill="white" stroke="#dbeafe" strokeWidth="1"/>
+                  <text x="341" y="194" fill="#3b82f6" fontSize="8.5" fontFamily="Inter,sans-serif" fontWeight="600" textAnchor="middle">enrich</text>
+                  <rect x="320" y="257" width="38" height="16" rx="8" fill="white" stroke="#fef3c7" strokeWidth="1"/>
+                  <text x="339" y="269" fill="#f59e0b" fontSize="8.5" fontFamily="Inter,sans-serif" fontWeight="600" textAnchor="middle">sync</text>
                 </svg>
               </div>
             </div>
