@@ -53,7 +53,7 @@ export default function ImportEnrichmentSection() {
         </div>
 
         {/* Card 2: Signal Agents */}
-        <div className="ie-card ie-card-reverse">
+        <div className="ie-card ie-card-normal">
           <div className="ie-card-content">
             <span className="ie-card-subtitle">02 — SIGNAL AGENTS</span>
             <h3>

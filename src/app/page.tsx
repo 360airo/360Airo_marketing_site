@@ -12,6 +12,7 @@ import ImportEnrichmentSection from '../components/ImportEnrichmentSection';
 import AiroAgentBuilder from '../components/AiroAgentBuilder';
 import FunnelStagesSection from '../components/FunnelStagesSection';
 import OutreachDeploySection from '../components/OutreachDeploySection';
+import TestimonialsSection from '../components/TestimonialsSection';
 import OutreachBentoSection from '../components/OutreachBentoSection';
 
 import PhoneDashboard from '../components/PhoneDashboard';
@@ -361,7 +362,8 @@ export default function App() {
   <EngineeringTeamSection />
   <FunnelStagesSection />
   <OutreachDeploySection />
-  <OutreachBentoSection />
+  <TestimonialsSection />
+  {/* <OutreachBentoSection /> */}
 
   <CTASection />
   <FAQSection />

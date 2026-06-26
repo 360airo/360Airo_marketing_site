@@ -479,116 +479,163 @@ export default function ContactUsPage() {
               letterSpacing: '-0.02em'
             }}
           >
-            Get in touch with 360Airo
+            Get in <span className="contact-heading-shine">touch with 360Airo</span>
           </h2>
 
-          {/* Grid: Map + Address Card */}
+          {/* Grid: Address Card Centered */}
           <div 
             className="contact-info-grid animate-fade-in-up delay-2"
             style={{
-              display: 'grid',
-              gridTemplateColumns: '1.2fr 1fr',
-              gap: '24px',
+              display: 'flex',
+              justifyContent: 'center',
               width: '100%',
-              maxWidth: '1000px',
               margin: '0 auto',
-              textAlign: 'left'
             }}
           >
-            
-            {/* Clean Styled Map Card */}
-            <div 
-              className="contact-map-card"
-              style={{
-                borderRadius: '24px',
-                border: '1px solid #E2E8F0',
-                overflow: 'hidden',
-                background: '#F8FAFC',
-                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.03)',
-                position: 'relative',
-                height: '350px'
-              }}
-            >
-              <iframe 
-                src="https://maps.google.com/maps?q=9314%20Forest%20Hill%20Blvd,%20Wellington,%20FL%2033411&t=&z=14&ie=UTF8&iwloc=&output=embed" 
-                width="100%" 
-                height="100%" 
-                style={{ 
-                  border: 0, 
-                  opacity: 0.95 
-                }} 
-                allowFullScreen={false} 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade"
-              />
-            </div>
 
-            {/* Address Information Card */}
+            {/* Neumorphic Address Card */}
             <div 
               className="contact-address-card"
               style={{
-                background: '#F5F2EB',
+                background: '#F1F5F9', // Soft gray for neumorphism
                 border: 'none',
                 borderRadius: '24px',
-                padding: '36px',
-                boxShadow: '0 8px 30px rgba(0, 0, 0, 0.02)',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'space-between',
-                height: '350px'
+                padding: '48px',
+                width: '100%',
+                maxWidth: '900px',
+                boxShadow: '12px 12px 24px #cbd5e1, -12px -12px 24px #ffffff',
+                display: 'grid',
+                gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+                gap: '40px',
+                textAlign: 'left'
               }}
             >
+              {/* Address Column */}
               <div>
-                <span style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#64748B', display: 'block', marginBottom: '6px' }}>Address</span>
-                <p style={{ fontSize: '16px', fontWeight: 600, color: '#0F172A', lineHeight: '1.4', marginBottom: '20px' }}>
-                  #744 - 9314 Forest Hill Blvd,<br />Wellington, FL 33411, United States
+                <h3 style={{ 
+                  fontSize: '13px', 
+                  fontWeight: 600, 
+                  textTransform: 'uppercase', 
+                  letterSpacing: '0.1em', 
+                  color: '#64748B',
+                  marginBottom: '16px'
+                }}>
+                  Office Location
+                </h3>
+                <p style={{ fontSize: '16px', fontWeight: 500, color: '#0F172A', lineHeight: '1.6', margin: '0 0 12px 0' }}>
+                  #744 - 9314 Forest Hill Blvd,<br />Wellington, FL 33411
                 </p>
-
-                <span style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#64748B', display: 'block', marginBottom: '6px' }}>Email Address</span>
-                <p style={{ fontSize: '16px', fontWeight: 600, color: '#0052FF', marginBottom: '20px' }}>
-                  <a href="mailto:info@360airo.com" style={{ color: 'inherit', textDecoration: 'none' }}>info@360airo.com</a>
-                </p>
-
-                <span style={{ fontSize: '11px', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.08em', color: '#64748B', display: 'block', marginBottom: '6px' }}>Phone</span>
-                <p style={{ fontSize: '16px', fontWeight: 600, color: '#0F172A', marginBottom: '0', lineHeight: '1.5' }}>
-                  +1 (561) 257-4066<br />
-                  +1 (561) 489-3335
-                </p>
+                <p style={{ fontSize: '15px', color: '#64748B', margin: '0' }}>United States</p>
               </div>
 
-              {/* Social Icons */}
-              <div style={{ display: 'flex', gap: '10px', marginTop: '16px' }}>
-                {['facebook', 'twitter', 'linkedin', 'youtube', 'instagram', 'github'].map((social) => {
-                  const href = social === 'linkedin' ? 'https://linkedin.com' : '#';
-                  const label = social === 'facebook' ? 'F' : social === 'twitter' ? 'X' : social === 'linkedin' ? 'In' : social === 'youtube' ? 'Yt' : social === 'instagram' ? 'Ig' : 'Git';
-                  return (
-                    <a 
-                      key={social}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      style={{
-                        width: '36px',
-                        height: '36px',
-                        borderRadius: '50%',
-                        background: '#FFFFFF',
-                        border: '1px solid #E2E8F0',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: '#475569',
-                        transition: 'background 0.25s, border-color 0.25s, color 0.25s',
-                        cursor: 'pointer',
-                        textDecoration: 'none'
-                      }}
-                      className="contact-social-btn"
+              {/* Contact Information Column */}
+              <div>
+                <h3 style={{ 
+                  fontSize: '13px', 
+                  fontWeight: 600, 
+                  textTransform: 'uppercase', 
+                  letterSpacing: '0.1em', 
+                  color: '#64748B',
+                  marginBottom: '16px'
+                }}>
+                  Contact Information
+                </h3>
+                
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <a href="mailto:info@360airo.com" style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '10px',
+                    color: '#0052FF',
+                    textDecoration: 'none',
+                    fontWeight: 500,
+                    fontSize: '15px',
+                    transition: 'opacity 0.2s'
+                  }}
+                  onMouseEnter={(e)=>e.currentTarget.style.opacity='0.8'}
+                  onMouseLeave={(e)=>e.currentTarget.style.opacity='1'}
+                  >
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                    info@360airo.com
+                  </a>
+
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <a href="tel:+15612574066" style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      color: '#0F172A',
+                      textDecoration: 'none',
+                      fontWeight: 500,
+                      fontSize: '15px',
+                      transition: 'color 0.2s'
+                    }}
+                    onMouseEnter={(e)=>e.currentTarget.style.color='#0052FF'}
+                    onMouseLeave={(e)=>e.currentTarget.style.color='#0F172A'}
                     >
-                      <span style={{ fontSize: '11px', fontWeight: 'bold' }}>
-                        {label}
-                      </span>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                      +1 (561) 257-4066
                     </a>
-                  );
-                })}
+                    
+                    <a href="tel:+15614893335" style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '10px',
+                      color: '#0F172A',
+                      textDecoration: 'none',
+                      fontWeight: 500,
+                      fontSize: '15px',
+                      transition: 'color 0.2s',
+                      paddingLeft: '28px'
+                    }}
+                    onMouseEnter={(e)=>e.currentTarget.style.color='#0052FF'}
+                    onMouseLeave={(e)=>e.currentTarget.style.color='#0F172A'}
+                    >
+                      +1 (561) 489-3335
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+
+              {/* Social Icons Column */}
+              <div>
+                <h3 style={{ 
+                  fontSize: '13px', 
+                  fontWeight: 600, 
+                  textTransform: 'uppercase', 
+                  letterSpacing: '0.1em', 
+                  color: '#64748B',
+                  marginBottom: '16px'
+                }}>
+                  Follow Us
+                </h3>
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                  {/* Facebook */}
+                  <a href="#" target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '12px', background: '#F1F5F9', border: 'none', boxShadow: '5px 5px 10px #cbd5e1, -5px -5px 10px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#475569', transition: 'all 0.2s' }} onMouseEnter={(e)=>{e.currentTarget.style.color='#0052FF'; e.currentTarget.style.boxShadow='inset 4px 4px 8px #cbd5e1, inset -4px -4px 8px #ffffff'}} onMouseLeave={(e)=>{e.currentTarget.style.color='#475569'; e.currentTarget.style.boxShadow='5px 5px 10px #cbd5e1, -5px -5px 10px #ffffff'}}>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c5.05-.5 9-4.76 9-9.95z"/></svg>
+                  </a>
+                  {/* X */}
+                  <a href="#" target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '12px', background: '#F1F5F9', border: 'none', boxShadow: '5px 5px 10px #cbd5e1, -5px -5px 10px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#475569', transition: 'all 0.2s' }} onMouseEnter={(e)=>{e.currentTarget.style.color='#0052FF'; e.currentTarget.style.boxShadow='inset 4px 4px 8px #cbd5e1, inset -4px -4px 8px #ffffff'}} onMouseLeave={(e)=>{e.currentTarget.style.color='#475569'; e.currentTarget.style.boxShadow='5px 5px 10px #cbd5e1, -5px -5px 10px #ffffff'}}>
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                  </a>
+                  {/* LinkedIn */}
+                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '12px', background: '#F1F5F9', border: 'none', boxShadow: '5px 5px 10px #cbd5e1, -5px -5px 10px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#475569', transition: 'all 0.2s' }} onMouseEnter={(e)=>{e.currentTarget.style.color='#0052FF'; e.currentTarget.style.boxShadow='inset 4px 4px 8px #cbd5e1, inset -4px -4px 8px #ffffff'}} onMouseLeave={(e)=>{e.currentTarget.style.color='#475569'; e.currentTarget.style.boxShadow='5px 5px 10px #cbd5e1, -5px -5px 10px #ffffff'}}>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg>
+                  </a>
+                  {/* YouTube */}
+                  <a href="#" target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '12px', background: '#F1F5F9', border: 'none', boxShadow: '5px 5px 10px #cbd5e1, -5px -5px 10px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#475569', transition: 'all 0.2s' }} onMouseEnter={(e)=>{e.currentTarget.style.color='#0052FF'; e.currentTarget.style.boxShadow='inset 4px 4px 8px #cbd5e1, inset -4px -4px 8px #ffffff'}} onMouseLeave={(e)=>{e.currentTarget.style.color='#475569'; e.currentTarget.style.boxShadow='5px 5px 10px #cbd5e1, -5px -5px 10px #ffffff'}}>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M21.58 7.19c-.23-.86-.91-1.54-1.77-1.77C18.25 5 12 5 12 5s-6.25 0-7.81.42c-.86.23-1.54.91-1.77 1.77C2 8.75 2 12 2 12s0 3.25.42 4.81c.23.86.91 1.54 1.77 1.77C5.75 19 12 19 12 19s6.25 0 7.81-.42c.86-.23 1.54-.91 1.77-1.77C22 15.25 22 12 22 12s0-3.25-.42-4.81zM10 15V9l5.2 3-5.2 3z"/></svg>
+                  </a>
+                  {/* Instagram */}
+                  <a href="#" target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '12px', background: '#F1F5F9', border: 'none', boxShadow: '5px 5px 10px #cbd5e1, -5px -5px 10px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#475569', transition: 'all 0.2s' }} onMouseEnter={(e)=>{e.currentTarget.style.color='#0052FF'; e.currentTarget.style.boxShadow='inset 4px 4px 8px #cbd5e1, inset -4px -4px 8px #ffffff'}} onMouseLeave={(e)=>{e.currentTarget.style.color='#475569'; e.currentTarget.style.boxShadow='5px 5px 10px #cbd5e1, -5px -5px 10px #ffffff'}}>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8 1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3z"/></svg>
+                  </a>
+                  {/* GitHub */}
+                  <a href="#" target="_blank" rel="noopener noreferrer" style={{ width: '40px', height: '40px', borderRadius: '12px', background: '#F1F5F9', border: 'none', boxShadow: '5px 5px 10px #cbd5e1, -5px -5px 10px #ffffff', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#475569', transition: 'all 0.2s' }} onMouseEnter={(e)=>{e.currentTarget.style.color='#0052FF'; e.currentTarget.style.boxShadow='inset 4px 4px 8px #cbd5e1, inset -4px -4px 8px #ffffff'}} onMouseLeave={(e)=>{e.currentTarget.style.color='#475569'; e.currentTarget.style.boxShadow='5px 5px 10px #cbd5e1, -5px -5px 10px #ffffff'}}>
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2A10 10 0 0 0 8.84 21.5c.5.08.66-.23.66-.5v-1.69c-2.77.6-3.36-1.34-3.36-1.34-.45-1.15-1.11-1.46-1.11-1.46-.9-.62.07-.6.07-.6 1 .07 1.53 1.03 1.53 1.03.87 1.52 2.34 1.07 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.92 0-1.11.38-2 1.03-2.71-.1-.25-.45-1.29.1-2.64 0 0 .84-.27 2.75 1.02.79-.22 1.65-.33 2.5-.33.85 0 1.71.11 2.5.33 1.91-1.29 2.75-1.02 2.75-1.02.55 1.35.2 2.39.1 2.64.65.71 1.03 1.6 1.03 2.71 0 3.82-2.34 4.66-4.57 4.91.36.31.69.92.69 1.85V21c0 .27.16.59.67.5C19.14 20.16 22 16.42 22 12A10 10 0 0 0 12 2z"/></svg>
+                  </a>
+                </div>
               </div>
             </div>
 

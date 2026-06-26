@@ -182,8 +182,33 @@ export default function EngineeringTeamSection() {
               <h3>Pipeline-Accelerating Follow-Ups</h3>
               <p>Close deals moving forward with automated follow-up workflows designed to generate more responses, meetings, and revenue opportunities.</p>
             </div>
-            <div className="donut-visual-container">
-              <div className="donut-chart"></div>
+            <div className="donut-visual-container" style={{ position: 'relative' }}>
+              <svg className="speedometer-svg" viewBox="0 0 240 140" style={{ width: '240px', height: '140px', transform: 'translateY(10px)' }}>
+                <defs>
+                  <linearGradient id="speedGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#0EB5BB" />
+                    <stop offset="100%" stopColor="#0052FF" />
+                  </linearGradient>
+                  {/* Shadow for the needle for a premium touch */}
+                  <filter id="needleShadow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feDropShadow dx="0" dy="4" stdDeviation="4" floodOpacity="0.15"/>
+                  </filter>
+                </defs>
+                {/* Background track */}
+                <path d="M 20 130 A 100 100 0 0 1 220 130" fill="none" stroke="#E2E8F0" strokeWidth="20" strokeLinecap="round" />
+                {/* Colored fill */}
+                <path className="speedometer-fill" d="M 20 130 A 100 100 0 0 1 220 130" fill="none" stroke="url(#speedGradient)" strokeWidth="20" strokeLinecap="round" strokeDasharray="314.2" strokeDashoffset="314.2" />
+                
+                {/* Needle */}
+                <g className="speedometer-svg-needle" filter="url(#needleShadow)">
+                  <line x1="120" y1="130" x2="30" y2="130" stroke="#0F172A" strokeWidth="6" strokeLinecap="round" />
+                  <circle cx="120" cy="130" r="8" fill="#0F172A" />
+                  <circle cx="120" cy="130" r="3" fill="#FFFFFF" />
+                </g>
+
+                {/* 5X Text perfectly aligned inside SVG */}
+                <text x="120" y="118" textAnchor="middle" fontSize="48" fontWeight="800" fill="#0F172A" fontFamily="inherit" className="speedometer-text-svg">5X</text>
+              </svg>
             </div>
             <div className="notifications-container">
               <div className="notif-card card-bg-3"></div>
@@ -208,30 +233,73 @@ export default function EngineeringTeamSection() {
               <h3>AI SDR Prospect Intelligence</h3>
               <p style={{ fontSize: '12.5px', color: 'rgba(255, 255, 255, 0.65)', lineHeight: '1.5', marginTop: '6px' }}>Build highly targeted prospect lists from over 900 million+ verified professionals. Reach decision-makers faster, improve conversion rates, and keep your sales pipeline filled with qualified opportunities.</p>
             </div>
-            <div className="map-visual">
-              {/* Abstract Map Nodes Container */}
-              <div className="map-nodes">
-                <div className="node node-avatar n1"></div>
-                <div className="node node-server n2">
-                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M6 16h.01M10 8h8M10 16h8"/></svg>
-                </div>
-                <div className="node node-avatar n3"></div>
-                <div className="node node-server n4">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M6 16h.01M10 8h8M10 16h8"/></svg>
-                </div>
-                <div className="node node-avatar n5"></div>
-                <div className="node node-avatar n6"></div>
-                <div className="node node-server n7">
-                   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M6 8h.01M6 16h.01M10 8h8M10 16h8"/></svg>
-                </div>
+            <div className="globe-visual-container">
+              <svg className="saas-globe-svg" viewBox="0 0 400 400">
+                <defs>
+                  <filter id="globeNodeGlow" x="-50%" y="-50%" width="200%" height="200%">
+                    <feGaussianBlur stdDeviation="3" result="blur" />
+                    <feMerge>
+                      <feMergeNode in="blur" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                  <radialGradient id="targetGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="#0EB5BB" stopOpacity="0.8" />
+                    <stop offset="100%" stopColor="#0EB5BB" stopOpacity="0" />
+                  </radialGradient>
+                  <clipPath id="globeClip">
+                    <circle cx="200" cy="200" r="160" />
+                  </clipPath>
+                </defs>
                 
-                {/* Connecting lines */}
-                <svg className="map-lines" viewBox="0 0 500 300" preserveAspectRatio="none">
-                  <path className="connecting-line" d="M80 80 Q 200 120 280 180" />
-                  <path className="connecting-line" d="M350 70 Q 300 130 280 180" />
-                  <path className="connecting-line" d="M420 100 Q 350 150 280 180" />
-                </svg>
-              </div>
+                {/* Globe Grid Base */}
+                <g className="globe-grid" stroke="rgba(255,255,255,0.08)" strokeWidth="1" fill="none">
+                  {/* Outer circle */}
+                  <circle cx="200" cy="200" r="160" />
+                  
+                  {/* Latitudes */}
+                  <ellipse cx="200" cy="200" rx="160" ry="40" />
+                  <ellipse cx="200" cy="200" rx="160" ry="100" />
+                  
+                  {/* Longitudes */}
+                  <ellipse cx="200" cy="200" rx="40" ry="160" />
+                  <ellipse cx="200" cy="200" rx="100" ry="160" />
+                </g>
+
+                {/* 900 Million Professionals - Background Sea of Dots */}
+                <g className="background-dots" fill="rgba(255,255,255,0.15)" clipPath="url(#globeClip)">
+                  {/* Just a scatter of small dots representing the massive database */}
+                  <circle cx="120" cy="100" r="1.5" /> <circle cx="280" cy="90" r="1.5" /> <circle cx="300" cy="150" r="1.5" />
+                  <circle cx="150" cy="250" r="1.5" /> <circle cx="220" cy="300" r="1.5" /> <circle cx="90" cy="180" r="1.5" />
+                  <circle cx="180" cy="120" r="1.5" /> <circle cx="250" cy="220" r="1.5" /> <circle cx="320" cy="260" r="1.5" />
+                  <circle cx="100" cy="280" r="1.5" /> <circle cx="200" cy="180" r="1.5" /> <circle cx="270" cy="320" r="1.5" />
+                  <circle cx="200" cy="80" r="1.5" /> <circle cx="330" cy="120" r="1.5" /> <circle cx="70" cy="220" r="1.5" />
+                </g>
+
+                {/* Animated Connection Arcs following Globe Surface */}
+                <g className="globe-arcs" fill="none" strokeWidth="2.5" strokeLinecap="round" filter="url(#globeNodeGlow)" clipPath="url(#globeClip)">
+                  {/* Arc 1: Top Latitude curve */}
+                  <path className="g-arc arc-1" d="M 60 120 A 160 80 0 0 1 340 120" stroke="#0EB5BB" />
+                  {/* Arc 2: Longitude curve right */}
+                  <path className="g-arc arc-2" d="M 200 40 A 100 160 0 0 1 260 330" stroke="#0052FF" />
+                  {/* Arc 3: Outer edge rim */}
+                  <path className="g-arc arc-3" d="M 200 360 A 160 160 0 0 1 40 200" stroke="#0EB5BB" />
+                  {/* Arc 4: Diagonal surface curve */}
+                  <path className="g-arc arc-4" d="M 70 280 A 180 120 45 0 1 320 160" stroke="#0052FF" />
+                </g>
+
+                {/* Points that appear when lines land */}
+                <g className="landing-points" fill="#ffffff" filter="url(#globeNodeGlow)" clipPath="url(#globeClip)">
+                  {/* Lands from Arc 1 */}
+                  <circle cx="340" cy="120" r="5" className="landing-point p-delay-1" />
+                  {/* Lands from Arc 2 */}
+                  <circle cx="260" cy="330" r="5" className="landing-point p-delay-2" />
+                  {/* Lands from Arc 3 */}
+                  <circle cx="40" cy="200" r="5" className="landing-point p-delay-3" />
+                  {/* Lands from Arc 4 */}
+                  <circle cx="320" cy="160" r="5" className="landing-point p-delay-4" />
+                </g>
+              </svg>
             </div>
           </div>
 
@@ -252,14 +320,13 @@ export default function EngineeringTeamSection() {
                 padding: '12px 16px',
                 display: 'flex',
                 alignItems: 'center',
-                justifyContent: 'space-between',
+                justifyContent: 'center',
                 boxShadow: '0 2px 8px rgba(0,0,0,0.02)'
               }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
                   <span className="warmup-pulse-dot" style={{ width: '8px', height: '8px', borderRadius: '50%', background: '#22c55e', display: 'inline-block' }}></span>
-                  <span style={{ fontSize: '13px', fontWeight: 600, color: '#334155' }}>Warmup Status: Active</span>
+                  <span style={{ fontSize: '14px', fontWeight: 600, color: '#334155' }}>Email Warmup Status: <span style={{ color: '#16a34a' }}>Active</span></span>
                 </div>
-                <span style={{ fontSize: '12px', color: '#64748b', fontFamily: 'monospace' }}>outbound@360airo.com</span>
               </div>
 
               <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
