@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   title: "360 Airo - AI SDR Built for High-Growth B2B Teams",
   description: "AI SDR Built for High-Growth B2B Teams",
   icons: {
-    icon: "/favicon.svg",
+    icon: "/favicon.ico",
   },
 };
 
