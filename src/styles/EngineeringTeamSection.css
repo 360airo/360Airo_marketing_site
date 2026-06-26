@@ -23,6 +23,26 @@
   text-align: left;
 }
 
+.eng-heading-shine {
+  background: linear-gradient(90deg, rgb(7, 11, 23) 0%, rgb(12, 22, 44) 35%, rgb(59, 130, 246) 50%, rgb(12, 22, 44) 65%, rgb(26, 36, 77) 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+  animation: textShine 6s linear infinite;
+}
+
+@keyframes textShine {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: -200% center;
+  }
+}
+
 /* --- BENTO GRID LAYOUT --- */
 .eng-bento {
   display: grid;
@@ -864,4 +884,22 @@
 }
 .warmup-pulse-dot {
   animation: warmup-glow 2s infinite;
+}
+
+@keyframes drawLineAnim {
+  0% { stroke-dashoffset: 500; }
+  40% { stroke-dashoffset: 0; }
+  80% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: -500; }
+}
+.animated-graph-line {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: drawLineAnim 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+.animated-graph-line-secondary {
+  stroke-dasharray: 500;
+  stroke-dashoffset: 500;
+  animation: drawLineAnim 10s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  animation-delay: 0.3s;
 }
