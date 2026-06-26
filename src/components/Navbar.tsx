@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { navLinks } from '../data/navLinks';
-import { BookOpen, Users, HelpCircle, ChevronDown } from 'lucide-react';
+import { BookOpen, Users, HelpCircle, ChevronDown, FileText, Scale, Star, MessageCircle } from 'lucide-react';
 
 interface NavbarProps {
   activeTab?: string;
@@ -11,25 +11,14 @@ interface NavbarProps {
 }
 
 const mainResources = [
-  {
-    label: 'Blogs & Articles',
-    description: 'Read our latest insights, outbound playbooks, and email marketing guides.',
-    href: '/blogs',
-    icon: BookOpen
-  },
-  {
-    label: 'Customer Stories',
-    description: 'See how high-growth B2B teams automate and scale their sales outreach.',
-    href: '/customer-stories',
-    icon: Users
-  }
+  { label: 'Blogs', description: 'Read our latest insights and outbound playbooks', href: '/blogs', icon: FileText },
+  { label: 'Comparisons', description: 'See how 360Airo stacks up against competitors', href: '/comparison', icon: Scale },
+  { label: 'Customer stories', description: 'How high-growth B2B teams scale sales outreach', href: '/customer-stories', icon: Users },
+  { label: 'Testimonial', description: 'Hear what our customers have to say', href: '#testimonials', icon: Star },
+  { label: 'FAqs', description: 'Frequently asked questions about our platform', href: '#faq', icon: HelpCircle }
 ];
 
-const footerResource = {
-  label: 'Customer Support',
-  href: '/customer-support',
-  icon: HelpCircle
-};
+const footerResource = { label: 'Customer Support', href: '/customer-support' };
 
 export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -82,31 +71,17 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
                         {mainResources.map((item, idx) => {
                           const IconComponent = item.icon;
                           return (
-                            <Link
-                              key={idx}
-                              href={item.href}
-                              className="nav-dropdown-item"
-                            >
+                            <Link key={idx} href={item.href} className="nav-dropdown-item">
                               <div className="nav-dropdown-icon-box">
-                                <IconComponent size={20} color="#8B5CF6" />
+                                <IconComponent size={16} />
                               </div>
-                              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                              <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
                                 <span className="nav-dropdown-title">{item.label}</span>
                                 <span className="nav-dropdown-desc">{item.description}</span>
                               </div>
                             </Link>
                           );
                         })}
-
-                        <div className="nav-dropdown-divider" />
-
-                        <Link
-                          href={footerResource.href}
-                          className="nav-dropdown-footer"
-                        >
-                          <HelpCircle size={16} color="rgba(255, 255, 255, 0.5)" />
-                          <span className="nav-dropdown-footer-text">{footerResource.label}</span>
-                        </Link>
                       </div>
                     )}
                   </li>

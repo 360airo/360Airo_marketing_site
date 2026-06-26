@@ -41,13 +41,12 @@
   max-width: 1300px;
   width: calc(100% - 4rem);
   margin: 0 auto;
-  background: #000000; /* Solid black background */
-  border-radius: 32px;
-  padding: 3rem;
+  background: transparent;
   display: flex;
   flex-direction: column;
-  gap: 3rem;
-  box-shadow: 0 20px 80px rgba(19, 44, 84, 0.15);
+  gap: 5rem;
+  /* Ensure container is tall enough to allow scrolling through the sticky elements */
+  padding-bottom: 5rem;
 }
 
 .ie-card {
@@ -58,13 +57,20 @@
   align-items: center;
   justify-content: space-between;
   gap: 5rem;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.04);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+  
+  /* STICKY CARD STACK EFFECT */
+  position: sticky;
+  border: 1px solid rgba(0,0,0,0.05);
 }
 
+.ie-card:nth-child(1) { top: 120px; }
+.ie-card:nth-child(2) { top: 120px; }
+.ie-card:nth-child(3) { top: 120px; }
+
 .ie-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
 }
 
 .ie-card-normal {
@@ -147,14 +153,17 @@
   justify-content: center;
   align-items: center;
   max-width: 48%;
+  height: 100%;
 }
 
 .ie-mockup-image {
   width: 100%;
   height: auto;
+  max-height: 320px;
   border-radius: 16px;
   box-shadow: 0 16px 48px rgba(15, 23, 42, 0.12);
   object-fit: contain;
+  object-position: center;
   border: 1px solid rgba(15, 23, 42, 0.05);
 }
 
