@@ -263,11 +263,11 @@
       transition: background .2s ease, box-shadow .2s ease, border-color .2s ease;
     }
     .brand-logo {
-      width: 252px;
-      height: 144px;
-      object-fit: fill;
+      width: auto;
+      height: 100%;
+      object-fit: contain;
       display: block;
-      transform: translate(-43px, -48px);
+      transform: none;
       transform-origin: top left;
       filter: none;
     }
@@ -2857,9 +2857,9 @@
       border-radius: 10px;
     }
     .brand-logo {
-      width: 228px;
-      height: 130px;
-      transform: translate(-39px, -43px);
+      width: auto;
+      height: 100%;
+      transform: none;
     }
     .nav {
       padding: 18px 13px 10px;
@@ -3320,9 +3320,9 @@
       display: block;
     }
     html.sidebar-collapsed .brand-logo {
-      width: 228px;
-      height: 130px;
-      transform: translate(-39px, -43px);
+      height: 100%;
+      width: auto;
+      transform: none;
     }
     html.sidebar-collapsed .sidebar-collapse {
       position: absolute;
