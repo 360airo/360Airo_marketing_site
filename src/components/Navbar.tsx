@@ -18,6 +18,8 @@ const mainResources = [
   { label: 'FAqs', description: 'Frequently asked questions about our platform', href: '#faq', icon: HelpCircle }
 ];
 
+const footerResource = { label: 'Customer Support', href: '/customer-support' };
+
 export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
