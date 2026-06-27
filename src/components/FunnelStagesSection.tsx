@@ -119,18 +119,12 @@ export default function FunnelStagesSection() {
             })}
           </div>
 
-          {/* Autoplay status overlay */}
-          {!isAutoPlay && (
-            <button className="funnel-autoplay-resume" onClick={() => setIsAutoPlay(true)}>
-              ▶ Resume Autoplay Funnel
-            </button>
-          )}
         </div>
 
         {/* Right Side: Isometric 3D Stacked Blocks Panel */}
         <div className="funnel-visual-panel">
           <div className="funnel-svg-wrapper">
-            <svg viewBox="0 0 500 480" className="funnel-stacked-blocks-svg">
+            <svg viewBox="0 0 600 480" className="funnel-stacked-blocks-svg">
               <defs>
                 {/* Glow Filter for Active Block Silhouette and Deal Closed Panel */}
                 <filter id="funnel-glow" x="-30%" y="-30%" width="160%" height="160%">
@@ -206,30 +200,26 @@ export default function FunnelStagesSection() {
                       <line x1="312" y1={Y + 40.6} x2="312" y2={Y + 144.6} className="cube-dashed-line" />
                       <line x1="343" y1={Y + 33.9} x2="343" y2={Y + 137.9} className="cube-dashed-line" />
 
-                      {/* Label 3D Shadow (White Offset Highlight) */}
+                      {/* Outside Floating Label */}
                       {isActive && (
-                        <text 
-                          x="312.85" 
-                          y={Y + 90.85} 
-                          transform={`rotate(-12, 312.85, ${Y + 90.85})`} 
-                          className="block-label" 
-                          style={{ fill: '#ffffff', fontSize: '9.5px', fontWeight: 900, letterSpacing: '0.04em', opacity: 0.95 }}
-                        >
-                          {labels[index]}
-                        </text>
-                      )}
-
-                      {/* Label Foreground (Navy Text) */}
-                      {isActive && (
-                        <text 
-                          x="312" 
-                          y={Y + 90} 
-                          transform={`rotate(-12, 312, ${Y + 90})`} 
-                          className="block-label" 
-                          style={{ fill: '#132c54', fontSize: '9.5px', fontWeight: 900, letterSpacing: '0.04em' }}
-                        >
-                          {labels[index]}
-                        </text>
+                        <g className="floating-label">
+                          {/* Connecting Line and Dot */}
+                          <line x1="375" y1={Y + 76} x2="410" y2={Y + 76} stroke="#3b82f6" strokeWidth="1.5" strokeDasharray="3,3" className="animated-dashed-line" />
+                          <circle cx="375" cy={Y + 76} r="2.5" fill="#3b82f6" />
+                          
+                          {/* Floating Pill Box */}
+                          <rect x="410" y={Y + 59} width="160" height="34" rx="17" fill="#ffffff" stroke="#3b82f6" strokeWidth="1" filter="drop-shadow(0px 4px 8px rgba(59, 130, 246, 0.25))" />
+                          
+                          {/* Text Inside Pill */}
+                          <text 
+                            x="490" 
+                            y={Y + 81} 
+                            textAnchor="middle"
+                            style={{ fill: '#132c54', fontSize: '13px', fontWeight: 800, letterSpacing: '0.04em' }}
+                          >
+                            {labels[index]}
+                          </text>
+                        </g>
                       )}
                     </g>
                   );
@@ -249,26 +239,7 @@ export default function FunnelStagesSection() {
                 );
               })()}
 
-              {/* BLUE PANEL: DEAL CLOSED (Active/Glows when bottom block is active, i.e., index 3) */}
-              <g className={`funnel-deal-closed-panel ${activeStage === 3 ? 'active' : ''}`}>
-                {/* Connecting dashed projection lines from Block 4 to the floating blue panel */}
-                <line x1="125" y1="415" x2="45" y2="375" className="projection-dashed-line" />
-                <line x1="125" y1="317" x2="45" y2="277" className="projection-dashed-line" />
-                <line x1="250" y1="448" x2="170" y2="408" className="projection-dashed-line" />
 
-                {/* Floating Isometric Blue Panel */}
-                <path d="M 45 277 L 170 304 L 170 408 L 45 375 Z" className="deal-panel-bg" style={{ rx: 6, ry: 6 }} />
-
-                {/* Vertical dashed lines inside Deal Closed panel */}
-                <line x1="76" y1="283.7" x2="76" y2="381.7" className="cube-dashed-line" style={{ stroke: activeStage === 3 ? 'rgba(59, 130, 246, 0.8)' : 'rgba(148, 163, 184, 0.4)' }} />
-                <line x1="107" y1="290.4" x2="107" y2="388.4" className="cube-dashed-line" style={{ stroke: activeStage === 3 ? 'rgba(59, 130, 246, 0.8)' : 'rgba(148, 163, 184, 0.4)' }} />
-                <line x1="138" y1="297.1" x2="138" y2="395.1" className="cube-dashed-line" style={{ stroke: activeStage === 3 ? 'rgba(59, 130, 246, 0.8)' : 'rgba(148, 163, 184, 0.4)' }} />
-                
-                {/* Text: DEAL CLOSED skewed/rotated parallel to panel */}
-                <text x="107" y="340" transform="rotate(12, 107, 340)" className="deal-panel-text">
-                  DEAL CLOSED 🏆
-                </text>
-              </g>
             </svg>
           </div>
         </div>

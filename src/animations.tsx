@@ -229,7 +229,7 @@ function upNav(){
   const tgt = isFeatures ? 0 : (window._lightProg||0);
   _p+=(tgt-_p)*.06;
   const p=_p;
-  nav.style.background=`rgba(${Math.round(lerp(3,228,p))},${Math.round(lerp(7,234,p))},${Math.round(lerp(18,252,p))},${lerp(.42,.72,p).toFixed(2)})`;
+  nav.style.background=`rgba(${Math.round(lerp(3,128,p))},${Math.round(lerp(7,128,p))},${Math.round(lerp(18,128,p))}, 1)`;
   nav.style.borderBottomColor=`rgba(${Math.round(lerp(255,99,p))},${Math.round(lerp(255,102,p))},${Math.round(lerp(255,241,p))},${lerp(.09,.18,p).toFixed(2)})`;
   const tR=Math.round(lerp(255,15,p)),tG=Math.round(lerp(255,23,p)),tB=Math.round(lerp(255,42,p)),tA=lerp(.72,.65,p).toFixed(2);
   nav.querySelectorAll('.nav-text-item:not(.active)').forEach(l=>{l.style.color=`rgba(${tR},${tG},${tB},${tA})`});

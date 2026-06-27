@@ -15,7 +15,7 @@ const mainResources = [
   { label: 'Comparisons', description: 'See how 360Airo stacks up against competitors', href: '/comparison', icon: Scale },
   { label: 'Customer stories', description: 'How high-growth B2B teams scale sales outreach', href: '/customer-stories', icon: Users },
   { label: 'Testimonial', description: 'Hear what our customers have to say', href: '#testimonials', icon: Star },
-  { label: 'FAqs', description: 'Frequently asked questions about our platform', href: '#faq', icon: HelpCircle }
+  { label: 'FAQs', description: 'Frequently asked questions about our platform', href: '#faq', icon: HelpCircle }
 ];
 
 const footerResource = { label: 'Customer Support', href: '/customer-support' };
@@ -27,7 +27,7 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
 
   return (
     <>
-      <nav id="main-nav" className={theme === 'light' ? 'nav-light' : 'nav-dark'}>
+      <nav id="main-nav" className="nav-dark">
         <div className="nav-wrap">
           <Link className="nav-logo" href="/">
             <Image

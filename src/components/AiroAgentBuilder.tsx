@@ -167,12 +167,22 @@ export default function AiroAgentBuilder() {
     runAutoplaySequence();
   };
 
+  const getLineClass = (buildStep: number, sourceNode: string, beforeNodes: string[]) => {
+    const isBuild = !runningNode;
+    const isActive = (isBuild && currentStep === buildStep) || runningNode === sourceNode;
+    const isCompleted = (isBuild && currentStep > buildStep) || (runningNode && !beforeNodes.includes(runningNode));
+    
+    if (isActive) return 'flow-line active';
+    if (isCompleted) return 'flow-line completed';
+    return 'flow-line';
+  };
+
   return (
     <div className="agent-builder-section-wrapper" ref={sectionRef} style={{ backgroundColor: '#fdfdfe' }}>
       <div className="agent-builder-section">
         <div className="agent-builder-header">
           <h2>Build the outbound campaigns <br /><span>your team actually needs</span></h2>
-          <p>Drop in criteria, let AiroAgent write sequences, and preview automation charts in real time.</p>
+          <p>Drop in criteria, let Airo Agent write sequences, and preview automation charts in real time.</p>
         </div>
 
       {/* Tabs */}
@@ -311,46 +321,43 @@ export default function AiroAgentBuilder() {
                   <div className="sequence-label">Sequence Editor</div>
 
                   {/* SVG Connection Lines overlay */}
-                  <svg className="flow-svg-lines" viewBox="0 0 700 620" preserveAspectRatio="xMidYMid meet">
+                  <svg className="flow-svg-lines" viewBox="0 0 700 620" preserveAspectRatio="none">
                     {/* Start → Email */}
-                    <line x1="350" y1="38" x2="350" y2="62" className={`flow-line ${runningNode ? 'active' : ''}`} />
+                    <line x1="350" y1="38" x2="350" y2="62" className={getLineClass(1, 'start', ['start'])} />
                     {/* Email → Decision1 */}
-                    <line x1="350" y1="135" x2="350" y2="160" className={`flow-line ${runningNode === 'email1' || runningNode === 'decision1' || runningNode === 'crm' || runningNode === 'linkedin-invite' || runningNode === 'decision2' || runningNode === 'linkedin-msg' || runningNode === 'sms' ? 'active' : ''}`} />
+                    <line x1="350" y1="135" x2="350" y2="160" className={getLineClass(2, 'email1', ['start', 'email1'])} />
                     {/* Decision1 → CRM (Yes left) */}
-                    <path d="M 260 175 L 150 175 L 150 240" className={`flow-line ${runningNode === 'crm' ? 'active' : ''}`} />
+                    <path d="M 350 195 L 350 230 L 150 230 L 150 240" className={getLineClass(2, 'decision1', ['start', 'email1', 'decision1'])} />
                     {/* Decision1 → LinkedIn (No right) */}
-                    <path d="M 440 175 L 550 175 L 550 240" className={`flow-line ${runningNode === 'linkedin-invite' || runningNode === 'decision2' || runningNode === 'linkedin-msg' || runningNode === 'sms' ? 'active' : ''}`} />
+                    <path d="M 350 195 L 350 230 L 550 230 L 550 240" className={getLineClass(2, 'decision1', ['start', 'email1', 'decision1'])} />
                     {/* LinkedIn → Decision2 */}
-                    <line x1="550" y1="330" x2="550" y2="390" className={`flow-line ${runningNode === 'decision2' || runningNode === 'linkedin-msg' || runningNode === 'sms' ? 'active' : ''}`} />
+                    <line x1="550" y1="330" x2="550" y2="390" className={getLineClass(3, 'linkedin-invite', ['start', 'email1', 'decision1', 'crm', 'linkedin-invite'])} />
                     {/* Decision2 → LinkedIn Msg (Yes left) */}
-                    <path d="M 455 405 L 350 405 L 350 470" className={`flow-line ${runningNode === 'linkedin-msg' ? 'active' : ''}`} />
+                    <path d="M 550 425 L 550 460 L 350 460 L 350 470" className={getLineClass(3, 'decision2', ['start', 'email1', 'decision1', 'crm', 'linkedin-invite', 'decision2'])} />
                     {/* Decision2 → SMS (No right) */}
-                    <path d="M 645 405 L 650 405 L 650 470" className={`flow-line ${runningNode === 'sms' ? 'active' : ''}`} />
+                    <path d="M 550 425 L 550 460 L 650 460 L 650 470" className={getLineClass(3, 'decision2', ['start', 'email1', 'decision1', 'crm', 'linkedin-invite', 'decision2'])} />
                   </svg>
 
                   {/* Flowchart Nodes */}
                   <div className="flow-nodes">
 
                     {/* Node 1: Start */}
-                    <div className="flow-node node-start" style={{ top: 12, left: '50%', transform: 'translateX(-50%)' }}>
+                    <div className="flow-node node-start" style={{ top: '1.9%', left: '50%', transform: 'translateX(-50%)' }}>
                       Start
                     </div>
 
                     {/* Node 2: Email 1 */}
                     <div className={`flow-node node-action ${currentStep >= 1 ? 'visible' : ''} ${runningNode === 'email1' ? 'running' : ''} ${(currentStep === 5 || (runningNode !== 'start' && runningNode !== 'email1' && runningNode !== null)) ? 'active-completed' : ''}`}
-                      style={{ top: 62, left: '50%', transform: 'translateX(-50%)', width: 200 }}>
+                      style={{ top: '10%', left: '50%', transform: 'translateX(-50%)', width: 200 }}>
                       <div className="node-meta">Send immediately</div>
                       <div className="node-title">
-                        <span className="node-logo node-logo-email">
-                          <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="16" rx="3" fill="#4f46e5" opacity=".15"/><rect x="2" y="4" width="20" height="16" rx="3" stroke="#4f46e5" strokeWidth="1.5"/><path d="M2 7l10 6 10-6" stroke="#4f46e5" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                        </span>
                         Email 1 – Send outreach
                       </div>
                     </div>
 
                     {/* Node 3: Decision 1 (Replied?) */}
                     <div className={`flow-node node-decision ${currentStep >= 2 ? 'visible' : ''} ${runningNode === 'decision1' ? 'running' : ''} ${(currentStep === 5 || (runningNode !== 'start' && runningNode !== 'email1' && runningNode !== 'decision1' && runningNode !== null)) ? 'active-completed' : ''}`}
-                      style={{ top: 160, left: '50%', transform: 'translateX(-50%)', width: 180 }}>
+                      style={{ top: '25.8%', left: '50%', transform: 'translateX(-50%)', width: 180 }}>
                       <span style={{ fontSize: '0.8rem' }}>⏱</span> Replied in 2 days?
                       <div className="dec-yes">Yes</div>
                       <div className="dec-no">No</div>
@@ -358,31 +365,25 @@ export default function AiroAgentBuilder() {
 
                     {/* LEFT BRANCH (Yes) — Node 4: Pipedrive CRM */}
                     <div className={`flow-node node-action ${currentStep >= 2 ? 'visible' : ''} ${runningNode === 'crm' ? 'running' : ''} ${(runningNode === 'complete' || currentStep === 5) && runningNode !== 'crm' ? 'active-completed' : ''}`}
-                      style={{ top: 240, left: 55, width: 190 }}>
+                      style={{ top: '38.7%', left: '21.4%', transform: 'translateX(-50%)', width: 190 }}>
                       <div className="node-meta">Action on Reply</div>
                       <div className="node-title">
-                        <span className="node-logo node-logo-pipedrive">
-                          <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="9" r="5" fill="#e84e1b" opacity=".15"/><circle cx="12" cy="9" r="5" stroke="#e84e1b" strokeWidth="1.5"/><path d="M12 14v7" stroke="#e84e1b" strokeWidth="2" strokeLinecap="round"/></svg>
-                        </span>
                         Push to Pipedrive CRM
                       </div>
                     </div>
 
                     {/* RIGHT BRANCH (No) — Node 5: LinkedIn Invite */}
                     <div className={`flow-node node-action ${currentStep >= 2 ? 'visible' : ''} ${runningNode === 'linkedin-invite' ? 'running' : ''} ${(runningNode === 'decision2' || runningNode === 'linkedin-msg' || runningNode === 'sms' || currentStep === 5) && runningNode !== 'linkedin-invite' ? 'active-completed' : ''}`}
-                      style={{ top: 240, left: 455, width: 190 }}>
+                      style={{ top: '38.7%', left: '78.5%', transform: 'translateX(-50%)', width: 190 }}>
                       <div className="node-meta">Action if No Reply</div>
                       <div className="node-title">
-                        <span className="node-logo node-logo-linkedin">
-                          <svg viewBox="0 0 24 24" fill="#0a66c2"><rect width="24" height="24" rx="4" fill="#0a66c2" opacity=".12"/><path d="M7 10v8M7 7v.01M12 18v-5a2 2 0 014 0v5M12 13v5" stroke="#0a66c2" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                        </span>
                         LinkedIn invite (personalized)
                       </div>
                     </div>
 
                     {/* Node 6: Decision 2 (Accepted & Replied?) */}
                     <div className={`flow-node node-decision ${currentStep >= 3 ? 'visible' : ''} ${runningNode === 'decision2' ? 'running' : ''} ${(runningNode === 'linkedin-msg' || runningNode === 'sms' || currentStep === 5) && runningNode !== 'decision2' ? 'active-completed' : ''}`}
-                      style={{ top: 390, left: 455, width: 190 }}>
+                      style={{ top: '62.9%', left: '78.5%', transform: 'translateX(-50%)', width: 190 }}>
                       <span style={{ fontSize: '0.8rem' }}>🔗</span> Accepted &amp; Replied?
                       <div className="dec-yes">Yes</div>
                       <div className="dec-no">No</div>
@@ -390,24 +391,18 @@ export default function AiroAgentBuilder() {
 
                     {/* Node 7: LinkedIn Message (Yes) */}
                     <div className={`flow-node node-action ${currentStep >= 3 ? 'visible' : ''} ${runningNode === 'linkedin-msg' ? 'running' : ''} ${(runningNode === 'complete' || currentStep === 5) && runningNode !== 'linkedin-msg' ? 'active-completed' : ''}`}
-                      style={{ top: 470, left: 245, width: 210 }}>
+                      style={{ top: '75.8%', left: '50%', transform: 'translateX(-50%)', width: 210 }}>
                       <div className="node-meta">Reach out re: email</div>
                       <div className="node-title">
-                        <span className="node-logo node-logo-linkedin">
-                          <svg viewBox="0 0 24 24" fill="#0a66c2"><rect width="24" height="24" rx="4" fill="#0a66c2" opacity=".12"/><path d="M7 10v8M7 7v.01M12 18v-5a2 2 0 014 0v5M12 13v5" stroke="#0a66c2" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                        </span>
                         Msg: "I tried to reach out..."
                       </div>
                     </div>
 
                     {/* Node 8: SMS (No) */}
                     <div className={`flow-node node-action ${currentStep >= 3 ? 'visible' : ''} ${runningNode === 'sms' ? 'running' : ''} ${(runningNode === 'complete' || currentStep === 5) && runningNode !== 'sms' ? 'active-completed' : ''}`}
-                      style={{ top: 470, left: 570, width: 160 }}>
+                      style={{ top: '75.8%', left: '92.8%', transform: 'translateX(-50%)', width: 170 }}>
                       <div className="node-meta">SMS Follow-up</div>
                       <div className="node-title">
-                        <span className="node-logo node-logo-sms">
-                          <svg viewBox="0 0 24 24" fill="none"><rect x="2" y="4" width="20" height="14" rx="3" fill="#10b981" opacity=".15"/><rect x="2" y="4" width="20" height="14" rx="3" stroke="#10b981" strokeWidth="1.5"/><path d="M7 9h10M7 13h6" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round"/><path d="M8 18l-3 3v-3" stroke="#10b981" strokeWidth="1.5" strokeLinecap="round"/></svg>
-                        </span>
                         Send SMS
                       </div>
                     </div>

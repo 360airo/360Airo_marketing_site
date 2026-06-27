@@ -83,9 +83,7 @@ color:#fff;
 
  padding: 4px 0;
 
- background: rgba(3,7,18,0.42);
- backdrop-filter: blur(32px) saturate(180%) brightness(110%);
- -webkit-backdrop-filter: blur(32px) saturate(180%) brightness(110%);
+ background: #030712;
 
  border-bottom: 1px solid rgba(255,255,255,0.09);
 
@@ -1208,7 +1206,7 @@ color:#fff;
 #section-phone .hero-left{padding-top:30px}
 #section-phone .hero-left p{font-size:12.5px;line-height:1.7;color:#888;margin-bottom:16px;max-width:180px}
 #section-phone .hero-center{display:flex;flex-direction:column;justify-content:flex-start;padding-top:10px;overflow:hidden}
-#section-phone .hero-headline{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(50px,min(13vw, 19vh),200px);line-height:.88;color:#111;text-transform:uppercase;letter-spacing:-3px}
+#section-phone .hero-headline{font-family:'Barlow Condensed',sans-serif;font-weight:900;font-size:clamp(50px,min(13vw, 19vh),200px);line-height:.88;color:#111;text-transform:uppercase;letter-spacing:2px;font-kerning:none;font-variant-ligatures:none}
 #section-phone .headline-line{display:block;overflow:hidden}
 #section-phone .headline-line .headline-inner{display:block;transform:translate3d(0,110%,0);will-change:transform}
 #section-phone .headline-line .headline-inner.revealed{transform:translate3d(0,0,0);transition:transform 1.3s cubic-bezier(0.16,1,0.3,1)}
@@ -1269,8 +1267,8 @@ color:#fff;
 #section-phone .feature-icon{flex-shrink:0;width:36px;height:36px;display:flex;align-items:center;justify-content:center}
 #section-phone .feature-icon svg{width:28px;height:28px;stroke:#555;fill:none;stroke-width:1.5}
 #section-phone .feature-text{font-size:13px;line-height:1.65;color:#666;max-width:320px}
-@media(max-width:900px){#section-phone{display:block}#section-phone .p2-hero{height:auto!important;min-height:auto!important;padding:60px 0;overflow:visible!important}#section-phone .hero-main{grid-template-columns:1fr;text-align:center;padding:30px 24px 0}#section-phone .hero-left{display:flex;flex-direction:column;align-items:center;padding-top:0}#section-phone .hero-right{justify-content:center;padding-right:0;padding-top:30px}#section-phone .hero-center{overflow:visible!important}#section-phone .headline-line{overflow:visible!important}#section-phone .hero-headline{font-size:clamp(55px,12vw,120px);letter-spacing:-2px}#section-phone .feature-strip{grid-template-columns:1fr;gap:30px;padding:40px 24px}}
-@media(max-width:600px){#section-phone .phone-mockup{width:240px;height:480px}#section-phone .hero-headline{font-size:clamp(40px,13vw,80px);letter-spacing:-1px}}
+@media(max-width:900px){#section-phone{display:block}#section-phone .p2-hero{height:auto!important;min-height:auto!important;padding:60px 0;overflow:visible!important}#section-phone .hero-main{grid-template-columns:1fr;text-align:center;padding:30px 24px 0}#section-phone .hero-left{display:flex;flex-direction:column;align-items:center;padding-top:0}#section-phone .hero-right{justify-content:center;padding-right:0;padding-top:30px}#section-phone .hero-center{overflow:visible!important}#section-phone .headline-line{overflow:visible!important}#section-phone .hero-headline{font-size:clamp(55px,12vw,120px);letter-spacing:2px}#section-phone .feature-strip{grid-template-columns:1fr;gap:30px;padding:40px 24px}}
+@media(max-width:600px){#section-phone .phone-mockup{width:240px;height:480px}#section-phone .hero-headline{font-size:clamp(40px,13vw,80px);letter-spacing:2px}}
 
 /* MOUNTAIN */
 #section-mountain{position:relative;z-index:1}
@@ -2206,7 +2204,7 @@ filter:none;
 
 /* Light Nav styling overrides for white background contact page */
 #main-nav.nav-light {
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: gray !important;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08) !important;
   backdrop-filter: blur(24px) saturate(180%) !important;
   -webkit-backdrop-filter: blur(24px) saturate(180%) !important;
@@ -2909,4 +2907,24 @@ filter:none;
   footer .footer-grid-override {
     grid-template-columns: 1fr !important;
   }
+}
+
+.animated-dashed-line {
+  animation: funnelDashAnim 1s linear infinite;
+}
+
+@keyframes funnelDashAnim {
+  to {
+    stroke-dashoffset: -6;
+  }
+}
+
+.testimonials-shine-text {
+  background: linear-gradient(90deg, #070b17 0%, #0c162c 35%, #3b82f6 50%, #0c162c 65%, #1a244d 100%) 0 0 / 200%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  display: inline-block;
+  animation: contactTextShine 4s linear infinite;
 }
