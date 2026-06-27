@@ -47,12 +47,12 @@ export default function TestimonialsSection() {
   ];
 
   return (
-    <section className="py-20 md:py-28" style={{ backgroundColor: '#fdfdfe', position: 'relative', overflow: 'hidden' }}>
+    <section className="pt-10 pb-20 md:pt-16 md:pb-28" style={{ backgroundColor: '#fdfdfe', position: 'relative', overflow: 'hidden' }}>
       <div className="mx-auto max-w-[1200px] px-4 sm:px-8 relative z-10">
         <div className="max-w-[800px] text-center mx-auto" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <p className="font-semibold uppercase tracking-widest mb-3" style={{ color: '#ea580c', fontSize: '14px', letterSpacing: '0.1em' }}>Customer reviews</p>
+          <p className="testimonials-shine-text font-semibold uppercase tracking-widest mb-3" style={{ fontSize: '14px', letterSpacing: '0.1em' }}>Customer reviews</p>
           <h2 className="mt-3 font-display font-bold leading-[1.05] tracking-heading" style={{ color: '#0F172A', fontSize: 'clamp(36px,4vw,52px)', marginBottom: '16px', textAlign: 'center' }}>
-            Why 25,000+ businesses <span className="relative inline-block"><span className="relative z-10 italic" style={{ color: '#ea580c' }}>switched</span></span>
+            Why <span className="testimonials-shine-text">5,000+ businesses <span className="italic">switched</span></span>
           </h2>
           <p className="mt-4 text-body" style={{ color: '#475569', fontSize: '18px', textAlign: 'center' }}>
             Don't take our word for it. Here's what teams say after switching.

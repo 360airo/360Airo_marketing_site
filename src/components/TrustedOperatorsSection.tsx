@@ -15,6 +15,7 @@ export default function TrustedOperatorsSection() {
         const prefix = counter.dataset.prefix || "";
         const suffix = counter.dataset.suffix || "";
         const duration = 2000;
+        
         const startTime = performance.now();
 
         function updateCounter(currentTime) {
@@ -63,25 +64,25 @@ export default function TrustedOperatorsSection() {
         
         {/* STATS CARD */}
         <div className="trusted-stats-card">
-          <article className="trusted-stat-item" style={{ animationDelay: '0s' }}>
+          <article className="trusted-stat-item" style={{ transitionDelay: '0s' }}>
             <strong className="to-counter" data-target="6.5" data-decimals="1" data-suffix="M+">0.0M+</strong>
             <span>Emails sent / month</span>
           </article>
           <div className="trusted-divider"></div>
           
-          <article className="trusted-stat-item" style={{ animationDelay: '0.08s' }}>
+          <article className="trusted-stat-item" style={{ transitionDelay: '0.08s' }}>
             <strong className="to-counter" data-target="13.6" data-decimals="1" data-suffix="M+">0.0M+</strong>
             <span>Prospects contacted / month</span>
           </article>
           <div className="trusted-divider"></div>
 
-          <article className="trusted-stat-item" style={{ animationDelay: '0.16s' }}>
+          <article className="trusted-stat-item" style={{ transitionDelay: '0.16s' }}>
             <strong className="to-counter" data-target="5" data-decimals="0" data-prefix="$" data-suffix="M+">$0M+</strong>
             <span>Pipeline generated / month</span>
           </article>
           <div className="trusted-divider"></div>
 
-          <article className="trusted-stat-item" style={{ animationDelay: '0.24s' }}>
+          <article className="trusted-stat-item" style={{ transitionDelay: '0.24s' }}>
             <strong className="to-counter" data-target="1.25" data-decimals="2" data-prefix="$" data-suffix="M+">$0.00M+</strong>
             <span>Revenue generated / month</span>
           </article>

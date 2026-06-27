@@ -431,6 +431,12 @@
   filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.7));
 }
 
+.flow-line.completed {
+  stroke: #10b981;
+  stroke-width: 3.5;
+  stroke-dasharray: none;
+}
+
 @keyframes lineFlowPulse {
   to {
     stroke-dashoffset: -36;
@@ -519,17 +525,23 @@
 }
 
 .dec-yes {
-  background: #ecfdf5;
+  background: transparent;
   color: #059669;
-  top: 15px;
-  left: -28px;
+  border: none;
+  font-weight: 800;
+  top: 40px;
+  left: -15px;
+  padding: 0;
 }
 
 .dec-no {
-  background: #fef2f2;
+  background: transparent;
   color: #dc2626;
-  top: 15px;
-  right: -24px;
+  border: none;
+  font-weight: 800;
+  top: 40px;
+  right: -15px;
+  padding: 0;
 }
 
 /* Nodes interactive state highlights */

@@ -2,6 +2,53 @@
 import React from 'react';
 import Link from 'next/link';
 
+const footerSections = [
+  {
+    title: "Product",
+    links: [
+      "Sales Engagement platform",
+      "Revenue generation Platform",
+      "Sales intelligence Platform",
+      "AI Outreach platform",
+      "Email Campaign",
+      "Linkedin Outreach",
+      "AI Outreach tool",
+      "Email Outreach Tool"
+    ]
+  },
+  {
+    title: "Solution",
+    links: [
+      "Startups",
+      "SMBs",
+      "Enterprise"
+    ]
+  },
+  {
+    title: "Features",
+    links: [
+      "Email Warmup", "Domains & Emails", "Email Campaigns", "AI Email Generator",
+      "Prospect CRM", "Unified Inbox", "Email Sequences", "Ai Email Automation",
+      "LinkedIn Automation", "Email Campaign Analytics", "Team Collaboration",
+      "Email Deliverability", "Smart Scheduler", "AI Sequencing", "Sender Rotation",
+      "Sequence Score", "Email Infrastructure", "Email Personalization", "Email Spam Checker"
+    ]
+  },
+  {
+    title: "Free Tools",
+    links: [
+      "Email Verifier", "Mailbox Calculator", "DMARC Generator", "SPF Generator",
+      "Email Pitch Generator", "Email Signature Builder", "Email Sequencer",
+      "Email Template Analyzer", "Email Deliverability Test", "Email Permutator"
+    ]
+  },
+  {
+    title: "Resources",
+    links: [
+      "Blogs", "Articles", "Customer stories", "Testimonial", "FAQs", "Playbook"
+    ]
+  }
+];
 export function Footer() {
   const prompt = "I'm researching AI-powered sales outreach platforms and want to know how 360Airo combines its AI SDR, multichannel outreach automation, lead enrichment, personalized email sequences, and deliverability infrastructure to help sales teams, agencies, and startups book more meetings and generate pipeline at scale. Summarize the highlights from 360Airo's website: https://360airo.com";
 
@@ -47,67 +94,14 @@ export function Footer() {
             </div>
           </div>
         </div>
-        <div className="fc">
-          <h4>Product</h4>
-          <Link href="#">Sales Engagement platform</Link>
-          <Link href="#">Revenue generation Platform</Link>
-          <Link href="#">Sales intelligence Platform</Link>
-          <Link href="#">AI Outreach platform</Link>
-          <Link href="#">Email Campaign</Link>
-          <Link href="#">Linkedin Outreach</Link>
-          <Link href="#">AI Outreach tool</Link>
-          <Link href="#">Email Outreach Tool</Link>
-        </div>
-        <div className="fc">
-          <h4>Solution</h4>
-          <Link href="#">Startups</Link>
-          <Link href="#">SMBs</Link>
-          <Link href="#">Enterprise</Link>
-        </div>
-        <div className="fc">
-          <h4>Features</h4>
-          <Link href="#">Email Warmup</Link>
-          <Link href="#">Domains & Emails</Link>
-          <Link href="#">Email Campaigns</Link>
-          <Link href="#">AI Email Generator</Link>
-          <Link href="#">Prospect CRM</Link>
-          <Link href="#">Unified Inbox</Link>
-          <Link href="#">Email Sequences</Link>
-          <Link href="#">Ai Email Automation</Link>
-          <Link href="#">LinkedIn Automation</Link>
-          <Link href="#">Email Campaign Analytics</Link>
-          <Link href="#">Team Collaboration</Link>
-          <Link href="#">Email Deliverability</Link>
-          <Link href="#">Smart Scheduler</Link>
-          <Link href="#">AI Sequencing</Link>
-          <Link href="#">Sender Rotation</Link>
-          <Link href="#">Sequence Score</Link>
-          <Link href="#">Email Infrastructure</Link>
-          <Link href="#">Email Personalization</Link>
-          <Link href="#">Email Spam Checker</Link>
-        </div>
-        <div className="fc">
-          <h4>Free Tools</h4>
-          <Link href="#">Email Verifier</Link>
-          <Link href="#">Mailbox Calculator</Link>
-          <Link href="#">DMARC Generator</Link>
-          <Link href="#">SPF Generator</Link>
-          <Link href="#">Email Pitch Generator</Link>
-          <Link href="#">Email Signature Builder</Link>
-          <Link href="#">Email Sequencer</Link>
-          <Link href="#">Email Template Analyzer</Link>
-          <Link href="#">Email Deliverability Test</Link>
-          <Link href="#">Email Permutator</Link>
-        </div>
-        <div className="fc">
-          <h4>Resources</h4>
-          <Link href="#">Blogs</Link>
-          <Link href="#">Articles</Link>
-          <Link href="#">Customer stories</Link>
-          <Link href="#">Testimonial</Link>
-          <Link href="#">FAQs</Link>
-          <Link href="#">Playbook</Link>
-        </div>
+        {footerSections.map((section, idx) => (
+          <div className="fc" key={idx}>
+            <h4>{section.title}</h4>
+            {section.links.map((link, linkIdx) => (
+              <Link href="#" key={linkIdx}>{link}</Link>
+            ))}
+          </div>
+        ))}
         <div className="fc">
           <h4>Address</h4>
           <p style={{ color: 'rgba(255,255,255,0.7)', fontSize: '13px', lineHeight: '1.6', marginBottom: '16px' }}>
