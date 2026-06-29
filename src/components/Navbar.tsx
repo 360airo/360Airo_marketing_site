@@ -51,7 +51,7 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
           </Link>
 
           <ul className="nav-links">
-            {navLinks.filter(link => link !== 'Book a Demo').map((link) => {
+            {navLinks.filter(link => link !== 'Book a Demo' && link !== 'Login').map((link) => {
               const linkSlug = link.toLowerCase().replace(/\s+/g, '-');
 
               if (linkSlug === 'resources' || linkSlug === 'solutions') {
@@ -119,11 +119,25 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
             })}
           </ul>
 
-          <div className="nav-btns">
+          <div className="nav-btns" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: '16px' }}>
+            <Link
+              href="https://app.360airo.com/"
+              className="btn-nav-login-link"
+              style={{
+                textDecoration: 'none',
+                padding: '8px 16px',
+                borderRadius: '8px',
+                fontWeight: 500,
+                transition: 'all 0.2s',
+                border: '1px solid transparent'
+              }}
+            >
+              Login
+            </Link>
             <Link 
               href="/book-a-demo" 
               className="btn-nav-login" 
-              style={{ textDecoration: 'none', display: 'inline-block' }}
+              style={{ textDecoration: 'none', display: 'inline-block', padding: '8px 18px', fontSize: '13px' }}
             >
               Book a Demo
             </Link>
