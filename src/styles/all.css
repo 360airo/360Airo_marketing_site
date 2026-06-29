@@ -109,6 +109,21 @@ color:#fff;
 .nav-btns{justify-self:end}
 .btn-nav-login{background:#5B8EFF;border-radius:6px;padding:10px 24px;color:#fff;font-size:14px;font-weight:600;box-shadow:none;transition:transform .25s,background .25s;white-space:nowrap}
 .btn-nav-login:hover{transform:translateY(-2px);background:#487BE6;box-shadow:0 4px 12px rgba(91,142,255,0.3)}
+
+.btn-nav-login-link {
+  color: #fff;
+}
+.btn-nav-login-link:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+#main-nav.nav-light .btn-nav-login-link {
+  color: #fff;
+}
+#main-nav.nav-light .btn-nav-login-link:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
 .nav-hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:8px}
 .nav-hamburger span{width:22px;height:2px;background:#fff;border-radius:2px}
 .mobile-overlay {
@@ -1645,7 +1660,7 @@ transition:color .35s ease;
 
 /* LIGHT NAV */
 #main-nav.nav-light .nav-text-item{
-color:#111;
+color:#fff;
 }
 
 #main-nav.nav-light #nav-logo-icon,
@@ -2228,12 +2243,12 @@ filter:none;
 }
 
 #main-nav.nav-light .nav-text-item {
-  color: rgba(0, 0, 0, 0.7) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
 }
 
 #main-nav.nav-light .nav-text-item:hover,
 #main-nav.nav-light .nav-text-item.active {
-  color: #000000 !important;
+  color: #fff !important;
 }
 
 #main-nav.nav-light .nav-hamburger span {
