@@ -42,7 +42,7 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
           </Link>
 
           <ul className="nav-links">
-            {navLinks.filter(link => link !== 'Book a Demo').map((link) => {
+            {navLinks.filter(link => link !== 'Book a Demo' && link !== 'Login').map((link) => {
               const linkSlug = link.toLowerCase().replace(/\s+/g, '-');
 
               if (linkSlug === 'resources') {
@@ -103,6 +103,13 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
           </ul>
 
           <div className="nav-btns">
+            <Link 
+              href="/login" 
+              className="btn-nav-login" 
+              style={{ textDecoration: 'none', display: 'inline-block', marginRight: '12px' }}
+            >
+              Login
+            </Link>
             <Link 
               href="/book-a-demo" 
               className="btn-nav-login" 
@@ -180,14 +187,14 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
           }
 
           const href = linkSlug === 'home' ? '/' : `/${linkSlug}`;
-          if (linkSlug === 'book-a-demo') {
+          if (linkSlug === 'book-a-demo' || linkSlug === 'login') {
             return (
               <Link 
                 key={link} 
                 href={href} 
                 onClick={() => setMobileMenuOpen(false)}
                 className="btn-nav-login mobile-book-btn"
-                style={{ textDecoration: 'none' }}
+                style={{ textDecoration: 'none', marginBottom: linkSlug === 'login' ? '12px' : '0' }}
               >
                 {link}
               </Link>
