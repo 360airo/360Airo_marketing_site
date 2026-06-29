@@ -246,7 +246,8 @@
   padding: 0.75rem 1rem;
   font-size: 0.88rem;
   line-height: 1.45;
-  font-weight: 550;
+  font-weight: 400;
+  text-align: left;
 }
 
 .agent-msg .chat-bubble {
@@ -420,7 +421,7 @@
   stroke-width: 2.5;
   fill: none;
   stroke-dasharray: 4 4;
-  transition: stroke 0.3s ease, stroke-width 0.3s ease;
+  transition: stroke 1.2s ease-in-out, stroke-width 1.2s ease-in-out;
 }
 
 .flow-line.active {
@@ -435,6 +436,7 @@
   stroke: #10b981;
   stroke-width: 3.5;
   stroke-dasharray: 8 6;
+  animation: lineFlowPulse 0.8s linear infinite;
 }
 
 @keyframes lineFlowPulse {
@@ -463,7 +465,7 @@
   font-weight: 650;
   color: #1e293b;
   box-shadow: 0 4px 16px rgba(15, 23, 42, 0.04);
-  transition: all 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: all 1.2s ease-in-out;
   white-space: normal;
 }
 
