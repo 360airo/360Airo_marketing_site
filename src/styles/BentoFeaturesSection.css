@@ -1,0 +1,387 @@
+/* src/styles/BentoFeaturesSection.css */
+.bento-section {
+  width: 100%;
+  padding: 80px 24px;
+  background-color: #ffffff;
+  font-family: 'DM Sans', sans-serif;
+  color: #0c1024;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.bento-container {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.bento-headline {
+  text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(32px, 4vw, 46px);
+  margin: 0 0 50px 0;
+  line-height: 1.1;
+  color: #0c0926;
+}
+
+/* 2-Column Masonry Layout */
+.bento-layout {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+}
+
+.bento-col-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 0 0 45%;
+}
+
+.bento-col-right {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex: 0 0 calc(55% - 20px);
+}
+
+.bento-row-top {
+  display: flex;
+  gap: 20px;
+  flex: 1; /* Takes up necessary space to align with Card 1 if needed */
+}
+
+.bento-row-top > .bento-card {
+  flex: 1;
+}
+
+/* Card Styling */
+.bento-card {
+  border-radius: 20px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+}
+
+.bento-light-blue { background-color: #e9efff; }
+.bento-light-blue-solid { background-color: #eaf1fd; }
+.bento-light-purple { background-color: #eee1fd; }
+.bento-light-yellow { background-color: #fff6d5; }
+
+.bento-card-content {
+  position: relative;
+  z-index: 2;
+}
+
+.bento-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  margin: 0 0 16px 0;
+  color: #0c0a20;
+}
+
+.bento-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4b5563;
+  margin: 0;
+}
+
+/* Specific Card Layouts */
+.bento-card-1 {
+  height: 520px;
+}
+.bento-card-4 {
+  height: 320px;
+}
+.bento-card-4 .bento-card-content {
+  width: 50%; /* Prevent text from overlapping the right mockup */
+}
+.bento-card-2, .bento-card-3 {
+  height: 340px; /* Square-ish */
+}
+.bento-card-5 {
+  height: 500px;
+}
+
+/* Mockups Wrapper */
+.bento-mockup-wrapper {
+  position: absolute;
+  z-index: 1;
+}
+
+.mockup-bottom {
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+}
+
+.mockup-wide {
+  width: 96%;
+}
+
+.mockup-right {
+  right: -20px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50%;
+}
+
+/* Generic Mockup Elements */
+.mock-line {
+  height: 8px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+}
+.mock-line.bold {
+  height: 12px;
+  background-color: #d1d5db;
+}
+.mock-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.mock-dot.blue { background-color: #3b82f6; }
+.mock-dot.green { background-color: #10b981; }
+.mock-dot.purple { background-color: #8b5cf6; }
+.mock-dot.yellow { background-color: #f59e0b; }
+
+/* 1. Mock Flowchart (Card 1) */
+.mock-flowchart {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.mock-flow-node {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.mock-flow-arrow {
+  color: #cbd5e1;
+  font-size: 1.2rem;
+  margin: 8px 0;
+}
+
+.mock-flow-split {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+.mock-flow-branch {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* 2. Mock Profile (Card 4) */
+.mock-profile {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  border: 1px solid rgba(0,0,0,0.03);
+  position: relative;
+}
+
+.mock-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: #e0e7ff;
+  color: #4f46e5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+
+.mock-profile-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mock-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #ecfdf5;
+  color: #059669;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.mock-status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #059669;
+}
+
+.mock-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #a78bfa, #4c1d95);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.bubble-1 {
+  width: 40px;
+  height: 40px;
+  bottom: -15px;
+  right: -15px;
+}
+.bubble-2 {
+  width: 24px;
+  height: 24px;
+  bottom: 20px;
+  right: -25px;
+}
+
+/* 3. Mock Dashboard (Card 5) */
+.mock-dashboard {
+  background: #ffffff;
+  border-radius: 12px 12px 0 0;
+  box-shadow: 0 -10px 30px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.03);
+  border-bottom: none;
+  height: 280px;
+  display: flex;
+  flex-direction: column;
+}
+
+.mock-dash-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  border-bottom: 1px solid #f3f4f6;
+}
+
+.mock-dash-tabs {
+  display: flex;
+  gap: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #9ca3af;
+}
+
+.mock-dash-tabs .active {
+  color: #111827;
+  position: relative;
+}
+.mock-dash-tabs .active::after {
+  content: '';
+  position: absolute;
+  bottom: -17px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #3b82f6;
+}
+
+.mock-dash-btn {
+  background: #2563eb;
+  color: white;
+  font-size: 0.75rem;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 600;
+}
+
+.mock-dash-list {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mock-dash-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #f9fafb;
+}
+
+.mock-dash-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+.logo-blue { background: #dbeafe; }
+.logo-green { background: #d1fae5; }
+.logo-orange { background: #ffedd5; }
+.logo-purple { background: #f3e8ff; }
+
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .bento-card-4 .bento-card-content {
+    width: 60%;
+  }
+}
+
+@media (max-width: 960px) {
+  .bento-layout {
+    flex-direction: column;
+  }
+  .bento-col-left, .bento-col-right {
+    width: 100%;
+  }
+  .bento-card-1 { height: 460px; }
+  .bento-card-4 { height: auto; padding-bottom: 240px; }
+  .mockup-right { 
+    right: 50%;
+    transform: translateX(50%);
+    top: auto;
+    bottom: -20px;
+    width: 80%;
+  }
+  .bento-card-4 .bento-card-content {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .bento-row-top {
+    flex-direction: column;
+  }
+  .bento-card-2, .bento-card-3 {
+    height: auto;
+  }
+  .bento-mockup-wrapper {
+    width: 95%;
+  }
+  .bento-title {
+    font-size: 1.1rem;
+  }
+}

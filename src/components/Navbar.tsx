@@ -19,10 +19,10 @@ const mainResources = [
 ];
 
 const mainSolutions = [
-  { label: 'Startups', description: 'Scale your early-stage growth', href: '/solutions/startups', icon: Zap },
+  { label: 'Startups', description: 'Scale your early-stage growth', href: '/solutions/smbs', icon: Zap },
   { label: 'SMBs', description: 'Grow your small to medium business', href: '/solutions/smbs', icon: Briefcase },
-  { label: 'Enterprise', description: 'Power your large-scale operations', href: '/solutions/enterprise', icon: Building2 },
-  { label: 'Marketing agencies', description: 'Drive client success efficiently', href: '/solutions/agencies', icon: Target }
+  { label: 'Enterprise', description: 'Power your large-scale operations', href: '/solutions/smbs', icon: Building2 },
+  { label: 'Marketing agencies', description: 'Drive client success efficiently', href: '/solutions/smbs', icon: Target }
 ];
 
 const footerResource = { label: 'Customer Support', href: '/customer-support' };

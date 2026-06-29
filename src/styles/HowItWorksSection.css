@@ -1,0 +1,180 @@
+/* src/styles/HowItWorksSection.css */
+.hiw-section {
+  width: 100%;
+  background-color: #FDFDFE;
+  font-family: 'DM Sans', sans-serif;
+  color: #0c1024;
+}
+
+.hiw-scroll-trigger {
+  width: 100%;
+  min-height: 100vh;
+  padding: 40px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hiw-container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Headline */
+.hiw-headline {
+  text-align: center;
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 800;
+  font-size: clamp(32px, 4vw, 48px);
+  margin: 0 0 20px 0;
+  line-height: 1.1;
+  color: #0c1024;
+}
+
+/* Visuals Area */
+.hiw-visual-container {
+  width: 100%;
+  aspect-ratio: 21 / 9;
+  max-height: 55vh;
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+  margin-bottom: 40px;
+  background-color: #f3f4f6;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.hiw-visual-pane {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hiw-visual-pane.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.hiw-placeholder-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: rgba(0, 0, 0, 0.3);
+}
+
+/* Timeline Container */
+.hiw-timeline-container {
+  position: relative;
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+.hiw-timeline-track {
+  position: absolute;
+  top: 36px;
+  left: 10%;
+  width: 80%;
+  height: 2px;
+  background-color: #e5e7eb;
+  z-index: 1;
+}
+
+.hiw-timeline-progress {
+  height: 100%;
+  background-color: #7c3aed; /* Brand purple */
+  transition: width 0.3s ease;
+}
+
+.hiw-timeline-steps {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.hiw-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 20%;
+  gap: 16px;
+  transition: all 0.3s ease;
+}
+
+.hiw-step-circle {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 2px solid #d1d5db;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: #6b7280;
+  transition: all 0.3s ease;
+}
+
+.hiw-step.active .hiw-step-circle,
+.hiw-step.passed .hiw-step-circle {
+  border-color: #7c3aed;
+  background-color: #7c3aed;
+  color: #ffffff;
+}
+
+.hiw-step.active .hiw-step-circle {
+  box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.2);
+  transform: scale(1.1);
+}
+
+.hiw-step-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #9ca3af;
+  line-height: 1.4;
+  max-width: 160px;
+  transition: color 0.3s ease;
+}
+
+.hiw-step.active .hiw-step-title {
+  color: #0c1024;
+  font-weight: 700;
+}
+
+/* Responsiveness */
+@media (max-width: 960px) {
+  .hiw-visual-container {
+    aspect-ratio: 16 / 9;
+  }
+  .hiw-step-title {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hiw-scroll-trigger {
+    height: auto;
+    padding: 60px 0;
+  }
+  
+  /* Disable pinning on mobile, just stack them */
+  .hiw-timeline-container {
+    display: none; /* Can replace with a mobile-friendly vertical timeline later */
+  }
+}
