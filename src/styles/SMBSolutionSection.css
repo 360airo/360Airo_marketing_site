@@ -1,0 +1,167 @@
+/* src/styles/SMBSolutionSection.css */
+.smb-solution-section {
+  width: 100%;
+  background-color: #FDFDFE;
+  padding: 80px 24px;
+  display: flex;
+  justify-content: center;
+  font-family: 'DM Sans', sans-serif;
+  color: #070B17;
+  overflow: hidden;
+}
+
+.smb-container {
+  width: 100%;
+  max-width: 1240px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.agency-cards-title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 800;
+  font-size: clamp(32px, 4vw, 42px);
+  color: #0c0a20;
+  margin: 0 0 48px 0;
+  text-align: center;
+}
+
+/* Cards Grid */
+.agency-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 64px;
+}
+
+.agency-card {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 28px;
+  border-radius: 12px;
+  border: none;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease;
+  height: 100%;
+  cursor: default;
+}
+
+.agency-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.05);
+}
+
+.agency-card:focus-visible {
+  outline: 2px solid #0c0a20;
+  outline-offset: 2px;
+}
+
+/* Card Backgrounds */
+.bg-light-blue { background-color: #eaf2ff; }
+.bg-light-yellow { background-color: #fff6da; }
+.bg-light-purple { background-color: #f1e6ff; }
+.bg-light-green { background-color: #d8fbc5; }
+
+/* Icons */
+.agency-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 32px;
+  color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease;
+}
+
+.agency-card:hover .agency-card-icon {
+  transform: scale(1.05);
+}
+
+.icon-solid-blue { background-color: #537bfc; }
+.icon-solid-yellow { background-color: #fabc05; }
+.icon-solid-purple { background-color: #9d82d4; }
+.icon-solid-green { background-color: #17b355; }
+
+/* Typography */
+.agency-card-heading {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 700;
+  font-size: 1.15rem;
+  line-height: 1.4;
+  margin: 0 0 16px 0;
+  color: #0c0a20;
+}
+
+.agency-card-text {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #2b3044;
+  margin: 0;
+}
+
+/* CTA Area */
+.agency-cta-area {
+  display: flex;
+  justify-content: center;
+}
+
+.agency-btn-primary {
+  background-color: #0c0926;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 16px 48px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.agency-btn-primary:hover {
+  background-color: #1a164d;
+  transform: translateY(-2px);
+}
+
+.agency-btn-primary:focus-visible {
+  outline: 2px solid #5078F2;
+  outline-offset: 2px;
+}
+
+/* Responsiveness */
+@media (max-width: 1024px) {
+  .agency-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .smb-solution-section {
+    padding: 60px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .agency-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .agency-btn-primary {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agency-card {
+    transition: none;
+  }
+  .agency-card:hover {
+    transform: none;
+  }
+  .agency-card-icon {
+    transition: none;
+  }
+}
