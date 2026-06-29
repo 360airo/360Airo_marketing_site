@@ -1267,7 +1267,7 @@ color:#fff;
 #section-phone .feature-icon{flex-shrink:0;width:36px;height:36px;display:flex;align-items:center;justify-content:center}
 #section-phone .feature-icon svg{width:28px;height:28px;stroke:#555;fill:none;stroke-width:1.5}
 #section-phone .feature-text{font-size:13px;line-height:1.65;color:#666;max-width:320px}
-@media(max-width:900px){#section-phone{display:block}#section-phone .p2-hero{height:auto!important;min-height:auto!important;padding:60px 0;overflow:visible!important}#section-phone .hero-main{grid-template-columns:1fr;text-align:center;padding:30px 24px 0}#section-phone .hero-left{display:flex;flex-direction:column;align-items:center;padding-top:0}#section-phone .hero-right{justify-content:center;padding-right:0;padding-top:30px}#section-phone .hero-center{overflow:visible!important}#section-phone .headline-line{overflow:visible!important}#section-phone .hero-headline{font-size:clamp(55px,12vw,120px);letter-spacing:2px}#section-phone .feature-strip{grid-template-columns:1fr;gap:30px;padding:40px 24px}}
+@media(max-width:1024px){#section-phone{display:block}#section-phone .p2-hero{height:auto!important;min-height:auto!important;padding:60px 0;overflow:visible!important}#section-phone .hero-main{grid-template-columns:1fr;text-align:left;padding:30px 24px 0}#section-phone .hero-left{display:flex;flex-direction:column;align-items:flex-start;padding-top:0}#section-phone .hero-right{justify-content:center;padding-right:0;padding-top:30px}#section-phone .hero-center{overflow:visible!important}#section-phone .headline-line{overflow:visible!important}#section-phone .hero-headline{font-size:clamp(55px,12vw,120px);letter-spacing:2px}#section-phone .feature-strip{grid-template-columns:1fr;gap:30px;padding:40px 24px}}
 @media(max-width:600px){#section-phone .phone-mockup{width:240px;height:480px}#section-phone .hero-headline{font-size:clamp(40px,13vw,80px);letter-spacing:2px}}
 
 /* MOUNTAIN */
@@ -2640,6 +2640,14 @@ filter:none;
     font-size: 12px !important;
     color: rgba(255, 255, 255, 0.35) !important;
     order: 2 !important;
+  }
+  
+  footer .footer-social-icons a {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0 !important;
+    margin: 0 !important;
   }
   
   footer .fsc {

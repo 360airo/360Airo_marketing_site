@@ -328,3 +328,11 @@ body {
     bottom: 5% !important;
   }
 }
+
+/* Hide tablet mockup completely on tablet and mobile */
+@media (max-width: 1024px) {
+  .tablet-motion-layer, 
+  .tablet-motion-shell {
+    display: none !important;
+  }
+}
