@@ -97,9 +97,29 @@ export function Footer() {
         {footerSections.map((section, idx) => (
           <div className="fc" key={idx}>
             <h4>{section.title}</h4>
-            {section.links.map((link, linkIdx) => (
-              <Link href="#" key={linkIdx}>{link}</Link>
-            ))}
+            {section.links.map((link, linkIdx) => {
+              const linkMap: Record<string, string> = {
+                "Startups": "/solutions", "SMBs": "/solutions", "Enterprise": "/solutions",
+                "Email Verifier": "/free-tools/email-verifier", "Mailbox Calculator": "/free-tools/mailbox-calculator",
+                "DMARC Generator": "/free-tools/dmarc-generator", "SPF Generator": "/free-tools/spf-generator",
+                "Email Pitch Generator": "/free-tools/email-pitch-generator", "Email Signature Builder": "/free-tools/email-signature-builder",
+                "Email Sequencer": "/free-tools/email-sequencer", "Email Template Analyzer": "/free-tools/email-template-analyzer",
+                "Email Deliverability Test": "/free-tools/email-deliverability-test", "Email Permutator": "/free-tools/email-permutator",
+                "Email Spam Checker": "/free-tools/email-spam-checker",
+                "Blogs": "/blogs", "Articles": "/resources", "Customer stories": "/customer-stories",
+                "Testimonial": "/#testimonials", "FAQs": "/#faq", "Playbook": "/resources",
+                "Email Deliverability": "/features"
+              };
+              
+              // Fallback routing based on section
+              let href = linkMap[link];
+              if (!href) {
+                if (section.title === "Features" || section.title === "Product") href = "/features";
+                else href = "#";
+              }
+
+              return <Link href={href} key={linkIdx}>{link}</Link>;
+            })}
           </div>
         ))}
         <div className="fc">
