@@ -434,7 +434,7 @@
 .flow-line.completed {
   stroke: #10b981;
   stroke-width: 3.5;
-  stroke-dasharray: none;
+  stroke-dasharray: 8 6;
 }
 
 @keyframes lineFlowPulse {

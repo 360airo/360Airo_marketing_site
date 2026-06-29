@@ -99,14 +99,30 @@
   color: #A0A0A0;
 }
 
+/* --- STATIC LOGO GRID --- */
+.trusted-logo-grid-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 30px 0 100px;
+  margin-top: 10px;
+}
+
+.trusted-logo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 40px 80px;
+  max-width: 1200px;
+}
+
 /* --- LOGO MARQUEE --- */
 .logo-marquee-container {
   overflow: hidden;
   width: 100%;
   display: flex;
   position: relative;
-  padding: 30px 0 100px;
-  margin-top: 10px;
   /* Fade edges for glassmorphism layout feel */
   mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
@@ -308,7 +324,7 @@
     font-size: 17px;
   }
 
-  .trusted-logo-row {
+  .trusted-logo-grid {
     gap: 30px 40px;
   }
 }
