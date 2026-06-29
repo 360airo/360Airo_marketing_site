@@ -103,21 +103,52 @@ export default function PricingPage() {
         </section>
 
         {/* PRICING CARDS */}
-        <section className="pricing-grid">
-          
-          {/* CARD 1: Base/Starter */}
+                <section className="pricing-grid">
+          {/* CARD 1: Free */}
           <div className="pp-card pp-animate-reveal delay-100">
             <div className="pp-card-inner">
-              <h3 className="pp-card-name">Email Volume</h3>
-              <p className="pp-card-desc">Send high-volume outbound email sequences at scale with maximum deliverability.</p>
+              <h3 className="pp-card-name">Free</h3>
+              <p className="pp-card-desc">For individuals starting with outbound email</p>
               
               <div className="pp-card-price-wrap">
                 <div className="pp-card-price-period">Starting at</div>
                 <div className="pp-card-price">
-                  <span style={{fontSize: 24}}>$</span>
-                  {isYearly ? '59' : '79'}
+                  <span style={{fontSize: 24}}>$</span>0
                 </div>
-                <div className="pp-card-price-subtext">per user / month, billed {isYearly ? 'annually' : 'monthly'}</div>
+                <div className="pp-card-price-subtext">per month</div>
+              </div>
+              
+              <Link href="/contact-us" className="pp-btn pp-btn-outline">Start Free Trial</Link>
+              
+              <div className="pp-card-divider"></div>
+              
+              <div className="pp-feature-group">
+                <div className="pp-feature-group-title">Free Features</div>
+                <ul className="pp-feature-list">
+                  <li className="pp-feature-item"><CheckIcon /> Unlimited email sending</li>
+                  <li className="pp-feature-item"><CheckIcon /> 1,000 email contacts</li>
+                  <li className="pp-feature-item"><CheckIcon /> 1 mailbox</li>
+                  <li className="pp-feature-item"><CheckIcon /> 1 user</li>
+                  <li className="pp-feature-item"><CheckIcon /> 500 AI personalization credits</li>
+                  <li className="pp-feature-item"><CheckIcon /> Email campaigns</li>
+                  <li className="pp-feature-item"><CheckIcon /> Limited integrations</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          {/* CARD 2: Starter */}
+          <div className="pp-card pp-animate-reveal delay-100">
+            <div className="pp-card-inner">
+              <h3 className="pp-card-name">Starter</h3>
+              <p className="pp-card-desc">For small outbound teams that need shared tools</p>
+              
+              <div className="pp-card-price-wrap">
+                <div className="pp-card-price-period">Starting at</div>
+                <div className="pp-card-price">
+                  <span style={{fontSize: 24}}>$</span>99
+                </div>
+                <div className="pp-card-price-subtext">per month</div>
               </div>
               
               <Link href="/contact-us" className="pp-btn pp-btn-outline">Start 14-day trial</Link>
@@ -125,40 +156,34 @@ export default function PricingPage() {
               <div className="pp-card-divider"></div>
               
               <div className="pp-feature-group">
-                <div className="pp-feature-group-title">Channels</div>
+                <div className="pp-feature-group-title">Starter Features</div>
                 <ul className="pp-feature-list">
-                  <li className="pp-feature-item"><CheckIcon /> Email Automation</li>
-                  <li className="pp-feature-item dimmed"><CheckIcon /> LinkedIn Automation</li>
-                  <li className="pp-feature-item dimmed"><CheckIcon /> Calls & SMS</li>
-                </ul>
-              </div>
-
-              <div className="pp-feature-group">
-                <div className="pp-feature-group-title">Core Features</div>
-                <ul className="pp-feature-list">
-                  <li className="pp-feature-item"><CheckIcon /> Free Warmup</li>
-                  <li className="pp-feature-item"><CheckIcon /> Unlimited inboxes</li>
-                  <li className="pp-feature-item"><CheckIcon /> 50 B2B data credits / mo</li>
-                  <li className="pp-feature-item"><CheckIcon /> Anti-spam safety limits</li>
+                  <li className="pp-feature-item"><CheckIcon /> Unlimited email sending</li>
+                  <li className="pp-feature-item"><CheckIcon /> 5,000 email contacts</li>
+                  <li className="pp-feature-item"><CheckIcon /> 8 mailboxes & 3 users</li>
+                  <li className="pp-feature-item"><CheckIcon /> 3,000 AI credits/mo</li>
+                  <li className="pp-feature-item"><CheckIcon /> 3 LinkedIn seats</li>
+                  <li className="pp-feature-item"><CheckIcon /> 3,000 email verification credits/mo</li>
+                  <li className="pp-feature-item"><CheckIcon /> Unified inbox & Smart scheduler</li>
+                  <li className="pp-feature-item"><CheckIcon /> Email warmup & Inbox rotation</li>
                 </ul>
               </div>
             </div>
           </div>
 
-          {/* CARD 2: Growth (Recommended) */}
+          {/* CARD 3: Pro */}
           <div className="pp-card pp-card-recommended pp-animate-reveal delay-200">
-            <div className="pp-card-top-bar">Best value for growing teams</div>
+            <div className="pp-card-top-bar">Best for growing teams</div>
             <div className="pp-card-inner">
-              <h3 className="pp-card-name">Multichannel</h3>
-              <p className="pp-card-desc">Combine autonomous Email, LinkedIn, and Calls in unified sequences to book more meetings.</p>
+              <h3 className="pp-card-name">Pro</h3>
+              <p className="pp-card-desc">For growing teams running advanced outbound workflows</p>
               
               <div className="pp-card-price-wrap">
                 <div className="pp-card-price-period">Starting at</div>
                 <div className="pp-card-price">
-                  <span style={{fontSize: 24}}>$</span>
-                  {isYearly ? '109' : '149'}
+                  <span style={{fontSize: 24}}>$</span>299
                 </div>
-                <div className="pp-card-price-subtext">per user / month, billed {isYearly ? 'annually' : 'monthly'}</div>
+                <div className="pp-card-price-subtext">per month</div>
               </div>
               
               <Link href="/contact-us" className="pp-btn pp-btn-solid">Start 14-day trial</Link>
@@ -166,59 +191,53 @@ export default function PricingPage() {
               <div className="pp-card-divider"></div>
               
               <div className="pp-feature-group">
-                <div className="pp-feature-group-title">Channels</div>
+                <div className="pp-feature-group-title">Pro Features</div>
                 <ul className="pp-feature-list">
-                  <li className="pp-feature-item"><CheckIcon /> Email Automation (Unlimited)</li>
-                  <li className="pp-feature-item"><CheckIcon /> LinkedIn Automation</li>
-                  <li className="pp-feature-item"><CheckIcon /> Calls & SMS Automation</li>
-                </ul>
-              </div>
-
-              <div className="pp-feature-group">
-                <div className="pp-feature-group-title">Growth Tools</div>
-                <ul className="pp-feature-list">
-                  <li className="pp-feature-item"><CheckIcon /> AI-assisted sequence writer</li>
-                  <li className="pp-feature-item"><CheckIcon /> Smart inbox rotation</li>
-                  <li className="pp-feature-item"><CheckIcon /> Advanced deliverability suite</li>
-                  <li className="pp-feature-item"><CheckIcon /> Team performance reporting</li>
+                  <li className="pp-feature-item"><CheckIcon /> Unlimited email sending</li>
+                  <li className="pp-feature-item"><CheckIcon /> 25,000 email contacts</li>
+                  <li className="pp-feature-item"><CheckIcon /> 20 mailboxes & 5 users</li>
+                  <li className="pp-feature-item"><CheckIcon /> 10,000 AI credits/mo</li>
+                  <li className="pp-feature-item"><CheckIcon /> 5 LinkedIn seats</li>
+                  <li className="pp-feature-item"><CheckIcon /> 10,000 email verification credits/mo</li>
+                  <li className="pp-feature-item"><CheckIcon /> Advanced AI & Inbox rotation</li>
+                  <li className="pp-feature-item"><CheckIcon /> Full integrations & A/B testing</li>
                 </ul>
               </div>
             </div>
           </div>
 
-          {/* CARD 3: Distinct / AI SDR */}
+          {/* CARD 4: Enterprise */}
           <div className="pp-card pp-card-ai pp-animate-reveal delay-300">
             <div className="pp-card-inner">
-              <div className="pp-ai-label"><AIStarIcon /> 360Airo AI</div>
-              <h3 className="pp-card-name">Hire AI SDR</h3>
-              <p className="pp-card-desc">An autonomous agent that identifies prospects, writes personalized copy, and manages replies 24/7.</p>
+              <div className="pp-ai-label"><AIStarIcon /> Unlimited Scale</div>
+              <h3 className="pp-card-name">Enterprise</h3>
+              <p className="pp-card-desc">Custom infrastructure and unlimited scale for large organizations</p>
               
               <div className="pp-card-price-wrap">
-                <div className="pp-card-price-period">Starting at</div>
+                <div className="pp-card-price-period">Custom Pricing</div>
                 <div className="pp-card-price">
-                  <span style={{fontSize: 24}}>$</span>
-                  {isYearly ? '600' : '800'}
+                  <span style={{fontSize: 24, paddingBottom: 10, paddingTop: 10}}>Contact for quote</span>
                 </div>
-                <div className="pp-card-price-subtext">/ month, billed {isYearly ? 'annually' : 'monthly'}</div>
               </div>
               
-              <Link href="/contact-us" className="pp-btn pp-btn-white" style={{color: 'var(--pp-bg-navy)'}}>Hire AI SDR</Link>
+              <Link href="/contact-us" className="pp-btn pp-btn-white" style={{color: 'var(--pp-bg-navy)'}}>Contact Sales</Link>
               
               <div className="pp-card-divider"></div>
               
               <div className="pp-feature-group">
-                <div className="pp-feature-group-title">Autonomous Capabilities</div>
+                <div className="pp-feature-group-title">Enterprise Features</div>
                 <ul className="pp-feature-list">
-                  <li className="pp-feature-item"><CheckIcon /> 24/7 Autonomous Operations</li>
-                  <li className="pp-feature-item"><CheckIcon /> Real-time prospect intent search</li>
-                  <li className="pp-feature-item"><CheckIcon /> Inbox signals routing</li>
-                  <li className="pp-feature-item"><CheckIcon /> AI hyper-personalization</li>
-                  <li className="pp-feature-item"><CheckIcon /> AI-generated responses</li>
+                  <li className="pp-feature-item"><CheckIcon /> Unlimited users & mailboxes</li>
+                  <li className="pp-feature-item"><CheckIcon /> Unlimited AI personalization</li>
+                  <li className="pp-feature-item"><CheckIcon /> Unlimited LinkedIn seats</li>
+                  <li className="pp-feature-item"><CheckIcon /> Custom voice calling seats</li>
+                  <li className="pp-feature-item"><CheckIcon /> Custom AI models & API access</li>
+                  <li className="pp-feature-item"><CheckIcon /> Dedicated infrastructure</li>
+                  <li className="pp-feature-item"><CheckIcon /> Dedicated account executive</li>
                 </ul>
               </div>
             </div>
           </div>
-
         </section>
 
         {/* SOCIAL PROOF */}
@@ -249,17 +268,17 @@ export default function PricingPage() {
             <p className="pp-section-subtext">See the full feature breakdown to decide the best fit for your outreach scale, team size, and automation needs.</p>
           </div>
           
-          <div className="pp-table-wrapper">
+                    <div className="pp-table-wrapper">
             <table className="pp-compare-table">
               <thead>
                 <tr>
                   <th>Feature</th>
                   <th>Starter</th>
                   <th className="pp-col-highlight">
-                    Growth
+                    Pro
                     <div className="pp-table-badge">Best for growing teams</div>
                   </th>
-                  <th>Pro</th>
+                  <th>Enterprise</th>
                 </tr>
               </thead>
               <tbody>
@@ -271,18 +290,18 @@ export default function PricingPage() {
                 </tr>
                 <tr>
                   <td>Daily Send Limit</td>
-                  <td>400</td>
+                  <td>100</td>
                   <td className="pp-col-highlight">1,000</td>
                   <td>10,000+</td>
                 </tr>
                 <tr>
-                  <td>Sequence Campaigns</td>
-                  <td>5</td>
+                  <td>Sequence Capacity</td>
+                  <td>3</td>
                   <td className="pp-col-highlight">25</td>
                   <td>Unlimited</td>
                 </tr>
                 <tr>
-                  <td>AI Automation Steps</td>
+                  <td>AI Automation Tools</td>
                   <td>Basic</td>
                   <td className="pp-col-highlight">Advanced</td>
                   <td>Enterprise</td>
@@ -302,7 +321,7 @@ export default function PricingPage() {
               </tbody>
             </table>
           </div>
-          
+
           <div className="pp-compare-note">
             Not sure which plan fits your workflow? Compare capabilities by team size, automation needs, and sending scale.
           </div>
@@ -374,8 +393,8 @@ export default function PricingPage() {
         {/* FINAL CTA */}
         <section className="pp-final-cta">
           <div className="pp-cta-panel">
-            <div className="pp-cta-eyebrow">START YOUR OUTREACH ENGINE</div>
-            <h2 className="pp-cta-heading">Start building better outbound campaigns today.</h2>
+            <div className="pp-cta-eyebrow">START FREE TRIAL</div>
+            <h2 className="pp-cta-heading">Try 360Airo Free — No Credit Card Required.</h2>
             <p className="pp-cta-desc">Create your first campaign, connect an inbox, and explore AI-powered outreach in minutes. No credit card required.</p>
             <Link href="/contact-us" className="pp-btn pp-btn-solid">Start Free Trial <span className="pp-cta-arrow">&rarr;</span></Link>
             
