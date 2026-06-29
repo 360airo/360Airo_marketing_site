@@ -2030,10 +2030,9 @@ filter:none;
 /* Resources Dropdown Custom Styles */
 .nav-dropdown-menu {
   position: absolute;
-  top: 100%;
+  top: calc(100% + 10px);
   left: 50%;
   transform: translateX(-50%);
-  margin-top: 10px;
   width: 380px;
   background: #ffffff !important;
   border: 1px solid #e2e8f0 !important;
@@ -2046,6 +2045,17 @@ filter:none;
   gap: 6px;
   text-align: left;
   animation: dropdownFadeIn 0.2s ease-out forwards;
+}
+
+/* Invisible bridge to prevent hover gap issues */
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 0;
+  right: 0;
+  height: 20px;
+  background: transparent;
 }
 
 @keyframes dropdownFadeIn {
