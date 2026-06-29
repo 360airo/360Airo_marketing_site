@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { navLinks } from '../data/navLinks';
-import { BookOpen, Users, HelpCircle, ChevronDown, FileText, Scale, Star, MessageCircle } from 'lucide-react';
+import { BookOpen, Users, HelpCircle, ChevronDown, FileText, Scale, Star, MessageCircle, Zap, Briefcase, Building2, Target } from 'lucide-react';
 
 interface NavbarProps {
   activeTab?: string;
@@ -18,12 +18,21 @@ const mainResources = [
   { label: 'FAQs', description: 'Frequently asked questions about our platform', href: '#faq', icon: HelpCircle }
 ];
 
+const mainSolutions = [
+  { label: 'Startups', description: 'Scale your early-stage growth', href: '/solutions/startups', icon: Zap },
+  { label: 'SMBs', description: 'Grow your small to medium business', href: '/solutions/smbs', icon: Briefcase },
+  { label: 'Enterprise', description: 'Power your large-scale operations', href: '/solutions/enterprise', icon: Building2 },
+  { label: 'Marketing agencies', description: 'Drive client success efficiently', href: '/solutions/agencies', icon: Target }
+];
+
 const footerResource = { label: 'Customer Support', href: '/customer-support' };
 
 export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [solutionsDropdownOpen, setSolutionsDropdownOpen] = useState(false);
   const [mobileResourcesOpen, setMobileResourcesOpen] = useState(false);
+  const [mobileSolutionsOpen, setMobileSolutionsOpen] = useState(false);
 
   return (
     <>
@@ -42,16 +51,24 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
           </Link>
 
           <ul className="nav-links">
-            {navLinks.filter(link => link !== 'Book a Demo' && link !== 'Login').map((link) => {
+            {navLinks.filter(link => link !== 'Book a Demo').map((link) => {
               const linkSlug = link.toLowerCase().replace(/\s+/g, '-');
 
-              if (linkSlug === 'resources') {
+              if (linkSlug === 'resources' || linkSlug === 'solutions') {
+                const isResources = linkSlug === 'resources';
+                const isOpen = isResources ? dropdownOpen : solutionsDropdownOpen;
+                const setOpen = isResources ? setDropdownOpen : setSolutionsDropdownOpen;
+                const items = isResources ? mainResources : mainSolutions;
+                const isActive = isResources 
+                  ? (activeTab === 'resources' || activeTab === 'customer-stories')
+                  : activeTab === 'solutions';
+
                 return (
                   <li
                     key={link}
-                    className={`nav-text-item ${activeTab === 'resources' || activeTab === 'customer-stories' ? 'active' : ''}`}
-                    onMouseEnter={() => setDropdownOpen(true)}
-                    onMouseLeave={() => setDropdownOpen(false)}
+                    className={`nav-text-item ${isActive ? 'active' : ''}`}
+                    onMouseEnter={() => setOpen(true)}
+                    onMouseLeave={() => setOpen(false)}
                     style={{ position: 'relative', display: 'flex', alignItems: 'center' }}
                   >
                     <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
@@ -60,15 +77,15 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
                         size={14} 
                         style={{
                           transition: 'transform 0.2s',
-                          transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                          transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                           display: 'inline-block'
                         }}
                       />
                     </span>
 
-                    {dropdownOpen && (
+                    {isOpen && (
                       <div className="nav-dropdown-menu">
-                        {mainResources.map((item, idx) => {
+                        {items.map((item, idx) => {
                           const IconComponent = item.icon;
                           return (
                             <Link key={idx} href={item.href} className="nav-dropdown-item">
@@ -104,13 +121,6 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
 
           <div className="nav-btns">
             <Link 
-              href="/login" 
-              className="btn-nav-login" 
-              style={{ textDecoration: 'none', display: 'inline-block', marginRight: '12px' }}
-            >
-              Login
-            </Link>
-            <Link 
               href="/book-a-demo" 
               className="btn-nav-login" 
               style={{ textDecoration: 'none', display: 'inline-block' }}
@@ -132,25 +142,30 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
         {navLinks.map((link) => {
           const linkSlug = link.toLowerCase().replace(/\s+/g, '-');
 
-          if (linkSlug === 'resources') {
+          if (linkSlug === 'resources' || linkSlug === 'solutions') {
+            const isResources = linkSlug === 'resources';
+            const isOpen = isResources ? mobileResourcesOpen : mobileSolutionsOpen;
+            const setOpen = isResources ? setMobileResourcesOpen : setMobileSolutionsOpen;
+            const items = isResources ? mainResources : mainSolutions;
+
             return (
               <div key={link} style={{ display: 'flex', flexDirection: 'column', width: '100%' }}>
                 <div 
-                  onClick={() => setMobileResourcesOpen(!mobileResourcesOpen)}
+                  onClick={() => setOpen(!isOpen)}
                   className="mobile-resources-toggle"
                 >
                   {link}
                   <span 
                     className="mobile-resources-arrow"
                     style={{ 
-                      transform: mobileResourcesOpen ? 'rotate(180deg)' : 'rotate(0deg)', 
+                      transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)', 
                       display: 'inline-block'
                     }}
                   >▼</span>
                 </div>
-                {mobileResourcesOpen && (
+                {isOpen && (
                   <div className="mobile-submenu">
-                    {mainResources.map((item, idx) => {
+                    {items.map((item, idx) => {
                       const IconComponent = item.icon;
                       const isActiveDropdown = activeTab === item.href.substring(1);
                       return (
@@ -168,18 +183,22 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
                         </Link>
                       );
                     })}
-                    <div style={{ width: '80%', height: '1px', background: 'rgba(255, 255, 255, 0.05)' }} />
-                    <Link 
-                      href={footerResource.href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className="mobile-submenu-link"
-                      style={{
-                        color: activeTab === 'customer-support' ? '#0EB5BB' : undefined
-                      }}
-                    >
-                      <HelpCircle size={15} color={activeTab === 'customer-support' ? '#0EB5BB' : 'rgba(255, 255, 255, 0.4)'} />
-                      {footerResource.label}
-                    </Link>
+                    {isResources && (
+                      <>
+                        <div style={{ width: '80%', height: '1px', background: 'rgba(255, 255, 255, 0.05)' }} />
+                        <Link 
+                          href={footerResource.href}
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="mobile-submenu-link"
+                          style={{
+                            color: activeTab === 'customer-support' ? '#0EB5BB' : undefined
+                          }}
+                        >
+                          <HelpCircle size={15} color={activeTab === 'customer-support' ? '#0EB5BB' : 'rgba(255, 255, 255, 0.4)'} />
+                          {footerResource.label}
+                        </Link>
+                      </>
+                    )}
                   </div>
                 )}
               </div>
@@ -187,14 +206,14 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
           }
 
           const href = linkSlug === 'home' ? '/' : `/${linkSlug}`;
-          if (linkSlug === 'book-a-demo' || linkSlug === 'login') {
+          if (linkSlug === 'book-a-demo') {
             return (
               <Link 
                 key={link} 
                 href={href} 
                 onClick={() => setMobileMenuOpen(false)}
                 className="btn-nav-login mobile-book-btn"
-                style={{ textDecoration: 'none', marginBottom: linkSlug === 'login' ? '12px' : '0' }}
+                style={{ textDecoration: 'none' }}
               >
                 {link}
               </Link>
