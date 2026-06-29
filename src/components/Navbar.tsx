@@ -105,7 +105,7 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
                 );
               }
 
-              const href = linkSlug === 'home' ? '/' : `/${linkSlug}`;
+              const href = linkSlug === 'home' ? '/' : linkSlug === 'login' ? 'https://app.360airo.com/' : `/${linkSlug}`;
               return (
                 <li
                   key={link}
@@ -205,7 +205,7 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
             );
           }
 
-          const href = linkSlug === 'home' ? '/' : `/${linkSlug}`;
+          const href = linkSlug === 'home' ? '/' : linkSlug === 'login' ? 'https://app.360airo.com/' : `/${linkSlug}`;
           if (linkSlug === 'book-a-demo') {
             return (
               <Link 
