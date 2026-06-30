@@ -20,7 +20,7 @@ const mainResources = [
 
 const mainSolutions = [
   { label: 'Startups', description: 'Scale your early-stage growth', href: '/solutions/smbs', icon: Zap },
-  { label: 'SMBs', description: 'Grow your small to medium business', href: '/solutions/smbs', icon: Briefcase },
+  // { label: 'SMBs', description: 'Grow your small to medium business', href: '/solutions/smbs', icon: Briefcase },
   { label: 'Enterprise', description: 'Power your large-scale operations', href: '/solutions/smbs', icon: Building2 },
   { label: 'Marketing agencies', description: 'Drive client success efficiently', href: '/solutions/smbs', icon: Target }
 ];
