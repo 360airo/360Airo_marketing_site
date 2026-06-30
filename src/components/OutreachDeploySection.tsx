@@ -218,11 +218,8 @@ export default function OutreachDeploySection() {
                   <div className="mockup-view-content crm-view animate-fade-in">
                     <div className="crm-sync-grid">
                       <div className="crm-node-box pipedrive" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.5rem' }}>
-                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-                          <svg viewBox="0 0 24 24" fill="#000000" xmlns="http://www.w3.org/2000/svg" style={{ width: 20, height: 20 }}>
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L10.5 16c.45.45 1.08.7 1.5.7.83 0 1.5-.67 1.5-1.5 0-.42-.25-1.05-.7-1.5L9.2 10.1c.83-.45 1.79-.7 2.8-.7 3.31 0 6 2.69 6 6 0 3.31-2.69 6-6 6z" fill="currentColor"/>
-                          </svg>
-                          <span className="crm-logo-mock black" style={{ color: '#000000' }}>Pipedrive</span>
+                        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                          <span className="crm-logo-mock black" style={{ color: '#000000' }}>CRM</span>
                         </div>
                         <span className="crm-node-status">Connected</span>
                       </div>
