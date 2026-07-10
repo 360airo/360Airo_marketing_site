@@ -5,14 +5,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import '../styles/HowItWorksSection.css';
 
 const steps = [
-  { id: 1, title: 'Import & Enrich Your Prospect List', image: '/step_1_leads.png' },
-  { id: 2, title: 'Choose AI-Powered Multichannel Sequences', image: '/step_2_channels.png' },
-  { id: 3, title: 'Build your unique hyper-Personalized AI Sequences and Templates', image: '/step_3_templates.png' },
-  { id: 4, title: 'Manage Conversations & Book Meetings', image: '/step_4_inbox.png' },
-  { id: 5, title: 'Analyze Performance & Optimize ROI', image: '/step_5_analytics.png' },
+  { id: 1, title: 'Unlimited Mailboxes & Warm-Up', image: '/step_1_leads.png' },
+  { id: 2, title: 'Enrich prospects with realtime b2b lead intelligence', image: '/step_2_channels.png' },
+  { id: 3, title: 'AI-Powered Hyper- Personalization', image: '/step_3_templates.png' },
+  { id: 4, title: 'Multichannel Sales Engagement', image: '/step_4_inbox.png' },
+  { id: 5, title: 'Sales Analytics & Reporting', image: '/step_5_analytics.png' },
 ];
 
-export default function HowItWorksSection() {
+export default function StartupsHowItWorksSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const triggerRef = useRef<HTMLDivElement>(null);
   const [activeStep, setActiveStep] = useState(1);
@@ -24,16 +24,13 @@ export default function HowItWorksSection() {
       ScrollTrigger.create({
         trigger: triggerRef.current,
         start: "top 100px",
-        end: "+=1500",
+        end: "+=1500", // Adjusted for a more compact scroll
         pin: true,
-        scrub: 1, // Added smooth scrub!
+        scrub: 1,
         onUpdate: (self) => {
-          // Progress goes from 0 to 1
           const progress = self.progress;
-          // Calculate step based on progress (1 to 5)
           let currentStep = Math.min(Math.floor(progress * 5) + 1, 5);
           
-          // Edge case: if progress is exactly 1, we still want step 5
           if (progress === 1) currentStep = 5;
           if (progress === 0) currentStep = 1;
 
@@ -53,7 +50,7 @@ export default function HowItWorksSection() {
           
           {/* Headline */}
           <h2 className="hiw-headline">
-            One Centralized Platform to Run and Scale<br/>Your SDR & BDR Outreach
+            Your First Sales Hire Doesn't Have to Be a Sales Hire
           </h2>
 
           {/* Visuals Area */}

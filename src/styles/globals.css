@@ -336,3 +336,55 @@ body {
     display: none !important;
   }
 }
+
+/* --- LOGO MARQUEE --- */
+.logo-marquee-container {
+  overflow: hidden;
+  width: 100%;
+  display: block;
+  position: relative;
+  /* Fade edges for glassmorphism layout feel */
+  mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+}
+
+.logo-marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 80px; /* Generous gap for premium spacious layout */
+  width: max-content;
+  animation: logo-scroll 30s linear infinite !important;
+  -webkit-animation: logo-scroll 30s linear infinite !important;
+  /* Crucial: Prevent the track from shrinking to fit the container */
+  flex-shrink: 0; 
+  will-change: transform;
+}
+
+.logo-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@-webkit-keyframes logo-scroll {
+  0% { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+  100% { -webkit-transform: translate3d(-50%, 0, 0); transform: translate3d(-50%, 0, 0); }
+}
+
+@keyframes logo-scroll {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-50%, 0, 0); }
+}
+
+/* Base custom logo styling */
+.custom-logo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Outfit', sans-serif;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.custom-logo svg {
+  width: 24px;
+  height: 24px;
+}

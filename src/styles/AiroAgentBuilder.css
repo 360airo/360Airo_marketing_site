@@ -383,12 +383,14 @@
   background-image: radial-gradient(#e2e8f0 1.2px, transparent 1.2px);
   background-size: 16px 16px;
   position: relative;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
   height: 100%;
 }
 
 .flow-canvas-grid {
   width: 100%;
+  min-width: 700px; /* Forces horizontal scrolling on small screens and fixes overlap */
   height: 100%;
   position: relative;
 }
@@ -808,7 +810,16 @@
 }
 
 /* RESPONSIVE LAYOUTS */
-@media (max-width: 900px) {
+@media (max-width: 600px) {
+  .ab-title-campaign {
+    display: none;
+  }
+  .ab-window-header {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
   .ab-window-body {
     flex-direction: column;
     height: auto;
@@ -817,7 +828,7 @@
   .ab-chat-panel {
     width: 100%;
     border-right: none;
-    border-bottom: 1px solid #e2e8f0;
+    border-bottom: 2px solid #e2e8f0;
     height: 400px;
   }
   

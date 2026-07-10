@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import '../styles/SMBSolutionSection.css';
 
-export default function SMBSolutionSection() {
+export default function StartupsSolutionSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLHeadingElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -58,7 +58,7 @@ export default function SMBSolutionSection() {
       <div className="smb-container">
         
         <h2 className="agency-cards-title" ref={headerRef}>
-          Built for Ambitious SMBs. Optimized for Revenue Growth.
+          Your First Sales Hire Doesn't Have to Be a Sales Hire
         </h2>
 
         <div className="agency-cards-grid" ref={cardsRef}>
@@ -71,10 +71,7 @@ export default function SMBSolutionSection() {
                 <line x1="6" y1="20" x2="6" y2="14"></line>
               </svg>
             </div>
-            <h3 className="agency-card-heading">Scale Your Sales Without Growing Your Team</h3>
-            <p className="agency-card-text">
-              Automate follow-ups, sequences, lead qualification, and repetitive outreach tasks so your team can engage 3–5× more prospects and generate more pipeline—without hiring additional sales reps.
-            </p>
+            <h3 className="agency-card-heading">Unlimited Mailboxes & Warm-Up</h3>
           </div>
 
           {/* Card 2 */}
@@ -85,10 +82,7 @@ export default function SMBSolutionSection() {
                 <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
               </svg>
             </div>
-            <h3 className="agency-card-heading">Protect Your Sender Reputation</h3>
-            <p className="agency-card-text">
-              Keep your emails landing in the inbox with built-in email warm-up, deliverability monitoring, email health checks, and sending safeguards that help maintain a strong sender reputation
-            </p>
+            <h3 className="agency-card-heading">Enrich prospects with realtime b2b lead intelligence</h3>
           </div>
 
           {/* Card 3 */}
@@ -98,10 +92,7 @@ export default function SMBSolutionSection() {
                 <polygon points="2 4 5 13 12 10 19 13 22 4 22 20 2 20 2 4"></polygon>
               </svg>
             </div>
-            <h3 className="agency-card-heading">Measure What Drives Revenue</h3>
-            <p className="agency-card-text">
-              Track opens, replies, meetings, pipeline, and campaign performance from one dashboard. Export detailed reports to measure ROI, optimize outreach, and make smarter sales decisions.
-            </p>
+            <h3 className="agency-card-heading">AI-Powered Hyper-Personalization</h3>
           </div>
 
           {/* Card 4 */}
@@ -114,17 +105,20 @@ export default function SMBSolutionSection() {
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
             </div>
-            <h3 className="agency-card-heading">One Dashboard for Your Entire Sales Team</h3>
-            <p className="agency-card-text">
-              Create separate workspaces, assign roles and permissions, and manage every campaign from one platform. Give your team the visibility and control they need to scale outbound efficiently
-            </p>
+            <h3 className="agency-card-heading">Multichannel Sales Engagement</h3>
           </div>
-        </div>
 
-        <div className="agency-cta-area">
-          <button className="agency-btn-primary" tabIndex={0}>
-            Free 14 days Trail → Start now
-          </button>
+          {/* Card 5 */}
+          <div className="agency-card bg-light-blue" tabIndex={0}>
+            <div className="agency-card-icon icon-solid-blue">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </div>
+            <h3 className="agency-card-heading">Sales Analytics & Reporting</h3>
+          </div>
         </div>
 
       </div>

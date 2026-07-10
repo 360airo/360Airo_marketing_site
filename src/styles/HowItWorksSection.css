@@ -8,8 +8,8 @@
 
 .hiw-scroll-trigger {
   width: 100%;
-  min-height: 100vh;
-  padding: 40px 0;
+  min-height: auto;
+  padding: 20px 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -39,12 +39,12 @@
 .hiw-visual-container {
   width: 100%;
   aspect-ratio: 21 / 9;
-  max-height: 55vh;
+  max-height: 45vh;
   position: relative;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   background-color: #f3f4f6;
   border: 1px solid rgba(0, 0, 0, 0.05);
 }

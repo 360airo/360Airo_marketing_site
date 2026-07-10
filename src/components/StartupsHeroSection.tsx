@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/SMBHeroSection.css';
 
-export default function SMBHeroSection() {
+export default function StartupsHeroSection() {
   return (
     <section className="smb-hero-section">
       <div className="smb-hero-container">
@@ -9,15 +9,13 @@ export default function SMBHeroSection() {
         {/* Left Side: Copy */}
         <div className="smb-hero-content">
           <h1 className="smb-hero-title">
-            Sales Intelligence Platform for SMBs<br/>
-            Find High-Intent Buyers. Automate Outreach. Accelerate Revenue.
+            Email Outreach for Startups
           </h1>
           <p className="smb-hero-desc">
-            Manage every outreach campaign from one AI-powered sales engagement platform. Personalize outreach at scale, maximize email deliverability, engage buyers across every channel, and grow revenue without growing your team.
+            Launch high-performing email campaigns that help your startup generate predictable pipeline from day one.
           </p>
           <div className="smb-hero-actions">
-            <button className="btn-primary-dark">Start Free Trial</button>
-            <button className="btn-outline">Talk to us</button>
+            <button className="btn-primary-dark">Start a 14 day trial</button>
           </div>
         </div>
 

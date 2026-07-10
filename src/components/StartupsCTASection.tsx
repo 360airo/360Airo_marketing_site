@@ -2,16 +2,16 @@ import React from 'react';
 import Link from 'next/link';
 import '../styles/CTASection.css';
 
-export default function CTASection() {
+export default function StartupsCTASection() {
   return (
     <section className="cta-section">
       <div className="cta-container">
-        <h2 className="cta-heading">Your Next Stage of Sales Growth Starts Here</h2>
+        <h2 className="cta-heading">Start Growing Your Startup Today</h2>
         <p className="cta-description">
-          Whether you're building your first outbound team or scaling an existing one, 360Airo gives your SMB the tools to generate more pipeline, book more meetings, and accelerate revenue.
+          Find your ideal customers, automate personalized outreach, and book more qualified meetings all from one AI-powered sales engagement platform built for startups.
         </p>
         <Link href="/book-a-demo" className="cta-button">
-          Schedule a Demo
+          Start a 14 day trial
         </Link>
       </div>
     </section>
