@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles/SMBHeroSection.css';
 
-export default function SMBHeroSection() {
+export default function AgenciesHeroSection() {
   return (
     <section className="smb-hero-section">
       <div className="smb-hero-container">
@@ -9,15 +9,14 @@ export default function SMBHeroSection() {
         {/* Left Side: Copy */}
         <div className="smb-hero-content">
           <h1 className="smb-hero-title">
-            Sales Intelligence Platform for SMBs<br/>
-            Find High-Intent Buyers. Automate Outreach. Accelerate Revenue.
+            Grow Your Agency Without Growing Your Team
           </h1>
           <p className="smb-hero-desc">
-            Manage every outreach campaign from one AI-powered sales engagement platform. Personalize outreach at scale, maximize email deliverability, engage buyers across every channel, and grow revenue without growing your team.
+            Manage every client's cold email campaigns from one platform. Use unlimited sender accounts, generate client-ready reports, and scale your outreach with ease.
           </p>
           <div className="smb-hero-actions">
             <button className="btn-primary-dark">Start Free Trial</button>
-            <button className="btn-outline">Talk to us</button>
+            <button className="btn-outline">Book a Demo</button>
           </div>
         </div>
 
@@ -59,20 +58,20 @@ export default function SMBHeroSection() {
             {/* Nodes */}
             <div className="diag-node diag-center">
               <span className="diag-icon">Airo</span>
-              Sequences
+              Agencies
             </div>
 
             <div className="diag-node diag-tl">
-              Centralized Dashboards
+              Client Dashboards
               <div className="diag-badge-icon badge-purple">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
               </div>
             </div>
 
             <div className="diag-node diag-tr">
-              <div className="diag-badge-pill pill-green">AI-Powered</div>
+              <div className="diag-badge-pill pill-green">White-Label</div>
               <svg className="diag-check" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10b981" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              Deliverability Engine
+              Reports
             </div>
 
             <div className="diag-node diag-bl">
@@ -80,11 +79,11 @@ export default function SMBHeroSection() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
               </div>
               <div className="diag-badge-pill pill-yellow">Infinite Scale</div>
-              <span>Automated AI Warm-Up</span>
+              <span>Unlimited Mailboxes</span>
             </div>
 
             <div className="diag-node diag-br">
-              <div className="diag-text">Omnichannel AI Outreach</div>
+              <div className="diag-text">AI Campaign Personalization</div>
               <div className="diag-channel-icons">
                 <div className="channel-circle c-email">✉</div>
                 <div className="channel-circle c-phone">📞</div>

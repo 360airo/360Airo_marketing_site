@@ -7,7 +7,7 @@ export default function BentoFeaturesSection() {
     <section className="bento-section">
       <div className="bento-container">
         <h2 className="bento-headline">
-          All-in-one platform to run and scale<br />client outreach campaigns
+          All-in-One Sales Engagement Platform for client Outreach Campaigns
         </h2>
 
         <div className="bento-layout">
@@ -17,9 +17,9 @@ export default function BentoFeaturesSection() {
             {/* Card 1: Smart Sequences */}
             <div className="bento-card bento-light-blue bento-card-1">
               <div className="bento-card-content">
-                <h3 className="bento-title">Smart sequences that adapt to your prospects</h3>
+                <h3 className="bento-title">AI-Powered Multichannel Sequences</h3>
                 <p className="bento-text">
-                  Mix email, LinkedIn, calls, SMS, and WhatsApp into one seamless flow. Sequences adapt automatically based on prospect data and engagement, so your team can deliver personalized outreach at scale for every client.
+                  Reach prospects across Email, LinkedIn, SMS, and WhatsApp from a single sequence. AI adapts follow-ups based on prospect engagement, helping your team personalize outreach at scale and book more meetings.
                 </p>
               </div>
               <div className="bento-mockup-wrapper mockup-bottom">
@@ -54,9 +54,9 @@ export default function BentoFeaturesSection() {
             {/* Card 4: Complete Prospect Data */}
             <div className="bento-card bento-light-yellow bento-card-4">
               <div className="bento-card-content">
-                <h3 className="bento-title">Complete prospect data in seconds</h3>
+                <h3 className="bento-title">Instant Prospect Enrichment</h3>
                 <p className="bento-text">
-                  Upload client lists — even incomplete ones — and 360Airo will enrich them with LinkedIn URLs, phone numbers, and verified emails. Build ready-to-launch multichannel campaigns for clients in minutes instead of days.
+                  Upload and Scale your prospect list and automatically enrich it with verified emails, phone numbers, LinkedIn profiles, company insights, and buying signals. Launch highly targeted outbound campaigns in minutes not days.
                 </p>
               </div>
               <div className="bento-mockup-wrapper mockup-right">
@@ -86,9 +86,9 @@ export default function BentoFeaturesSection() {
               {/* Card 2: Bulk mailbox */}
               <div className="bento-card bento-light-blue-solid bento-card-2">
                 <div className="bento-card-content">
-                  <h3 className="bento-title">Bulk mailbox import for high-volume campaigns</h3>
+                  <h3 className="bento-title">Manage Multiple Mailboxes</h3>
                   <p className="bento-text">
-                    Quickly import and connect multiple client mailboxes via CSV, API, or native integrations. Perfect for agencies running high-volume campaigns — saving hours on setup and ensuring smooth management of dozens of accounts at once.
+                    Connect multiple business mailboxes with Google Workspace, Microsoft 365, SMTP, or IMAP. Scale outbound campaigns while maintaining healthy sending limits and strong email deliverability.
                   </p>
                 </div>
               </div>
@@ -96,9 +96,9 @@ export default function BentoFeaturesSection() {
               {/* Card 3: Conversations */}
               <div className="bento-card bento-light-purple bento-card-3">
                 <div className="bento-card-content">
-                  <h3 className="bento-title">All client conversations in one place</h3>
+                  <h3 className="bento-title">Unified Sales Inbox</h3>
                   <p className="bento-text">
-                    Every email reply, LinkedIn message, and SMS response is pulled into one unified inbox. AI auto-tags intent ("interested," "follow up later," "meeting booked"), helping you prioritize hot leads and prove ROI faster to clients.
+                    Manage every email reply, LinkedIn conversation, and SMS response from one inbox. Automatically organize conversations, prioritize hot prospects, and ensure no sales opportunity is missed.
                   </p>
                 </div>
               </div>
@@ -107,9 +107,9 @@ export default function BentoFeaturesSection() {
             {/* Card 5: Advanced roles */}
             <div className="bento-card bento-light-blue-solid bento-card-5">
               <div className="bento-card-content">
-                <h3 className="bento-title">Advanced roles and permissions</h3>
+                <h3 className="bento-title">Role-Based Team Management</h3>
                 <p className="bento-text">
-                  Manage all your clients and their campaigns from one 360Airo account — no more switching tabs or tools. Each client gets their own dedicated workspace, ensuring no mix-ups of data, campaigns, or contacts.
+                  Create workspaces, assign user roles and permissions, and manage your SDRs, BDRs, and sales managers from one centralized dashboard. Keep every campaign, contact, and workflow organized as your team grows.
                 </p>
               </div>
               <div className="bento-mockup-wrapper mockup-bottom mockup-wide">

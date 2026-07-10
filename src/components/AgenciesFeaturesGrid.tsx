@@ -4,7 +4,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import '../styles/SMBSolutionSection.css';
 
-export default function SMBSolutionSection() {
+export default function AgenciesFeaturesGrid() {
   const sectionRef = useRef<HTMLElement>(null);
   const headerRef = useRef<HTMLHeadingElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
@@ -13,7 +13,6 @@ export default function SMBSolutionSection() {
     gsap.registerPlugin(ScrollTrigger);
     
     const ctx = gsap.context(() => {
-      // Heading fade and move up
       gsap.fromTo(headerRef.current,
         { opacity: 0, y: 18 },
         {
@@ -29,7 +28,6 @@ export default function SMBSolutionSection() {
         }
       );
 
-      // Cards stagger animation
       const cards = cardsRef.current?.children;
       if (cards) {
         gsap.fromTo(cards,
@@ -58,10 +56,11 @@ export default function SMBSolutionSection() {
       <div className="smb-container">
         
         <h2 className="agency-cards-title" ref={headerRef}>
-          Built for Ambitious SMBs. Optimized for Revenue Growth.
+          Built for Agencies That Want to Scale
         </h2>
 
-        <div className="agency-cards-grid" ref={cardsRef}>
+        {/* 6 cards instead of 4 */}
+        <div className="agency-cards-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))' }} ref={cardsRef}>
           {/* Card 1 */}
           <div className="agency-card bg-light-blue" tabIndex={0}>
             <div className="agency-card-icon icon-solid-blue">
@@ -71,9 +70,9 @@ export default function SMBSolutionSection() {
                 <line x1="6" y1="20" x2="6" y2="14"></line>
               </svg>
             </div>
-            <h3 className="agency-card-heading">Scale Your Sales Without Growing Your Team</h3>
+            <h3 className="agency-card-heading">Manage Every Client from One Place</h3>
             <p className="agency-card-text">
-              Automate follow-ups, sequences, lead qualification, and repetitive outreach tasks so your team can engage 3–5× more prospects and generate more pipeline—without hiring additional sales reps.
+              Give every client their own dedicated workspace with separate campaigns, sender accounts, and reports—so you stay organized as your agency grows.
             </p>
           </div>
 
@@ -85,9 +84,9 @@ export default function SMBSolutionSection() {
                 <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
               </svg>
             </div>
-            <h3 className="agency-card-heading">Protect Your Sender Reputation</h3>
+            <h3 className="agency-card-heading">Scale Your Campaigns with Confidence</h3>
             <p className="agency-card-text">
-              Keep your emails landing in the inbox with built-in email warm-up, deliverability monitoring, email health checks, and sending safeguards that help maintain a strong sender reputation
+              Launch and manage hundreds of outreach campaigns while protecting deliverability with intelligent sender rotation and automated sending limits.
             </p>
           </div>
 
@@ -98,9 +97,9 @@ export default function SMBSolutionSection() {
                 <polygon points="2 4 5 13 12 10 19 13 22 4 22 20 2 20 2 4"></polygon>
               </svg>
             </div>
-            <h3 className="agency-card-heading">Measure What Drives Revenue</h3>
+            <h3 className="agency-card-heading">Personalize Every Client Campaign</h3>
             <p className="agency-card-text">
-              Track opens, replies, meetings, pipeline, and campaign performance from one dashboard. Export detailed reports to measure ROI, optimize outreach, and make smarter sales decisions.
+              Create tailored outreach for every client using AI, merge fields, dynamic variables, and custom messaging that resonates with each audience.
             </p>
           </div>
 
@@ -114,17 +113,40 @@ export default function SMBSolutionSection() {
                 <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
               </svg>
             </div>
-            <h3 className="agency-card-heading">One Dashboard for Your Entire Sales Team</h3>
+            <h3 className="agency-card-heading">Show the Results Your Clients Care About</h3>
             <p className="agency-card-text">
-              Create separate workspaces, assign roles and permissions, and manage every campaign from one platform. Give your team the visibility and control they need to scale outbound efficiently
+              Share real-time campaign performance, reply rates, meetings booked, and ROI through client-ready reports that build trust and strengthen retention.
             </p>
           </div>
-        </div>
 
-        <div className="agency-cta-area">
-          <button className="agency-btn-primary" tabIndex={0}>
-            Free 14 days Trail → Start now
-          </button>
+          {/* Card 5 */}
+          <div className="agency-card bg-light-blue" tabIndex={0}>
+            <div className="agency-card-icon icon-solid-blue">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="20" x2="18" y2="10"></line>
+                <line x1="12" y1="20" x2="12" y2="4"></line>
+                <line x1="6" y1="20" x2="6" y2="14"></line>
+              </svg>
+            </div>
+            <h3 className="agency-card-heading">Grow Your Brand with White-Label Outreach</h3>
+            <p className="agency-card-text">
+              Deliver outreach, reports, and client experiences under your own brand, giving your agency a professional and seamless customer experience.
+            </p>
+          </div>
+
+          {/* Card 6 */}
+          <div className="agency-card bg-light-purple" tabIndex={0}>
+            <div className="agency-card-icon icon-solid-purple">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                <polygon points="2 4 5 13 12 10 19 13 22 4 22 20 2 20 2 4"></polygon>
+              </svg>
+            </div>
+            <h3 className="agency-card-heading">Find Qualified Leads for Every Client</h3>
+            <p className="agency-card-text">
+              Build targeted prospect lists with verified B2B contacts, company insights, and buyer data—so you can launch campaigns faster for any industry or niche.
+            </p>
+          </div>
+
         </div>
 
       </div>
