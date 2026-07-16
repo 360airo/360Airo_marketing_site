@@ -183,26 +183,42 @@ export default function AiroAgentBuilder() {
           className={`ab-tab ${activeTab === 'ai' ? 'active' : ''}`} 
           onClick={() => setActiveTab('ai')}
         >
-          ✨ Let AI handle it
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+            <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275Z" />
+            <path d="m5 3 1 2.5L8.5 6 6 7 5 9.5 4 7 1.5 6 4 5.5Z" />
+            <path d="m19 17 1 2.5 2.5.5-2.5 1-1 2.5-1-2.5-2.5-1 2.5-1Z" />
+          </svg>
+          Let AI handle it
         </button>
         <button 
           className={`ab-tab ${activeTab === 'leads' ? 'active' : ''}`} 
           onClick={() => setActiveTab('leads')}
         >
-          🔍 Get verified data
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="m9 11 2 2 4-4"/>
+          </svg>
+          Get verified data
         </button>
 
         <button 
           className={`ab-tab ${activeTab === 'engage' ? 'active' : ''}`} 
           onClick={() => setActiveTab('engage')}
         >
-          ✉️ Engage on multi-channels
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+            <path d="m22 2-7 20-4-9-9-4Z" />
+            <path d="M22 2 11 13" />
+          </svg>
+          Engage on multi-channels
         </button>
         <button 
           className={`ab-tab ${activeTab === 'spam' ? 'active' : ''}`} 
           onClick={() => setActiveTab('spam')}
         >
-          🛡️ Avoid spam
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0 }}>
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+          </svg>
+          Avoid spam
         </button>
       </div>
 
