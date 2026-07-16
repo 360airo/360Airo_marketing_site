@@ -1,5 +1,4 @@
 import React from 'react';
-import { redirect } from 'next/navigation';
 import Navbar from '../../../components/Navbar';
 import Footer from '../../../components/Footer';
 import SMBHeroSection from '../../../components/SMBHeroSection';
@@ -9,9 +8,6 @@ import HowItWorksSection from '../../../components/HowItWorksSection';
 import CTASection from '../../../components/CTASection';
 
 export default function SMBSolutionsPage() {
-  // Temporarily disable page during development
-  redirect('/');
-  
   return (
     <div className="app-container">
       <Navbar activeTab="solutions" />

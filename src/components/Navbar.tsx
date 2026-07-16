@@ -21,7 +21,7 @@ const mainResources = [
 const mainSolutions = [
   { label: 'Startups', description: 'Scale your early-stage growth', href: '/solutions/startups', icon: Zap },
   { label: 'SMBs', description: 'Grow your small to medium business', href: '/solutions/smbs', icon: Briefcase },
-  { label: 'Enterprise', description: 'Power your large-scale operations', href: '/solutions/smbs', icon: Building2 },
+  { label: 'Enterprise', description: 'Power your large-scale operations', href: '#', icon: Building2, disabled: true },
   { label: 'Marketing agencies', description: 'Drive client success efficiently', href: '/solutions/agencies', icon: Target }
 ];
 
@@ -87,6 +87,19 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
                       <div className="nav-dropdown-menu">
                         {items.map((item, idx) => {
                           const IconComponent = item.icon;
+                          if (item.disabled) {
+                            return (
+                              <div key={idx} className="nav-dropdown-item" style={{ cursor: 'not-allowed', opacity: 0.55 }}>
+                                <div className="nav-dropdown-icon-box">
+                                  <IconComponent size={16} />
+                                </div>
+                                <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+                                  <span className="nav-dropdown-title">{item.label}</span>
+                                  <span className="nav-dropdown-desc">{item.description}</span>
+                                </div>
+                              </div>
+                            );
+                          }
                           return (
                             <Link key={idx} href={item.href} className="nav-dropdown-item">
                               <div className="nav-dropdown-icon-box">
@@ -179,24 +192,39 @@ export function Navbar({ activeTab = 'home', theme = 'dark' }: NavbarProps) {
                 </div>
                 {isOpen && (
                   <div className="mobile-submenu">
-                    {items.map((item, idx) => {
-                      const IconComponent = item.icon;
-                      const isActiveDropdown = activeTab === item.href.substring(1);
-                      return (
-                        <Link 
-                          key={idx} 
-                          href={item.href} 
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="mobile-submenu-link"
-                          style={{
-                            color: isActiveDropdown ? '#0EB5BB' : undefined
-                          }}
-                        >
-                          <IconComponent size={16} color={isActiveDropdown ? '#0EB5BB' : 'rgba(255, 255, 255, 0.4)'} />
-                          {item.label}
-                        </Link>
-                      );
-                    })}
+                     {items.map((item, idx) => {
+                       const IconComponent = item.icon;
+                       const isActiveDropdown = activeTab === item.href.substring(1);
+                       if (item.disabled) {
+                         return (
+                           <div 
+                             key={idx} 
+                             className="mobile-submenu-link"
+                             style={{
+                               color: 'rgba(255, 255, 255, 0.3)',
+                               cursor: 'not-allowed'
+                             }}
+                           >
+                             <IconComponent size={16} color="rgba(255, 255, 255, 0.2)" />
+                             {item.label}
+                           </div>
+                         );
+                       }
+                       return (
+                         <Link 
+                           key={idx} 
+                           href={item.href} 
+                           onClick={() => setMobileMenuOpen(false)}
+                           className="mobile-submenu-link"
+                           style={{
+                             color: isActiveDropdown ? '#0EB5BB' : undefined
+                           }}
+                         >
+                           <IconComponent size={16} color={isActiveDropdown ? '#0EB5BB' : 'rgba(255, 255, 255, 0.4)'} />
+                           {item.label}
+                         </Link>
+                       );
+                     })}
                     {isResources && (
                       <>
                         <div style={{ width: '80%', height: '1px', background: 'rgba(255, 255, 255, 0.05)' }} />
