@@ -2,6 +2,7 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import WorkflowDiagram from './WorkflowDiagram';
 import '../styles/AiroAgentBuilder.css';
 
 export default function AiroAgentBuilder() {
@@ -410,7 +411,119 @@ export default function AiroAgentBuilder() {
           )}
 
           {activeTab === 'leads' && (
-            <div className="tab-mock-content">
+            <div className="tab-mock-content animate-fade-in">
+              <div className="mock-leads-header-premium">
+                <h3>Verified B2B Lead Directory</h3>
+                <p>Search, filter, and export verified emails & phone numbers from our database of 250M+ prospects.</p>
+              </div>
+              <div className="mock-leads-grid-premium">
+                <div className="mock-filter-sidebar-premium">
+                  <div className="filter-header-premium">
+                    <span>🔍</span> Filter Prospects
+                  </div>
+                  <div className="filter-group-premium">
+                    <label>Job Title</label>
+                    <span className="filter-chip-premium active">CFO</span>
+                    <span className="filter-chip-premium">VP Finance</span>
+                    <span className="filter-chip-premium">Controller</span>
+                  </div>
+                  <div className="filter-group-premium">
+                    <label>Industry</label>
+                    <span className="filter-chip-premium active">B2B SaaS</span>
+                    <span className="filter-chip-premium">Fintech</span>
+                    <span className="filter-chip-premium">Healthcare</span>
+                  </div>
+                  <div className="filter-group-premium">
+                    <label>Location</label>
+                    <span className="filter-chip-premium active">United States</span>
+                    <span className="filter-chip-premium">United Kingdom</span>
+                    <span className="filter-chip-premium">Canada</span>
+                  </div>
+                  <button className="apply-filter-btn" style={{ pointerEvents: 'none' }}>Apply Filters</button>
+                </div>
+                <div className="mock-leads-table-container">
+                  <div className="table-row-premium header-premium">
+                    <div>Name / Role</div>
+                    <div>Company</div>
+                    <div>Email</div>
+                    <div>Phone</div>
+                  </div>
+                  {/* Row 1 */}
+                  <div className="table-row-premium">
+                    <div className="prospect-info">
+                      <div className="prospect-avatar">JS</div>
+                      <div>
+                        <strong>Jane Smith</strong>
+                        <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 'normal' }}>CFO</div>
+                      </div>
+                    </div>
+                    <div>
+                      <span className="company-badge">Vercel</span>
+                    </div>
+                    <div>
+                      <span className="email-pill">j***@vercel.com (Verified)</span>
+                    </div>
+                    <div>
+                      <span className="phone-text">+1 (415) 555-0192</span>
+                    </div>
+                  </div>
+                  {/* Row 2 */}
+                  <div className="table-row-premium">
+                    <div className="prospect-info">
+                      <div className="prospect-avatar">MD</div>
+                      <div>
+                        <strong>Marcus Davis</strong>
+                        <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 'normal' }}>Chief Financial Officer</div>
+                      </div>
+                    </div>
+                    <div>
+                      <span className="company-badge">Stripe</span>
+                    </div>
+                    <div>
+                      <span className="email-pill">m***@stripe.com (Verified)</span>
+                    </div>
+                    <div>
+                      <span className="phone-text">+1 (212) 555-0143</span>
+                    </div>
+                  </div>
+                  {/* Row 3 */}
+                  <div className="table-row-premium">
+                    <div className="prospect-info">
+                      <div className="prospect-avatar">EL</div>
+                      <div>
+                        <strong>Elena Lopez</strong>
+                        <div style={{ fontSize: '0.75rem', color: '#64748b', fontWeight: 'normal' }}>VP of Finance</div>
+                      </div>
+                    </div>
+                    <div>
+                      <span className="company-badge">Figma</span>
+                    </div>
+                    <div>
+                      <span className="email-pill">e***@figma.com (Verified)</span>
+                    </div>
+                    <div>
+                      <span className="phone-text">+1 (650) 555-0187</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'engage' && (
+            <div className="tab-mock-content animate-fade-in" style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+              <div className="mock-leads-header-premium">
+                <h3>Multichannel Sequencer</h3>
+                <p>Build and preview smart sequences combining Email, LinkedIn, SMS, and cold calling triggers.</p>
+              </div>
+              <div style={{ flex: 1, minHeight: '380px', background: 'radial-gradient(ellipse at top, rgba(0, 82, 255, 0.16) 0%, rgba(255, 255, 255, 0) 70%), #ffffff', borderRadius: '12px', overflow: 'hidden', border: '1px solid #e2e8f0', position: 'relative' }}>
+                <WorkflowDiagram />
+              </div>
+            </div>
+          )}
+
+          {activeTab === 'spam' && (
+            <div className="tab-mock-content animate-fade-in">
               <div className="mock-leads-header-premium">
                 <h3>Mailbox Health & Deliverability Guard</h3>
                 <p>Monitor configurations, SPF/DKIM/DMARC status, and spam score metrics automatically.</p>
