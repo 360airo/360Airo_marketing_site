@@ -10,7 +10,15 @@ interface NavbarProps {
   theme?: 'light' | 'dark';
 }
 
-const mainResources = [
+interface DropdownItem {
+  label: string;
+  description: string;
+  href: string;
+  icon: React.ComponentType<any>;
+  disabled?: boolean;
+}
+
+const mainResources: DropdownItem[] = [
   { label: 'Blogs', description: 'Read our latest insights and outbound playbooks', href: '/blogs', icon: FileText },
   { label: 'Comparisons', description: 'See how 360Airo stacks up against competitors', href: '/comparison', icon: Scale },
   { label: 'Customer stories', description: 'How high-growth B2B teams scale sales outreach', href: '/customer-stories', icon: Users },
@@ -18,7 +26,7 @@ const mainResources = [
   { label: 'FAQs', description: 'Frequently asked questions about our platform', href: '#faq', icon: HelpCircle }
 ];
 
-const mainSolutions = [
+const mainSolutions: DropdownItem[] = [
   { label: 'Startups', description: 'Scale your early-stage growth', href: '/solutions/startups', icon: Zap },
   { label: 'SMBs', description: 'Grow your small to medium business', href: '/solutions/smbs', icon: Briefcase },
   { label: 'Enterprise', description: 'Power your large-scale operations', href: '#', icon: Building2, disabled: true },
