@@ -1,9 +1,13 @@
 <IfModule mod_rewrite.c>
   RewriteEngine On
 
-  RewriteCond %{HTTPS} off [OR]
-  RewriteCond %{HTTP_HOST} ^www\.360airo\.com$ [NC]
-  RewriteRule ^ https://360airo.com%{REQUEST_URI} [L,R=301,NE]
+  # 1. Redirect www to non-www (both HTTP and HTTPS)
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L,NE]
+
+  # 2. Redirect HTTP to HTTPS
+  RewriteCond %{HTTPS} off
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L,NE]
 </IfModule>
 
 <IfModule mod_expires.c>
