@@ -1,10 +1,22 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import nodemailer from 'nodemailer';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder';
 
 const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Reusable Nodemailer Transporter using environment variables
+const transporter = nodemailer.createTransport({
+  host: 'smtp.office365.com',
+  port: 587,
+  secure: false, // STARTTLS
+  auth: {
+    user: process.env.SMTP_USER || '',
+    pass: process.env.SMTP_PASS || ''
+  }
+});
 
 export async function POST(request: Request) {
   try {
@@ -27,18 +39,84 @@ export async function POST(request: Request) {
       how_can_we_help: message || null
     };
 
-    // Insert into Supabase table public.contact_us
-    const { data, error } = await supabase
-      .from('contact_us')
-      .insert(insertData)
-      .select();
+    let supabaseSaved = false;
+    let insertDataResult = null;
 
-    if (error) {
-      console.error('Supabase error inserting into contact_us:', error);
-      return NextResponse.json(
-        { error: error.message },
-        { status: 500 }
-      );
+    // Fail-safe Supabase database insert to prevent connection DNS errors from crashing submission
+    try {
+      const { data, error } = await supabase
+        .from('contact_us')
+        .insert(insertData)
+        .select();
+
+      if (error) {
+        console.error('Supabase execution error inserting into contact_us:', error);
+      } else {
+        insertDataResult = data;
+        supabaseSaved = true;
+      }
+    } catch (dbErr: any) {
+      console.error('Supabase network/connection error:', dbErr.message || dbErr);
+    }
+
+    // Send Formally Confirmation Email to the recipient lead on behalf of 360Airo
+    let emailSent = false;
+    try {
+      const emailHtml = `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <h2 style="color: #0052ff; margin: 0; font-family: 'Outfit', sans-serif;">360Airo</h2>
+          </div>
+          <p>Dear ${name},</p>
+          <p>Thank you for reaching out to 360Airo! We have successfully received your inquiry regarding <strong>${interestedIn}</strong>.</p>
+          <p>Our team is currently reviewing your details, and one of our outbound specialists will get back to you shortly (typically within 24 business hours).</p>
+          
+          <div style="background-color: #f9f9f9; padding: 15px; border-radius: 6px; margin: 20px 0; border: 1px solid #f0f0f0;">
+            <h4 style="margin-top: 0; color: #555555;">Submission Details:</h4>
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 6px 0; font-weight: bold; width: 120px; border-bottom: 1px solid #eeeeee;">Name:</td>
+                <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;">${name}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; font-weight: bold; border-bottom: 1px solid #eeeeee;">Email:</td>
+                <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;">${email}</td>
+              </tr>
+              ${phone ? `<tr>
+                <td style="padding: 6px 0; font-weight: bold; border-bottom: 1px solid #eeeeee;">Phone:</td>
+                <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;">${phone}</td>
+              </tr>` : ''}
+              ${companyUrl ? `<tr>
+                <td style="padding: 6px 0; font-weight: bold; border-bottom: 1px solid #eeeeee;">Company Website:</td>
+                <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;"><a href="${companyUrl}" target="_blank" style="color: #0052ff;">${companyUrl}</a></td>
+              </tr>` : ''}
+              <tr>
+                <td style="padding: 6px 0; font-weight: bold; border-bottom: 1px solid #eeeeee;">Interested In:</td>
+                <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;">${interestedIn}</td>
+              </tr>
+            </table>
+          </div>
+          
+          <p>If you have any additional details to share or urgent questions, please feel free to reply directly to this email.</p>
+          <hr style="border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;" />
+          <p style="font-size: 12px; color: #777777; text-align: center;">
+            Best regards,<br />
+            <strong>The 360Airo Team</strong><br />
+            <a href="https://360airo.com" style="color: #0052ff; text-decoration: none;">360airo.com</a>
+          </p>
+        </div>
+      `;
+
+      await transporter.sendMail({
+        from: `"360Airo" <${process.env.SMTP_USER || 'Info@360airo.com'}>`,
+        to: email,
+        subject: 'We received your request - 360Airo',
+        html: emailHtml
+      });
+      emailSent = true;
+      console.log(`Confirmation email sent to ${email}`);
+    } catch (emailErr: any) {
+      console.error('Nodemailer error sending email:', emailErr.message || emailErr);
     }
 
     // Trigger Google Apps Script Webhook
@@ -87,7 +165,13 @@ export async function POST(request: Request) {
       console.error('Failed to trigger Google Sheet Webhook:', webhookErr);
     }
 
-    return NextResponse.json({ success: true, data });
+    // Return success to the client page even if Supabase server is offline (operational fallback)
+    return NextResponse.json({ 
+      success: true, 
+      supabaseSaved,
+      emailSent,
+      data: insertDataResult 
+    });
   } catch (err: any) {
     console.error('Error handling contact form submission:', err);
     return NextResponse.json(

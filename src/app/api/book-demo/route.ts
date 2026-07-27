@@ -1,10 +1,22 @@
 import { NextResponse } from 'next/server';
 import { createClient } from '@supabase/supabase-js';
+import nodemailer from 'nodemailer';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://placeholder.supabase.co';
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || 'placeholder';
 
 const supabase = createClient(supabaseUrl, supabaseKey);
+
+// Reusable Nodemailer Transporter using environment variables
+const transporter = nodemailer.createTransport({
+  host: 'smtp.office365.com',
+  port: 587,
+  secure: false, // STARTTLS
+  auth: {
+    user: process.env.SMTP_USER || '',
+    pass: process.env.SMTP_PASS || ''
+  }
+});
 
 const getOrganizationName = (email: string, teamType: string) => {
   if (!email) return teamType === 'company' ? 'Company' : 'Small Team';
@@ -84,17 +96,85 @@ export async function POST(request: Request) {
       timezone: timezone
     };
 
-    const { data, error } = await supabase
-      .from('book_demo')
-      .upsert(insertData, { onConflict: 'email' })
-      .select();
+    let supabaseSaved = false;
+    let insertDataResult = null;
 
-    if (error) {
-      console.error('Supabase error inserting demo booking:', error);
-      return NextResponse.json(
-        { error: error.message },
-        { status: 500 }
-      );
+    // Fail-safe Supabase database insert to prevent offline database DNS errors from crashing submission
+    try {
+      const { data, error } = await supabase
+        .from('book_demo')
+        .upsert(insertData, { onConflict: 'email' })
+        .select();
+
+      if (error) {
+        console.error('Supabase error inserting demo booking:', error);
+      } else {
+        insertDataResult = data;
+        supabaseSaved = true;
+      }
+    } catch (dbErr: any) {
+      console.error('Supabase network/connection error on demo booking:', dbErr.message || dbErr);
+    }
+
+    // Send Formally Confirmation Email to the recipient lead on behalf of 360Airo
+    let emailSent = false;
+    try {
+      const emailHtml = `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+          <div style="text-align: center; margin-bottom: 20px;">
+            <h2 style="color: #0052ff; margin: 0; font-family: 'Outfit', sans-serif;">360Airo</h2>
+          </div>
+          <p>Dear ${firstName} ${lastName},</p>
+          <p>Thank you for booking a demo with 360Airo! We are excited to show you how to scale your outreach and automate your GTM campaigns.</p>
+          <p>Your demo session has been scheduled successfully. Here are your booking details:</p>
+          
+          <div style="background-color: #f9f9f9; padding: 15px; border-radius: 6px; margin: 20px 0; border: 1px solid #f0f0f0;">
+            <h4 style="margin-top: 0; color: #555555;">Booking Details:</h4>
+            <table style="width: 100%; border-collapse: collapse;">
+              <tr>
+                <td style="padding: 6px 0; font-weight: bold; width: 140px; border-bottom: 1px solid #eeeeee;">Date:</td>
+                <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;">${dateFormatted}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; font-weight: bold; border-bottom: 1px solid #eeeeee;">Time:</td>
+                <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;">${demoTime}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; font-weight: bold; border-bottom: 1px solid #eeeeee;">Timezone:</td>
+                <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;">${timezone}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; font-weight: bold; border-bottom: 1px solid #eeeeee;">Organization:</td>
+                <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;">${orgName}</td>
+              </tr>
+              <tr>
+                <td style="padding: 6px 0; font-weight: bold; border-bottom: 1px solid #eeeeee;">Phone Number:</td>
+                <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;">${countryCode || '+1'} ${phone}</td>
+              </tr>
+            </table>
+          </div>
+          
+          <p>A calendar invitation containing the meeting link (Google Meet / Zoom) will be sent to this email address shortly.</p>
+          <p>If you need to reschedule or cancel your session, please feel free to reply directly to this email.</p>
+          <hr style="border: 0; border-top: 1px solid #eeeeee; margin: 20px 0;" />
+          <p style="font-size: 12px; color: #777777; text-align: center;">
+            Best regards,<br />
+            <strong>The 360Airo Team</strong><br />
+            <a href="https://360airo.com" style="color: #0052ff; text-decoration: none;">360airo.com</a>
+          </p>
+        </div>
+      `;
+
+      await transporter.sendMail({
+        from: `"360Airo" <${process.env.SMTP_USER || 'Info@360airo.com'}>`,
+        to: email,
+        subject: 'Your demo booking is confirmed! - 360Airo',
+        html: emailHtml
+      });
+      emailSent = true;
+      console.log(`Demo booking confirmation email sent to ${email}`);
+    } catch (emailErr: any) {
+      console.error('Nodemailer error sending demo confirmation:', emailErr.message || emailErr);
     }
 
     // Trigger webhook if configured (e.g. to feed Excel sheet via Power Automate/Zapier)
@@ -128,7 +208,12 @@ export async function POST(request: Request) {
       }
     }
 
-    return NextResponse.json({ success: true, data });
+    return NextResponse.json({ 
+      success: true, 
+      supabaseSaved,
+      emailSent,
+      data: insertDataResult 
+    });
   } catch (err: any) {
     console.error('Error handling demo booking submission:', err);
     return NextResponse.json(
