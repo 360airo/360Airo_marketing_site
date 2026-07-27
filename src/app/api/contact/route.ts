@@ -9,7 +9,7 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, phone, interestedIn, message } = body;
+    const { name, email, phone, companyUrl, interestedIn, message } = body;
 
     if (!name || !email) {
       return NextResponse.json(
@@ -22,6 +22,7 @@ export async function POST(request: Request) {
       name,
       email,
       phone_number: phone || null,
+      company_url: companyUrl || null,
       interested_in: interestedIn || null,
       how_can_we_help: message || null
     };
@@ -55,6 +56,9 @@ export async function POST(request: Request) {
           phone: phone || '',
           phone_number: phone || '',
           phoneNumber: phone || '',
+          companyUrl: companyUrl || '',
+          company_url: companyUrl || '',
+          'Company URL': companyUrl || '',
           // Variations for Interested In
           interestedIn: interestedIn || '',
           interested_in: interestedIn || '',
