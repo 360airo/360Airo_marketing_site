@@ -121,8 +121,11 @@ export async function POST(request: Request) {
     try {
       const emailHtml = `
         <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
-          <div style="text-align: center; margin-bottom: 20px;">
-            <h2 style="color: #0052ff; margin: 0; font-family: 'Outfit', sans-serif;">360Airo</h2>
+          <div style="text-align: center; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 8px;">
+            <img src="https://dnbgjzscuxrlbceqsrhz.supabase.co/storage/v1/object/public/comany_logo_for_resue/FinalLogo_icon_transparent%20(1).png" alt="360Airo Logo" style="height: 36px; width: auto; vertical-align: middle;" />
+            <span style="font-family: 'Outfit', 'Helvetica Neue', Arial, sans-serif; font-size: 28px; font-weight: bold; vertical-align: middle; letter-spacing: -0.03em;">
+              <span style="color: #0F172A;">360</span><span style="color: #0052FF;">Airo</span>
+            </span>
           </div>
           <p>Dear ${firstName} ${lastName},</p>
           <p>Thank you for booking a demo with 360Airo! We are excited to show you how to scale your outreach and automate your GTM campaigns.</p>
@@ -173,6 +176,61 @@ export async function POST(request: Request) {
       });
       emailSent = true;
       console.log(`Demo booking confirmation email sent to ${email}`);
+
+      // Internal lead notification to the GTM / Sales team
+      try {
+        const teamEmailHtml = `
+          <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333333; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 8px;">
+            <div style="background-color: #0052ff; color: #ffffff; padding: 15px; text-align: center; border-radius: 6px 6px 0 0;">
+              <h2 style="margin: 0; font-size: 20px; font-family: 'Outfit', sans-serif;">New Demo Booked!</h2>
+            </div>
+            <p>Hello Team,</p>
+            <p>A new lead has just scheduled a demo session on 360Airo website. Here are the details:</p>
+            
+            <div style="background-color: #f9f9f9; padding: 15px; border-radius: 6px; margin: 20px 0; border: 1px solid #f0f0f0;">
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr>
+                  <td style="padding: 6px 0; font-weight: bold; width: 140px; border-bottom: 1px solid #eeeeee;">Name:</td>
+                  <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;">${firstName} ${lastName}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0; font-weight: bold; border-bottom: 1px solid #eeeeee;">Email:</td>
+                  <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;"><a href="mailto:${email}">${email}</a></td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0; font-weight: bold; border-bottom: 1px solid #eeeeee;">Phone:</td>
+                  <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;">${countryCode || '+1'} ${phone}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0; font-weight: bold; border-bottom: 1px solid #eeeeee;">Organization:</td>
+                  <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;">${orgName}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0; font-weight: bold; border-bottom: 1px solid #eeeeee;">Employee Size:</td>
+                  <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;">${employeeSize || '1-10'}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 6px 0; font-weight: bold; border-bottom: 1px solid #eeeeee;">Date & Time:</td>
+                  <td style="padding: 6px 0; border-bottom: 1px solid #eeeeee;">${dateFormatted} at ${demoTime} (${timezone})</td>
+                </tr>
+              </table>
+            </div>
+            <p style="font-size: 12px; color: #777777; text-align: center;">
+              This notification was generated automatically by 360Airo Lead Capture.
+            </p>
+          </div>
+        `;
+
+        await transporter.sendMail({
+          from: `"360Airo Lead Alerts" <${process.env.SMTP_USER || 'Info@360airo.com'}>`,
+          to: 'Harish.k@globopersona.com, info@360airo.com, nihal.y@globopersona.com',
+          subject: `⚡ New Demo Booked: ${firstName} ${lastName} (${orgName})`,
+          html: teamEmailHtml
+        });
+        console.log(`Internal demo lead notification sent to GTM team.`);
+      } catch (teamEmailErr: any) {
+        console.error('Nodemailer error sending internal team notification:', teamEmailErr.message || teamEmailErr);
+      }
     } catch (emailErr: any) {
       console.error('Nodemailer error sending demo confirmation:', emailErr.message || emailErr);
     }
