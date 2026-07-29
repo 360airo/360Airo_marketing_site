@@ -62,6 +62,15 @@ export default function FreeToolsGuard({ children }: FreeToolsGuardProps) {
     }
   }, [isGuardedRoute, isVerified, email, pathname]);
 
+  // Reset scroll position to top when showing the OTP gating screen
+  useEffect(() => {
+    if (isGuardedRoute && !isVerified) {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+  }, [isGuardedRoute, isVerified, step]);
+
   if (!isGuardedRoute || isVerified) {
     return <>{children}</>;
   }
