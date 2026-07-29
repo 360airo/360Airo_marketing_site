@@ -1,11 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
+import { dbSaveOTP } from '@/lib/free-tools-db';
 
-// In-memory OTP store
-const otpStore = new Map<string, { otp: string; timestamp: number; expires: number }>();
+const publicDomains = [
+  'gmail.com', 'googlemail.com', 'outlook.com', 'hotmail.com',
+  'yahoo.com', 'ymail.com', 'aol.com', 'icloud.com', 'mail.com',
+  'live.com', 'msn.com', 'zoho.com', 'proton.me', 'protonmail.com',
+  'gmx.com', 'yandex.com'
+];
 
 function generateOTP(): string {
-  return Math.floor(10000 + Math.random() * 90000).toString();
+  return Math.floor(100000 + Math.random() * 900000).toString(); // 6 digits
 }
 
 export async function POST(req: NextRequest) {
@@ -19,29 +24,33 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Normalize email to lowercase for consistency across all operations
+    // Normalize email
     const normalizedEmail = email.toLowerCase().trim();
+    const domain = normalizedEmail.split('@')[1];
 
-    const smtpHost = process.env.SMTP_HOST || process.env.GMAIL_HOST || 'smtp.gmail.com';
-    const smtpPort = parseInt(process.env.SMTP_PORT || process.env.GMAIL_PORT || '587');
-    const smtpSecure = (process.env.SMTP_SECURE || process.env.GMAIL_SECURE || 'false') === 'true';
-    const smtpUser = process.env.SMTP_USER || process.env.GMAIL_USER;
-    const smtpPass = process.env.SMTP_PASS || process.env.GMAIL_APP_PASSWORD;
+    // Check if it is a company email
+    if (publicDomains.includes(domain)) {
+      return NextResponse.json(
+        { error: 'Please use a work/company email address. Public domains are not allowed for free tool usage.' },
+        { status: 400 }
+      );
+    }
 
-    console.log(`📧 [GLOBAL OTP] Sending OTP to ${normalizedEmail}`);
+    const smtpUser = process.env.SMTP_USER || '';
+    const smtpPass = process.env.SMTP_PASS || '';
 
     if (!smtpUser || !smtpPass) {
-      console.error('❌ [GLOBAL OTP] Missing SMTP credentials');
+      console.error('❌ [SEND OTP] Missing SMTP credentials');
       return NextResponse.json(
-        { error: 'Email service not configured' },
+        { error: 'Email service credentials not configured on the server.' },
         { status: 500 }
       );
     }
 
     const transporter = nodemailer.createTransport({
-      host: smtpHost,
-      port: smtpPort,
-      secure: smtpSecure,
+      host: 'smtp.office365.com',
+      port: 587,
+      secure: false, // STARTTLS
       auth: {
         user: smtpUser,
         pass: smtpPass,
@@ -49,98 +58,62 @@ export async function POST(req: NextRequest) {
     });
 
     const otp = generateOTP();
-    const timestamp = Date.now();
-    const expiresIn = 10 * 60 * 1000; // 10 minutes
+    const expiresInSeconds = 2 * 60; // 2 minutes
+    const expiresAt = new Date(Date.now() + expiresInSeconds * 1000);
 
-    // Store OTP in memory with normalized email key
-    otpStore.set(normalizedEmail, {
-      otp,
-      timestamp,
-      expires: timestamp + expiresIn,
+    // Save OTP using DB helper (will auto handle local fallback cache)
+    await dbSaveOTP(normalizedEmail, otp, expiresAt);
+
+    console.log(`📧 [SEND OTP] Initiating email sending of code ${otp} to ${normalizedEmail} in background...`);
+
+    // Dispatch the email in the background (no 'await' so we respond instantly to the client)
+    transporter.sendMail({
+      from: `"360Airo" <${smtpUser}>`,
+      to: normalizedEmail,
+      subject: '🔑 Your 360Airo Free Tools Verification Code',
+      html: `
+        <div style="font-family: 'Outfit', 'Inter', Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 40px 20px; background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%); border-radius: 16px; color: #f8fafc; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.3);">
+          <div style="margin-bottom: 24px;">
+            <h1 style="color: #a78bfa; font-size: 28px; font-weight: 700; margin: 0; letter-spacing: -0.025em;">360Airo</h1>
+            <p style="color: #94a3b8; font-size: 14px; margin: 4px 0 0 0; text-transform: uppercase; letter-spacing: 0.1em;">Free Tools Access</p>
+          </div>
+          
+          <div style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 32px; margin-bottom: 24px;">
+            <h2 style="font-size: 20px; margin-top: 0; color: #ffffff;">Verify your work email</h2>
+            <p style="color: #cbd5e1; font-size: 15px; line-height: 1.5;">Please use the following verification code to access all of our outbound sales infrastructure and content analysis tools.</p>
+            
+            <div style="font-size: 40px; font-weight: 700; color: #a78bfa; letter-spacing: 8px; margin: 28px 0; padding: 12px; background: rgba(167, 139, 250, 0.1); border-radius: 8px; border: 1px dashed rgba(167, 139, 250, 0.3); display: inline-block;">
+              ${otp}
+            </div>
+            
+            <p style="color: #94a3b8; font-size: 13px; margin: 0;">⏱️ This code is valid for 2 minutes</p>
+          </div>
+          
+          <div style="color: #64748b; font-size: 12px;">
+            <p style="margin: 0 0 8px 0;">If you did not request this verification code, please ignore this email.</p>
+            <p style="margin: 0;">&copy; ${new Date().getFullYear()} 360Airo. All rights reserved.</p>
+          </div>
+        </div>
+      `,
+      text: `Your 360Airo Free Tools verification code is: ${otp}\n\nThis code is valid for 2 minutes.\n\nIf you did not request this code, please ignore this email.`,
+    })
+    .then(() => {
+      console.log(`✅ [SEND OTP] Background email successfully sent to ${normalizedEmail}`);
+    })
+    .catch((emailError) => {
+      console.error(`❌ [SEND OTP] Background email dispatch failed for ${normalizedEmail}:`, emailError);
     });
 
-    console.log(`📧 [GLOBAL OTP] Generated OTP for ${normalizedEmail}: ${otp}`);
-    console.log(`📧 [GLOBAL OTP] OTP stored in memory. Store size: ${otpStore.size}, Keys: ${Array.from(otpStore.keys()).join(', ')}`);
-
-    try {
-      await transporter.sendMail({
-        from: smtpUser,
-        to: normalizedEmail,
-        subject: '🔐 360 Airo Free Tools - Your Verification Code',
-        html: `
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=600, initial-scale=1.0">
-    <title>Email Verification Code</title>
-    <style type="text/css">
-        * { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
-        body { margin: 0; padding: 0; background-color: #f5f5f5; width: 600px; }
-        table { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; width: 600px; }
-        td { vertical-align: top; }
-        img { border: 0; display: block; }
-    </style>
-</head>
-<body style="margin: 0 !important; padding: 0 !important; background-color: #f5f5f5 !important; width: 600px !important; max-width: 600px !important;">
-<table align="center" width="600" cellpadding="0" cellspacing="0" style="width: 600px !important; max-width: 600px !important; margin: 0 auto !important; min-width: 600px !important;">
-    <tr>
-        <td style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 40px 20px; text-align: center;">
-            <h1 style="color: white; font-size: 28px; font-weight: 700; margin: 0 0 8px 0;">360 Airo Free Tools</h1>
-            <p style="color: white; font-size: 16px; margin: 0;">Email Verification Code</p>
-        </td>
-    </tr>
-    <tr>
-        <td style="background-color: white; padding: 40px 30px; border: 1px solid #e0e0e0;">
-            <h2 style="font-size: 22px; color: #333; margin: 0 0 16px 0;">Verify Your Email</h2>
-            <p style="font-size: 15px; color: #666; margin: 0 0 24px 0;">Your verification code is valid for 10 minutes.</p>
-            <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f9f9f9; margin: 30px 0; border: 2px solid #667eea;">
-                <tr>
-                    <td style="padding: 30px; text-align: center;">
-                        <div style="font-size: 48px; font-weight: 700; color: #667eea; letter-spacing: 12px; margin: 0 0 16px 0;">${otp}</div>
-                        <div style="color: #999; font-size: 13px;">⏱️ Valid for 10 minutes</div>
-                    </td>
-                </tr>
-            </table>
-            <p style="font-size: 15px; color: #666; margin: 30px 0 0 0; text-align: center;">Use this code to access all 360 Airo free tools.</p>
-        </td>
-    </tr>
-    <tr>
-        <td style="background-color: white; border: 1px solid #e0e0e0; padding: 24px 30px; text-align: center; font-size: 12px; color: #999;">
-            <p style="margin: 0;">© 2024 360 Airo. All rights reserved.</p>
-        </td>
-    </tr>
-</table>
-</body>
-</html>
-        `,
-        text: `Your verification code is: ${otp}\nValid for 10 minutes.\n\nUse this code to access all 360 Airo free tools.\n\n© 2024 360 Airo. All rights reserved.`,
-      });
-
-      console.log(`✅ [GLOBAL OTP] Email sent to ${normalizedEmail}`);
-      return NextResponse.json(
-        { success: true, message: 'OTP sent successfully' },
-        { status: 200 }
-      );
-    } catch (emailError: any) {
-      const errorMsg = emailError?.message || String(emailError);
-      console.error(`❌ [GLOBAL OTP] Failed to send email:`, errorMsg);
-      otpStore.delete(normalizedEmail);
-      
-      return NextResponse.json(
-        { error: `Failed to send OTP: ${errorMsg}` },
-        { status: 500 }
-      );
-    }
-  } catch (error) {
-    console.error('❌ [GLOBAL OTP] Error:', error);
+    // Respond immediately to the client to make the UI feel fast
+    return NextResponse.json(
+      { success: true, message: 'Verification code generated.' },
+      { status: 200 }
+    );
+  } catch (error: any) {
+    console.error('❌ [SEND OTP] Error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }
     );
   }
 }
-
-// Export store for verify-otp endpoint
-export { otpStore };
