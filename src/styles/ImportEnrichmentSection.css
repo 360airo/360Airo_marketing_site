@@ -52,16 +52,16 @@
 
 .import-enrichment-header-section h3 {
   font-family: 'Outfit', sans-serif;
-  font-size: clamp(2.2rem, 3.2vw, 2.85rem);
-  font-weight: 850;
-  color: #0f172a;
+  font-size: clamp(1.4rem, 2vw, 1.6rem);
+  font-weight: 650;
+  color: #213856;
   line-height: 1.15;
   letter-spacing: -0.03em;
   margin: 0;
 }
 
 .import-enrichment-header-section h3 span {
-  color: #0f172a;
+  color: #213856;
 }
 
 /* Stepper accordions wrapper */
@@ -142,6 +142,7 @@
   border-radius: 4px;
 }
 
+/* Optimized for instantaneous mouse wheel feedback (removed delay transition) */
 .ie-item-line-fill {
   position: absolute;
   top: 18px; 
@@ -149,7 +150,7 @@
   background-color: #3b82f6;
   z-index: 2;
   border-radius: 4px;
-  transition: height 0.1s ease-out; 
+  transition: none; /* instant real-time response to scroll wheel */
 }
 
 /* Accordion details side style */
@@ -202,8 +203,8 @@
 .ie-accordion-title {
   font-family: 'Outfit', sans-serif;
   font-size: 1.75rem;
-  font-weight: 800;
-  color: #0f172a;
+  font-weight: 650;
+  color: #213856;
   line-height: 1.25;
   margin: 0 0 1rem;
   letter-spacing: -0.02em;
@@ -231,7 +232,7 @@
 .ie-learn-more-btn:hover {
   background-color: #f8fafc;
   border-color: #cbd5e1;
-  color: #0f172a;
+  color: #213856;
 }
 
 /* RIGHT COLUMN - Royal Blue Container Backdrop */

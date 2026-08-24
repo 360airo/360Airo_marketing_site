@@ -1,0 +1,500 @@
+/* ========================================================
+   AUTOMATE YOUR SOCIAL MEDIA SECTION - HIGH FIDELITY
+   ======================================================== */
+
+.social-auto-wrapper {
+  background-color: #050507;
+  color: #ffffff;
+  padding: 100px 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Subtle ambient background glow centered under title */
+.social-auto-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.social-auto-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Header Styling */
+.social-auto-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 64px;
+}
+
+.social-auto-title {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+}
+
+.social-auto-subtitle {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: #808694;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Bento Grid Core Layout */
+.social-auto-bento-layout {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Row 1 Layout (60% / 40% Split) */
+.social-auto-row1 {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 24px;
+}
+
+/* Row 2 Layout (Equal 33.3% Split) */
+.social-auto-row2 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* Individual Bento Card Styling */
+.social-bento-card {
+  background: #0b0c0e;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  min-height: 360px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-bento-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Card Content Typography */
+.social-card-text-top {
+  margin-bottom: 24px;
+}
+
+.social-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.015em;
+}
+
+.social-card-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #808694;
+  margin: 0;
+  max-width: 90%;
+}
+
+/* ========================================================
+   CARD 1 GRAPHIC: SOCIAL PLATFORMS CAROUSEL GRID
+   ======================================================== */
+.social-platforms-grid {
+  position: relative;
+  height: 150px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 12px;
+  overflow: hidden;
+  /* Visual horizontal masking for edges */
+  mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+}
+
+.social-grid-connector {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.social-icons-row {
+  display: flex;
+  gap: 16px;
+  width: max-content;
+  z-index: 1;
+}
+
+.row-1 {
+  transform: translateX(-20px);
+}
+
+.row-2 {
+  transform: translateX(20px);
+}
+
+.social-app-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+/* Distinct individual icon glow styles */
+.icon-ig { color: #f77737; }
+.icon-tt { color: #00f2fe; }
+.icon-tw { color: #ffffff; }
+.icon-fb { color: #1877f2; }
+.icon-meta { color: #0081fb; }
+.icon-li { color: #0a66c2; }
+.icon-slack { color: #ecb22e; }
+
+.social-app-icon:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+
+/* ========================================================
+   CARD 2 GRAPHIC: ANALYTICS CURVE MOCKUP
+   ======================================================== */
+.analytics-curve-wrap {
+  position: relative;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.analytics-vector-curve {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.analytics-live-node {
+  position: absolute;
+  z-index: 2;
+  transform: translate(-50%, -50%);
+}
+
+.analytics-cursor-dot {
+  width: 8px;
+  height: 8px;
+  background: #ffffff;
+  border: 2.5px solid #38bdf8;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #38bdf8;
+}
+
+.analytics-tooltip {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+  padding: 4px 10px;
+  white-space: nowrap;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.analytics-tooltip span {
+  font-size: 10.5px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.analytics-vector-cursor {
+  position: absolute;
+  top: 10px;
+  left: 6px;
+  animation: pointerHover 3s ease-in-out infinite alternate;
+}
+
+@keyframes pointerHover {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(3px, 3px); }
+}
+
+/* ========================================================
+   CARD 3 GRAPHIC: AI CHIPS INTEGRATED CLUSTER
+   ======================================================== */
+.ai-chips-cluster {
+  position: relative;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+}
+
+.ai-cluster-glow {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ai-chip-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #111215;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #475569;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* Stacked horizontal depth scaling styling */
+.fade-left-2, .fade-right-2 {
+  transform: scale(0.85);
+  opacity: 0.25;
+}
+
+.fade-left-1, .fade-right-1 {
+  transform: scale(0.92);
+  opacity: 0.55;
+  color: #94a3b8;
+}
+
+.ai-chip-icon.primary-chip {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+/* ========================================================
+   CARD 4 GRAPHIC: SIMULATED FLOW COLLABORATION CANVAS
+   ======================================================== */
+.collab-flow-wrap {
+  position: relative;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.01);
+  border: 1px solid rgba(255, 255, 255, 0.02);
+  border-radius: 12px;
+  padding: 10px;
+  overflow: hidden;
+}
+
+.collab-grid-dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 10px 10px;
+  pointer-events: none;
+}
+
+.collab-dot-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 12px;
+  z-index: 1;
+}
+
+.dot-ind {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.collab-flow-nodes-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.collab-flow-connector-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.collab-node {
+  background: #111215;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 6px;
+  padding: 4px 10px;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  position: relative;
+}
+
+.collab-node-text {
+  font-size: 10px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.collab-user-badge {
+  font-size: 8px;
+  font-weight: 600;
+  padding: 1.5px 5px;
+  border-radius: 4px;
+  position: absolute;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tag-manu {
+  background: rgba(0, 216, 246, 0.1);
+  border: 1px solid rgba(0, 216, 246, 0.2);
+  color: #00d8f6;
+  right: -64px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.tag-tyler {
+  background: rgba(244, 63, 94, 0.1);
+  border: 1px solid rgba(244, 63, 94, 0.2);
+  color: #f43f5e;
+  right: -72px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.node-cursor-arrow {
+  position: absolute;
+  top: -6px;
+  left: -4px;
+}
+
+/* ========================================================
+   CARD 5 GRAPHIC: AUDIENCE INSIGHTS WIDGET
+   ======================================================== */
+.audience-profile-wrap {
+  position: relative;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.audience-avatar-frame {
+  padding: 2.5px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audience-avatar-inner {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: #111215;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.audience-info-block {
+  text-align: center;
+}
+
+.audience-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 2px;
+}
+
+.audience-stats {
+  font-size: 10.5px;
+  color: #64748b;
+}
+
+.audience-waveform-wrap {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+}
+
+.audience-waveform {
+  width: 100%;
+  height: 100%;
+}
+
+/* ========================================================
+   RESPONSIVE DESIGN SYSTEM MEDIA QUERIES
+   ======================================================== */
+@media (max-width: 960px) {
+  .social-auto-row1 {
+    grid-template-columns: 1fr;
+  }
+  
+  .social-auto-row2 {
+    grid-template-columns: 1fr;
+  }
+  
+  .social-bento-card {
+    min-height: auto;
+  }
+
+  .social-platforms-grid {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+}

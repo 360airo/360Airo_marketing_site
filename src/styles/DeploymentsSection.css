@@ -1,0 +1,464 @@
+/* ========================================================
+   DEPLOYMENTS MADE EASY SECTION (BENTO GRID - EXACT)
+   ======================================================== */
+
+.deployments-section-wrapper {
+  background-color: #0d0e12;
+  padding: 80px 24px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.deployments-container {
+  width: 100%;
+  max-width: 1240px;
+}
+
+/* Outer White Card Container */
+.deployments-outer-card {
+  background: #ffffff;
+  border-radius: 40px;
+  padding: 80px 54px;
+  box-shadow: 0 50px 100px -20px rgba(0, 0, 0, 0.3);
+  color: #0f172a;
+}
+
+/* Header with Figma Selection Box Mockup */
+.deployments-header {
+  text-align: center;
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.deployments-focus-box {
+  display: inline-block;
+  position: relative;
+  padding: 10px 24px;
+  border: 1px dashed rgba(12, 140, 233, 0.5); /* Figma-style selection outline */
+  background: rgba(12, 140, 233, 0.02);
+  margin-bottom: 16px;
+}
+
+/* Figma Corner Select Handles */
+.figma-handle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: #ffffff;
+  border: 1px solid #0c8ce9;
+  z-index: 2;
+}
+.fh-tl { top: -4px; left: -4px; }
+.fh-tr { top: -4px; right: -4px; }
+.fh-bl { bottom: -4px; left: -4px; }
+.fh-br { bottom: -4px; right: -4px; }
+
+.deployments-title {
+  font-size: clamp(32px, 3.8vw, 46px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: #0f172a;
+  margin: 0;
+}
+
+.deployments-subtitle {
+  font-size: 16px;
+  color: #64748b;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* Asymmetric Bento Grid */
+.deployments-bento-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 900px) {
+  .deployments-bento-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .deploy-card-1 {
+    grid-column: span 7;
+  }
+  .deploy-card-2 {
+    grid-column: span 5;
+  }
+  .deploy-card-3 {
+    grid-column: span 5;
+  }
+  .deploy-card-4 {
+    grid-column: span 7;
+  }
+}
+
+/* Base Bento Card Style */
+.deploy-bento-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 28px;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 440px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.01);
+}
+
+/* Inner Text Area */
+.deploy-bento-text {
+  padding: 36px 40px;
+  z-index: 2;
+}
+
+.deploy-bento-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #0f172a;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.01em;
+}
+
+.deploy-bento-desc {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: #64748b;
+  margin: 0;
+  max-width: 90%;
+}
+
+/* CARD 1: One Click Deploy Graphics */
+.deploy-card-1-graphic {
+  height: 240px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 32px;
+  margin-top: 24px;
+}
+
+.connecting-lines-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.deploy-git-card {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 18px 22px;
+  font-family: 'Fira Code', 'Courier New', Courier, monospace;
+  font-size: 13px;
+  color: #334155;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
+  z-index: 1;
+  width: 190px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.git-line {
+  display: flex;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.git-cmd {
+  color: #64748b;
+}
+
+.git-val {
+  color: #0f172a;
+  font-weight: 500;
+}
+
+.deploy-logo-circle {
+  width: 84px;
+  height: 84px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.03);
+  z-index: 1;
+}
+
+.aws-status-text {
+  font-size: 8px;
+  color: #94a3b8;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-weight: 500;
+}
+
+.aws-spark {
+  color: #eab308;
+}
+
+/* CARD 2: Intuitive Workflow Dashboard Clip */
+.deploy-card-2-graphic {
+  position: relative;
+  height: 250px;
+  margin-top: auto;
+  overflow: hidden;
+}
+
+.dashboard-mockup-wrapper {
+  background: #ffffff;
+  border-top-left-radius: 16px;
+  border: 1px solid #e2e8f0;
+  border-bottom: none;
+  border-right: none;
+  width: 130%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 40px;
+  box-shadow: -10px 10px 35px rgba(0, 0, 0, 0.03);
+  display: flex;
+}
+
+/* Mockup Layout Grid */
+.mockup-sidebar {
+  width: 55px;
+  border-right: 1px solid #f1f5f9;
+  padding: 16px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.sidebar-logo {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.sidebar-menu-item {
+  width: 24px;
+  height: 6px;
+  border-radius: 3px;
+  background: #e2e8f0;
+}
+
+.mockup-main {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.mockup-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #f1f5f9;
+  padding-bottom: 10px;
+}
+
+.mockup-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.mockup-body-split {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+}
+
+/* Visual Components */
+.card-widget {
+  border: 1px solid #f1f5f9;
+  border-radius: 12px;
+  padding: 12px;
+  background: #ffffff;
+}
+
+.widget-label {
+  font-size: 9px;
+  color: #64748b;
+  margin-bottom: 4px;
+}
+
+.widget-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.donut-chart-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-top: 8px;
+}
+
+.donut-center {
+  position: absolute;
+  font-size: 10px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.transaction-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  border-bottom: 1px solid #f8fafc;
+  padding-bottom: 4px;
+}
+
+.tx-left {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.tx-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 4px;
+  background: #f1f5f9;
+}
+
+.tx-name {
+  font-weight: 500;
+  color: #0f172a;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+}
+
+.tx-amount {
+  font-weight: 600;
+  color: #0f172a;
+}
+
+/* CARD 3: Hosting Over the Edge Globe */
+.deploy-card-3-graphic {
+  position: relative;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  overflow: hidden;
+}
+
+.globe-sphere {
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 50% 20%, #172554 0%, #020617 75%);
+  border: 1.5px solid rgba(56, 189, 248, 0.45);
+  box-shadow: 
+    0 -30px 60px -10px rgba(56, 189, 248, 0.35),
+    inset 0 25px 50px rgba(56, 189, 248, 0.2);
+  position: absolute;
+  bottom: -210px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Globe Map Overlay Grid Lines */
+.globe-grid-lines {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    radial-gradient(rgba(56, 189, 248, 0.4) 1px, transparent 1.5px);
+  background-size: 16px 16px;
+  border-radius: 50%;
+  opacity: 0.85;
+  mask-image: radial-gradient(circle at 50% 30%, black 35%, transparent 80%);
+  -webkit-mask-image: radial-gradient(circle at 50% 30%, black 35%, transparent 80%);
+}
+
+/* CARD 4: Wide Dashboard Clip */
+.deploy-card-4-graphic {
+  position: relative;
+  height: 250px;
+  margin-top: auto;
+  overflow: hidden;
+}
+
+.wide-dashboard-mockup {
+  background: #ffffff;
+  border-top-left-radius: 16px;
+  border-top-right-radius: 16px;
+  border: 1px solid #e2e8f0;
+  border-bottom: none;
+  width: calc(100% - 80px);
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 40px;
+  box-shadow: 0 -10px 35px rgba(0, 0, 0, 0.03);
+  display: flex;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .deployments-outer-card {
+    padding: 48px 24px;
+    border-radius: 28px;
+  }
+  
+  .deploy-bento-card {
+    min-height: auto;
+  }
+  
+  .deploy-card-1-graphic {
+    height: auto;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+  }
+  
+  .connecting-lines-svg {
+    display: none;
+  }
+
+  .dashboard-mockup-wrapper,
+  .wide-dashboard-mockup {
+    width: 100%;
+    left: 20px;
+  }
+}

@@ -56,9 +56,13 @@ export default function ImportEnrichmentSection() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Performance optimized scroll event utilizing passive listeners & requestAnimationFrame
   useEffect(() => {
-    const handleScroll = () => {
-      if (!containerRef.current || window.innerWidth < 768) return;
+    let rafId: number;
+    let active = true;
+
+    const updateScrollProgress = () => {
+      if (!containerRef.current || !active) return;
 
       const rect = containerRef.current.getBoundingClientRect();
       const sectionHeight = rect.height;
@@ -72,7 +76,7 @@ export default function ImportEnrichmentSection() {
 
       setProgress(scrollPercent);
 
-      // Distribute progress across steps
+      // Determine active steps instantly matching scrolling
       if (scrollPercent < 20) {
         setActiveStep(1);
       } else if (scrollPercent >= 20 && scrollPercent < 40) {
@@ -86,9 +90,21 @@ export default function ImportEnrichmentSection() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    handleScroll();
-    return () => window.removeEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(updateScrollProgress);
+    };
+
+    if (window.innerWidth >= 768) {
+      window.addEventListener('scroll', handleScroll, { passive: true });
+      updateScrollProgress(); // initial execution
+    }
+
+    return () => {
+      active = false;
+      cancelAnimationFrame(rafId);
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, []);
 
   const getLocalProgress = (stepId: number) => {
@@ -124,7 +140,7 @@ export default function ImportEnrichmentSection() {
         <div className="import-enrichment-sticky-frame">
           <div className="ie-sticky-content-grid">
             
-            {/* LEFT SIDE COLUMN: Header + Scrolling Accordions */}
+            {/* LEFT COLUMN: Header + Scrolling Accordions */}
             <div className="ie-left-sticky-column">
               
               {/* Static Header */}
@@ -192,7 +208,7 @@ export default function ImportEnrichmentSection() {
 
             </div>
 
-            {/* RIGHT SIDE COLUMN: Blue Backdrop Card with Continuous Vertical Filmstrip */}
+            {/* RIGHT COLUMN: Blue Backdrop Card with Continuous Vertical Filmstrip */}
             <div className="ie-right-visual-column">
               
               {/* Slider Viewport Window */}

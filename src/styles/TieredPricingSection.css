@@ -1,0 +1,337 @@
+/* ========================================================
+   MODERN TIERED PRICING SECTION - HIGH FIDELITY
+   ======================================================== */
+
+.tiered-pricing-wrapper {
+  background-color: #ffffff;
+  color: #0f172a;
+  padding: 100px 24px 120px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+.tiered-pricing-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header Section */
+.tiered-pricing-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.tiered-header-sub {
+  font-size: 11px;
+  font-weight: 700;
+  color: #718096;
+  letter-spacing: 0.08em;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.tiered-header-title {
+  font-size: clamp(32px, 4vw, 44px);
+  font-weight: 700;
+  color: #0c142c;
+  margin: 0;
+  letter-spacing: -0.025em;
+}
+
+/* Category Switcher Tabs */
+.tiered-category-tabs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: #e9f0fe;
+  border-radius: 12px;
+  padding: 6px;
+  width: fit-content;
+  margin: 0 auto 28px;
+}
+
+.tiered-tab-btn {
+  border: none;
+  background: transparent;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #4a5568;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tiered-tab-btn.active {
+  background: #ffffff;
+  color: #0c142c;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.tiered-pill-badge {
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 9.5px;
+  font-weight: 700;
+  padding: 1.5px 6.5px;
+  border-radius: 6px;
+}
+
+/* Billing Toggle (Annual / Monthly) */
+.tiered-billing-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  margin-bottom: 64px;
+  font-size: 14px;
+  color: #4a5568;
+}
+
+.tiered-toggle-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.tiered-toggle-option.active {
+  color: #0c142c;
+  font-weight: 700;
+}
+
+/* Custom Interactive Radio Bullet */
+.tiered-custom-radio {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1.5px solid #a0aec0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.2s ease;
+}
+
+.tiered-toggle-option.active .tiered-custom-radio {
+  border-color: #0c142c;
+}
+
+.radio-inner-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0c142c;
+}
+
+.tiered-save-badge {
+  background: #3b82f6;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 4px;
+  margin-left: 4px;
+  text-transform: capitalize;
+}
+
+/* Pricing Grid (4 columns seamless layout) */
+.tiered-pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 28px;
+  align-items: stretch;
+}
+
+.pricing-tier-card {
+  background: transparent;
+  border: none;
+  padding: 24px 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+
+.tier-card-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Featured Dark Card (Influencer) */
+.pricing-tier-card.featured-dark {
+  background: #0c142c;
+  color: #ffffff;
+  border-radius: 16px;
+  padding: 40px 28px;
+  box-shadow: 0 30px 60px -15px rgba(12, 20, 44, 0.25);
+  /* Perfect vertical scale & offset shift */
+  transform: scaleY(1.06) translateY(-4px);
+  z-index: 5;
+}
+
+.tier-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #718096;
+  margin-bottom: 12px;
+  text-transform: capitalize;
+}
+
+.featured-dark .tier-name {
+  color: #a0aec0;
+}
+
+.tier-price-row {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  margin-bottom: 16px;
+}
+
+.tier-price {
+  font-size: 38px;
+  font-weight: 700;
+  color: #0c142c;
+  line-height: 1;
+}
+
+.featured-dark .tier-price {
+  color: #ffffff;
+}
+
+.tier-period {
+  font-size: 14px;
+  color: #718096;
+  font-weight: 500;
+}
+
+.featured-dark .tier-period {
+  color: #a0aec0;
+}
+
+.tier-audience-desc {
+  font-size: 13px;
+  color: #718096;
+  margin-bottom: 36px;
+  line-height: 1.5;
+  min-height: 40px;
+}
+
+.featured-dark .tier-audience-desc {
+  color: #a0aec0;
+}
+
+/* Feature checklist space styling */
+.tier-feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 36px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.tier-feature-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  font-size: 13px;
+  color: #2d3748;
+  line-height: 1.4;
+  font-weight: 500;
+}
+
+.featured-dark .tier-feature-item {
+  color: #e2e8f0;
+}
+
+.tier-check-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #334155;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.featured-dark .tier-check-icon {
+  background: #ffffff;
+  color: #0c142c;
+}
+
+/* Styled Action Buttons */
+.tier-btn {
+  width: 100%;
+  padding: 12px 24px;
+  border-radius: 999px;
+  font-size: 13.5px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  border: none;
+}
+
+.tier-btn-dark {
+  background: #000000;
+  color: #ffffff;
+}
+
+.tier-btn-dark:hover {
+  background: #1a1a1a;
+}
+
+.tier-btn-white {
+  background: #ffffff;
+  color: #0c142c;
+}
+
+.tier-btn-white:hover {
+  background: #f7fafc;
+}
+
+/* Scale adjustments for nested transforms in featured cards */
+.featured-dark .tier-card-content {
+  transform: scaleY(0.94);
+  transform-origin: top;
+}
+
+.featured-dark .tier-btn {
+  transform: scaleY(0.94);
+  transform-origin: bottom;
+}
+
+/* Responsive Media queries */
+@media (max-width: 1024px) {
+  .tiered-pricing-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 36px;
+  }
+  .pricing-tier-card.featured-dark {
+    transform: none;
+    padding: 32px 24px;
+  }
+  .featured-dark .tier-card-content,
+  .featured-dark .tier-btn {
+    transform: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .tiered-pricing-grid {
+    grid-template-columns: 1fr;
+  }
+  .tiered-category-tabs {
+    flex-wrap: wrap;
+  }
+}
