@@ -28,135 +28,163 @@ export default function NativeToolsIntegration() {
             <div className="canvas-dot-grid" aria-hidden="true" />
 
             <div className="flow-diagram-stage">
-              {/* SVG Connecting Lines */}
-              <svg className="flow-svg-layer" viewBox="0 0 900 300" preserveAspectRatio="none">
+              {/* SVG Connecting Lines Layer */}
+              <svg className="flow-svg-layer" viewBox="0 0 960 320" fill="none">
                 <defs>
-                  <linearGradient id="gradOrange" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#f97316" stopOpacity="0.8"/>
-                    <stop offset="100%" stopColor="#fb923c" stopOpacity="0.2"/>
+                  {/* Top Orange/Red Gradient */}
+                  <linearGradient id="gradOrangeRed" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="rgba(255,255,255,0.1)"/>
+                    <stop offset="50%" stopColor="#f87171"/>
+                    <stop offset="100%" stopColor="#ef4444"/>
                   </linearGradient>
-                  <linearGradient id="gradBlue" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.9"/>
-                    <stop offset="100%" stopColor="#60a5fa" stopOpacity="0.4"/>
+
+                  {/* Middle Blue Gradient */}
+                  <linearGradient id="gradBlueLine" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="rgba(255,255,255,0.1)"/>
+                    <stop offset="60%" stopColor="#38bdf8"/>
+                    <stop offset="100%" stopColor="#3b82f6"/>
                   </linearGradient>
-                  <linearGradient id="gradYellow" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#eab308" stopOpacity="0.8"/>
-                    <stop offset="100%" stopColor="#fde047" stopOpacity="0.2"/>
+
+                  {/* Bottom Amber/Yellow Gradient */}
+                  <linearGradient id="gradYellowLine" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="rgba(255,255,255,0.1)"/>
+                    <stop offset="60%" stopColor="#fbbf24"/>
+                    <stop offset="100%" stopColor="#f59e0b"/>
                   </linearGradient>
                 </defs>
 
-                {/* Trigger 1 -> Center Hub */}
-                <path d="M 230 75 L 360 75 Q 390 75 390 110 L 390 150 L 415 150" fill="none" stroke="url(#gradOrange)" strokeWidth="2" className="animated-path"/>
+                {/* Left 3 Trigger Lines entering center Hub */}
+                {/* 1. Meeting Summarizer (Top -> down into hub top) */}
+                <path 
+                  d="M 215 90 L 460 90 L 460 130" 
+                  stroke="url(#gradOrangeRed)" 
+                  strokeWidth="1.5" 
+                  className="animated-flow-line"
+                />
                 
-                {/* Trigger 2 -> Center Hub */}
-                <path d="M 230 150 L 415 150" fill="none" stroke="url(#gradBlue)" strokeWidth="2" className="animated-path"/>
+                {/* 2. Code Reviewer (Middle -> direct into hub left) */}
+                <path 
+                  d="M 185 160 L 430 160" 
+                  stroke="url(#gradBlueLine)" 
+                  strokeWidth="1.5" 
+                  className="animated-flow-line"
+                />
 
-                {/* Trigger 3 -> Center Hub */}
-                <path d="M 230 225 L 360 225 Q 390 225 390 190 L 390 150 L 415 150" fill="none" stroke="url(#gradYellow)" strokeWidth="2" className="animated-path"/>
+                {/* 3. Customer Support (Bottom -> up into hub bottom) */}
+                <path 
+                  d="M 205 230 L 460 230 L 460 190" 
+                  stroke="url(#gradYellowLine)" 
+                  strokeWidth="1.5" 
+                  className="animated-flow-line"
+                />
 
-                {/* Hub -> Summarizer Pill -> Integrations */}
-                <line x1="475" y1="150" x2="540" y2="150" stroke="#3b82f6" strokeWidth="2"/>
-                <line x1="620" y1="150" x2="680" y2="150" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"/>
+                {/* Hub -> Connected Pill Line */}
+                <line x1="490" y1="160" x2="640" y2="160" stroke="#2563eb" strokeWidth="1.5"/>
 
-                {/* Summarizer -> Top Left (Notion) */}
-                <line x1="570" y1="130" x2="570" y2="90" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"/>
+                {/* Vertical Line Up to Notion */}
+                <line x1="675" y1="144" x2="675" y2="102" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"/>
 
-                {/* Summarizer -> Bottom (Pie) */}
-                <line x1="570" y1="170" x2="570" y2="210" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"/>
+                {/* Vertical Line Down to Linear */}
+                <line x1="675" y1="176" x2="675" y2="218" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"/>
 
-                {/* Slack -> Bolt (Top) */}
-                <line x1="680" y1="130" x2="680" y2="90" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"/>
+                {/* Horizontal Line from Connected to Slack */}
+                <line x1="710" y1="160" x2="770" y2="160" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"/>
 
-                {/* Slack -> Globe (Right) */}
-                <line x1="710" y1="150" x2="760" y2="150" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"/>
+                {/* Vertical Line Up from Slack to Lightning Bolt */}
+                <line x1="792" y1="138" x2="792" y2="92" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"/>
+
+                {/* Horizontal Line from Slack to OpenAI */}
+                <line x1="814" y1="160" x2="870" y2="160" stroke="rgba(255,255,255,0.15)" strokeWidth="1.5"/>
               </svg>
 
-              {/* Left Triggers List */}
+              {/* Left Trigger Items (Clean text + icons, no bulky cards) */}
               <div className="flow-left-triggers">
-                <div className="flow-trigger-item">
-                  <svg className="flow-trigger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <rect x="2" y="3" width="20" height="14" rx="2"/>
-                    <line x1="8" y1="21" x2="16" y2="21"/>
-                    <line x1="12" y1="17" x2="12" y2="21"/>
+                {/* Meeting Summarizer */}
+                <div className="flow-trigger-item trigger-item-top">
+                  <svg className="flow-trigger-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <rect x="3" y="4" width="18" height="14" rx="2"/>
+                    <line x1="8" y1="9" x2="10" y2="9"/>
                   </svg>
                   <span>Meeting Summarizer</span>
                 </div>
 
-                <div className="flow-trigger-item">
-                  <svg className="flow-trigger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <polyline points="16 18 22 12 16 6"/>
-                    <polyline points="8 6 2 12 8 18"/>
+                {/* Code Reviewer */}
+                <div className="flow-trigger-item trigger-item-mid">
+                  <svg className="flow-trigger-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
+                    <polyline points="8 7 3 12 8 17"/>
+                    <polyline points="16 7 21 12 16 17"/>
                   </svg>
                   <span>Code Reviewer</span>
                 </div>
 
-                <div className="flow-trigger-item">
-                  <svg className="flow-trigger-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                {/* Customer Support */}
+                <div className="flow-trigger-item trigger-item-bot">
+                  <svg className="flow-trigger-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8">
                     <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
                   </svg>
                   <span>Customer Support</span>
                 </div>
               </div>
 
-              {/* Center Hub */}
+              {/* Center Hub Node */}
               <div className="flow-center-hub">
                 <div className="hub-box">
-                  <div className="hub-cubes">
-                    <div className="hub-cube-1"/>
-                    <div className="hub-cube-2"/>
+                  <div className="hub-cubes-mark">
+                    <div className="hub-dot hub-dot-1" />
+                    <div className="hub-dot hub-dot-2" />
                   </div>
                 </div>
               </div>
 
-              {/* Blue Tag */}
-              <div className="flow-summarizer-pill">
-                summarizer
+              {/* Connected Blue Pill */}
+              <div className="flow-connected-pill">
+                Connected
               </div>
 
-              {/* Right Integrations Network */}
+              {/* Right Integrations Network Nodes */}
               <div className="flow-right-network">
-                {/* Notion / Doc */}
+                {/* 1. Notion Node (Top) */}
                 <div className="network-node node-notion" title="Notion">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e2e8f0" strokeWidth="2">
-                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                    <polyline points="14 2 14 8 20 8"/>
-                    <line x1="16" y1="13" x2="8" y2="13"/>
-                    <line x1="16" y1="17" x2="8" y2="17"/>
-                    <polyline points="10 9 9 9 8 9"/>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M4.459 4.208c.746.606 1.026.56 2.428.466l11.435-.654c1.12-.093 1.307-.466 1.027-.933L17.79 1.41C17.324.757 16.67.477 15.643.57L3.619 1.41c-.933.093-1.12.56-.746 1.027l1.586 1.77zm.933 3.92v13.626c0 .84.467 1.213 1.4 1.12l13.116-.747c.933-.093 1.12-.653 1.12-1.493V7.008c0-.746-.373-1.12-1.12-1.027L5.86 6.915c-.933.093-.467.466-.467 1.213zm12.32 1.493c.093.467 0 .933-.467 1.027l-.746.186v8.494l1.213.653c.467.28.653.654.467 1.12l-2.613.187-3.92-5.787v4.667l1.027.467c.373.186.467.56.373.933l-2.613.187-.84-.187v-9.333l-.84-.28c-.373-.187-.467-.56-.373-.933l2.8-.187 4.107 6.067V10.09l-.933-.466c-.374-.187-.374-.654-.094-.934l2.427-.186z"/>
                   </svg>
                 </div>
 
-                {/* Lightning Bolt */}
-                <div className="network-node node-bolt" title="Fast Execution">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="#34d399">
-                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+                {/* 2. Linear Node (Bottom) */}
+                <div className="network-node node-linear" title="Linear">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="9" stroke="#ffffff" strokeWidth="1.8"/>
+                    <line x1="6" y1="15" x2="15" y2="6" stroke="#ffffff" strokeWidth="1.5"/>
+                    <line x1="8" y1="17" x2="17" y2="8" stroke="#ffffff" strokeWidth="1.5"/>
+                    <line x1="10" y1="19" x2="19" y2="10" stroke="#ffffff" strokeWidth="1.5"/>
                   </svg>
                 </div>
 
-                {/* Slack */}
-                <div className="network-node node-slack" title="Slack Integration">
+                {/* 3. Slack Node (Middle) */}
+                <div className="network-node node-slack" title="Slack">
                   <svg width="20" height="20" viewBox="0 0 24 24">
-                    <path fill="#E01E5A" d="M6 15a2 2 0 1 0-2-2v2h2zm1 0a2 2 0 1 0 4 0v-5a2 2 0 1 0-4 0v5z"/>
-                    <path fill="#36C5F0" d="M9 6a2 2 0 1 0-2 2h2V6zm0 1a2 2 0 1 0 0 4h5a2 2 0 1 0 0-4H9z"/>
-                    <path fill="#2EB67D" d="M18 9a2 2 0 1 0 2 2v-2h-2zm-1 0a2 2 0 1 0-4 0v5a2 2 0 1 0 4 0V9z"/>
-                    <path fill="#ECB22E" d="M15 18a2 2 0 1 0 2-2h-2v2zm0-1a2 2 0 1 0 0-4H10a2 2 0 1 0 0 4h5z"/>
+                    <path fill="#E01E5A" d="M5.042 15.165a2.528 2.528 0 0 1-2.52-2.523 2.52 2.52 0 0 1 2.52-2.52h2.52v2.52c0 1.394-1.126 2.523-2.52 2.523z"/>
+                    <path fill="#E01E5A" d="M6.313 15.165a2.528 2.528 0 0 1 2.521-2.523 2.52 2.52 0 0 1 2.52 2.523v6.313A2.52 2.52 0 0 1 8.834 24a2.528 2.528 0 0 1-2.521-2.522v-6.313z"/>
+                    <path fill="#36C5F0" d="M8.834 5.042a2.528 2.528 0 0 1-2.521-2.52A2.52 2.52 0 0 1 8.834 0h2.52v2.522c0 1.393-1.126 2.52-2.52 2.52z"/>
+                    <path fill="#36C5F0" d="M8.834 6.313a2.528 2.528 0 0 1 2.52 2.521 2.52 2.52 0 0 1-2.52 2.52H2.522A2.52 2.52 0 0 1 0 8.834a2.528 2.528 0 0 1 2.522-2.521h6.312z"/>
+                    <path fill="#2EB67D" d="M18.958 8.834a2.528 2.528 0 0 1 2.522 2.521 2.52 2.52 0 0 1-2.522 2.52h-2.52V11.355c0-1.393 1.127-2.521 2.52-2.521z"/>
+                    <path fill="#2EB67D" d="M17.688 8.834a2.528 2.528 0 0 1-2.523 2.521 2.52 2.52 0 0 1-2.52-2.521V2.522A2.52 2.52 0 0 1 15.165 0a2.528 2.528 0 0 1 2.523 2.522v6.312z"/>
+                    <path fill="#ECB22E" d="M15.165 18.958a2.528 2.528 0 0 1 2.523 2.522 2.52 2.52 0 0 1-2.523 2.52h-2.52v-2.52c0-1.395 1.127-2.522 2.52-2.522z"/>
+                    <path fill="#ECB22E" d="M15.165 17.688a2.528 2.528 0 0 1-2.52-2.523 2.52 2.52 0 0 1 2.52-2.52h6.313A2.52 2.52 0 0 1 24 15.165a2.528 2.528 0 0 1-2.522 2.523h-6.313z"/>
                   </svg>
                 </div>
 
-                {/* Globe / Cloud API */}
-                <div className="network-node node-globe" title="Cloud APIs">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <line x1="2" y1="12" x2="22" y2="12"/>
-                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                {/* 4. Lightning Bolt Node (Top-Right above Slack) */}
+                <div className="network-node node-bolt" title="Fast Trigger">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="#10b981">
+                    <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                   </svg>
                 </div>
 
-                {/* Pie / Metrics */}
-                <div className="network-node node-pie" title="Telemetry & Logs">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" strokeWidth="2">
-                    <circle cx="12" cy="12" r="10"/>
-                    <path d="M12 2a10 10 0 0 1 10 10H12V2z" fill="#94a3b8"/>
+                {/* 5. OpenAI Node (Far-Right of Slack) */}
+                <div className="network-node node-openai" title="OpenAI">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.771-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.746-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.08 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.493zm-8.66-4.666a4.477 4.477 0 0 1-.533-3.008l.142.083 4.78 2.758a.791.791 0 0 0 .78 0l5.834-3.369v2.335a.08.08 0 0 1-.033.065l-4.839 2.793a4.506 4.506 0 0 1-6.131-1.657zm-1.074-9.363c.306-1.025.99-1.9 1.943-2.476l-.001.164v5.516a.79.79 0 0 0 .389.682l5.834 3.369-2.02 1.168a.078.078 0 0 1-.071 0l-4.839-2.793a4.508 4.508 0 0 1-1.235-5.63zm14.507 3.633l-5.834-3.369 2.02-1.168a.078.078 0 0 1 .071 0l4.839 2.793a4.508 4.508 0 0 1-.708 8.113v-5.688a.79.79 0 0 0-.388-.681zm2.445-3.07a4.513 4.513 0 0 1-.39 2.928l-.142-.082-4.78-2.758a.79.79 0 0 0-.78 0L8.632 12.39V10.05a.077.077 0 0 1 .033-.064l4.839-2.794a4.498 4.498 0 0 1 4.79.467 4.53 4.53 0 0 1 1.34 2.457zm-9.068-1.572l-2.02-1.168a.07.07 0 0 1-.038-.052V2.083a4.504 4.504 0 0 1 7.37 3.453l-.142.08-4.779 2.758a.795.795 0 0 0-.391.681v.342zm-1.024 4.364l2.836-1.638 2.836 1.638v3.275l-2.836 1.637-2.836-1.637z"/>
                   </svg>
                 </div>
               </div>

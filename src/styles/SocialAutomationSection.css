@@ -1,5 +1,5 @@
 /* ========================================================
-   AUTOMATE YOUR SOCIAL MEDIA SECTION - HIGH FIDELITY
+   AUTOMATE YOUR SOCIAL MEDIA SECTION - UNIFIED BENTO GRID
    ======================================================== */
 
 .social-auto-wrapper {
@@ -11,7 +11,7 @@
   overflow: hidden;
 }
 
-/* Subtle ambient background glow centered under title */
+/* Ambient background glow */
 .social-auto-wrapper::before {
   content: '';
   position: absolute;
@@ -55,25 +55,32 @@
   font-weight: 400;
 }
 
-/* Bento Grid Core Layout */
+/* ========================================================
+   UNIFIED 3-COLUMN BENTO GRID
+   Top Row: Card 1 (2 cols) + Card 2 (1 col)
+   Bottom Row: Card 3 (1 col) + Card 4 (1 col) + Card 5 (1 col)
+   ======================================================== */
 .social-auto-bento-layout {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-/* Row 1 Layout (60% / 40% Split) */
-.social-auto-row1 {
-  display: grid;
-  grid-template-columns: 1.5fr 1fr;
-  gap: 24px;
-}
-
-/* Row 2 Layout (Equal 33.3% Split) */
-.social-auto-row2 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
+  gap: 20px;
+}
+
+/* Card 1: Exactly 2 Columns Wide (Matches Bottom 2 Cards combined) */
+.card-platforms {
+  grid-column: span 2;
+}
+
+/* Card 2: Exactly 1 Column Wide (Matches Card 5 directly below it) */
+.card-analytics {
+  grid-column: span 1;
+}
+
+/* Bottom Cards 3, 4, 5: Exactly 1 Column each */
+.card-integrated-ai,
+.card-easy-collab,
+.card-audience {
+  grid-column: span 1;
 }
 
 /* Individual Bento Card Styling */
@@ -81,14 +88,14 @@
   background: #0b0c0e;
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 20px;
-  padding: 36px;
+  padding: 34px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   position: relative;
   overflow: hidden;
   min-height: 360px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -100,6 +107,14 @@
 /* Card Content Typography */
 .social-card-text-top {
   margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.social-card-text-bot {
+  margin-top: auto;
+  position: relative;
+  z-index: 2;
 }
 
 .social-card-title {
@@ -121,18 +136,17 @@
 /* ========================================================
    CARD 1 GRAPHIC: SOCIAL PLATFORMS CAROUSEL GRID
    ======================================================== */
-.social-platforms-grid {
+.social-platforms-stage {
   position: relative;
-  height: 150px;
+  height: 155px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 16px;
-  margin-bottom: 12px;
+  gap: 12px;
   overflow: hidden;
-  /* Visual horizontal masking for edges */
-  mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, #000 15%, #000 85%, transparent);
+  margin-top: 10px;
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
 }
 
 .social-grid-connector {
@@ -141,18 +155,29 @@
   left: 0;
   width: 100%;
   height: 100%;
+  pointer-events: none;
   z-index: 0;
+}
+
+.social-flow-path {
+  animation: socialDash 20s linear infinite;
+}
+
+@keyframes socialDash {
+  to {
+    stroke-dashoffset: -1000;
+  }
 }
 
 .social-icons-row {
   display: flex;
-  gap: 16px;
+  gap: 12px;
   width: max-content;
   z-index: 1;
 }
 
 .row-1 {
-  transform: translateX(-20px);
+  transform: translateX(-15px);
 }
 
 .row-2 {
@@ -162,317 +187,315 @@
 .social-app-icon {
   width: 48px;
   height: 48px;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 13px;
+  background: #141519;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
 }
 
-/* Distinct individual icon glow styles */
-.icon-ig { color: #f77737; }
-.icon-tt { color: #00f2fe; }
-.icon-tw { color: #ffffff; }
-.icon-fb { color: #1877f2; }
-.icon-meta { color: #0081fb; }
-.icon-li { color: #0a66c2; }
-.icon-slack { color: #ecb22e; }
-
 .social-app-icon:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.15);
+  transform: scale(1.08);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 /* ========================================================
    CARD 2 GRAPHIC: ANALYTICS CURVE MOCKUP
    ======================================================== */
-.analytics-curve-wrap {
+.analytics-radar-wrap {
   position: relative;
-  height: 160px;
+  height: 150px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.radar-circle-bg {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+}
+
+.radar-dashed-axis {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  border-left: 1px dashed rgba(255, 255, 255, 0.07);
+  pointer-events: none;
 }
 
 .analytics-vector-curve {
   width: 100%;
   height: 100%;
+  position: relative;
   z-index: 1;
 }
 
-.analytics-live-node {
+.analytics-node-apex {
   position: absolute;
-  z-index: 2;
+  left: 50%;
+  top: 48px;
   transform: translate(-50%, -50%);
+  z-index: 3;
 }
 
-.analytics-cursor-dot {
-  width: 8px;
-  height: 8px;
+.analytics-apex-dot {
+  width: 9px;
+  height: 9px;
   background: #ffffff;
-  border: 2.5px solid #38bdf8;
+  border: 2px solid #38bdf8;
   border-radius: 50%;
-  box-shadow: 0 0 10px #38bdf8;
+  box-shadow: 0 0 12px #38bdf8;
 }
 
-.analytics-tooltip {
+.analytics-badge-tooltip {
   position: absolute;
   bottom: 18px;
   left: 50%;
   transform: translateX(-50%);
-  background: rgba(15, 23, 42, 0.9);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #16171b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 999px;
-  padding: 4px 10px;
+  padding: 3px 10px;
   white-space: nowrap;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
 }
 
-.analytics-tooltip span {
+.analytics-badge-tooltip span {
   font-size: 10.5px;
   color: #94a3b8;
   font-weight: 500;
 }
 
-.analytics-vector-cursor {
+.analytics-blue-cursor {
   position: absolute;
-  top: 10px;
+  top: 8px;
   left: 6px;
-  animation: pointerHover 3s ease-in-out infinite alternate;
-}
-
-@keyframes pointerHover {
-  0% { transform: translate(0, 0); }
-  100% { transform: translate(3px, 3px); }
+  pointer-events: none;
 }
 
 /* ========================================================
-   CARD 3 GRAPHIC: AI CHIPS INTEGRATED CLUSTER
+   CARD 3 GRAPHIC: INTEGRATED AI CLUSTER
    ======================================================== */
-.ai-chips-cluster {
+.ai-carousel-wrap {
   position: relative;
   height: 140px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 14px;
+  gap: 12px;
 }
 
-.ai-cluster-glow {
+.ai-ambient-particles {
   position: absolute;
-  width: 120px;
-  height: 120px;
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
+  inset: 0;
+  background: radial-gradient(circle 80px at 50% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
   pointer-events: none;
 }
 
-.ai-chip-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: #111215;
-  border: 1px solid rgba(255, 255, 255, 0.05);
+.ai-logo-node {
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #475569;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  background: #121316;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  transition: transform 0.25s ease;
 }
 
-/* Stacked horizontal depth scaling styling */
-.fade-left-2, .fade-right-2 {
-  transform: scale(0.85);
+.node-claude {
+  width: 34px;
+  height: 34px;
   opacity: 0.25;
+  transform: scale(0.85);
 }
 
-.fade-left-1, .fade-right-1 {
-  transform: scale(0.92);
-  opacity: 0.55;
+.claude-letter {
+  font-weight: 700;
+  font-size: 13px;
+  color: #d97706;
+}
+
+.node-robot {
+  width: 40px;
+  height: 40px;
+  opacity: 0.5;
   color: #94a3b8;
 }
 
-.ai-chip-icon.primary-chip {
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
+.node-openai-main {
+  width: 54px;
+  height: 54px;
   background: #ffffff;
   color: #000000;
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
   transform: scale(1.05);
   z-index: 2;
 }
 
+.node-meta-ai {
+  width: 40px;
+  height: 40px;
+  opacity: 0.5;
+}
+
+.node-sparkle {
+  width: 34px;
+  height: 34px;
+  opacity: 0.25;
+  color: #a855f7;
+  transform: scale(0.85);
+}
+
 /* ========================================================
-   CARD 4 GRAPHIC: SIMULATED FLOW COLLABORATION CANVAS
+   CARD 4 GRAPHIC: EASY COLLABORATION CANVAS
    ======================================================== */
-.collab-flow-wrap {
+.collab-stage-wrap {
   position: relative;
   height: 140px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.01);
-  border: 1px solid rgba(255, 255, 255, 0.02);
-  border-radius: 12px;
-  padding: 10px;
-  overflow: hidden;
+  align-items: center;
 }
 
-.collab-grid-dots {
-  position: absolute;
-  inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 10px 10px;
-  pointer-events: none;
-}
-
-.collab-dot-indicators {
+.collab-dot-row {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 12px;
-  z-index: 1;
+  margin-bottom: 10px;
 }
 
 .dot-ind {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
 }
 
-.collab-flow-nodes-container {
-  position: relative;
+.collab-nodes-stack {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
-  width: 100%;
-}
-
-.collab-flow-connector-line {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 0;
-  pointer-events: none;
-}
-
-.collab-node {
-  background: #111215;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 6px;
-  padding: 4px 10px;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 8px;
+  gap: 5px;
   position: relative;
 }
 
-.collab-node-text {
-  font-size: 10px;
+.collab-item-box {
+  background: #141519;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 6px;
+  padding: 4px 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collab-box-text {
+  font-size: 10.5px;
   color: #94a3b8;
   font-weight: 500;
 }
 
-.collab-user-badge {
-  font-size: 8px;
-  font-weight: 600;
-  padding: 1.5px 5px;
-  border-radius: 4px;
+.active-cyan-box {
+  border-color: #00d8f6;
+  box-shadow: 0 0 16px rgba(0, 216, 246, 0.2);
+}
+
+.active-cyan-box .collab-box-text {
+  color: #ffffff;
+}
+
+.collab-v-line {
+  width: 1px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.collab-pointer-tag {
   position: absolute;
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.tag-manu {
-  background: rgba(0, 216, 246, 0.1);
-  border: 1px solid rgba(0, 216, 246, 0.2);
-  color: #00d8f6;
-  right: -64px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.tag-tyler {
-  background: rgba(244, 63, 94, 0.1);
-  border: 1px solid rgba(244, 63, 94, 0.2);
-  color: #f43f5e;
   right: -72px;
   top: 50%;
   transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 8.5px;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-.node-cursor-arrow {
-  position: absolute;
-  top: -6px;
-  left: -4px;
+.tag-blue {
+  color: #00d8f6;
+}
+
+.tag-subtle {
+  color: #64748b;
 }
 
 /* ========================================================
    CARD 5 GRAPHIC: AUDIENCE INSIGHTS WIDGET
    ======================================================== */
-.audience-profile-wrap {
+.audience-stage-wrap {
   position: relative;
   height: 140px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
+  gap: 8px;
 }
 
-.audience-avatar-frame {
-  padding: 2.5px;
-  border-radius: 50%;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, transparent 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.audience-avatar-container {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.5px solid #00d8f6;
+  box-shadow: 0 0 20px rgba(0, 216, 246, 0.25);
 }
 
-.audience-avatar-inner {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #111215;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.audience-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 
-.audience-info-block {
+.audience-text-meta {
   text-align: center;
 }
 
-.audience-name {
+.audience-user-name {
   font-size: 13.5px;
   font-weight: 600;
   color: #ffffff;
-  margin-bottom: 2px;
 }
 
-.audience-stats {
-  font-size: 10.5px;
+.audience-user-stats {
+  font-size: 10px;
   color: #64748b;
+  margin-top: 1px;
 }
 
-.audience-waveform-wrap {
-  position: absolute;
-  bottom: 0;
+.audience-waveform-box {
   width: 100%;
-  height: 40px;
+  height: 30px;
+  opacity: 0.7;
 }
 
-.audience-waveform {
+.audience-waveform-svg {
   width: 100%;
   height: 100%;
 }
@@ -481,20 +504,19 @@
    RESPONSIVE DESIGN SYSTEM MEDIA QUERIES
    ======================================================== */
 @media (max-width: 960px) {
-  .social-auto-row1 {
+  .social-auto-bento-layout {
     grid-template-columns: 1fr;
   }
   
-  .social-auto-row2 {
-    grid-template-columns: 1fr;
-  }
-  
-  .social-bento-card {
-    min-height: auto;
+  .card-platforms,
+  .card-analytics,
+  .card-integrated-ai,
+  .card-easy-collab,
+  .card-audience {
+    grid-column: span 1;
   }
 
-  .social-platforms-grid {
-    mask-image: none;
-    -webkit-mask-image: none;
+  .social-bento-card {
+    min-height: auto;
   }
 }

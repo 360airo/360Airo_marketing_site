@@ -6,13 +6,13 @@
   position: relative;
   background-color: #0B0A0B;
   color: #ffffff;
-  padding: 40px 24px 80px;
+  padding: 60px 24px 80px;
   overflow: hidden;
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
 .native-tools-container {
-  max-width: 1240px;
+  max-width: 1180px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
@@ -33,7 +33,7 @@
 
 /* Header */
 .native-tools-header {
-  margin-bottom: 40px;
+  margin-bottom: 36px;
   position: relative;
   z-index: 3;
 }
@@ -73,21 +73,20 @@
 .native-tools-canvas {
   position: relative;
   width: 100%;
-  height: 380px;
+  height: 340px;
   border-radius: 18px;
   background: #000000;
-  
-
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  margin-bottom: 30px;
 }
 
 .canvas-dot-grid {
   position: absolute;
   inset: 0;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1.2px, transparent 1.2px);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.14) 1.2px, transparent 1.2px);
   background-size: 24px 24px;
   mask-image: radial-gradient(ellipse 85% 70% at 50% 50%, #000 60%, transparent 100%);
   -webkit-mask-image: radial-gradient(ellipse 85% 70% at 50% 50%, #000 60%, transparent 100%);
@@ -98,12 +97,8 @@
 .flow-diagram-stage {
   position: relative;
   width: 100%;
-  max-width: 980px;
-  height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 40px;
+  max-width: 960px;
+  height: 320px;
 }
 
 .flow-svg-layer {
@@ -115,118 +110,131 @@
   z-index: 1;
 }
 
-/* Left Trigger Nodes */
+/* Animated flow lines */
+.animated-flow-line {
+  stroke-dasharray: 4 4;
+  animation: flowPulse 25s linear infinite;
+}
+
+@keyframes flowPulse {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+/* Left Trigger Items */
 .flow-left-triggers {
+  position: absolute;
+  left: 30px;
+  top: 0;
+  bottom: 0;
   display: flex;
   flex-direction: column;
-  gap: 32px;
-  z-index: 2;
-  position: relative;
-  width: 220px;
+  justify-content: space-between;
+  padding: 70px 0;
+  z-index: 3;
 }
 
 .flow-trigger-item {
   display: flex;
   align-items: center;
-  gap: 12px;
-  font-size: 13px;
+  gap: 10px;
+  font-size: 13.5px;
   font-weight: 500;
   color: #cbd5e1;
-  background: #000000;
-  padding: 8px 14px;
-  border-radius: 10px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.6);
-  transition: all 0.3s ease;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: default;
+  transition: color 0.2s ease;
 }
 
 .flow-trigger-item:hover {
-  border-color: rgba(255, 255, 255, 0.25);
   color: #ffffff;
-  transform: translateX(4px);
 }
 
 .flow-trigger-icon {
   width: 16px;
   height: 16px;
-  opacity: 0.8;
+  color: #94a3b8;
   flex-shrink: 0;
 }
 
 /* Center Hub Node */
 .flow-center-hub {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  left: 434px;
+  top: 132px;
+  z-index: 3;
 }
 
 .hub-box {
-  width: 58px;
-  height: 58px;
+  width: 56px;
+  height: 56px;
   border-radius: 14px;
-  background: #000000;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: #111113;
+  border: 1px solid rgba(255, 255, 255, 0.16);
   box-shadow: 
-    0 8px 30px rgba(0, 0, 0, 0.9),
-    0 0 25px rgba(99, 102, 241, 0.25),
-    inset 0 1px 1px rgba(255, 255, 255, 0.2);
+    0 10px 30px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(255, 255, 255, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, border-color 0.3s ease;
 }
 
 .hub-box:hover {
-  transform: scale(1.06);
+  transform: scale(1.05);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
-.hub-cubes {
-  display: grid;
-  grid-template-columns: 10px 10px;
-  gap: 4px;
-  transform: rotate(-12deg);
-}
-
-.hub-cube-1 {
-  width: 10px;
-  height: 10px;
-  background: #ffffff;
-  border-radius: 2px;
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
-}
-
-.hub-cube-2 {
-  width: 10px;
-  height: 10px;
-  background: #94a3b8;
-  border-radius: 2px;
-  transform: translateY(6px);
-}
-
-/* Middle Tag Pill */
-.flow-summarizer-pill {
+.hub-cubes-mark {
   position: relative;
-  z-index: 2;
-  background: #1e3a8a;
-  color: #93c5fd;
-  font-size: 11px;
+  width: 18px;
+  height: 18px;
+}
+
+.hub-dot {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  background: #ffffff;
+  border-radius: 1.5px;
+}
+
+.hub-dot-1 {
+  top: 1px;
+  left: 1px;
+}
+
+.hub-dot-2 {
+  bottom: 1px;
+  right: 1px;
+}
+
+/* Connected Pill */
+.flow-connected-pill {
+  position: absolute;
+  left: 640px;
+  top: 145px;
+  z-index: 3;
+  background: #0052cc;
+  color: #ffffff;
+  font-size: 12px;
   font-weight: 600;
-  padding: 5px 12px;
+  padding: 6px 14px;
   border-radius: 6px;
-  border: 1px solid rgba(96, 165, 250, 0.35);
-  box-shadow: 0 0 16px rgba(37, 99, 235, 0.3);
+  border: 1px solid #3b82f6;
+  box-shadow: 0 0 16px rgba(59, 130, 246, 0.35);
   letter-spacing: 0.02em;
 }
 
-/* Right Integrations Network */
+/* Right Integrations Network Nodes */
 .flow-right-network {
-  position: relative;
-  width: 240px;
-  height: 220px;
-  z-index: 2;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 3;
 }
 
 .network-node {
@@ -234,57 +242,47 @@
   width: 44px;
   height: 44px;
   border-radius: 12px;
-  background: #000000;
+  background: #111113;
   border: 1px solid rgba(255, 255, 255, 0.14);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.8);
-  transition: all 0.3s ease;
+  color: #ffffff;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.8);
+  pointer-events: auto;
+  transition: transform 0.25s ease, border-color 0.25s ease;
 }
 
 .network-node:hover {
   transform: scale(1.1);
-  border-color: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.35);
 }
 
-/* Positions matching diagram */
+/* Exact Coordinates matching SVG paths */
 .node-notion {
-  top: 15px;
-  left: 0;
+  left: 653px;
+  top: 58px;
 }
 
-.node-bolt {
-  top: 0;
-  left: 80px;
-  background: #000000;
+.node-linear {
+  left: 653px;
+  top: 218px;
 }
 
 .node-slack {
-  top: 75px;
-  left: 80px;
+  left: 770px;
+  top: 138px;
 }
 
-.node-globe {
-  top: 75px;
-  right: 10px;
+.node-bolt {
+  left: 770px;
+  top: 48px;
+  background: #111113;
 }
 
-.node-pie {
-  bottom: 10px;
-  left: 0;
-}
-
-/* Animated Path Pulse */
-.animated-path {
-  stroke-dasharray: 6 6;
-  animation: dashMove 20s linear infinite;
-}
-
-@keyframes dashMove {
-  to {
-    stroke-dashoffset: -1000;
-  }
+.node-openai {
+  left: 870px;
+  top: 138px;
 }
 
 /* Bottom 3 Columns */
@@ -292,8 +290,8 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 36px;
-  
   padding-top: 36px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .native-feature-col {
@@ -326,59 +324,25 @@
   margin: 0;
 }
 
-/* Responsive */
-@media (max-width: 960px) {
+/* Responsive Styles */
+@media (max-width: 1024px) {
+  .native-tools-canvas {
+    overflow-x: auto;
+    justify-content: flex-start;
+  }
+
+  .flow-diagram-stage {
+    min-width: 960px;
+  }
+}
+
+@media (max-width: 860px) {
   .native-tools-card {
-    padding: 32px 24px;
+    padding: 32px 20px;
   }
 
   .native-tools-features {
     grid-template-columns: 1fr;
     gap: 28px;
-  }
-
-  .flow-diagram-stage {
-    padding: 0 10px;
-  }
-
-  .flow-left-triggers {
-    width: 180px;
-  }
-
-  .flow-trigger-item {
-    font-size: 12px;
-    padding: 6px 10px;
-  }
-}
-
-@media (max-width: 680px) {
-  .native-tools-canvas {
-    height: auto;
-    padding: 24px 10px;
-  }
-
-  .flow-diagram-stage {
-    flex-direction: column;
-    height: auto;
-    gap: 24px;
-  }
-
-  .flow-svg-layer {
-    display: none;
-  }
-
-  .flow-left-triggers,
-  .flow-right-network {
-    width: 100%;
-    position: static;
-    height: auto;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  .network-node {
-    position: static;
   }
 }

@@ -45,7 +45,7 @@
 
 /* Audit Activity Terminal Card Component */
 .audit-activity-card {
-  background: #0d0e11;
+  background: #000000;
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 24px;
@@ -147,7 +147,7 @@
 
 /* Role-Based Access Avatar Map Widget */
 .roles-cluster-card {
-  background: #0d0e11;
+  background: #000000;
   border: 1px solid rgba(255, 255, 255, 0.05);
   border-radius: 16px;
   padding: 32px;
@@ -202,8 +202,8 @@
 
 .role-user-avatar {
   position: absolute;
-  width: 46px;
-  height: 46px;
+  width: 66px;
+  height: 66px;
   border-radius: 12px;
   background: #1e293b;
   border: 1.5px solid rgba(255, 255, 255, 0.12);
@@ -225,12 +225,12 @@
 }
 
 /* Perfect alignment coordinate mapping mimicking hexagon layout */
-.role-u1 { top: 12px; left: 45px; border-color: rgba(59, 130, 246, 0.4); }
-.role-u2 { top: 12px; right: 45px; }
+.role-u1 { top: 3px; left: 45px; border-color: rgba(59, 130, 246, 0.4); }
+.role-u2 { top: 3px; right: 45px; }
 .role-u3 { top: 50%; left: 10px; transform: translateY(-50%); }
 .role-u4 { top: 50%; right: 10px; transform: translateY(-50%); }
-.role-u5 { bottom: 12px; left: 45px; }
-.role-u6 { bottom: 12px; right: 45px; border-color: rgba(59, 130, 246, 0.4); }
+.role-u5 { bottom: -5px; left: 45px; }
+.role-u6 { bottom: -5px; right: 45px; border-color: rgba(59, 130, 246, 0.4); }
 
 /* Sub Feature Styling */
 .sub-feature-item {
@@ -266,7 +266,7 @@
    BOTTOM DASHBOARD SHOWCASE COMPONENT
    ======================================================== */
 .audit-showcase-panel {
-  background: #050507;
+  background: #000000;
   border-radius: 28px;
   padding: 32px;
   display: flex;
