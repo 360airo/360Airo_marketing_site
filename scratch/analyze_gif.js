@@ -3,7 +3,7 @@ const path = require('path');
 const { GifReader } = require('omggif');
 
 const gifPath = path.join(__dirname, '..', 'public', 'enhanced_video.gif');
-const buf = fs.readFileSync(gifPath);
+const buf = fs.readFileSync(gifPath); 
 
 try {
   const reader = new GifReader(buf);
