@@ -1598,7 +1598,7 @@ color:#fff;
 @media(max-width:768px){#section-analytics .as{padding:80px 24px}}
 
 /* PRICING DARK + FOOTER */
-#section-pricing{position:relative;z-index:1;background:linear-gradient(to bottom, #000000 0%, transparent 300px)}
+
 #section-pricing .ps{padding:100px 32px;text-align:center}
 #section-pricing .pin{max-width:1000px;margin:0 auto}
 #section-pricing .psub{color:var(--text-muted);font-size:16px;margin-bottom:48px}

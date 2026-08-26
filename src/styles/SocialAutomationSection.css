@@ -1,0 +1,522 @@
+/* ========================================================
+   AUTOMATE YOUR SOCIAL MEDIA SECTION - UNIFIED BENTO GRID
+   ======================================================== */
+
+.social-auto-wrapper {
+  background-color: #050507;
+  color: #ffffff;
+  padding: 100px 24px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient background glow */
+.social-auto-wrapper::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(56, 189, 248, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.social-auto-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+/* Header Styling */
+.social-auto-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 64px;
+}
+
+.social-auto-title {
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  margin: 0 0 16px 0;
+}
+
+.social-auto-subtitle {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: #808694;
+  margin: 0;
+  font-weight: 400;
+}
+
+/* ========================================================
+   UNIFIED 3-COLUMN BENTO GRID
+   Top Row: Card 1 (2 cols) + Card 2 (1 col)
+   Bottom Row: Card 3 (1 col) + Card 4 (1 col) + Card 5 (1 col)
+   ======================================================== */
+.social-auto-bento-layout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Card 1: Exactly 2 Columns Wide (Matches Bottom 2 Cards combined) */
+.card-platforms {
+  grid-column: span 2;
+}
+
+/* Card 2: Exactly 1 Column Wide (Matches Card 5 directly below it) */
+.card-analytics {
+  grid-column: span 1;
+}
+
+/* Bottom Cards 3, 4, 5: Exactly 1 Column each */
+.card-integrated-ai,
+.card-easy-collab,
+.card-audience {
+  grid-column: span 1;
+}
+
+/* Individual Bento Card Styling */
+.social-bento-card {
+  background: #0b0c0e;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 20px;
+  padding: 34px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  min-height: 360px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.social-bento-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* Card Content Typography */
+.social-card-text-top {
+  margin-bottom: 24px;
+  position: relative;
+  z-index: 2;
+}
+
+.social-card-text-bot {
+  margin-top: auto;
+  position: relative;
+  z-index: 2;
+}
+
+.social-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin: 0 0 10px 0;
+  letter-spacing: -0.015em;
+}
+
+.social-card-desc {
+  font-size: 13.5px;
+  line-height: 1.6;
+  color: #808694;
+  margin: 0;
+  max-width: 90%;
+}
+
+/* ========================================================
+   CARD 1 GRAPHIC: SOCIAL PLATFORMS CAROUSEL GRID
+   ======================================================== */
+.social-platforms-stage {
+  position: relative;
+  height: 155px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+  overflow: hidden;
+  margin-top: 10px;
+  mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 12%, #000 88%, transparent);
+}
+
+.social-grid-connector {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.social-flow-path {
+  animation: socialDash 20s linear infinite;
+}
+
+@keyframes socialDash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
+
+.social-icons-row {
+  display: flex;
+  gap: 12px;
+  width: max-content;
+  z-index: 1;
+}
+
+.row-1 {
+  transform: translateX(-15px);
+}
+
+.row-2 {
+  transform: translateX(20px);
+}
+
+.social-app-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 13px;
+  background: #141519;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0;
+}
+
+.social-app-icon:hover {
+  transform: scale(1.08);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* ========================================================
+   CARD 2 GRAPHIC: ANALYTICS CURVE MOCKUP
+   ======================================================== */
+.analytics-radar-wrap {
+  position: relative;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radar-circle-bg {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  pointer-events: none;
+}
+
+.radar-dashed-axis {
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  border-left: 1px dashed rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+}
+
+.analytics-vector-curve {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+.analytics-node-apex {
+  position: absolute;
+  left: 50%;
+  top: 48px;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+}
+
+.analytics-apex-dot {
+  width: 9px;
+  height: 9px;
+  background: #ffffff;
+  border: 2px solid #38bdf8;
+  border-radius: 50%;
+  box-shadow: 0 0 12px #38bdf8;
+}
+
+.analytics-badge-tooltip {
+  position: absolute;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #16171b;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 999px;
+  padding: 3px 10px;
+  white-space: nowrap;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+}
+
+.analytics-badge-tooltip span {
+  font-size: 10.5px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.analytics-blue-cursor {
+  position: absolute;
+  top: 8px;
+  left: 6px;
+  pointer-events: none;
+}
+
+/* ========================================================
+   CARD 3 GRAPHIC: INTEGRATED AI CLUSTER
+   ======================================================== */
+.ai-carousel-wrap {
+  position: relative;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.ai-ambient-particles {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle 80px at 50% 50%, rgba(255, 255, 255, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ai-logo-node {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #121316;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5);
+  transition: transform 0.25s ease;
+}
+
+.node-claude {
+  width: 34px;
+  height: 34px;
+  opacity: 0.25;
+  transform: scale(0.85);
+}
+
+.claude-letter {
+  font-weight: 700;
+  font-size: 13px;
+  color: #d97706;
+}
+
+.node-robot {
+  width: 40px;
+  height: 40px;
+  opacity: 0.5;
+  color: #94a3b8;
+}
+
+.node-openai-main {
+  width: 54px;
+  height: 54px;
+  background: #ffffff;
+  color: #000000;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.25);
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+.node-meta-ai {
+  width: 40px;
+  height: 40px;
+  opacity: 0.5;
+}
+
+.node-sparkle {
+  width: 34px;
+  height: 34px;
+  opacity: 0.25;
+  color: #a855f7;
+  transform: scale(0.85);
+}
+
+/* ========================================================
+   CARD 4 GRAPHIC: EASY COLLABORATION CANVAS
+   ======================================================== */
+.collab-stage-wrap {
+  position: relative;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.collab-dot-row {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.dot-ind {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.collab-nodes-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  position: relative;
+}
+
+.collab-item-box {
+  background: #141519;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 6px;
+  padding: 4px 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.collab-box-text {
+  font-size: 10.5px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+.active-cyan-box {
+  border-color: #00d8f6;
+  box-shadow: 0 0 16px rgba(0, 216, 246, 0.2);
+}
+
+.active-cyan-box .collab-box-text {
+  color: #ffffff;
+}
+
+.collab-v-line {
+  width: 1px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.collab-pointer-tag {
+  position: absolute;
+  right: -72px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 8.5px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.tag-blue {
+  color: #00d8f6;
+}
+
+.tag-subtle {
+  color: #64748b;
+}
+
+/* ========================================================
+   CARD 5 GRAPHIC: AUDIENCE INSIGHTS WIDGET
+   ======================================================== */
+.audience-stage-wrap {
+  position: relative;
+  height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.audience-avatar-container {
+  width: 50px;
+  height: 50px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1.5px solid #00d8f6;
+  box-shadow: 0 0 20px rgba(0, 216, 246, 0.25);
+}
+
+.audience-photo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.audience-text-meta {
+  text-align: center;
+}
+
+.audience-user-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.audience-user-stats {
+  font-size: 10px;
+  color: #64748b;
+  margin-top: 1px;
+}
+
+.audience-waveform-box {
+  width: 100%;
+  height: 30px;
+  opacity: 0.7;
+}
+
+.audience-waveform-svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ========================================================
+   RESPONSIVE DESIGN SYSTEM MEDIA QUERIES
+   ======================================================== */
+@media (max-width: 960px) {
+  .social-auto-bento-layout {
+    grid-template-columns: 1fr;
+  }
+  
+  .card-platforms,
+  .card-analytics,
+  .card-integrated-ai,
+  .card-easy-collab,
+  .card-audience {
+    grid-column: span 1;
+  }
+
+  .social-bento-card {
+    min-height: auto;
+  }
+}

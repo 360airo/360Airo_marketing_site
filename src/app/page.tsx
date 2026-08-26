@@ -14,6 +14,13 @@ import FunnelStagesSection from '../components/FunnelStagesSection';
 import OutreachDeploySection from '../components/OutreachDeploySection';
 import TestimonialsSection from '../components/TestimonialsSection';
 import OutreachBentoSection from '../components/OutreachBentoSection';
+import BuiltForSpeedSection from '../components/BuiltForSpeedSection';
+import NativeToolsIntegration from '../components/NativeToolsIntegration';
+import DeploymentsSection from '../components/DeploymentsSection';
+import SocialAutomationSection from '../components/SocialAutomationSection';
+import AuditAndAccessSection from '../components/AuditAndAccessSection';
+import ResourcesBankSection from '../components/ResourcesBankSection';
+import TieredPricingSection from '../components/TieredPricingSection';
 
 import PhoneDashboard from '../components/PhoneDashboard';
 import ModernOutreachSection from '../components/ModernOutreachSection';
@@ -365,9 +372,18 @@ export default function App() {
   <TestimonialsSection />
   {/* <OutreachBentoSection /> */}
 
+  <BuiltForSpeedSection />
+   <ResourcesBankSection />
+  <NativeToolsIntegration />
+  <DeploymentsSection />
+  <SocialAutomationSection />
+  <AuditAndAccessSection />
+ 
+  <TieredPricingSection />
+
   <CTASection />
   <FAQSection />
-  <div id="section-pricing" style={{ position: 'relative', zIndex: 10, width: '100%' }}>
+  <div id="section-footer" style={{ position: 'relative', zIndex: 10, width: '100%' }}>
     <Footer />
   </div>
 </div>
