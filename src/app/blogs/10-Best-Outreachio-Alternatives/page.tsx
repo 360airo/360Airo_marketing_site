@@ -759,7 +759,7 @@ export default function BlogColdEmailPage() {
                 {
                   title: 'How AI Sales Engagement Platforms Compare in 2026',
                   tag: 'AI Sales',
-                  href: '/blogs/ai-sales-engagement-platforms-2026',
+                  href: '/blogs/10-Cheapest-Cold-Email-Software',
                   description: 'Read this next to compare modern outbound platforms in more detail.',
                   image:
                     'https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=1200&q=80',
@@ -767,7 +767,7 @@ export default function BlogColdEmailPage() {
                 {
                   title: 'Best Cold Email and Deliverability Tools for Growing Teams',
                   tag: 'Sales Automation',
-                  href: '/blogs/best-cold-email-deliverability-tools',
+                  href: '/blogs/Free-Email-Deliverability-Test',
                   description: 'Read this next to explore deliverability-focused outreach tools.',
                   image:
                     'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
@@ -775,7 +775,7 @@ export default function BlogColdEmailPage() {
                 {
                   title: 'How to Choose the Right Sales Engagement Platform',
                   tag: 'CRM Integration',
-                  href: '/blogs/how-to-choose-sales-engagement-platform',
+                  href: '/blogs',
                   description: 'Read this next to evaluate platform fit, workflows, and pricing.',
                   image:
                     'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',

@@ -560,7 +560,7 @@ export default function ChainOfEventsCaseStudy() {
             <Link href="/pricing" style={{ background: 'linear-gradient(135deg, #070b17 0%, #0c162c 40%, #1a244d 100%)', color: 'white', padding: '12px 28px', borderRadius: '100px', textDecoration: 'none', fontWeight: 600, fontSize: '15px', boxShadow: '0 4px 20px rgba(7,11,23,0.35)', letterSpacing: '0.01em' }}>
               Try 360Airo →
             </Link>
-            <Link href="/demo" style={{ background: 'transparent', color: '#0c162c', border: '2px solid #1a244d', padding: '12px 28px', borderRadius: '100px', textDecoration: 'none', fontWeight: 600, fontSize: '15px', letterSpacing: '0.01em' }}>
+            <Link href="/book-a-demo" style={{ background: 'transparent', color: '#0c162c', border: '2px solid #1a244d', padding: '12px 28px', borderRadius: '100px', textDecoration: 'none', fontWeight: 600, fontSize: '15px', letterSpacing: '0.01em' }}>
               Book a demo →
             </Link>
           </div>

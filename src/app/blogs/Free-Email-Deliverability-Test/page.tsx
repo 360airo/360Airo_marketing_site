@@ -1155,7 +1155,7 @@ export default function BlogColdEmailPage() {
                 {
                   title: 'How to Choose a Free Lead Conversion Platform That Actually Works',
                   tag: 'Lead Conversion',
-                  href: '/blogs/how-to-choose-a-free-lead-conversion-platform-that-actually-works',
+                  href: '/blogs/10-Cheapest-Cold-Email-Software',
                   description: 'Learn how to evaluate free lead conversion tools and pick a platform that actually helps convert leads.',
                   image:
                     'https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=80',
@@ -1163,7 +1163,7 @@ export default function BlogColdEmailPage() {
                 {
                   title: 'Why Gmail Deliverability Matters for Cold Outreach',
                   tag: 'Cold Email',
-                  href: '/blogs/why-gmail-deliverability-matters-for-cold-outreach',
+                  href: '/blogs/10-Best-Outreachio-Alternatives',
                   description: 'Understand how Gmail classifies outreach emails and what affects inbox placement.',
                   image:
                     'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
@@ -1171,7 +1171,7 @@ export default function BlogColdEmailPage() {
                 {
                   title: 'Email Spam Checker Best Practices for Marketers',
                   tag: 'Email Marketing',
-                  href: '/blogs/email-spam-checker-best-practices-for-marketers',
+                  href: '/blogs',
                   description: 'See what spam checkers catch before your campaign goes live and how to fix common issues.',
                   image:
                     'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=80',

@@ -37,57 +37,6 @@ const itemVariants = {
 
 const blogPosts = [
   {
-    id: 1,
-    title: 'A Complete Guide for Modern Sales Teams',
-    excerpt:
-      'Sales prospecting has always been one of the most challenging parts of the sales process.',
-    slug: 'Transforming-Sales-Prospecting',
-    author: '360Airo Team',
-    date: 'December 3, 2025',
-    readTime: '6 min read',
-    category: 'Email Tools',
-    image:
-      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    featured: true,
-    isNew: true,
-    views: '2.8K',
-    tags: ['Email Calculator', 'Deliverability', 'Cold Email'],
-  },
-  {
-    id: 2,
-    title: '10 Cheapest Cold Email Software Tools for Startups & Agencies (2026 Guide)',
-    excerpt:
-      'Cold email remains one of the most cost-effective growth channels for startups and agencies. Discover the 10 most affordable tools.',
-    slug: 'Sales-Outreach-Platform',
-    author: '360Airo Team',
-    date: 'November 15, 2025',
-    readTime: '10 min read',
-    category: 'Cold Email',
-    image:
-      'https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    featured: true,
-    isNew: false,
-    views: '4.1K',
-    tags: ['Cold Email', 'Software Tools'],
-  },
-  {
-    id: 3,
-    title: 'Free Email Verification: How to Verify Email Addresses for Free with 360Airo',
-    excerpt:
-      'Clean your email lists, protect sender reputation, and improve outreach results before sending a single email.',
-    slug: 'Inbound-Sales-Automation',
-    author: '360Airo Team',
-    date: 'October 25, 2025',
-    readTime: '8 min read',
-    category: 'Email Marketing',
-    image:
-      'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    featured: true,
-    isNew: false,
-    views: '3.2K',
-    tags: ['Email Verification', 'Deliverability'],
-  },
-  {
     id: 4,
     title: 'LinkedIn Outreach Strategy That Converts: Step-by-Step Playbook for 2025',
     excerpt:
@@ -104,77 +53,6 @@ const blogPosts = [
     views: '1.8K',
     tags: ['LinkedIn', 'Outreach'],
   },
-  {
-    id: 5,
-    title: 'Top Cold Email Tools in 2025: Which One Actually Delivers Replies?',
-    excerpt:
-      'Cold outreach today is about precision, personalization, and performance. Discover the tools that actually get responses.',
-    slug: 'SDR-Workflow-Automation-Guide',
-    author: 'Sarah Chen',
-    date: 'October 23, 2025',
-    readTime: '8 min read',
-    category: 'Cold Email',
-    image:
-      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    featured: true,
-    isNew: false,
-    views: '2.4K',
-    tags: ['Cold Email', 'Sales Tools'],
-  },
-  {
-    id: 6,
-    title: 'Top Cold Email Tools in 2025: Which One Actually Delivers Replies?',
-    excerpt:
-      'Cold outreach today is about precision, personalization, and performance. Discover the tools that actually get responses.',
-    slug: 'Free-Email-Verification',
-    author: 'Sarah Chen',
-    date: 'October 23, 2025',
-    readTime: '8 min read',
-    category: 'Cold Email',
-    image:
-      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    featured: true,
-    isNew: false,
-    views: '2.4K',
-    tags: ['Cold Email', 'Sales Tools'],
-  },
-
-    {
-    id: 7,
-    title: 'Top Cold Email Tools in 2025: Which One Actually Delivers Replies?',
-    excerpt:
-      'Cold outreach today is about precision, personalization, and performance. Discover the tools that actually get responses.',
-    slug: 'Free-SPF-Record-Generator',
-    author: 'Sarah Chen',
-    date: 'October 23, 2025',
-    readTime: '8 min read',
-    category: 'Cold Email',
-    image:
-      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    featured: true,
-    isNew: false,
-    views: '2.4K',
-    tags: ['Cold Email', 'Sales Tools'],
-  },
-
-    {
-    id: 8,
-    title: 'Top Cold Email Tools in 2025: Which One Actually Delivers Replies?',
-    excerpt:
-      'Cold outreach today is about precision, personalization, and performance. Discover the tools that actually get responses.',
-    slug: 'Free-Email-Mailbox-Calculator',
-    author: 'Sarah Chen',
-    date: 'October 23, 2025',
-    readTime: '8 min read',
-    category: 'Cold Email',
-    image:
-      'https://images.unsplash.com/photo-1555949963-aa79dcee981c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80',
-    featured: true,
-    isNew: false,
-    views: '2.4K',
-    tags: ['Cold Email', 'Sales Tools'],
-  },
-
     {
     id: 9,
     title: 'Top Cold Email Tools in 2025: Which One Actually Delivers Replies?',
