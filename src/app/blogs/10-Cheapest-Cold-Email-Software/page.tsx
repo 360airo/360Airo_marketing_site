@@ -139,18 +139,8 @@ function RightPromoCards() {
   return (
     <aside className="sticky top-[20vh] self-start hidden xl:block space-y-4 w-[250px]">
       <div className="rounded-[20px] border border-[#0C162C] bg-[#0C162C] p-4 shadow-[0_8px_24px_rgba(12,22,44,0.35)]">
-        <div className="flex items-center justify-center gap-3 mb-5">
-          <div className="relative w-[200px] h-[130px] shrink-0">
-            <Image
-              src="/360aironewlog.png"
-              alt="360Airo logo"
-              fill
-              className="object-contain"
-            />
-          </div>
-        </div>
-
-        <h3 className="text-[16px] leading-[1.3] font-bold text-white text-center mt-[-30px] mb-4">
+        {/* Removed the broken Image wrapper here */}
+        <h3 className="text-[16px] leading-[1.3] font-bold text-white text-center mb-4">
           Cheapest Cold
           <br />
           Email Software
@@ -501,15 +491,6 @@ export default function BlogColdEmailPage() {
                 </p>
 
                 <div className="mb-8 inline-flex flex-wrap items-center gap-3 rounded-xl border border-[#0C162C] bg-[#0C162C] px-4 py-3 text-white text-xs md:text-sm">
-                  <div className="flex items-center gap-2">
-                    <Image
-                      src="/logonew.png"
-                      alt="360Airo Team"
-                      width={140}
-                      height={40}
-                      className="h-10 w-auto object-contain"
-                    />
-                  </div>
                   <span>•360AIRO Team </span>
                   <span>Updated: Jun 2026</span>
                   <span>•</span>
