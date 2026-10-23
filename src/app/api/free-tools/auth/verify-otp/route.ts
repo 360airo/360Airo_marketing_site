@@ -1,20 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { dbVerifyOTP } from '@/lib/free-tools-db';
+import { dbVerifyOTP, dbAddVerifiedUser } from '@/lib/free-tools-db';
 
 export async function POST(req: NextRequest) {
   try {
     const { email, otp } = await req.json();
 
-    if (!email || !otp) {
+    if (!email) {
       return NextResponse.json(
-        { error: 'Email and OTP code are required.' },
+        { error: 'Email is required.' },
         { status: 400 }
       );
     }
 
     const normalizedEmail = email.toLowerCase().trim();
-    console.log(`🔐 [VERIFY OTP] Checking OTP for ${normalizedEmail}...`);
 
+    // If no OTP provided, grant direct access without OTP
+    if (!otp) {
+      await dbAddVerifiedUser(normalizedEmail);
+      return NextResponse.json(
+        { 
+          success: true, 
+          message: 'Access granted successfully!', 
+          email: normalizedEmail 
+        },
+        { status: 200 }
+      );
+    }
+
+    console.log(`🔐 [VERIFY OTP] Checking OTP for ${normalizedEmail}...`);
     const verified = await dbVerifyOTP(normalizedEmail, String(otp));
 
     if (verified) {

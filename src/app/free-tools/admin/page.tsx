@@ -54,7 +54,7 @@ export default function FreeToolsAdminPage() {
 
   // Revoke/Delete user verification
   const handleDeleteUser = async (email: string) => {
-    if (!confirm(`Are you sure you want to revoke verification for ${email}? They will need to verify via OTP again to access any free tools.`)) {
+    if (!confirm(`Are you sure you want to revoke verification for ${email}? They will need to enter their email again to access any free tools.`)) {
       return;
     }
 
@@ -165,7 +165,7 @@ export default function FreeToolsAdminPage() {
         <div style={styles.emptyContainer}>
           <Users size={48} color="#475569" />
           <h3>No Verified Users Found</h3>
-          <p>Verified domains will appear here once users complete the OTP loop.</p>
+          <p>Users and domains will appear here once they unlock the free tools.</p>
         </div>
       ) : (
         <div style={styles.tableContainer}>

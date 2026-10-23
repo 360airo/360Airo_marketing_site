@@ -1,0 +1,8 @@
+[
+  {
+    "email": "nihalyadav0410203@gmail.com",
+    "tool_name": "email-deliverability-test",
+    "usage_count": 1,
+    "last_accessed_at": "2026-10-23T19:20:47.379Z"
+  }
+]
