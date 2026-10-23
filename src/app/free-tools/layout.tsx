@@ -1,7 +1,6 @@
 "use client";
 
 import { FreeToolsAuthProvider } from "../contexts/FreeToolsAuthContext";
-import FreeToolsGuard from "../../components/FreeToolsGuard";
 import "../../styles/free-tools.css";
 import "../../styles/aurora.css";
 import Script from 'next/script';
@@ -29,9 +28,7 @@ export default function FreeToolsLayout({ children }: { children: React.ReactNod
       <canvas id="aurora-canvas"></canvas>
       <div className="ft-site">
         <Navbar activeTab="free-tools" />
-        <FreeToolsGuard>
-          {children}
-        </FreeToolsGuard>
+        {children}
         <Footer />
       </div>
     </FreeToolsAuthProvider>
