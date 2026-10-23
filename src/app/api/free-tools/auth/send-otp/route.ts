@@ -26,15 +26,6 @@ export async function POST(req: NextRequest) {
 
     // Normalize email
     const normalizedEmail = email.toLowerCase().trim();
-    const domain = normalizedEmail.split('@')[1];
-
-    // Check if it is a company email
-    if (publicDomains.includes(domain)) {
-      return NextResponse.json(
-        { error: 'Please use a work/company email address. Public domains are not allowed for free tool usage.' },
-        { status: 400 }
-      );
-    }
 
     const smtpUser = process.env.SMTP_USER || '';
     const smtpPass = process.env.SMTP_PASS || '';
