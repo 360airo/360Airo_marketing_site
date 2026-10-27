@@ -298,6 +298,75 @@ const featuresList = [
   }
 ];
 
+// JSON-LD Structured Data for SEO
+const featuresPageJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://360airo.com/features#webpage",
+      "url": "https://360airo.com/features",
+      "name": "360Airo Features | AI SDR & Multichannel Outreach Platform",
+      "description": "Explore 360Airo features for B2B sales outreach, including AI SDRs, email automation, LinkedIn outreach, inbox rotation, email warmup, prospecting, and real-time analytics.",
+      "isPartOf": {
+        "@id": "https://360airo.com/#website"
+      },
+      "about": {
+        "@id": "https://360airo.com/#organization"
+      },
+      "breadcrumb": {
+        "@id": "https://360airo.com/features#breadcrumb"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://360airo.com/#organization",
+      "name": "360Airo",
+      "url": "https://360airo.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://360airo.com/logo.svg"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/360-airo/",
+        "https://x.com/360airo",
+        "https://www.instagram.com/360airo",
+        "https://www.youtube.com/@360airo",
+        "https://www.facebook.com/p/360-Airo-61583637801140/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://360airo.com/#website",
+      "url": "https://360airo.com/",
+      "name": "360Airo",
+      "publisher": {
+        "@id": "https://360airo.com/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://360airo.com/features#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://360airo.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Features",
+          "item": "https://360airo.com/features"
+        }
+      ]
+    }
+  ]
+};
+
 export default function FeaturesPage() {
   const [interactiveMode, setInteractiveMode] = useState(false);
   const [activeSection, setActiveSection] = useState('ai-workflow-builder');
@@ -601,6 +670,46 @@ export default function FeaturesPage() {
 
   return (
     <div className="app-container features-page-root">
+      {/* ==================== SEO / META TAGS ==================== */}
+      <title>360Airo Features | AI SDR & Multichannel Outreach Platform Features</title>
+      <meta
+        name="description"
+        content="Explore 360Airo features for B2B sales outreach, including AI SDRs, email automation, LinkedIn outreach, inbox rotation, email warmup, prospecting, and real-time analytics."
+      />
+      <meta
+        name="robots"
+        content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1"
+      />
+      <link rel="canonical" href="https://360airo.com/features" />
+
+      {/* Open Graph */}
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="360Airo Features | 365+  AI SDR & Multichannel Outreach Platform features" />
+      <meta
+        property="og:description"
+        content="360Airo's B2B outreach features for AI SDR automation, email campaigns, LinkedIn outreach, deliverability, prospecting, and sales analytics."
+      />
+      <meta property="og:url" content="https://360airo.com/features" />
+      <meta property="og:site_name" content="360Airo" />
+      <meta property="og:image" content="https://360airo.com/og-image.jpg" />
+      <meta property="og:image:alt" content="360Airo AI SDR and multichannel outreach platform" />
+
+      {/* Twitter Card */}
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content="360Airo Features | AI SDR & Multichannel Outreach Platform features" />
+      <meta
+        name="twitter:description"
+        content="Explore AI SDRs, email automation, LinkedIn outreach, deliverability, prospecting, and sales analytics with 360Airo."
+      />
+      <meta name="twitter:image" content="https://360airo.com/logo.svg" />
+
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(featuresPageJsonLd) }}
+      />
+      {/* ==================== END SEO / META TAGS ==================== */}
+
       <canvas id="aurora-canvas" />
       <canvas id="aurora-light-canvas" />
       <Navbar activeTab="features" />

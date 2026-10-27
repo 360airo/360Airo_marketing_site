@@ -1,394 +1,357 @@
-// @ts-nocheck
-"use client";
-import React, { useEffect, useRef, useLayoutEffect } from 'react';
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';   //nihal
+import type { Metadata, Viewport } from 'next';
+import HomeClient from './HomeClient';
 
-import { initAnimations } from '../animations';
-import EngineeringTeamSection from '../components/EngineeringTeamSection';
-import TrustedOperatorsSection from '../components/TrustedOperatorsSection';
-import LaunchFasterSection from '../components/LaunchFasterSection';
-import ImportEnrichmentSection from '../components/ImportEnrichmentSection';
-import AiroAgentBuilder from '../components/AiroAgentBuilder';
-import FunnelStagesSection from '../components/FunnelStagesSection';
-import OutreachDeploySection from '../components/OutreachDeploySection';
-import TestimonialsSection from '../components/TestimonialsSection';
-import OutreachBentoSection from '../components/OutreachBentoSection';
-import BuiltForSpeedSection from '../components/BuiltForSpeedSection';
-import NativeToolsIntegration from '../components/NativeToolsIntegration';
-import DeploymentsSection from '../components/DeploymentsSection';
-import SocialAutomationSection from '../components/SocialAutomationSection';
-import AuditAndAccessSection from '../components/AuditAndAccessSection';
-import ResourcesBankSection from '../components/ResourcesBankSection';
-import TieredPricingSection from '../components/TieredPricingSection';
+// 1. Export Viewport Configuration
+export const viewport: Viewport = {
+  themeColor: '#08124A',
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  colorScheme: 'dark light',
+};
 
-import PhoneDashboard from '../components/PhoneDashboard';
-import ModernOutreachSection from '../components/ModernOutreachSection';
-import Navbar from '../components/Navbar';
-import DashboardMockup from '../components/DashboardMockup';
-import CTASection from '../components/CTASection';
-import FAQSection from '../components/FAQSection';
-import Footer from '../components/Footer';
-export default function App() {
-  const heroStageRef = useRef(null);
-  const heroContentRef = useRef(null);
-  const tabletMotionRef = useRef(null);
-  const phoneDashboardRef = useRef(null);
-  const heroTabletRef = useRef(null);
-  const tabletScreenRef = useRef(null);
-  const dashboardUiRef = useRef(null);
-  const futureTabletContentRef = useRef(null);
+// 2. Export Complete Homepage SEO Metadata
+export const metadata: Metadata = {
+  metadataBase: new URL('https://360airo.com'),
+  title: '360AIRO | Multichannel Outreach Platform for Sales Teams',
+  description:
+    'Generate more meetings with a multichannel outreach platform that automates cold email, LinkedIn outreach, follow-ups, inbox rotation, email warmup, and sales engagement from one place.',
+  keywords: [
+    'multichannel outreach platform',
+    'cold email software',
+    'sales engagement platform',
+    'email outreach software',
+    'LinkedIn outreach automation',
+    'outbound sales software',
+    'sales prospecting software',
+    'email warmup',
+    'inbox rotation',
+    'email deliverability',
+    'outreach automation',
+    'B2B sales software',
+    'sales automation',
+  ],
+  authors: [{ name: '360AIRO', url: 'https://360airo.com' }],
+  creator: '360AIRO',
+  publisher: '360AIRO',
+  applicationName: '360AIRO',
+  category: 'Business & Sales Software',
+  classification: 'Multichannel Outreach & Sales Engagement Platform',
+  referrer: 'origin-when-cross-origin',
+  formatDetection: {
+    telephone: false,
+    date: false,
+    address: false,
+    email: false,
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+      'max-video-preview': -1,
+    },
+  },
+  alternates: {
+    canonical: 'https://360airo.com/',
+    languages: {
+      'en-US': 'https://360airo.com/',
+      'x-default': 'https://360airo.com/',
+    },
+  },
+  openGraph: {
+    type: 'website',
+    siteName: '360AIRO',
+    title: '360AIRO | AI Multichannel Outreach Platform',
+    description:
+      'AI multichannel outreach platform that Scales outbound sales with cold email, LinkedIn outreach, smart follow-ups, inbox management.',
+    url: 'https://360airo.com/',
+    locale: 'en_US',
+    images: [
+      {
+        url: 'https://360airo.com/og-image.jpg',
+        secureUrl: 'https://360airo.com/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: '360AIRO Multichannel Outreach Platform',
+        type: 'image/jpeg',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    site: '@360airo',
+    creator: '@360airo',
+    title: '360AIRO | Multichannel Outreach Platform for B2b  SDR  Teams',
+    description:
+      'Automate cold email, LinkedIn outreach, inbox rotation, email warmup, and follow-ups to book more meetings with 360AIRO.',
+    images: [
+      {
+        url: 'https://360airo.com/og-image.jpg',
+        alt: '360AIRO Multichannel Outreach Platform',
+        width: 1200,
+        height: 630,
+      },
+    ],
+  },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/logo.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/FinalLogo_icon_transparent.png', sizes: '180x180', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+  },
+  other: {
+    language: 'English',
+    'meta[name=title]': '360AIRO | Multichannel Outreach Platform for Sales Teams',
+    rating: 'General',
+    distribution: 'Global',
+  },
+};
 
-  useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-    let ctx;
-
-    const getViewportScreenCoverScale = () => {
-      const screen = tabletScreenRef.current;
-      if (!screen) return 1.5;
-      const baseScreenWidth = screen.offsetWidth || 680;
-      const baseScreenHeight = screen.offsetHeight || 460;
-      const scaleX = window.innerWidth / baseScreenWidth;
-      const scaleY = window.innerHeight / baseScreenHeight;
-      return Math.max(scaleX, scaleY) * 1.14;
-    };
-
-    const updateScaledWidth = () => {
-      const scale = getViewportScreenCoverScale();
-      if (futureTabletContentRef.current) {
-        const scaledViewportWidth = window.innerWidth / scale;
-        futureTabletContentRef.current.style.setProperty('--scaled-viewport-width', `${scaledViewportWidth}px`);
+// 3. Schema 1: SoftwareApplication Structured Data
+const softwareApplicationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "@id": "https://360airo.com/#software",
+  "name": "360AIRO",
+  "alternateName": "360 AIRO",
+  "url": "https://360airo.com/",
+  "description": "360AIRO is a multichannel outreach platform that helps businesses automate cold email, LinkedIn outreach, email warm-up, inbox rotation, follow-ups, personalization, lead management, and sales engagement from one platform.",
+  "applicationCategory": "BusinessApplication",
+  "applicationSubCategory": "Sales Engagement Platform",
+  "applicationSuite": "360AIRO",
+  "operatingSystem": "Web",
+  "browserRequirements": "Requires a modern web browser",
+  "softwareVersion": "Latest",
+  "inLanguage": "en-US",
+  "publisher": {
+    "@id": "https://360airo.com/#organization"
+  },
+  "brand": {
+    "@id": "https://360airo.com/#organization"
+  },
+  "image": "https://360airo.com/logo.svg",
+  "screenshot": "https://360airo.com/logo.svg",
+  "sameAs": [
+    "https://www.facebook.com/p/360-Airo-61583637801140/",
+    "https://x.com/360airo",
+    "https://www.instagram.com/360airo",
+    "https://www.youtube.com/@360airo"
+  ],
+  "featureList": [
+    "Cold Email Campaigns",
+    "LinkedIn Outreach",
+    "Email Personalization",
+    "Email Warm-up",
+    "Inbox Rotation",
+    "Unified Inbox",
+    "Email Verification",
+    "Email Deliverability Monitoring",
+    "Campaign Analytics",
+    "Prospect Management",
+    "CRM Integration",
+    "Follow-up Sequences",
+    "Multichannel Outreach",
+    "Team Collaboration",
+    "Reporting Dashboard"
+  ],
+  "offers": {
+    "@type": "AggregateOffer",
+    "url": "https://360airo.com/pricing",
+    "priceCurrency": "USD",
+    "lowPrice": "0",
+    "highPrice": "299",
+    "offerCount": "7",
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Freemium",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock",
+        "url": "https://360airo.com/pricing"
+      },
+      {
+        "@type": "Offer",
+        "name": "Starter Monthly",
+        "price": "99",
+        "priceCurrency": "USD",
+        "billingDuration": "P1M",
+        "availability": "https://schema.org/InStock",
+        "url": "https://360airo.com/pricing"
+      },
+      {
+        "@type": "Offer",
+        "name": "Starter Yearly",
+        "price": "990",
+        "priceCurrency": "USD",
+        "billingDuration": "P1Y",
+        "availability": "https://schema.org/InStock",
+        "url": "https://360airo.com/pricing"
+      },
+      {
+        "@type": "Offer",
+        "name": "Professional Monthly",
+        "price": "299",
+        "priceCurrency": "USD",
+        "billingDuration": "P1M",
+        "availability": "https://schema.org/InStock",
+        "url": "https://360airo.com/pricing"
+      },
+      {
+        "@type": "Offer",
+        "name": "Professional Yearly",
+        "price": "2990",
+        "priceCurrency": "USD",
+        "billingDuration": "P1Y",
+        "availability": "https://schema.org/InStock",
+        "url": "https://360airo.com/pricing"
+      },
+      {
+        "@type": "Offer",
+        "name": "Enterprise",
+        "availability": "https://schema.org/InStock",
+        "url": "https://360airo.com/contact-sales",
+        "priceSpecification": {
+          "@type": "PriceSpecification",
+          "priceCurrency": "USD",
+          "priceType": "https://schema.org/Quote"
+        }
       }
-    };
+    ]
+  }
+};
 
-    const initTimeline = () => {
-      ctx = gsap.context(() => {
-        let mm = gsap.matchMedia();
-        
-        // --- DESKTOP ANIMATION ---
-        mm.add("(min-width: 1025px) and (prefers-reduced-motion: no-preference)", () => {
-          gsap.set(tabletMotionRef.current, {
-            xPercent: 0,
-            yPercent: -50,
-            x: 0,
-            y: 0,
-            scale: 1,
-            transformOrigin: "center center"
-          });
+// 4. Schema 2: SiteNavigationElement Structured Data
+const siteNavigationJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "SiteNavigationElement",
+  "name": [
+    "Home",
+    "Features",
+    "Solutions",
+    "Free Tools",
+    "Resources",
+    "Pricing",
+    "Contact Us"
+  ],
+  "url": [
+    "https://360airo.com/",
+    "https://360airo.com/features",
+    "https://360airo.com/solutions",
+    "https://360airo.com/tools",
+    "https://360airo.com/resources",
+    "https://360airo.com/pricing",
+    "https://360airo.com/contact-us"
+  ]
+};
 
-          const timeline = gsap.timeline({
-            scrollTrigger: {
-              trigger: heroStageRef.current,
-              start: "top top",
-              end: "+=1130",
-              scrub: 1.15,
-              pin: true,
-              pinSpacing: true,
-              anticipatePin: 1,
-              invalidateOnRefresh: true
-            },
-            onUpdate: function() {
-              const currentScale = parseFloat(gsap.getProperty(tabletMotionRef.current, "scaleX") as string) || 1;
-              if (futureTabletContentRef.current) {
-                const inverseScale = 1 / currentScale;
-                futureTabletContentRef.current.style.setProperty('--tablet-scale-inverse', inverseScale.toString());
-              }
-            }
-          });
-
-          timeline
-            .addLabel("heroExit")
-            .to(heroContentRef.current, { opacity: 0, y: -50, duration: 1, ease: "none" }, "heroExit")
-            .to(dashboardUiRef.current, { opacity: 0, scale: 0.96, filter: "blur(4px)", duration: 1, ease: "none" }, "heroExit")
-            .addLabel("futureTitleEnter", "heroExit+=0.35")
-            .to(futureTabletContentRef.current, { autoAlpha: 1, opacity: 0.65, duration: 0.55, ease: "none" }, "futureTitleEnter")
-            .addLabel("futureTitleCrisp", "futureTitleEnter+=0.4")
-            .to(futureTabletContentRef.current, { opacity: 1, duration: 0.65, ease: "none" }, "futureTitleCrisp")
-            .addLabel("tabletPullForward", "futureTitleCrisp+=0.45")
-            .to(tabletMotionRef.current, {
-              x: () => {
-                const shell = tabletMotionRef.current;
-                if (!shell) return 0;
-                const rect = shell.getBoundingClientRect();
-                const currentCenterX = rect.left + rect.width / 2;
-                return window.innerWidth / 2 - currentCenterX;
-              },
-              y: () => {
-                const shell = tabletMotionRef.current;
-                if (!shell) return 0;
-                const rect = shell.getBoundingClientRect();
-                const currentCenterY = rect.top + rect.height / 2;
-                return window.innerHeight / 2 - currentCenterY;
-              },
-              scale: 1.55,
-              duration: 1.2,
-              ease: "none"
-            }, "tabletPullForward")
-            .addLabel("tabletZoomToViewport", "tabletPullForward+=0.95")
-            .to(tabletMotionRef.current, {
-              scale: getViewportScreenCoverScale,
-              duration: 2.8,
-              ease: "none"
-            }, "tabletZoomToViewport")
-            .to(phoneDashboardRef.current, { opacity: 1, duration: 1.98, ease: "none" }, 2.97);
-        });
-
-        // --- MOBILE ANIMATION ---
-        mm.add("(max-width: 1024px) and (prefers-reduced-motion: no-preference)", () => {
-          gsap.set(tabletMotionRef.current, {
-            xPercent: 0,
-            yPercent: 0,
-            x: 0,
-            y: 0,
-            scale: 1,
-            transformOrigin: "center center"
-          });
-          // Disabled scroll animation for mobile/tablet per user request
-        });
-      });
-    };
-
-    if (document.readyState === 'complete') {
-      initTimeline();
-      updateScaledWidth();
-    } else {
-      const handleLoad = () => {
-        initTimeline();
-        updateScaledWidth();
-      };
-      window.addEventListener('load', handleLoad);
-      ctx = { revert: () => window.removeEventListener('load', handleLoad) };
+// 5. Schema 3: Organization, WebSite, WebPage, and BreadcrumbList Structured Data
+const knowledgeGraphJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://360airo.com/#organization",
+      "name": "360AIRO",
+      "alternateName": "360 AIRO",
+      "url": "https://360airo.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://360airo.com/#logo",
+        "url": "https://360airo.com/logo.svg",
+        "contentUrl": "https://360airo.com/logo.svg",
+        "caption": "360AIRO Logo"
+      },
+      "image": "https://360airo.com/logo.svg",
+      "sameAs": [
+        "https://www.facebook.com/p/360-Airo-61583637801140/",
+        "https://x.com/360airo",
+        "https://www.instagram.com/360airo",
+        "https://www.youtube.com/@360airo"
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "Sales and Customer Support",
+          "url": "https://360airo.com/contact-us",
+          "availableLanguage": ["en"]
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://360airo.com/#website",
+      "url": "https://360airo.com/",
+      "name": "360AIRO",
+      "description": "Multichannel Outreach Platform for Sales Teams",
+      "publisher": {
+        "@id": "https://360airo.com/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://360airo.com/#webpage",
+      "url": "https://360airo.com/",
+      "name": "360AIRO | Multichannel Outreach Platform for Sales Teams",
+      "isPartOf": {
+        "@id": "https://360airo.com/#website"
+      },
+      "about": {
+        "@id": "https://360airo.com/#software"
+      },
+      "description":
+        "Generate more meetings with a multichannel outreach platform that automates cold email, LinkedIn outreach, follow-ups, inbox rotation, email warmup, and sales engagement from one place.",
+      "breadcrumb": {
+        "@id": "https://360airo.com/#breadcrumb"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://360airo.com/#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://360airo.com/"
+        }
+      ]
     }
+  ]
+};
 
-    window.addEventListener('resize', updateScaledWidth, { passive: true });
-
-    return () => {
-      if (ctx && typeof ctx.revert === 'function') ctx.revert();
-      window.removeEventListener('resize', updateScaledWidth);
-    };
-  }, []);
-  useEffect(() => {
-    initAnimations();
-  }, []);
+// 6. Root Home Page Component (Server Component)
+export default function HomePage() {
   return (
-    <div className="app-container">
-      <div>   
-  <canvas id="aurora-canvas" />
-  <canvas id="aurora-light-canvas" />
-        <Navbar activeTab="home" />
-  <div id="section-home">
-    <section className="hero-stitch-stage" ref={heroStageRef}>
-      <div className="hero-scene">
-    <div className="hero-diagonal-bg" aria-hidden="true">
-      <span className="hero-panel panel-1"></span>
-      <span className="hero-panel panel-2"></span>
-      <span className="hero-panel panel-3"></span>
-      <span className="hero-panel panel-4"></span>
-      <span className="hero-panel panel-5"></span>
-      <span className="hero-glow glow-1"></span>
-      <span className="hero-glow glow-2"></span>
-    </div>
-    <section className="hero">
-        <div className="hero-copy" ref={heroContentRef}>
-        <h1 className="hero-title">
-          <span className="title-line">A Hyper-<em className="title-accent">Personalized</em></span>
-          <span className="title-line">Multichannel</span>
-          <span className="title-line">Outreach Platform</span>
-        </h1>
-        <p className="hero-desc">AI SDR Built for High-Growth B2B Teams Start real conversations,
-          Automate prospecting, run outreach campaigns across email,
-          LinkedIn and sms that converts more leads into pipeline without
-          growing your SDR team.</p>
-        <div className="hero-actions">
-          <button className="hero-btn-primary">Start Free Trial &nbsp;→</button>
-          <button className="hero-btn-secondary">Book Demo</button>
-        </div>
-        {/* METRIC CARDS — dark glass, Figma style */}
-        <div className="hero-metrics">
-          {/* Card 1: Reply Rate */}
-          <div className="hero-stat-card metric-blue">
-            <div className="metric-top">
-              <div className="metric-icon">
-                <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#5B8EFF" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                  <rect x={2} y={4} width={20} height={16} rx={2} />
-                  <path d="M2 7l10 7 10-7" />
-                </svg>
-              </div>
-              <div className="metric-stats">
-                <span className="metric-value counter" data-target="3.2" data-decimals={1} data-suffix="x">0x</span>
-                <div className="metric-label">Average Reply Rate Lift</div>
-              </div>
-            </div>
-            <div className="metric-growth"><span>↗ <strong>32%</strong></span> vs industry average</div>
-          </div>
-          {/* Card 2: Campaigns */}
-          <div className="hero-stat-card metric-cyan">
-            <div className="metric-top">
-              <div className="metric-icon">
-                <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#18D8E8" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M22 2L11 13" />
-                  <path d="M22 2L15 22l-4-9-9-4 20-7z" />
-                </svg>
-              </div>
-              <div className="metric-stats">
-                <span className="metric-value counter" data-target={4200} data-decimals={0} data-suffix="+">0+</span>
-                <div className="metric-label">Campaigns Launched</div>
-              </div>
-            </div>
-            <div className="metric-growth"><span>↗ <strong>24%</strong></span> vs last 90 days</div>
-          </div>
-          {/* Card 3: Customer Retention */}
-          <div className="hero-stat-card metric-purple">
-            <div className="metric-top">
-              <div className="metric-icon">
-                <svg width={24} height={24} viewBox="0 0 24 24" fill="none" stroke="#9B6BFF" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" />
-                  <circle cx={9} cy={7} r={4} />
-                  <path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" />
-                </svg>
-              </div>
-              <div className="metric-stats">
-                <span className="metric-value counter" data-target={89} data-decimals={0} data-suffix="%">0%</span>
-                <div className="metric-label">Customer Retention</div>
-              </div>
-            </div>
-            <div className="metric-growth"><span>↗ <strong>7%</strong></span> vs last 90 days</div>
-          </div>
-        </div>{/* /.hero-metrics */}
-      </div>{/* /.hero-copy */}
-        {/* RIGHT VISUAL: TABLET MOCKUP */}
-        <div className="hero-visual"></div>
-      </section>
-
-                  <div className="future-transition-layer" aria-hidden="true">
-        <div ref={tabletMotionRef} className="tablet-motion-shell">
-          <div ref={heroTabletRef} className="hero-dashboard-tablet">
-            <div className="tablet-camera" />
-            <div className="tablet-side-dot tablet-left" />
-            <div className="tablet-side-dot tablet-right" />
-            <div ref={tabletScreenRef} className="tablet-screen-mask">
-              <div ref={dashboardUiRef} className="hero-dashboard-ui">
-                <DashboardMockup />
-              </div>
-
-              <div ref={futureTabletContentRef} className="future-tablet-content">
-                <h2 style={{ width: '100%', margin: 0 }}>
-                  <span>THE FUTURE</span>
-                  <span>OF</span>
-                  <span>OUTREACH</span>
-                </h2>
-              </div>
-            </div>{/* closes tablet-screen-mask */}
-          </div>{/* closes hero-dashboard-tablet */}
-        </div>{/* closes tablet-motion-shell */}
-        <div ref={phoneDashboardRef} className="viewport-phone-dashboard-wrapper">
-          <PhoneDashboard />
-        </div>
-      </div>{/* closes future-transition-layer */}
-      </div>{/* closes hero-scene */}
-    </section>
-  </div>{/* closes section-home */}
-
-  <div id="section-phone">
-    <section className="p2-hero">
-      <div className="hero-main">
-        <div className="hero-center">
-          <h1 className="hero-headline">
-            <span className="headline-line">
-              <span className="headline-inner revealed">THE FUTURE</span>
-            </span>
-            <span className="headline-line line2">
-              <span className="headline-inner revealed">OF</span>
-            </span>
-            <span className="headline-line">
-              <span className="headline-inner revealed">OUTREACH</span>
-            </span>
-          </h1>
-        </div>
-        <div className="hero-right">
-          <div style={{ display: 'flex', justifyContent: 'center', width: '100%' }}>
-            <PhoneDashboard style={{ width: '100%', maxWidth: '360px' }} />
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <TrustedOperatorsSection />
-  <ModernOutreachSection />
-  <AiroAgentBuilder />
-  <div id="section-trusted-startups">
-    <section className="trusted-startups-inner">
-      <div className="trusted-startups-eyebrow" data-anim="up">TRUSTED BY FAST-GROWING STARTUPS</div>
-      <div className="logo-marquee-container" style={{ marginTop: '20px', paddingBottom: '60px' }}>
-        <div className="logo-marquee-track">
-          {/* Set 1 */}
-          <div className="startup-logo logo-heavy" style={{color: '#FF5A5F'}}><svg viewBox="0 0 24 24"><path d="M4 12 L12 4 L20 12 L12 20 Z" fill="currentColor" /></svg>softr</div>
-          <div className="startup-logo logo-wide" style={{color: '#00A699'}}><svg viewBox="0 0 24 24"><rect x={4} y={4} width={16} height={16} rx={2} stroke="currentColor" strokeWidth={2} fill="none" /><path d="M9 12 L15 12 M12 9 L12 15" stroke="currentColor" strokeWidth={2} /></svg>Get hired</div>
-          <div className="startup-logo" style={{color: '#FC642D'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={8} fill="currentColor" /><circle cx={12} cy={12} r={3} fill="#F7F7F5" /></svg>Alice. Tech</div>
-          <div className="startup-logo logo-light" style={{color: '#29B6F6'}}><svg viewBox="0 0 24 24"><path d="M6 6 L6 18 L10 18 M14 18 L18 18 L18 6" stroke="currentColor" strokeWidth="2.5" fill="none" /></svg>rtackradar</div>
-          <div className="startup-logo logo-heavy" style={{color: '#AB47BC'}}><svg viewBox="0 0 24 24"><path d="M4 12 h16 M4 6 h12 M4 18 h12" stroke="currentColor" strokeWidth={3} fill="none" /></svg>firma.dev</div>
-          <div className="startup-logo logo-light" style={{color: '#EF5350'}}>Pond</div>
-          <div className="startup-logo logo-light logo-wide" style={{color: '#FFA726'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={9} stroke="currentColor" strokeWidth="1.5" fill="none" strokeDasharray="2 3" /></svg>Lofty</div>
-          <div className="startup-logo" style={{color: '#66BB6A'}}><svg viewBox="0 0 24 24"><path d="M4 12 Q12 4 20 12" stroke="currentColor" strokeWidth={3} fill="none" strokeLinecap="round" /></svg>Tap Hero</div>
-          <div className="startup-logo logo-heavy" style={{color: '#5C6BC0'}}><svg viewBox="0 0 24 24"><path d="M12 2 L22 12 L12 22 L2 12 Z" fill="none" stroke="currentColor" strokeWidth={3} /></svg>Exposr</div>
-          <div className="startup-logo logo-wide" style={{color: '#EC407A'}}><svg viewBox="0 0 24 24"><rect x={3} y={8} width={12} height={8} fill="currentColor" /><polygon points="15,12 21,8 21,16" fill="currentColor" /></svg>sendr</div>
-          <div className="startup-logo logo-light logo-serif" style={{color: '#26A69A'}}>Agent Arena</div>
-          <div className="startup-logo logo-large" style={{color: '#7E57C2'}}>Nanonets</div>
-          <div className="startup-logo logo-serif logo-large" style={{color: '#42A5F5'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={9} fill="currentColor" /><circle cx={16} cy={8} r={4} fill="#F7F7F5" /></svg>sleek analytics</div>
-          <div className="startup-logo" style={{color: '#FFCA28'}}><svg viewBox="0 0 24 24"><path d="M6 6 L6 18 M18 6 L18 18 M6 12 L18 12" stroke="currentColor" strokeWidth={4} /></svg>squidhub</div>
-          <div className="startup-logo logo-heavy" style={{color: '#D4E157'}}><svg viewBox="0 0 24 24"><path d="M4 10 Q12 2 20 10 L20 14 Q12 22 4 14 Z" fill="currentColor" /></svg>cubeone</div>
-          <div className="startup-logo logo-light" style={{color: '#008489'}}><svg viewBox="0 0 24 24"><path d="M4 12 h16 M4 6 h12 M4 18 h12" stroke="currentColor" strokeWidth={3} fill="none" /></svg>Browseract</div>
-          <div className="startup-logo logo-wide" style={{color: '#F06292'}}><svg viewBox="0 0 24 24"><rect x={3} y={8} width={12} height={8} fill="currentColor" /><polygon points="15,12 21,8 21,16" fill="currentColor" /></svg>oxlo.ai</div>
-          <div className="startup-logo logo-serif" style={{color: '#5D4037'}}>brew</div>
-          {/* Set 2 Duplicate */}
-          <div className="startup-logo logo-heavy" style={{color: '#FF5A5F'}}><svg viewBox="0 0 24 24"><path d="M4 12 L12 4 L20 12 L12 20 Z" fill="currentColor" /></svg>softr</div>
-          <div className="startup-logo logo-wide" style={{color: '#00A699'}}><svg viewBox="0 0 24 24"><rect x={4} y={4} width={16} height={16} rx={2} stroke="currentColor" strokeWidth={2} fill="none" /><path d="M9 12 L15 12 M12 9 L12 15" stroke="currentColor" strokeWidth={2} /></svg>Get hired</div>
-          <div className="startup-logo" style={{color: '#FC642D'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={8} fill="currentColor" /><circle cx={12} cy={12} r={3} fill="#F7F7F5" /></svg>Alice. Tech</div>
-          <div className="startup-logo logo-light" style={{color: '#29B6F6'}}><svg viewBox="0 0 24 24"><path d="M6 6 L6 18 L10 18 M14 18 L18 18 L18 6" stroke="currentColor" strokeWidth="2.5" fill="none" /></svg>rtackradar</div>
-          <div className="startup-logo logo-heavy" style={{color: '#AB47BC'}}><svg viewBox="0 0 24 24"><path d="M4 12 h16 M4 6 h12 M4 18 h12" stroke="currentColor" strokeWidth={3} fill="none" /></svg>firma.dev</div>
-          <div className="startup-logo logo-light" style={{color: '#EF5350'}}>Pond</div>
-          <div className="startup-logo logo-light logo-wide" style={{color: '#FFA726'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={9} stroke="currentColor" strokeWidth="1.5" fill="none" strokeDasharray="2 3" /></svg>Lofty</div>
-          <div className="startup-logo" style={{color: '#66BB6A'}}><svg viewBox="0 0 24 24"><path d="M4 12 Q12 4 20 12" stroke="currentColor" strokeWidth={3} fill="none" strokeLinecap="round" /></svg>Tap Hero</div>
-          <div className="startup-logo logo-heavy" style={{color: '#5C6BC0'}}><svg viewBox="0 0 24 24"><path d="M12 2 L22 12 L12 22 L2 12 Z" fill="none" stroke="currentColor" strokeWidth={3} /></svg>Exposr</div>
-          <div className="startup-logo logo-wide" style={{color: '#EC407A'}}><svg viewBox="0 0 24 24"><rect x={3} y={8} width={12} height={8} fill="currentColor" /><polygon points="15,12 21,8 21,16" fill="currentColor" /></svg>sendr</div>
-          <div className="startup-logo logo-light logo-serif" style={{color: '#26A69A'}}>Agent Arena</div>
-          <div className="startup-logo logo-large" style={{color: '#7E57C2'}}>Nanonets</div>
-          <div className="startup-logo logo-serif logo-large" style={{color: '#42A5F5'}}><svg viewBox="0 0 24 24"><circle cx={12} cy={12} r={9} fill="currentColor" /><circle cx={16} cy={8} r={4} fill="#F7F7F5" /></svg>sleek analytics</div>
-          <div className="startup-logo" style={{color: '#FFCA28'}}><svg viewBox="0 0 24 24"><path d="M6 6 L6 18 M18 6 L18 18 M6 12 L18 12" stroke="currentColor" strokeWidth={4} /></svg>squidhub</div>
-          <div className="startup-logo logo-heavy" style={{color: '#D4E157'}}><svg viewBox="0 0 24 24"><path d="M4 10 Q12 2 20 10 L20 14 Q12 22 4 14 Z" fill="currentColor" /></svg>cubeone</div>
-          <div className="startup-logo logo-light" style={{color: '#008489'}}><svg viewBox="0 0 24 24"><path d="M4 12 h16 M4 6 h12 M4 18 h12" stroke="currentColor" strokeWidth={3} fill="none" /></svg>Browseract</div>
-          <div className="startup-logo logo-wide" style={{color: '#F06292'}}><svg viewBox="0 0 24 24"><rect x={3} y={8} width={12} height={8} fill="currentColor" /><polygon points="15,12 21,8 21,16" fill="currentColor" /></svg>oxlo.ai</div>
-          <div className="startup-logo logo-serif" style={{color: '#5D4037'}}>brew</div>
-        </div>
-      </div>
-    </section>
-  </div>
-  <LaunchFasterSection />
-  <ImportEnrichmentSection />
-  <EngineeringTeamSection />
-  <FunnelStagesSection />
-  <OutreachDeploySection />
-  <TestimonialsSection />
-  {/* <OutreachBentoSection /> */}
-
-  <BuiltForSpeedSection />
-   <ResourcesBankSection />
-  <NativeToolsIntegration />
-  <DeploymentsSection />
-  <SocialAutomationSection />
-  <AuditAndAccessSection />
- 
-  <TieredPricingSection />
-
-  <CTASection />
-  <FAQSection />
-  <div id="section-footer" style={{ position: 'relative', zIndex: 10, width: '100%' }}>
-    <Footer />
-  </div>
-</div>
-
-
-    </div>
+    <>
+      {/* Structured Data: SoftwareApplication */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareApplicationJsonLd) }}
+      />
+      {/* Structured Data: SiteNavigationElement */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(siteNavigationJsonLd) }}
+      />
+      {/* Structured Data: Organization, WebSite, WebPage, BreadcrumbList */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(knowledgeGraphJsonLd) }}
+      />
+      {/* Client-Side Interactive Components & GSAP Animations */}
+      <HomeClient />
+    </>
   );
 }

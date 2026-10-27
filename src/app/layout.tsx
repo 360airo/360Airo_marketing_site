@@ -10,6 +10,7 @@ import BookDemoModalWrapper from "../components/BookDemoModalWrapper";
 import ChatBot from "../components/ChatBot";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://360airo.com"),
   title: "360 Airo - AI SDR Built for High-Growth B2B Teams",
   description: "AI SDR Built for High-Growth B2B Teams",
   icons: {

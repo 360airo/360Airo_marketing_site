@@ -1,141 +1,161 @@
-"use client";
+// page.tsx
+import type { Metadata, Viewport } from 'next';
+import DmarcGeneratorClient from './DmarcGeneratorClient';
 
-import React, { useState } from 'react';
-import FreeToolTemplate from '../../../components/FreeToolTemplate';
-import { Shield, Copy, Check } from 'lucide-react';
+// 1. Export SEO Metadata
+export const metadata: Metadata = {
+  title: 'Free DMARC Generator | Create a DMARC Record',
+  description: "Use 360Airo's free DMARC generator to create a DMARC record for your domain and configure an email authentication policy to help protect your domain from spoofing.",
+  robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+  alternates: {
+    canonical: 'https://360airo.com/free-tools/dmarc-generator',
+  },
+  openGraph: {
+    type: 'website',
+    title: 'Free DMARC Generator | Create a DMARC Record',
+    description: "Generate a DMARC record for your domain with 360Airo's free DMARC generator and configure your email authentication policy.",
+    url: 'https://360airo.com/free-tools/dmarc-generator',
+    siteName: '360Airo',
+    images: [
+      {
+        url: 'https://360airo.com/og-image.jpg',
+        alt: '360Airo Free DMARC Generator',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free DMARC Generator | Create a DMARC Record',
+    description: "Generate a DMARC record for your domain with 360Airo's free DMARC generator.",
+    images: ['https://360airo.com/og-image.jpg'],
+  },
+  authors: [{ name: '360Airo' }],
+};
 
-export default function DmarcGeneratorPage() {
-  const [domain, setDomain] = useState('');
-  const [policy, setPolicy] = useState('none');
-  const [ruaEmail, setRuaEmail] = useState('');
-  const [record, setRecord] = useState('');
-  const [copied, setCopied] = useState(false);
+// 2. Export Viewport (Handles theme-color natively in Next.js 14+)
+export const viewport: Viewport = {
+  themeColor: '#08124A',
+};
 
-  const generateRecord = () => {
-    if (!domain) {
-      alert("Please enter a domain");
-      return;
-    }
-    let dmarc = `v=DMARC1; p=${policy};`;
-    if (ruaEmail) {
-      dmarc += ` rua=mailto:${ruaEmail};`;
-    }
-    setRecord(dmarc);
-  };
-
-  const handleCopy = () => {
-    navigator.clipboard.writeText(record);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
-  const sections = [
+// 3. Define the JSON-LD Structured Data
+const dmarcGeneratorJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      title: "Why You Need a DMARC Record",
-      content: "DMARC prevents hackers from spoofing your domain and sending malicious emails on your behalf. Since February 2024, Google and Yahoo require DMARC records for all bulk senders.",
-      list: [
-        ". Stop Domain Spoofing",
-        ". Comply with Google & Yahoo Rules",
-        ". Improve Deliverability",
-        ". Get Visibility into Failures"
-      ]
-    }
-  ];
-
-  const faqs = [
-    {
-      q: "What policy should I choose?",
-      a: "Start with 'none' (monitoring mode) to see which emails pass or fail without blocking them. Once you're confident your legitimate emails are passing, upgrade to 'quarantine' or 'reject'."
-    }
-  ];
-
-  return (
-    <FreeToolTemplate
-      title="Free DMARC Record Generator"
-      subtitle="Comply with Google & Yahoo Sender Requirements"
-      description="Create a deployment-ready DMARC policy in seconds. Protect your domain reputation and ensure your emails reach the inbox instead of the spam folder."
-      sections={sections}
-      faqs={faqs}
-      ctaTitle="Need Help Implementing DMARC?"
-      ctaSubtitle="Generating the record is step one. Monitoring it is step two. Build a complete outbound infrastructure with 360Airo."
-      ctaButtonText="Explore Infrastructure Solutions"
-      calculator={
-        <div style={{ padding: '24px', maxWidth: '800px', margin: '0 auto' }}>
-          
-          <h3 style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 700, fontSize: '28px', marginBottom: '24px', textAlign: 'center', color: '#0F172A' }}>Configure DMARC Policy</h3>
-          
-          <div style={{ backgroundColor: '#FFFFFF', padding: '32px', borderRadius: '16px', border: '1px solid #E2E8F0', marginBottom: '24px', display: 'flex', flexDirection: 'column', gap: '20px', boxShadow: '0 4px 20px -2px rgba(0,0,0,0.02)' }}>
-            <div>
-              <label style={{ display: 'block', fontFamily: '"DM Sans", sans-serif', fontWeight: 600, marginBottom: '8px', color: '#374151' }}>Domain Name</label>
-              <input 
-                value={domain}
-                onChange={(e) => setDomain(e.target.value)}
-                placeholder="e.g., yourcompany.com"
-                style={{ width: '100%', padding: '16px', borderRadius: '8px', border: '1px solid #D1D5DB', fontFamily: '"DM Sans", sans-serif', fontSize: '15px' }}
-              />
-            </div>
-
-            <div>
-              <label style={{ display: 'block', fontFamily: '"DM Sans", sans-serif', fontWeight: 600, marginBottom: '8px', color: '#374151' }}>Policy Action (p=)</label>
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '12px' }}>
-                {[
-                  { value: 'none', label: 'None (Monitor Only)' },
-                  { value: 'quarantine', label: 'Quarantine (Spam Folder)' },
-                  { value: 'reject', label: 'Reject (Block)' }
-                ].map((p) => (
-                  <button 
-                    key={p.value}
-                    onClick={() => setPolicy(p.value)}
-                    style={{ padding: '12px', borderRadius: '8px', border: policy === p.value ? '2px solid #4F46E5' : '1px solid #D1D5DB', backgroundColor: policy === p.value ? '#EEF2FF' : 'white', color: policy === p.value ? '#4F46E5' : '#4B5563', cursor: 'pointer', fontFamily: '"DM Sans", sans-serif', fontWeight: 600 }}
-                  >
-                    {p.label}
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <label style={{ display: 'block', fontFamily: '"DM Sans", sans-serif', fontWeight: 600, marginBottom: '8px', color: '#374151' }}>Aggregate Reporting Email (rua=) - Optional</label>
-              <input 
-                value={ruaEmail}
-                onChange={(e) => setRuaEmail(e.target.value)}
-                placeholder="e.g., dmarc-reports@yourcompany.com"
-                style={{ width: '100%', padding: '16px', borderRadius: '8px', border: '1px solid #D1D5DB', fontFamily: '"DM Sans", sans-serif', fontSize: '15px' }}
-              />
-            </div>
-            
-            <button 
-              onClick={generateRecord}
-              style={{ width: '100%', marginTop: '8px', background: 'linear-gradient(135deg, #4f46e5, #2563eb)', color: 'white', border: 'none', padding: '16px', borderRadius: '100px', cursor: 'pointer', fontFamily: '"Outfit", sans-serif', fontWeight: 700, fontSize: '16px', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', boxShadow: '0 4px 14px rgba(79, 70, 229, 0.25)' }}
-            >
-              <Shield size={18} /> Generate DMARC Record
-            </button>
-          </div>
-
-          {record && (
-            <div style={{ animation: 'fadeIn 0.5s ease-in-out' }}>
-              <h4 style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 700, fontSize: '22px', color: '#0F172A', marginBottom: '16px' }}>Your DNS Record</h4>
-              
-              <div style={{ backgroundColor: '#FFFFFF', border: '1px solid #E2E8F0', borderRadius: '12px', overflow: 'hidden' }}>
-                <div style={{ backgroundColor: '#F8FAFC', borderBottom: '1px solid #E2E8F0', padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontFamily: '"DM Sans", sans-serif', fontSize: '14px', fontWeight: 600, color: '#374151' }}>
-                  <span>Type: TXT</span>
-                  <span>Name: _dmarc</span>
-                </div>
-                <div style={{ padding: '24px', display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', gap: '16px' }}>
-                  <span style={{ fontFamily: 'monospace', fontSize: '16px', color: '#111827', fontWeight: 700, wordBreak: 'break-all' }}>{record}</span>
-                  <button 
-                    onClick={handleCopy}
-                    style={{ flexShrink: 0, backgroundColor: copied ? '#10B981' : '#E5E7EB', color: copied ? 'white' : '#374151', border: 'none', padding: '8px 16px', borderRadius: '6px', cursor: 'pointer', display: 'flex', alignItems: 'center', gap: '6px', fontWeight: 600, fontFamily: '"DM Sans", sans-serif' }}
-                  >
-                    {copied ? <Check size={14} /> : <Copy size={14} />} {copied ? 'Copied' : 'Copy'}
-                  </button>
-                </div>
-              </div>
-            </div>
-          )}
-
-        </div>
+      "@type": "WebPage",
+      "@id": "https://360airo.com/free-tools/dmarc-generator#webpage",
+      "url": "https://360airo.com/free-tools/dmarc-generator",
+      "name": "Free DMARC Generator | Create a DMARC Record",
+      "description": "Use 360Airo's free DMARC generator to create a DMARC record for your domain and configure an email authentication policy to help protect your domain from spoofing.",
+      "isPartOf": {
+        "@id": "https://360airo.com/#website"
+      },
+      "about": {
+        "@id": "https://360airo.com/free-tools/dmarc-generator#tool"
+      },
+      "breadcrumb": {
+        "@id": "https://360airo.com/free-tools/dmarc-generator#breadcrumb"
+      },
+      "publisher": {
+        "@id": "https://360airo.com/#organization"
+      },
+      "inLanguage": "en-US",
+      "mainEntity": {
+        "@id": "https://360airo.com/free-tools/dmarc-generator#tool"
       }
-    />
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://360airo.com/free-tools/dmarc-generator#tool",
+      "name": "360Airo DMARC Generator",
+      "url": "https://360airo.com/free-tools/dmarc-generator",
+      "description": "A free DMARC record generator that helps create a DMARC policy record for email authentication and domain protection.",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Email Authentication Tool",
+      "operatingSystem": "Web",
+      "browserRequirements": "Requires a modern web browser with JavaScript enabled",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "creator": {
+        "@id": "https://360airo.com/#organization"
+      },
+      "publisher": {
+        "@id": "https://360airo.com/#organization"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://360airo.com/free-tools/dmarc-generator#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://360airo.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Free Tools",
+          "item": "https://360airo.com/free-tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "DMARC Generator",
+          "item": "https://360airo.com/free-tools/dmarc-generator"
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://360airo.com/#organization",
+      "name": "360Airo",
+      "url": "https://360airo.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://360airo.com/#logo",
+        "url": "https://360airo.com/logo.svg",
+        "contentUrl": "https://360airo.com/logo.svg"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/360-airo/posts/",
+        "https://x.com/360airo",
+        "https://www.instagram.com/360airo",
+        "https://www.youtube.com/@360airo",
+        "https://www.facebook.com/p/360-Airo-61583637801140/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://360airo.com/#website",
+      "url": "https://360airo.com/",
+      "name": "360Airo",
+      "publisher": {
+        "@id": "https://360airo.com/#organization"
+      },
+      "inLanguage": "en-US"
+    }
+  ]
+};
+
+// 4. Render the Page
+export default function DmarcGeneratorPage() {
+  return (
+    <>
+      {/* JSON-LD Script for SEO */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(dmarcGeneratorJsonLd) }}
+      />
+      
+      {/* Interactive Client Component */}
+      <DmarcGeneratorClient />
+    </>
   );
 }

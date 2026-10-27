@@ -1,126 +1,125 @@
-"use client";
+// page.tsx
+import type { Metadata } from 'next';
+// 👇 THIS IS HOW YOU CONNECT THE TWO FILES
+import SpamCheckerClient from './SpamCheckerClient'; 
 
-import React, { useState } from 'react';
-import FreeToolTemplate from '../../../components/FreeToolTemplate';
-import { Search, AlertTriangle, ShieldCheck } from 'lucide-react';
+// 1. Tell Next.js to put this in the <head>
+export const metadata: Metadata = {
+  title: 'Free Email Spam Checker | Check If Your Email Goes to Spam',
+  description: "Use 360Airo's free email spam checker to test your email for spam risks, identify deliverability issues, and improve your chances of reaching the inbox.",
+  robots: 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
+  alternates: {
+    canonical: 'https://360airo.com/free-tools/email-spam-checker',
+  },
+  openGraph: {
+    type: 'website',
+    title: 'Free Email Spam Checker | Check If Your Email Goes to Spam',
+    description: "Test your email for spam risks and deliverability issues with 360Airo's free email spam checker.",
+    url: 'https://360airo.com/free-tools/email-spam-checker',
+    siteName: '360Airo',
+    images: [
+      {
+        url: 'https://360airo.com/og-image.jpg',
+        alt: '360Airo Free Email Spam Checker',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Free Email Spam Checker | Check If Your Email Goes to Spam',
+    description: "Check your email for spam risks and deliverability issues with 360Airo's free email spam checker.",
+    images: ['https://360airo.com/og-image.jpg'],
+  },
+};
 
-const SPAM_WORDS = [
-  'free', 'guarantee', 'increase sales', 'order now', 'buy direct', 'cash', 'earn money',
-  'get paid', 'make money', 'no credit card', 'save big', 'special promotion', 'act now',
-  'apply now', 'click here', 'do it today', 'don\'t delete', 'exclusive deal', 'get it now',
-  'urgent', 'winner', 'winning', 'won', 'you have been selected', '100% free', 'bonus',
-  'cheap', 'discount', 'lowest price', 'sale', 'trial', 'unlimited', 'dear friend',
-  'opportunity', 'promise', 'risk free', 'satisfaction guaranteed'
-];
-
-export default function SpamCheckerPage() {
-  const [emailContent, setEmailContent] = useState('');
-  const [result, setResult] = useState<any>(null);
-
-  const checkSpam = () => {
-    if (!emailContent.trim()) {
-      alert("Please enter email content.");
-      return;
-    }
-
-    const lowerContent = emailContent.toLowerCase();
-    const foundWords = SPAM_WORDS.filter(word => lowerContent.includes(word));
-    
-    let score = 100;
-    score -= (foundWords.length * 15);
-    if (score < 0) score = 0;
-
-    let riskLevel = 'Low Risk';
-    if (score < 80) riskLevel = 'Medium Risk';
-    if (score < 50) riskLevel = 'High Risk';
-
-    setResult({
-      score,
-      riskLevel,
-      foundWords
-    });
-  };
-
-  const sections = [
+// 2. Your JSON-LD Structured Data
+const spamCheckerJsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      title: "Why Check for Spam Words?",
-      content: "Email providers use advanced algorithms to detect spam. While algorithms look at many factors, certain 'trigger words' related to money, urgency, or exaggerated claims drastically increase your chances of landing in the spam folder.",
-      list: [
-        ". Avoid Spam Filters",
-        ". Ensure Inbox Placement",
-        ". Maintain Domain Reputation",
-        ". Sound More Human"
+      "@type": "WebPage",
+      "@id": "https://360airo.com/free-tools/email-spam-checker#webpage",
+      "url": "https://360airo.com/free-tools/email-spam-checker",
+      "name": "Free Email Spam Checker | Check If Your Email Goes to Spam",
+      "description": "Use 360Airo's free email spam checker to test your email for spam risks, identify deliverability issues, and improve your chances of reaching the inbox.",
+      "isPartOf": { "@id": "https://360airo.com/#website" },
+      "about": { "@id": "https://360airo.com/free-tools/email-spam-checker#tool" },
+      "breadcrumb": { "@id": "https://360airo.com/free-tools/email-spam-checker#breadcrumb" },
+      "publisher": { "@id": "https://360airo.com/#organization" },
+      "inLanguage": "en-US",
+      "mainEntity": { "@id": "https://360airo.com/free-tools/email-spam-checker#tool" }
+    },
+    {
+      "@type": "WebApplication",
+      "@id": "https://360airo.com/free-tools/email-spam-checker#tool",
+      "name": "360Airo Email Spam Checker",
+      "url": "https://360airo.com/free-tools/email-spam-checker",
+      "description": "A free email spam checker that helps identify potential spam risks and email deliverability issues before sending your emails.",
+      "applicationCategory": "BusinessApplication",
+      "applicationSubCategory": "Email Deliverability Tool",
+      "operatingSystem": "Web",
+      "browserRequirements": "Requires a modern web browser with JavaScript enabled",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      },
+      "creator": { "@id": "https://360airo.com/#organization" },
+      "publisher": { "@id": "https://360airo.com/#organization" }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://360airo.com/free-tools/email-spam-checker#breadcrumb",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://360airo.com/" },
+        { "@type": "ListItem", "position": 2, "name": "Free Tools", "item": "https://360airo.com/free-tools" },
+        { "@type": "ListItem", "position": 3, "name": "Email Spam Checker", "item": "https://360airo.com/free-tools/email-spam-checker" }
       ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://360airo.com/#organization",
+      "name": "360Airo",
+      "url": "https://360airo.com/",
+      "logo": {
+        "@type": "ImageObject",
+        "@id": "https://360airo.com/#logo",
+        "url": "https://360airo.com/logo.svg",
+        "contentUrl": "https://360airo.com/logo.svg"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/360-airo/posts/",
+        "https://x.com/360airo",
+        "https://www.instagram.com/360airo",
+        "https://www.youtube.com/@360airo",
+        "https://www.facebook.com/p/360-Airo-61583637801140/"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://360airo.com/#website",
+      "url": "https://360airo.com/",
+      "name": "360Airo",
+      "publisher": { "@id": "https://360airo.com/#organization" },
+      "inLanguage": "en-US"
     }
-  ];
+  ]
+};
 
+// 3. Render the Page
+export default function SpamCheckerPage() {
   return (
-    <FreeToolTemplate
-      title="Free Email Spam Checker"
-      subtitle="Detect Spam Triggers Before You Send"
-      description="Don't let a few bad words ruin your campaign. Paste your email copy below and we'll instantly highlight high-risk spam words that could trigger filters."
-      sections={sections}
-      faqs={[]}
-      ctaTitle="Spam Words Are Just One Piece of the Puzzle"
-      ctaSubtitle="Even perfect copy goes to spam if your infrastructure is bad. Learn how to build a scalable, safe outbound system."
-      ctaButtonText="Explore Infrastructure"
-      calculator={
-        <div style={{ padding: '24px', maxWidth: '1000px', margin: '0 auto', display: 'grid', gridTemplateColumns: result ? '1fr 1fr' : '1fr', gap: '32px' }}>
-          
-          <div style={{ backgroundColor: '#F9FAFB', padding: '32px', borderRadius: '16px', border: '1px solid #E5E7EB', display: 'flex', flexDirection: 'column', gap: '20px' }}>
-            <h3 style={{ fontFamily: '"Barlow Condensed", sans-serif', fontSize: '28px', color: '#111827' }}>Scan Your Copy</h3>
-            
-            <textarea 
-              value={emailContent} onChange={(e) => setEmailContent(e.target.value)}
-              placeholder="Paste your email subject and body here..."
-              rows={10}
-              style={{ width: '100%', padding: '16px', borderRadius: '8px', border: '1px solid #D1D5DB', fontFamily: '"DM Sans", sans-serif', fontSize: '15px', resize: 'vertical' }}
-            />
-            
-            <button 
-              onClick={checkSpam}
-              style={{ width: '100%', backgroundColor: '#111827', color: 'white', border: 'none', padding: '16px', borderRadius: '100px', cursor: 'pointer', fontFamily: '"DM Sans", sans-serif', fontWeight: 600, fontSize: '16px', transition: 'all 0.2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px' }}
-            >
-              <Search size={18} /> Check for Spam Triggers
-            </button>
-          </div>
-
-          {result && (
-            <div style={{ animation: 'fadeIn 0.5s ease-in-out', backgroundColor: '#FFFFFF', border: '1px solid #E5E7EB', borderRadius: '16px', padding: '32px', display: 'flex', flexDirection: 'column', gap: '24px' }}>
-              <h3 style={{ fontFamily: '"Barlow Condensed", sans-serif', fontSize: '28px', color: '#111827' }}>Spam Analysis</h3>
-              
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '16px' }}>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '16px', backgroundColor: result.score >= 80 ? '#F0FDF4' : (result.score >= 50 ? '#FFFBEB' : '#FEF2F2'), border: `1px solid ${result.score >= 80 ? '#DCFCE7' : (result.score >= 50 ? '#FEF3C7' : '#FEE2E2')}`, borderRadius: '12px', padding: '24px' }}>
-                  {result.score >= 80 ? <ShieldCheck size={48} color="#10B981" /> : <AlertTriangle size={48} color={result.score >= 50 ? '#F59E0B' : '#DC2626'} />}
-                  <div>
-                    <p style={{ fontSize: '14px', fontWeight: 700, color: '#6B7280', textTransform: 'uppercase', fontFamily: '"DM Sans", sans-serif', marginBottom: '4px' }}>Spam Risk Level</p>
-                    <p style={{ fontSize: '32px', fontFamily: '"Outfit", sans-serif', fontWeight: 800, color: result.score >= 80 ? '#10B981' : (result.score >= 50 ? '#F59E0B' : '#DC2626'), lineHeight: 1 }}>{result.riskLevel}</p>
-                    <p style={{ fontSize: '14px', color: '#4B5563', fontFamily: '"DM Sans", sans-serif', marginTop: '8px' }}>Safety Score: {result.score}/100</p>
-                  </div>
-                </div>
-              </div>
-
-              <div>
-                <h4 style={{ fontFamily: '"DM Sans", sans-serif', fontSize: '16px', fontWeight: 700, color: '#111827', marginBottom: '12px' }}>Triggers Found ({result.foundWords.length})</h4>
-                {result.foundWords.length > 0 ? (
-                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px' }}>
-                    {result.foundWords.map((word: string, i: number) => (
-                      <span key={i} style={{ backgroundColor: '#FEE2E2', color: '#DC2626', border: '1px solid #FCA5A5', padding: '6px 12px', borderRadius: '100px', fontSize: '14px', fontWeight: 600, fontFamily: '"DM Sans", sans-serif', textTransform: 'lowercase' }}>
-                        "{word}"
-                      </span>
-                    ))}
-                  </div>
-                ) : (
-                  <div style={{ padding: '16px', backgroundColor: '#F0FDF4', color: '#15803D', borderRadius: '8px', fontSize: '14px', fontFamily: '"DM Sans", sans-serif', fontWeight: 600 }}>
-                    Great! No common spam triggers were detected in your copy.
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
-
-        </div>
-      }
-    />
+    <>
+      {/* This script goes into the server HTML */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(spamCheckerJsonLd) }}
+      />
+      
+      {/* 👇 THIS IS HOW YOU RENDER THE CLIENT COMPONENT */}
+      <SpamCheckerClient />
+    </>
   );
 }
